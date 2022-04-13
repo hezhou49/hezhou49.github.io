@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/hezhou49.github.io/images/favicon.png" type="image/png">
 
-    <title>My First Post :: Hezhou</title>
+    <title> :: Hezhou</title>
 
     
     <link href="/hezhou49.github.io/css/nucleus.css?1649864263" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="hezhou49.github.io/posts/my-first-post/">
+  <body class="" data-url="hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
     <nav id="sidebar" class="">
 
 
@@ -170,7 +170,7 @@
   
     
     <li data-nav-id="hezhou49.github.io/posts/" title="Posts" class="dd-item
-        parent
+        
         
         
         ">
@@ -196,7 +196,7 @@
  
   
     
-      <li data-nav-id="hezhou49.github.io/posts/my-first-post/" title="My First Post" class="dd-item active">
+      <li data-nav-id="hezhou49.github.io/posts/my-first-post/" title="My First Post" class="dd-item ">
         <a href="hezhou49.github.io/posts/my-first-post/">
         My First Post
         
@@ -225,7 +225,7 @@
   
     
     <li data-nav-id="hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" title="2D计算机视觉s" class="dd-item
-        
+        parent
         
         
         ">
@@ -251,7 +251,7 @@
  
   
     
-      <li data-nav-id="hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" title="" class="dd-item ">
+      <li data-nav-id="hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" title="" class="dd-item active">
         <a href="hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
         
         
@@ -361,7 +361,7 @@
             
           
           
-            <a href='hezhou49.github.io/'>Hezhou</a> > <a href='hezhou49.github.io/posts/'>Posts</a> > My First Post
+            <a href='hezhou49.github.io/'>Hezhou</a> > <a href='hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/'>2D计算机视觉s</a> > 
           
         
           
@@ -374,7 +374,20 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#参考">参考</a></li>
+        <li><a href="#第3章-空域增强">第3章 空域增强</a></li>
+        <li><a href="#第4章-频域增强">第4章 频域增强</a></li>
+        <li><a href="#第7章-图像分割">第7章 图像分割</a></li>
+        <li><a href="#基于灰度相似性的区域检测">基于灰度相似性的区域检测</a></li>
+        <li><a href="#第8章-基元检测">第8章 基元检测</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -390,14 +403,57 @@
           
             <h1>
               
-              My First Post
+              
             </h1>
           
 
         
 
 
-<p>none</p>
+<h3 id="参考">参考</h3>
+<p>《2D计算机视觉——原理、算法及应用》</p>
+<h3 id="第3章-空域增强">第3章 空域增强</h3>
+<p>算数运算：</p>
+<p>图像相减：体现两图的差别，可用于运动检测。</p>
+<p>对比度拉伸：增加原始图像里某两个灰度值的动态范围实现对比度的拉伸。</p>
+<!-- raw HTML omitted -->
+<p>动态范围压缩：</p>
+<p>和对比度拉伸相反目的相反，看函数图就知道了。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220220192318246.png" alt="image-20220220192318246"></p>
+<blockquote>
+<p>直方图</p>
+</blockquote>
+<p>使用直方图统计图像的亮度分布情况。</p>
+<p>直方图均匀化：使用累积分布函数CDF使得直方图分布均匀。</p>
+<p>直方图规定化：把直方图变成预期的形状。</p>
+<blockquote>
+<p>滤波</p>
+</blockquote>
+<p>平滑（模糊）</p>
+<p>锐化</p>
+<h3 id="第4章-频域增强">第4章 频域增强</h3>
+<p>傅里叶变换在这个应用中的应用：把一个关于图像亮度的函数从空域（位置与亮度的关系）转化到频域（频率与亮度的关系）。</p>
+<p><a href="https://www.zhihu.com/question/21040374">https://www.zhihu.com/question/21040374</a>。连接中是从时域变换到频域。</p>
+<!-- raw HTML omitted -->
+<h3 id="第7章-图像分割">第7章 图像分割</h3>
+<p>在对图像的研究和应用中，人们往往仅对图像中的某些部分感兴趣，这些部分常称为<strong>目标或前景</strong>(其他部分称为<strong>背景</strong>)，一般对应图像中特定的、具有独特性质的区域。为了辨识和分析目标，需要将这些区域分离并提取出来,如进行特征提取。</p>
+<!-- raw HTML omitted -->
+<p>先不管串、并行，分割的主要依据是<strong>检测边界</strong>或者<strong>检测区域</strong>，由此划分图像。</p>
+<hr>
+<h4 id="微分边缘检测">微分边缘检测</h4>
+<!-- raw HTML omitted -->
+<p>但是，图像是离散并非连续的，所以不能直接求导。所以数字图像的求导是利用<strong>差分来近似微分</strong>的。</p>
+<p>二维的差分使用<strong>卷积</strong>来实现。</p>
+<p>几个常用的梯度算子（一阶倒数算子/卷积模板）如下：</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220331200445544.png" alt="image-20220331200445544"></p>
+<h3 id="基于灰度相似性的区域检测">基于灰度相似性的区域检测</h3>
+<h4 id="阈值分割">阈值分割</h4>
+<h4 id="区域生长">区域生长</h4>
+<p>在实际应用区域生长技术时，需要解决三个问题:</p>
+<p>(1) 选择或确定一组能正确代表所需区域的种子像素。</p>
+<p>(2) 确定在生长过程中能将相邻像素包括进来的生长(或相似)准则。</p>
+<p>(3) 确定让生长过程停止的条件或规则。</p>
+<h3 id="第8章-基元检测">第8章 基元检测</h3>
 
 
 <footer class="footline">
@@ -435,40 +491,6 @@
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                         
                         
                     
@@ -496,10 +518,47 @@
             
         
                     
+            
+        
+                    
                         
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -540,10 +599,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="hezhou49.github.io/posts/" title="Posts"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" title="2D计算机视觉s"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" title="2D计算机视觉s" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%8C%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%99%A8%E6%A2%B0%E8%B7%9F%E8%B8%AA/" title="" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
