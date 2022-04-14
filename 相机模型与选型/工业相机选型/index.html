@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Categories :: hezhou notebook</title>
+    <title>工业相机选型 :: hezhou notebook</title>
 
     
     <link href="/css/nucleus.css?1649909331" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/categories/">
+  <body class="" data-url="/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%80%89%E5%9E%8B/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -330,7 +330,7 @@
   
     
     <li data-nav-id="/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/" title="相机模型与选型" class="dd-item
-        
+        parent
         
         
         ">
@@ -358,7 +358,7 @@
  
   
     
-      <li data-nav-id="/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%80%89%E5%9E%8B/" title="工业相机选型" class="dd-item ">
+      <li data-nav-id="/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%80%89%E5%9E%8B/" title="工业相机选型" class="dd-item active">
         <a href="/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%80%89%E5%9E%8B/">
         工业相机选型
         <i class="fas fa-check read-icon"></i>
@@ -462,7 +462,13 @@
             
           
           
-            <a href='/'></a> > Categories
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/'>相机模型与选型</a> > 工业相机选型
+          
+        
           
         
           
@@ -473,7 +479,19 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#参考">参考</a></li>
+        <li><a href="#成像">成像</a></li>
+        <li><a href="#相机">相机</a></li>
+        <li><a href="#镜头">镜头</a></li>
+        <li><a href="#选型">选型</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -489,24 +507,150 @@
           
             <h1>
               
-                category ::
-              
-              Categories
+              工业相机选型
             </h1>
           
 
         
 
 
+<h3 id="参考">参考</h3>
+<p>2013 《机器视觉实用教程》   ！！！选型上基本就够了，觉得不深入的地方再检索。
+图像处理、分析与机器视觉
+一文详解工业相机和镜头选取： <a href="https://zhuanlan.zhihu.com/p/264904019">https://zhuanlan.zhihu.com/p/264904019</a>
+知乎专栏：相机标定原理与实战讲解： <a href="https://www.zhihu.com/column/c_1339327809273753600">https://www.zhihu.com/column/c_1339327809273753600</a>
+爱特蒙特光学系列教程！！： <a href="https://www.edmundoptics.com/knowledge-center/industry-expertise/imaging-optics/imaging-resource-guide/">https://www.edmundoptics.com/knowledge-center/industry-expertise/imaging-optics/imaging-resource-guide/</a>
+日本VST镜头-辉视科技: <a href="https://space.bilibili.com/1210076026">https://space.bilibili.com/1210076026</a> （镜头知识与选型）
+相机帧率和曝光时间的关系：https://blog.csdn.net/maopig/article/details/88068892</p>
+<h3 id="成像">成像</h3>
+<blockquote>
+<p>数字图像是对真实世界亮度的采样</p>
+</blockquote>
+<h4 id="图像">图像</h4>
+<p>《图像处理、分析与机器视觉》第二章</p>
+<!-- raw HTML omitted -->
+<h4 id="数字化">数字化</h4>
+<!-- raw HTML omitted -->
+<h4 id="图像传感器">图像传感器</h4>
+<p>所以相机的芯片（图像传感器）就是一个二维阵列（下图红色内的方块）。图像传感器的作用是将<strong>光信号转换为电信号</strong>，如果相机的分辨率为1920X1080，则代表着这块传感器上分布了1920X1080个感光单元，他们把连续的光信号采样为离散的电信号。</p>
+<!-- raw HTML omitted -->
+<h4 id="凸透镜成像与小孔成像">凸透镜成像（与小孔成像）</h4>
+<p>镜头的作用就是把真实世界投射到图像传感器上。</p>
+<p>凸透镜的应用范围如下：</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316152545225.png" alt="image-20220316152545225"></p>
+<p>光线通过凸透镜中心不会变向，平行光线通过透镜会聚焦于焦点，可以根据这两条线判断最终成像点的位置。并且，由于穿过透镜中心的光线不变向，图中标出的两个角相等，即存在相似三角形，所以最终成像的大小是与“物距u/像距”相关的。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316154258788.png" alt="image-20220316154258788"></p>
+<p>为了方便理解，后续许多标定算法和内、外参计算直接把相机模型抽象成小孔成像模型，方便理解、记忆。</p>
+<!-- raw HTML omitted -->
+<p>至此，通过镜头与相机的组合，完成了真实世界到图像的投影。</p>
+<h3 id="相机">相机</h3>
+<p>需要关注的：分辨率、像元尺寸、帧率、信噪比、传感器类型、通信接口、光谱。<a href="https://www.daheng-imaging.com/index.php?m=content&amp;c=index&amp;a=xxlists&amp;catid=2">大恒图像选型中心为例</a></p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316154850993.png" alt="image-20220316154850993"></p>
+<p>相机选型重要参数：
+（1）黑白还是彩色。彩色相机能带来颜色信息，但灵敏度和分辨率都不及同参数的黑白相机。
+（2）帧速。无论是高速移动的样品还是一闪而过的光信号，都需要高帧速相机才有可能采集到。
+（3）成像质量。影响成像质量（或者经常听到&quot;清晰度&quot;这样的口头表述）的因素，包括信噪比和分辨率。无论是信噪比过低，还是分辨率过低，都无法得到让人满意的图片。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316154611249.png" alt="image-20220316154611249"></p>
+<h4 id="分辨率与像元尺寸">分辨率与像元尺寸</h4>
+<p>分辨率：是否越大越好？比如是否500万像素就比200万好？这种说法不严谨，根本上取决于像元尺寸。</p>
+<p>我们通常说分辨率的时候，比如“分辨率做到1mm”，根据前面所述的比例关系，这里的分辨率=像元尺寸X(物距/像距)</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316162348932.png" alt="image-20220316162348932"></p>
+<h4 id="传感器">传感器</h4>
+<h5 id="尺寸">尺寸</h5>
+<p>传感器尺寸，表示了工业相机使用的图像传感器的尺寸大小。图像传感器的尺寸大小，直接影响到视野、工作距离、镜头焦距的选择等。同时也会影响像元尺寸的大小。对于成像质量的影响也是非常大的。同样分辨率的相机，较大的图像传感器，往往会得到更佳的图像质量。工业相机中常见的图像传感器尺寸有2/3&rsquo;、1/1.8&rsquo;、1/2&rsquo;、1/2.5&rsquo;、1/3&rsquo;、1/4&rsquo;等。这里指的多少英寸，是指传感器的对角线长度。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316163612576.png" alt="image-20220316163612576"></p>
+<p><strong>计算规则</strong>：使用分辨率X像元尺寸得到真实的传感器尺寸大小。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316163944063.png" alt="image-20220316163944063"></p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316164110176.png" alt="image-20220316164110176"></p>
+<h5 id="曝光类型与曝光时间">曝光类型与曝光时间</h5>
+<p>快门是一种<strong>控制光通量时间的结构</strong>。相机的“曝光时间”，由快门来控制。在数字相机时代，快门已经不再是机械的焦平面快门结构，而使用电子快门。图像传感器的工作方式并不是像很多人想象的那样通过一个信号线就可以控制曝光的开始和结束。传感器的感光二极管不停的在捕获入射光子并转换成电子存储在电荷井中，控制部分可以将其读出和清零，但不能停止曝光。</p>
+<p>曝光时间越大，单帧图像接收的光通量越大。所以拍夜空需要很长的曝光时间。</p>
+<p><a href="#%E7%9B%B8%E6%9C%BA">相机</a></p>
+<p>曝光类型参看《机器视觉实用教超》P285开始。</p>
+<p>Rolling shutter VS global shutter</p>
+<p>简述：全局快门优于卷帘快门，当然价格也更贵。</p>
+<h4 id="帧率与数据接口">帧率与数据接口</h4>
+<h5 id="帧率">帧率</h5>
+<p>相机的实际帧率受到传感器固有参数与曝光时间的影响。</p>
+<p>相机的<strong>帧频</strong>/行频表示相机采集图像的频率，通常面阵相机用帧频表示(即帧率)，单位fps (Frame Per second)，如30fps，表示相机再1秒钟内<strong>最多能采集30 帧图像</strong>;线阵相机通常用行频表示单位.KHz，如 12KHz表示相机再1秒钟内最多能采集12000行图像数据。</p>
+<p>所以相机的最高帧率是受限于相机芯片的。</p>
+<p>相机的帧周期=<strong>曝光时间</strong>+输入时间。尽管存在非重叠、重叠（下图，优化时间）两种形式，但是可以知道，设置的曝光时间是要小于帧周期。比如：相机帧率是50fps，那么曝光时间是应该小于1s/50=20ms=20000us的。如果曝光时间大于20000us，那么输出图像的实际帧率将会下降。（通常将曝光时间设置为帧周期的一半，比如50fps的相机，曝光时间一般默认为10000us）</p>
+<!-- raw HTML omitted -->
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316202031247.png" alt="image-20220316202031247"></p>
+<h5 id="数据接口">数据接口</h5>
+<p>数据接口的选择主要是为了适配相机输出图像的带宽。比如：一个200万像素的黑白相机，帧率为50fps，那么每秒输出的的数据量为2000000X8X50=800000000 bit，8代表(8bit灰度图，灰度范围0-255)，即为800Mb/s的输出数据量，此时可以使用GigE协议进行传输（千兆网，普通网线，1Gb/s=1000Mb/s）。</p>
+<p>所以，一般使用GigE的相机可以直接根据分辨率估计大概的帧率范围，200万差不多50fps，500万20fps多一点。</p>
+<p>数据接口类型（现在也出现了一些3GigE、5GigE的接口）</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/v2-a5c9b7a4cd98fd3d16d6838ee834d97c_r.jpg" alt="preview"></p>
+<p>性能对比</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/v2-a0a8ae015d4b49ef49cd4d244d8a5502_b.jpg" alt="img"></p>
+<h4 id="动态范围">动态范围</h4>
+<p><a href="https://www.163.com/dy/article/E0LQC74U053840K0.html">https://www.163.com/dy/article/E0LQC74U053840K0.html</a>
+<a href="https://zhuanlan.zhihu.com/p/154529501">https://zhuanlan.zhihu.com/p/154529501</a>
+<a href="https://www.zhihu.com/question/21492596?sort=created">https://www.zhihu.com/question/21492596?sort=created</a></p>
+<p>相机的动态范围(Dynamic Range）表明相机探测光信号的范围。灰度的动态范围在工业相机中的模拟视频部分用<strong>信号/噪音比</strong>（Signal to Noise Ratio）SNR表示。</p>
+<p>动态范围越大，相机记录的暗部细节与亮部细节越丰富，抗噪声的能力越强。</p>
+<p>现在一般工业相机的厂商都不把“动态范围”参数作为主要参数放到一览内，因为不像一般劣质的相机（电脑串口相机等），工业相机的动态范围性能都基本是满足工业要求的，只是说谁更高谁更低而已。</p>
+<h4 id="demo">demo</h4>
+<p>Allied vision，国外老牌。传感器相同，价格在8000+到10000+。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220317000402085.png" alt="image-20220317000402085"></p>
+<h3 id="镜头">镜头</h3>
+<p>工业相机镜头也包含很多种，如：CCTV镜头、远心镜头、变焦镜头等。</p>
+<p>这里讲的是使用最广泛的CCTV镜头。特点：焦距固定、可对焦、可调光圈。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316211349820.png" alt="image-20220316211349820"></p>
+<p>通常需要考虑的参数如下。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220317001347960.png" alt="image-20220317001347960"></p>
+<h4 id="调焦">调焦</h4>
+<p>调焦调的是像距，是凸透镜到传感器靶面的距离，为了准确成像到传感器靶面上，需要进行调焦。工作距离&raquo;像距&gt;焦距。</p>
+<p>所以，物体不是放在任何位置都能清晰成像的，需要对焦到指定的工作距离附近。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316154258788.png" alt="image-20220316154258788"></p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316212103253.png" alt="image-20220316212103253"></p>
+<h4 id="光圈">光圈</h4>
+<!-- raw HTML omitted -->
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220316212953780.png" alt="image-20220316212953780"></p>
+<h4 id="光圈景深弥散圆">光圈、景深、弥散圆</h4>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220317113342139.png" alt="image-20220317113342139"></p>
+<h4 id="分辨率">分辨率</h4>
+<p>镜头的选择应该与相机适配，包括分辨率、支持传感器尺寸、机械接口等。</p>
+<!-- raw HTML omitted -->
+<p>镜头的分辨率的单位是“线对/毫米”，如何与相机分辨率对应？</p>
+<p>《机器视觉实用教程》P206</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220317153639876.png" alt="image-20220317153639876"></p>
+<p>所以最准确的镜头分辨率选型方法是：计算相机传感器上的每毫米的像素密度M（pixel/mm），镜头选择分辨率大于M/2(lp/mm)的镜头。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220317154224929.png" alt="image-20220317154224929"></p>
+<blockquote>
+<p>但是：这样去选型镜头稍许麻烦，所以想在一般选型镜头时，镜头会说明适用于“2/3&quot; 的500万像素镜头”，直接使用该指标即可，高像素可以兼容低像素。</p>
+</blockquote>
+<h4 id="像圈大小与视场角">像圈大小与视场角</h4>
+<p><a href="https://www.bilibili.com/video/BV1944y1h7NZ?spm_id_from=333.999.0.0">【工业镜头-知识篇】镜头选型的基本知识 “像圈与芯片大小”</a></p>
+<p>视场角：（根据相机芯片大小决定，但镜头的像圈大小是跟镜头固定的）
+镜头投影到相机靶面的尺寸是一个圆，所以直径大小（像圈 image circle）是最关键的，镜头的H、V是按照默认的传感器尺寸计算的，不同的传感器尺寸只是在圆内画出不同长宽的矩形。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220317002237939.png" alt="image-20220317002237939"></p>
+<p>如下展示了，相机靶面与像圈的成像关系，最左边这种情况将出现暗角，成为“渐晕”或“隧道效应”。</p>
+<!-- raw HTML omitted -->
+<h4 id="demo-1">demo</h4>
+<p>computar M0824-MPW2   价格1000+</p>
+<!-- raw HTML omitted -->
+<h3 id="选型">选型</h3>
+<blockquote>
+<p>eg1：尺寸、瑕疵检测 100X50mm的工件，要求0.1mm的检测精度。</p>
+</blockquote>
+<ol>
+<li>考虑分辨率与相机选型</li>
+</ol>
+<p>长边方向至少要有100/0.1=1000个像素，工业应用，为了达到更好应用效果，使用冗余的像素，提升一倍。
+那么算下来分辨率大于等于2000X1000（200万）的相机比较合适。一般这个分辨率的传感器大小是1/2到2/3英寸之间的（因为目前的像元尺寸普通的在2-6um左右），那么计算放大倍率=长边6.4mm/100mm=0.064（这里的长边是按照标准的1/2传感器尺寸算的）。</p>
+<ol start="2">
+<li>镜头与工作距离</li>
+</ol>
+<p>如果选用16mm镜头，工作距离大概是16/0.64=250mm处，如果选用25mm镜头，工作距离大概是25/0.064=390mm处。这样可以根据大致的工作距离挑选适当焦距的镜头。当然镜头的分辨率要与相机匹配，传感器尺寸也要匹配。</p>
+<ol start="3">
+<li>网上检索、咨询代理</li>
+</ol>
+<p>接下来，可以直接去网上搜索大概合适的相机、镜头，<a href="https://www.daheng-imaging.com/index.php?m=content&amp;c=index&amp;a=xxlists&amp;catid=2">大恒新版网页</a>选型工具做的不错，推荐使用。大恒代理了不少国外知名厂商，货比较全，选型可以优先考虑，但是国内的话，只卖自己家的产品；如果考虑到成本可以看看国内其他厂商比如海康威视等。代理商基本上是懂相机选型的，可以咨询寻求建议。</p>
 
 
-
-<ul>
-	
-</ul>
-
-
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
@@ -672,6 +816,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -685,6 +830,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -707,6 +853,8 @@
 
 	 
 	 
+		
+			<a class="nav nav-prev" href="/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/" title="相机模型与选型"> <i class="fa fa-chevron-left"></i></a>
 		
 		
 			<a class="nav nav-next" href="/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/" title="点云处理" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
@@ -749,3 +897,4 @@
 </script>
   </body>
 </html>
+

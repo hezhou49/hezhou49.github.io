@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Categories :: hezhou notebook</title>
+    <title>常用语法 :: hezhou notebook</title>
 
     
     <link href="/css/nucleus.css?1649909331" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/categories/">
+  <body class="" data-url="/c&#43;&#43;/%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -252,7 +252,7 @@
   
     
     <li data-nav-id="/c&#43;&#43;/" title="C&#43;&#43;" class="dd-item
-        
+        parent
         
         
         ">
@@ -301,7 +301,7 @@
  
   
     
-      <li data-nav-id="/c&#43;&#43;/%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/" title="常用语法" class="dd-item ">
+      <li data-nav-id="/c&#43;&#43;/%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/" title="常用语法" class="dd-item active">
         <a href="/c&#43;&#43;/%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/">
         常用语法
         <i class="fas fa-check read-icon"></i>
@@ -462,7 +462,13 @@
             
           
           
-            <a href='/'></a> > Categories
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/c++/'>C++</a> > 常用语法
+          
+        
           
         
           
@@ -473,7 +479,16 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#unordered_map--map">unordered_map // map</a></li>
+        <li><a href="#string">string</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -489,24 +504,171 @@
           
             <h1>
               
-                category ::
-              
-              Categories
+              常用语法
             </h1>
           
 
         
 
 
+<h3 id="unordered_map--map">unordered_map // map</h3>
+<p>键和值是pair形式，调用时使用first,second</p>
+<table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>begin()</td>
+<td>返回指向容器中第一个键值对的正向迭代器。</td>
+</tr>
+<tr>
+<td>end()</td>
+<td>返回指向容器中最后一个键值对之后位置的正向迭代器。</td>
+</tr>
+<tr>
+<td>cbegin()</td>
+<td>和 begin() 功能相同，只不过在其基础上增加了 const 属性，即该方法返回的迭代器不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>cend()</td>
+<td>和 end() 功能相同，只不过在其基础上，增加了 const 属性，即该方法返回的迭代器不能用于修改容器内存储的键值对。</td>
+</tr>
+<tr>
+<td>empty()</td>
+<td>若容器为空，则返回 true；否则 false。</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>返回当前容器中存有键值对的个数。</td>
+</tr>
+<tr>
+<td>max_size()</td>
+<td>返回容器所能容纳键值对的最大个数，不同的操作系统，其返回值亦不相同。</td>
+</tr>
+<tr>
+<td>operator[key]</td>
+<td>该模板类中重载了 [] 运算符，其功能是可以向访问数组中元素那样，只要给定某个键值对的键 key，就可以获取该键对应的值。注意，如果当前容器中没有以 key 为键的键值对，则其会使用该键向当前容器中插入一个新键值对。</td>
+</tr>
+<tr>
+<td>at(key)</td>
+<td>返回容器中存储的键 key 对应的值，如果 key 不存在，则会抛出 out_of_range 异常。</td>
+</tr>
+<tr>
+<td>find(key)</td>
+<td>查找以 key 为键的键值对，如果找到，则返回一个指向该键值对的正向迭代器；反之，则返回一个指向容器中最后一个键值对之后位置的迭代器（如果 end() 方法返回的迭代器）。</td>
+</tr>
+<tr>
+<td>count(key)</td>
+<td>在容器中查找以 key 键的键值对的个数。</td>
+</tr>
+<tr>
+<td>equal_range(key)</td>
+<td>返回一个 pair 对象，其包含 2 个迭代器，用于表明当前容器中键为 key 的键值对所在的范围。</td>
+</tr>
+<tr>
+<td>emplace()</td>
+<td>向容器中添加新键值对，效率比 insert() 方法高。</td>
+</tr>
+<tr>
+<td>emplace_hint()</td>
+<td>向容器中添加新键值对，效率比 insert() 方法高。</td>
+</tr>
+<tr>
+<td>insert()</td>
+<td>向容器中添加新键值对。</td>
+</tr>
+<tr>
+<td>erase()</td>
+<td>删除指定键值对。</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>清空容器，即删除容器中存储的所有键值对。</td>
+</tr>
+<tr>
+<td>swap()</td>
+<td>交换 2 个 unordered_map 容器存储的键值对，前提是必须保证这 2 个容器的类型完全相等。</td>
+</tr>
+<tr>
+<td>bucket_count()</td>
+<td>返回当前容器底层存储键值对时，使用桶（一个线性链表代表一个桶）的数量。</td>
+</tr>
+<tr>
+<td>max_bucket_count()</td>
+<td>返回当前系统中，unordered_map 容器底层最多可以使用多少桶。</td>
+</tr>
+<tr>
+<td>bucket_size(n)</td>
+<td>返回第 n 个桶中存储键值对的数量。</td>
+</tr>
+<tr>
+<td>bucket(key)</td>
+<td>返回以 key 为键的键值对所在桶的编号。</td>
+</tr>
+<tr>
+<td>load_factor()</td>
+<td>返回 unordered_map 容器中当前的负载因子。负载因子，指的是的当前容器中存储键值对的数量（size()）和使用桶数（bucket_count()）的比值，即 load_factor() = size() / bucket_count()。</td>
+</tr>
+<tr>
+<td>max_load_factor()</td>
+<td>返回或者设置当前 unordered_map 容器的负载因子。</td>
+</tr>
+<tr>
+<td>rehash(n)</td>
+<td>将当前容器底层使用桶的数量设置为 n。</td>
+</tr>
+<tr>
+<td>reserve()</td>
+<td>将存储桶的数量（也就是 bucket_count() 方法的返回值）设置为至少容纳count个元（不超过最大负载因子）所需的数量，并重新整理容器。</td>
+</tr>
+<tr>
+<td>hash_function()</td>
+<td>返回当前容器使用的哈希函数对象。</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> hashtable;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> hashtable.find(target <span style="color:#f92672">-</span> nums[i]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (it <span style="color:#f92672">!=</span> hashtable.end()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {it<span style="color:#f92672">-&gt;</span>second, i};
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    hashtable[nums[i]] <span style="color:#f92672">=</span> i;
+</span></span></code></pre></div><h4 id="重载">重载[]</h4>
+<p>如果数组内没有会自动新建，不会报错，比较方便。</p>
+<pre tabindex="0"><code>hashtable[key] = value;
+//值为数组
+hashtable[key].emplace_back(value);
+</code></pre><h3 id="string">string</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stoi(str)</td>
+<td>字符串转数字</td>
+</tr>
+<tr>
+<td>substr(pos,length)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
 
-
-<ul>
-	
-</ul>
-
-
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
@@ -624,6 +786,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -636,6 +799,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -653,6 +819,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -671,6 +838,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -708,8 +878,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="/c&#43;&#43;/c&#43;&#43;-stl/" title="C&#43;&#43; STL"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/" title="点云处理" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/" title="相机模型与选型" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -749,3 +921,4 @@
 </script>
   </body>
 </html>
+
