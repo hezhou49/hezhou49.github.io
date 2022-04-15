@@ -12,22 +12,22 @@
     <title>2D计算机视觉——原理、算法及应用 :: hezhou notebook</title>
 
     
-    <link href="/css/nucleus.css?1650026590" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1650026590" rel="stylesheet">
-    <link href="/css/hybrid.css?1650026590" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1650026590" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1650026590" rel="stylesheet">
-    <link href="/css/auto-complete.css?1650026590" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1650026590" rel="stylesheet">
-    <link href="/css/theme.css?1650026590" rel="stylesheet">
-    <link href="/css/tabs.css?1650026590" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1650026590" rel="stylesheet">
+    <link href="/css/nucleus.css?1650032872" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1650032872" rel="stylesheet">
+    <link href="/css/hybrid.css?1650032872" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1650032872" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1650032872" rel="stylesheet">
+    <link href="/css/auto-complete.css?1650032872" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1650032872" rel="stylesheet">
+    <link href="/css/theme.css?1650032872" rel="stylesheet">
+    <link href="/css/tabs.css?1650032872" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1650032872" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1650026590" rel="stylesheet">
+    <link href="/css/theme-green.css?1650032872" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1650026590"></script>
+    <script src="/js/jquery-3.3.1.min.js?1650032872"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -92,14 +92,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1650026590"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1650026590"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1650032872"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1650032872"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/hezhou49.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1650026590"></script>
+<script type="text/javascript" src="/js/search.js?1650032872"></script>
 
     
   </div>
@@ -552,7 +552,7 @@
 <p>算数运算：</p>
 <p>图像相减：体现两图的差别，可用于运动检测。</p>
 <p>对比度拉伸：增加原始图像里某两个灰度值的动态范围实现对比度的拉伸。</p>
-<!-- raw HTML omitted -->
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220220192127924.png" alt="image-20220220192127924" style="zoom:67%;" />
 <p>动态范围压缩：</p>
 <p>和对比度拉伸相反目的相反，看函数图就知道了。</p>
 <p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220220192318246.png" alt="image-20220220192318246"></p>
@@ -570,14 +570,14 @@
 <h3 id="第4章-频域增强">第4章 频域增强</h3>
 <p>傅里叶变换在这个应用中的应用：把一个关于图像亮度的函数从空域（位置与亮度的关系）转化到频域（频率与亮度的关系）。</p>
 <p><a href="https://www.zhihu.com/question/21040374">https://www.zhihu.com/question/21040374</a>。连接中是从时域变换到频域。</p>
-<!-- raw HTML omitted -->
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220221205234755.png" alt="image-20220221205234755" style="zoom: 80%;" />
 <h3 id="第7章-图像分割">第7章 图像分割</h3>
 <p>在对图像的研究和应用中，人们往往仅对图像中的某些部分感兴趣，这些部分常称为<strong>目标或前景</strong>(其他部分称为<strong>背景</strong>)，一般对应图像中特定的、具有独特性质的区域。为了辨识和分析目标，需要将这些区域分离并提取出来,如进行特征提取。</p>
-<!-- raw HTML omitted -->
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220331164235340.png" alt="image-20220331164235340" style="zoom:80%;" />
 <p>先不管串、并行，分割的主要依据是<strong>检测边界</strong>或者<strong>检测区域</strong>，由此划分图像。</p>
 <hr>
 <h4 id="微分边缘检测">微分边缘检测</h4>
-<!-- raw HTML omitted -->
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220331195105714.png" alt="image-20220331195105714" style="zoom:80%;" />
 <p>但是，图像是离散并非连续的，所以不能直接求导。所以数字图像的求导是利用<strong>差分来近似微分</strong>的。</p>
 <p>二维的差分使用<strong>卷积</strong>来实现。</p>
 <p>几个常用的梯度算子（一阶倒数算子/卷积模板）如下：</p>
@@ -828,16 +828,16 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1650026590"></script>
-    <script src="/js/perfect-scrollbar.min.js?1650026590"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1650026590"></script>
-    <script src="/js/jquery.sticky.js?1650026590"></script>
-    <script src="/js/featherlight.min.js?1650026590"></script>
-    <script src="/js/highlight.pack.js?1650026590"></script>
+    <script src="/js/clipboard.min.js?1650032872"></script>
+    <script src="/js/perfect-scrollbar.min.js?1650032872"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1650032872"></script>
+    <script src="/js/jquery.sticky.js?1650032872"></script>
+    <script src="/js/featherlight.min.js?1650032872"></script>
+    <script src="/js/highlight.pack.js?1650032872"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1650026590"></script>
-    <script src="/js/learn.js?1650026590"></script>
-    <script src="/js/hugo-learn.js?1650026590"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1650032872"></script>
+    <script src="/js/learn.js?1650032872"></script>
+    <script src="/js/hugo-learn.js?1650032872"></script>
     
         
             <script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script>

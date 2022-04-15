@@ -12,22 +12,22 @@
     <title>基于特征的点云配准 :: hezhou notebook</title>
 
     
-    <link href="/css/nucleus.css?1650026590" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1650026590" rel="stylesheet">
-    <link href="/css/hybrid.css?1650026590" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1650026590" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1650026590" rel="stylesheet">
-    <link href="/css/auto-complete.css?1650026590" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1650026590" rel="stylesheet">
-    <link href="/css/theme.css?1650026590" rel="stylesheet">
-    <link href="/css/tabs.css?1650026590" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1650026590" rel="stylesheet">
+    <link href="/css/nucleus.css?1650032872" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1650032872" rel="stylesheet">
+    <link href="/css/hybrid.css?1650032872" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1650032872" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1650032872" rel="stylesheet">
+    <link href="/css/auto-complete.css?1650032872" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1650032872" rel="stylesheet">
+    <link href="/css/theme.css?1650032872" rel="stylesheet">
+    <link href="/css/tabs.css?1650032872" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1650032872" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1650026590" rel="stylesheet">
+    <link href="/css/theme-green.css?1650032872" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1650026590"></script>
+    <script src="/js/jquery-3.3.1.min.js?1650032872"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -92,14 +92,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1650026590"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1650026590"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1650032872"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1650032872"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/hezhou49.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1650026590"></script>
+<script type="text/javascript" src="/js/search.js?1650032872"></script>
 
     
   </div>
@@ -553,7 +553,7 @@
 <p>采用的是“先粗后精”的配准思路。研究的重点是局部特征的相关技术，包括特征点的检测、特征点描述与特征匹配、误匹配对剔除，最后将这些技术应用到三维点云配准中，结合精细配准，实现三维点云自动化配准。</p>
 <h2 id="基于特征的点云配准">基于特征的点云配准</h2>
 <p>未包含误匹配删除的基于特征的点云配准流程：</p>
-<!-- raw HTML omitted -->
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/特征点云配准流程.png" alt="特征点云配准流程" style="zoom: 67%;" />
 <h3 id="特征点检测与降采样">特征点检测与降采样</h3>
 <p>在早期对点云配准的研究中，通常对点云数据预先计算具有区分力和描述力的关键点，再进一步进行处理。但是最近有研究表明，现有关键点检测方法在实际的应用中不仅较为费时，且效果较差。而均匀采样和随机采样方法被证明是一种有效的方法，可以用于取代关键点检测算法。（李佳骏，2021）</p>
 <p>实操试下来，在实时性要求高一点的应用里，特征检测算法确实是比较耗时的，现在也有一些开源的基于特征的配准算法使用降采样代替特征检测（open3d global registration）。</p>
@@ -563,13 +563,13 @@
 <p>介绍的文章和链接其实也很多，给出一些链接然后简要介绍。</p>
 <p><a href="https://zhuanlan.zhihu.com/p/192343758">知乎链接</a>;<a href="https://pcl.readthedocs.io/projects/tutorials/en/latest/pfh_estimation.html?highlight=PFH">PCL源链接</a></p>
 <p>描述的几个特征为下面几个值，d在最后时限的时候没怎么管，主要看前面3个角度。</p>
-<!-- raw HTML omitted -->
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220210134934978.png" alt="image-20220210134934978" style="zoom: 80%;" />
 <p>问题来了，是如何把这几个特征值的变为一个n维的向量的呢？规则是：（图源: PCL作者Rusu Dissertation： Semantic 3D Object Maps for Everyday Manipulation in Human Living Environments. 2009.）</p>
-<!-- raw HTML omitted -->
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220210140743057.png" alt="image-20220210140743057" style="zoom:67%;" />
 <p>即将每个角度均匀划分为5个区间，那么3个角度将产生125个区间，并且每一个bin都将完全对应一个唯一的代表三个角度特征的值（即为图中所述fully correlated）。由此可以生成一个直方图，横轴是0-125，纵轴则是统计在该点的邻域内有多少个点出现在了对应区间。于是就产生了一个125维的向量，每一维代表的是——特征位于该区间内的点的数量。（直方图如下所示，可以发现，这样做很多地方都是0值）</p>
-<!-- raw HTML omitted -->
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/v2-a20284bf63faebba9ae5fa739469da3d_b.jpg" alt="img" style="zoom:50%;" />
 <p>FPFH做出了改进，公式上有少许改进不详细说，主要是将特征抽象为特征向量时有改变：不再是b^d^个区间，而是b*d个区间，相当于是单独给每个特征做一个直方图，然后在水平方向上把直方图拼起来。PCL给出的实现不是分的5个区间，分的11个区间（区间多，分辨率高），所以总共33维。</p>
-<!-- raw HTML omitted -->
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220210150814873.png" alt="image-20220210150814873" style="zoom:67%;" />
 <h4 id="3dscusc">3DSC&amp;USC</h4>
 <p>描述的局部特征不同，但是抽象特征的思路是一样的。</p>
 <p>统计每个网格内的点数加权值即为 3DSC 描述子。描述子是高维向量，特征向量长度为总的格子数。</p>
@@ -839,16 +839,16 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1650026590"></script>
-    <script src="/js/perfect-scrollbar.min.js?1650026590"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1650026590"></script>
-    <script src="/js/jquery.sticky.js?1650026590"></script>
-    <script src="/js/featherlight.min.js?1650026590"></script>
-    <script src="/js/highlight.pack.js?1650026590"></script>
+    <script src="/js/clipboard.min.js?1650032872"></script>
+    <script src="/js/perfect-scrollbar.min.js?1650032872"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1650032872"></script>
+    <script src="/js/jquery.sticky.js?1650032872"></script>
+    <script src="/js/featherlight.min.js?1650032872"></script>
+    <script src="/js/highlight.pack.js?1650032872"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1650026590"></script>
-    <script src="/js/learn.js?1650026590"></script>
-    <script src="/js/hugo-learn.js?1650026590"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1650032872"></script>
+    <script src="/js/learn.js?1650032872"></script>
+    <script src="/js/hugo-learn.js?1650032872"></script>
     
         
             <script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script>
