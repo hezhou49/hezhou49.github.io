@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ROS on hezhou notebook</title>
+    <link>https://hezhou49.github.io/ros/</link>
+    <description>Recent content in ROS on hezhou notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 14 Apr 2022 10:08:35 +0800</lastBuildDate><atom:link href="https://hezhou49.github.io/ros/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ros移动底座开发思路</title>
+      <link>https://hezhou49.github.io/ros/ros%E7%A7%BB%E5%8A%A8%E5%BA%95%E5%BA%A7%E5%BC%80%E5%8F%91%E6%80%9D%E8%B7%AF/</link>
+      <pubDate>Tue, 14 Jul 2020 10:08:35 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/ros/ros%E7%A7%BB%E5%8A%A8%E5%BA%95%E5%BA%A7%E5%BC%80%E5%8F%91%E6%80%9D%E8%B7%AF/</guid>
+      <description>开发底盘Navigator Q2的ros驱动
+正常情况下，底盘驱动（ROS节点：base_controller）需要完成的两项任务为：
+  ROS内的相应节点会将运动控制的数据发往话题/cmd_vel内，底盘驱动需要订阅该话题得到控制数据（由于是2D平面，所以控制信息只包括x,y方向的速度以及垂直于平面的转速，然后将此速度控制信息发往底盘（比如通过串口、蓝牙、WIFI，考虑到通信质量以及普遍性，通常使用串口通信）。底盘得到来自上层的运动控制信息后经过运动学逆向解算将速度命令转换为每个麦克纳姆的速度，从而通过电机驱动控制电机运作。
+  由于ROS下的机器人建图、导航等一系列功能强烈依赖里程计信息，即：需要通过里程计信息辅助实现自我定位，所以底盘驱动需要返回底盘的里程计信息。一是发布odom坐标系与base_footprint的tf坐标变换；二是向/odom话题发布里程计信息（nav_msgs/Odometry）。
+  针对这两个任务开发底盘驱动，那么根据底盘已经提供的功能可以把开发任务分为几类（从简单到复杂）：
+  第一种也是最简单的。那就是底盘是你买的，厂家已经把底盘控制器以及对应的ROS驱动包做好了（其实现在大多数都是这样的）。比如说：turtlebot、EAI以及各种机器人厂家。可以说现在很多机器人移动平台都支持ROS，这是一种趋势。那么使用的时候，直接使用对应的命令运行launch文件启动即可。
+  第二种相对工作量大一点。底盘也是买的，但是它并不支持ROS，比如本课题的Navigator Q2（其实有ROS开发包，但没开发好）。针对这类底盘，它们本身的运动控制器肯定是写好了的，开发者可以比如使用串口、蓝牙、wifi等方式直接向底盘发送命令控制底盘运动。比如，本项目中，可以直接使用UART串口通信向Navigator Q2发送16进制的速度命令，规定格式如下（遥控器的控制协议）：
+那么现在的工作就是得到/cmd_vel内的标准速度控制指令，然后转换成底盘的16进制控制格式。
+  最后一种也是最复杂的一种，也是最考验技术的一种，那就是全部自己开发。在第2步的基础上，底盘的控制也要自己写，也就是当速度命令下发来后，底盘要根据该命令转换为每个车轮的转速，中间就涉及到了小车的你运动学建模了。这项工作其实也可以分为两个方向：一是开发成第2类的小车方式（也是最主流的），意思就是小车的运动控制（逆运动学建模、控制电机等）是在底盘内完成的，然后底盘给出一个控制的接口，就成了第二类的小车，这样的好处就是便于集成，你如果想集成到ROS，那么就写一个ROS的驱动下发命令，你如果向集成到其它系统，那么就按照其它系统的规范写一个驱动，这样模块相对独立，降低耦合。二是一种耦合比较高的方式，具体就是：全部工作都在ROS下完成了，拿到速度命令后就在ROS驱动内完成逆运动学解算为各个电机转速并控制电机运动，这样做是不太推荐的，耦合高，如果到时候我不想在ROS下跑了，那么底盘的控制代码我就要全部重写。
+  工作空间建立 在catkin_ws/src下新建文件夹navigator_q2。
+然后开始新建功能包，这里参照了比如turtlebot的规范。分别建立了两个包：q2_bringup、q2_nav。
+q2_bringup放的是底盘驱动相关的文件。q2_nav则是导航相关的:gmapping、amcl、move_base相关的配置和launch文件。
+程序结构 crc校验 crc校验的目的是为了验证传输数据的正确性，会把需要传输的数据按照一定的规定进行演算，得出一个校验码。所以数据接收方收到数据后，可使用相同的校验规则对数据进行校验得出校验码，然后与发送的数据包内的校验码对比。
+Navigator q2用的crc校验规则叫做&amp;quot;CRC-16/XMODEM&amp;quot;，在线crc校验链接：http://www.ip33.com/crc.html
+from crcmod import * #封装成函数 def crc_exchange(data_input):  #data = data.replace(&amp;#34; &amp;#34;, &amp;#34;&amp;#34;)  #print data  #转成hex  data_hex = data_input.decode(&amp;#34;hex&amp;#34;)  #构造crc校验器  crc16 = crcmod.mkCrcFun(0x11021, rev=False, initCrc=0x0000, xorOut=0x0000)  #生成校验值  crc = hex(crc16(data_hex))#string  #print crc  #排除高位为0而被省略的问题  if len(crc)==4:  crc=&amp;#39;0x00&amp;#39;+crc[-2:]  elif len(crc)==5:  crc=&amp;#39;0x0&amp;#39;+crc[-3:]  elif len(crc)==3:  crc=&amp;#39;0x000&amp;#39;+crc[-1:]  #取出高、低位  print crc[2:4],crc[-2:]  #拼接完整字符串  data_output=data_input+crc[-2:].</description>
+    </item>
+    
+    <item>
+      <title>moveit控制FP机械臂</title>
+      <link>https://hezhou49.github.io/ros/moveit%E6%8E%A7%E5%88%B6fp%E6%9C%BA%E6%A2%B0%E8%87%82/</link>
+      <pubDate>Sat, 17 Oct 2020 10:08:35 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/ros/moveit%E6%8E%A7%E5%88%B6fp%E6%9C%BA%E6%A2%B0%E8%87%82/</guid>
+      <description>前言：使用moveit控制真实的机械臂运动 几篇比较好的博客：
+通过ROS控制真实机械臂(5)&amp;mdash;Moveit!真实机械臂(move_group界面)
+moveit简介及其功能 先上个官网的基础概念：https://moveit.ros.org/documentation/concepts/
+什么是moveit?简单来说：moveit就是一个数学工具。现在设想，假如我们没有moveit，我们控制机械臂是一个怎样的流程呢？绝大多数情况下，开发机械臂需要完成的任务如下：
+  逆运动学建模。机械臂末端的位姿是各个关节叠加形成的。在绝大多数的实际应用中，我们往往是给机械臂的末端指定一个目标点，让它到达（并执行抓取等操作），而不是说我希望关节１运动多少角度，关节２运动多少角度。所以我们需要对机械臂进行逆运动学建模，也就是我们要计算机械臂末端在处于空间某一位姿时，机械臂的各个关节的角度。
+  路径规划。如果从空间中的一个点到达另一个点，我们应该怎么到达？这就涉及到了路径规划的算法。
+  控制机械臂进行运动。路径规划会规划出一个路径点集，也就是一组空间位姿，对其进行逆运动学求解就可以得到每个点对应的各个关节的角度，从而控制器就可以根据此角度控制电机运动。
+  上面就是常规的开发机械臂的基础任务。那么moveit做了什么工作呢？它把机械臂开发过程中，重复的、通用的部分（上述1、2）直接整合在了一起。moveit完成的工作如下:
+ 逆运动学建模。你只需要向moveit提供你的机器人描述文件，也就是URDF文件，里面包含了必要的机械臂的各个link和joint的信息，moveit就可以根据这些信息对机械臂进行逆运动学建模，省去了我们自己的的数学运算过程。 路径规划。moveit实现了OMPL在ROS下的应用。OMPL全称为the Open Motion Planning Library，即开源运动规划库。OMPL几乎包含了所有的开源的运动规划算法，可以上官网看看。OMPL是moveit默认的规划库，现在我们使用moveit，不用自己去写算法实现（可以在配置中切换我们要使用的路径规划算法），只要要指定目标点位姿，moveit就能帮我们完成规划。  所以，现在我们使用moveit控制机械臂，只要进行如下几个大家比较熟悉的步骤：
+  配置机械臂。向moveit的一个插件moveit_setup_assistant提供URDF机器人描述文件，然后根据要求完成机器人配置，步骤可以参考古月居的博客Moveit!配置助手的使用教程。最后会生成一个机器人的功能包。至此，就可以使用如下命令在rviz实现内实现机械臂的可视化路径规划等操作了。
+roslaunch &amp;lt;your_package&amp;gt; demo.launch 值得一提的是，现在已经很多很好的机器人公司的产品支持ROS支持moveit的机器人一览，你可以点进去找一个你喜欢的，然后直接去他们的github主页下载上述生成的功能包。
+  控制机器人运动。这一点也正是接下来要讲的、做的。既然moveit已经帮我们完成了路径规划和求运动学逆解，那么我们就需要根据规划结果去控制机器人。
+  那我们就需要知道我们应该如何拿到这个规划结果以及规划结果是什么形式。
+JointTrajectoryAction 先看这张movieit的架构图：
+可以看到右侧move_group与RobotController（真实的机器人控制器）通过一个JointTrajectoryAction连接。所以可以得知他们的通信模式是ROS Action。那么则需要一对Action Sever和Action Client。
+首先，因为我们现在控制真的机器人运动，所以需要到demo.launch中修改如下的参数。将&amp;quot;fake_execution&amp;quot;改为false。
+ &amp;lt;include file=&amp;#34;$(find ur5_moveit_config)/launch/move_group.launch&amp;#34;&amp;gt;  &amp;lt;arg name=&amp;#34;allow_trajectory_execution&amp;#34; value=&amp;#34;true&amp;#34;/&amp;gt;  &amp;lt;arg name=&amp;#34;fake_execution&amp;#34; value=&amp;#34;true&amp;#34;/&amp;gt;  &amp;lt;arg name=&amp;#34;info&amp;#34; value=&amp;#34;true&amp;#34;/&amp;gt;  &amp;lt;arg name=&amp;#34;debug&amp;#34; value=&amp;#34;$(arg debug)&amp;#34;/&amp;gt;  &amp;lt;/include&amp;gt; 然后再次运行demo.</description>
+    </item>
+    
+  </channel>
+</rss>

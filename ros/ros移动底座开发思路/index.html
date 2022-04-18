@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>二视图三维重建与器械跟踪 :: hezhou notebook</title>
+    <title>ros移动底座开发思路 :: hezhou notebook</title>
 
     
     <link href="/css/nucleus.css?1650294965" rel="stylesheet">
@@ -37,7 +37,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%8C%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%99%A8%E6%A2%B0%E8%B7%9F%E8%B8%AA/">
+  <body class="" data-url="/ros/ros%E7%A7%BB%E5%8A%A8%E5%BA%95%E5%BA%A7%E5%BC%80%E5%8F%91%E6%80%9D%E8%B7%AF/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -229,7 +229,7 @@
   
     
     <li data-nav-id="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" title="2D计算机视觉" class="dd-item
-        parent
+        
         
         
         ">
@@ -278,7 +278,7 @@
  
   
     
-      <li data-nav-id="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%8C%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%99%A8%E6%A2%B0%E8%B7%9F%E8%B8%AA/" title="二视图三维重建与器械跟踪" class="dd-item active">
+      <li data-nav-id="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%8C%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%99%A8%E6%A2%B0%E8%B7%9F%E8%B8%AA/" title="二视图三维重建与器械跟踪" class="dd-item ">
         <a href="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%8C%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%99%A8%E6%A2%B0%E8%B7%9F%E8%B8%AA/">
         二视图三维重建与器械跟踪
         <i class="fas fa-check read-icon"></i>
@@ -385,7 +385,7 @@
   
     
     <li data-nav-id="/ros/" title="ROS" class="dd-item
-        
+        parent
         
         
         ">
@@ -413,7 +413,7 @@
  
   
     
-      <li data-nav-id="/ros/ros%E7%A7%BB%E5%8A%A8%E5%BA%95%E5%BA%A7%E5%BC%80%E5%8F%91%E6%80%9D%E8%B7%AF/" title="ros移动底座开发思路" class="dd-item ">
+      <li data-nav-id="/ros/ros%E7%A7%BB%E5%8A%A8%E5%BA%95%E5%BA%A7%E5%BC%80%E5%8F%91%E6%80%9D%E8%B7%AF/" title="ros移动底座开发思路" class="dd-item active">
         <a href="/ros/ros%E7%A7%BB%E5%8A%A8%E5%BA%95%E5%BA%A7%E5%BC%80%E5%8F%91%E6%80%9D%E8%B7%AF/">
         ros移动底座开发思路
         <i class="fas fa-check read-icon"></i>
@@ -615,7 +615,7 @@
             
           
           
-            <a href='/'></a> > <a href='/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/'>2D计算机视觉</a> > 二视图三维重建与器械跟踪
+            <a href='/'></a> > <a href='/ros/'>ROS</a> > ros移动底座开发思路
           
         
           
@@ -630,26 +630,25 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#工作空间建立">工作空间建立</a></li>
+    <li><a href="#程序结构">程序结构</a>
       <ul>
-        <li><a href="#参考">参考</a></li>
-        <li><a href="#关于双目立体匹配与三维重建">关于双目立体匹配与三维重建</a></li>
-        <li><a href="#稠密点三维重建">稠密点三维重建</a>
+        <li><a href="#crc校验">crc校验</a></li>
+        <li><a href="#python串口通信">python串口通信</a></li>
+        <li><a href="#线程编程与程序框架">线程编程与程序框架</a></li>
+      </ul>
+    </li>
+    <li><a href="#不反馈odom的底盘驱动">不反馈odom的底盘驱动</a>
+      <ul>
+        <li><a href="#使用laser_scan_matcher发布odom到base_footprint的tf变换">使用laser_scan_matcher发布odom到base_footprint的tf变换</a>
           <ul>
-            <li><a href="#概述">概述</a></li>
-            <li><a href="#恢复相机运动"><strong>恢复相机运动</strong></a></li>
-            <li><a href="#方法框架">方法框架</a></li>
-          </ul>
-        </li>
-        <li><a href="#稀疏点三维重建">稀疏点三维重建</a>
-          <ul>
-            <li><a href="#匹配与重建">匹配与重建</a></li>
-            <li><a href="#距离编码代码复现">距离编码代码复现</a></li>
-            <li><a href="#随笔">随笔</a></li>
+            <li><a href="#问题该节点能否用于导航过程呢">问题：该节点能否用于导航过程呢</a></li>
           </ul>
         </li>
       </ul>
     </li>
+    <li><a href="#gmapping">gmapping</a></li>
+    <li><a href="#move_base">move_base</a></li>
   </ul>
 </nav>
     </div>
@@ -667,72 +666,216 @@
           
             <h1>
               
-              二视图三维重建与器械跟踪
+              ros移动底座开发思路
             </h1>
           
 
         
 
 
-<h3 id="参考">参考</h3>
-<p>知乎主页：<a href="https://www.zhihu.com/people/yingsongli">李迎松</a>
-GitHub：https://github.com/ethan-li-coding
-视频教程：<a href="https://www.bilibili.com/video/BV1Uv411q7GU">立体视觉之立体匹配理论与实战</a>
-手术器械的光学跟踪技术研究[D]，王志刚
-《视觉SLAM14讲》第7章
-<a href="https://blog.csdn.net/gangeqian2/article/details/119172447">3D点集之间计算转移矩阵，旋转R，转移T，新增缩放s (总结全面)</a></p>
-<h3 id="关于双目立体匹配与三维重建">关于双目立体匹配与三维重建</h3>
-<p>一种分类方式是：稠密三维重建与稀疏三维重建。</p>
-<p>顾名思义，稀松三维重建是只讲视野内的部分点重建，稠密三维重建通常是将所有点的三维坐标都重建出来。</p>
-<blockquote>
-<p>我们的项目是稀疏点三维重建。两种方案很多基础知识和术语是相同的</p>
-</blockquote>
-<p>目前，学界研究的基于双目的三维重建几乎都是稠密的深度图重建，因为说实话，稀疏点重建挺简单的。稀疏点的三维重建左右点的匹配关系可以做的非常精确，所以，通常情况下，稀疏点的三维重建的精度会比稠密三维重建高很多。</p>
-<h3 id="稠密点三维重建">稠密点三维重建</h3>
-<h4 id="概述">概述</h4>
-<p>从双目图像中恢复整张深度图（通常是以左摄像机坐标系为参考）。一些技术相似的任务：MVS、SFM</p>
-<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220404225227485.png" alt="image-20220404225227485"></p>
-<p>场景：无人机、智能驾驶、机器人。</p>
-<p>方法：传统算法效果还不错，近几年出现大量基于深度学习的方法（以lidar值为groundtruth）。</p>
-<h4 id="恢复相机运动"><strong>恢复相机运动</strong></h4>
-<p>对于MVS或者SFM等任务，没有相机间的坐标转换关系。对极约束简洁地给出了两个匹配点的空间位置关系。于是，相机位姿估计问题变为以下两步：</p>
+<p>开发底盘Navigator Q2的ros驱动</p>
+<p>正常情况下，底盘驱动（ROS节点：base_controller）需要完成的两项任务为：</p>
 <ol>
-<li>根据配对点的像素位置求出 E 或者 F。（E用8点法）</li>
-<li>根据 E 或者 F 求出 R、 t。（SVD，四组解，使用深度值为正的一组）</li>
+<li>
+<p>ROS内的相应节点会将运动控制的数据发往话题/cmd_vel内，底盘驱动需要订阅该话题得到控制数据（由于是2D平面，所以控制信息只包括x,y方向的速度以及垂直于平面的转速，然后将此速度控制信息发往底盘（比如通过串口、蓝牙、WIFI，考虑到通信质量以及普遍性，通常使用串口通信）。底盘得到来自上层的运动控制信息后经过运动学逆向解算将速度命令转换为每个麦克纳姆的速度，从而通过电机驱动控制电机运作。</p>
+</li>
+<li>
+<p>由于ROS下的机器人建图、导航等一系列功能强烈依赖里程计信息，即：需要通过里程计信息辅助实现自我定位，所以底盘驱动需要返回底盘的里程计信息。一是发布odom坐标系与base_footprint的tf坐标变换；二是向/odom话题发布里程计信息（nav_msgs/Odometry）。</p>
+</li>
 </ol>
-<p>由于 E 和 F 只相差了相机内参，而内参在 SLAM 中通常是已知的，所以实践当中往往使用形式更简单的 E。</p>
-<p>除了基本矩阵和本质矩阵，二视图几何中还存在另一种常见的矩阵：单应矩阵（ Homography）H，它描述了两个平面之间的映射关系。若场景中的特征点都落在同一平面上（比如墙、地面等），则可以通过单应性来进行运动估计。</p>
-<h4 id="方法框架">方法框架</h4>
-<p>关于极限纠正的代码，opencv也提供了相应的接口，我们自己程序内也有，但是实际操作时没用而已。</p>
-<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220404224636480.png" alt="image-20220404224636480"></p>
-<p>右边是视差三维矩阵，横轴是像素坐标x,y，纵轴是视差d。C(x,y,d)记录的是左图(x,y)与右图(x+d,y)的匹配代价。</p>
-<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220405003528506.png" alt="image-20220405003528506"></p>
-<h3 id="稀疏点三维重建">稀疏点三维重建</h3>
-<p>场景：刚体跟踪。</p>
-<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220405161616853.png" alt="image-20220405161616853" style="zoom: 67%;" />
-<h4 id="匹配与重建">匹配与重建</h4>
-<p>已实现具有精确的双目标定信息，所以只要左右对应点正确匹配，那么就可以使用<strong>三角测量</strong>的方式将点精确重建。</p>
-<p>三维重建的任务是计算点的三维坐标，但我们的任务还要从点信息中恢复空间变换，所以实际上是一个<strong>刚体追踪</strong>任务。需要确定哪些点是属于一个刚体的。所以这个问题不仅仅是立体匹配而已。关于点的分类，我们可以在二维图像中完成点的归类（比较困难），也可以在重建后（三维坐标）再对点进行分类。</p>
-<p>可以看出，点的归类与立体匹配其实是完全可以分开的两个任务。立体匹配只是为了找到精准的对应关系，要在这个环节创新的话，就是找到消除误匹配的方法。距离编码使用距离信息编码同时解决了误匹配和点排序问题。如果只是为了解决误匹配，可以直接只是用距离信息，无需编码。</p>
-<p>我个人觉得稀疏点这个任务是不太复杂的，因为我们手里的数据量其实也就只有那么几种：真实的点间距离，点的左右图像二维坐标，相机的标定参数。</p>
-<h4 id="距离编码代码复现">距离编码代码复现</h4>
-<p>这个方法是早先2012年王志刚的硕士毕业论文出现的，后面2016年才发小论文，小论文的数据和图是直接从大论文里面拿出来的，感觉是后来挤出来的小论文。发的<strong>中科院医学4区</strong>Computer Assisted Surgery。</p>
-<p>手术器械的光学跟踪技术研究[D]-4.4</p>
-<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220405142439014.png" alt="image-20220405142439014"></p>
-<p>简述步骤：</p>
+<p>针对这两个任务开发底盘驱动，那么根据底盘已经提供的功能可以把开发任务分为几类（从简单到复杂）：</p>
 <ol>
-<li>进行编码，按照预先指定的点的顺序（比如第一个器械是前三个点&hellip;）编码角点与距离，是<strong>一一对应</strong>的（n个点）。</li>
-<li>执行对极匹配，输出所有的匹配关系（包含错误匹配），使用三角测量将每一对匹配重建为三维坐标（长度为m*m，m&gt;n）。</li>
-<li>计算任意两点的欧式距离，填入矩阵形成m*m的上三角矩阵。</li>
-<li>遍历矩阵，判断值是否与真实的器械边长相等，则在新的m*m矩阵内填入对应的距离编码。遍历结束后，对称一下矩阵，将值填满。</li>
-<li>遍历每一行，使任意两个距离编码相加。如果等于角点编码，则匹配成功。（如果角点编码对应的是第4点，那么该点即为第4点）</li>
+<li>
+<p>第一种也是最简单的。那就是底盘是你买的，厂家已经把底盘控制器以及对应的ROS驱动包做好了（其实现在大多数都是这样的）。比如说：turtlebot、EAI以及各种机器人厂家。可以说现在很多机器人移动平台都支持ROS，这是一种趋势。那么使用的时候，直接使用对应的命令运行launch文件启动即可。</p>
+</li>
+<li>
+<p>第二种相对工作量大一点。底盘也是买的，但是它并不支持ROS，比如本课题的Navigator Q2（其实有ROS开发包，但没开发好）。针对这类底盘，它们本身的运动控制器肯定是写好了的，开发者可以比如使用串口、蓝牙、wifi等方式直接向底盘发送命令控制底盘运动。比如，本项目中，可以直接使用UART串口通信向Navigator Q2发送16进制的速度命令，规定格式如下（遥控器的控制协议）：</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/uart%E8%A7%84%E5%88%99.png" alt="image-20200712205643684"></p>
+<p>那么现在的工作就是得到/cmd_vel内的标准速度控制指令，然后转换成底盘的16进制控制格式。</p>
+</li>
+<li>
+<p>最后一种也是最复杂的一种，也是最考验技术的一种，那就是全部自己开发。在第2步的基础上，底盘的控制也要自己写，也就是当速度命令下发来后，底盘要根据该命令转换为每个车轮的转速，中间就涉及到了小车的你运动学建模了。这项工作其实也可以分为两个方向：一是开发成第2类的小车方式（也是最主流的），意思就是小车的运动控制（逆运动学建模、控制电机等）是在底盘内完成的，然后底盘给出一个控制的接口，就成了第二类的小车，这样的好处就是便于集成，你如果想集成到ROS，那么就写一个ROS的驱动下发命令，你如果向集成到其它系统，那么就按照其它系统的规范写一个驱动，这样模块相对独立，降低耦合。二是一种耦合比较高的方式，具体就是：全部工作都在ROS下完成了，拿到速度命令后就在ROS驱动内完成逆运动学解算为各个电机转速并控制电机运动，这样做是不太推荐的，耦合高，如果到时候我不想在ROS下跑了，那么底盘的控制代码我就要全部重写。</p>
+</li>
 </ol>
-<h4 id="随笔">随笔</h4>
-<p>三维空间点中求空间变换，其实两个点就可以，总共6个自由度，两组点就能提供6个方程。（但是会出现方向歧义，绑定手术器械后，绕中心旋转180度，靶点位置没有变化，手术器械变了）？对吗，在思考一下。（SVD提供的对应点的集合，所以是否不存在这个问题？）（两点无法建立一个参考坐标系！无法规定x、y的方向，空间变换描述的是参考坐标系之间的变换）</p>
-<p>为什么空间中刚体跟踪通常使用的是三个点而不是两个点呢？因为两点只能绑定一条直线，无法描述一个平面，实际的刚体位置可以在绕该直线旋转的任意位置。</p>
-<p>所以两点之间的转换是能求的，但是两点不能绑定一个三维的刚体，因为两点无法创建坐标系，所以无法描述两点与刚体的固定转换。</p>
-<p>关于SVD，因为SVD的输入是对应点的集合，所以计算是没问题的。但是如何确定对应点关系呢？如果是2个点，从检测手段来看，你根本不知道哪个是点1哪个是点2。另外，不能是等腰三角形，这样绕中轴旋转180度靶点没有变。</p>
-<p>使用大小不一的靶点？</p>
+<h2 id="工作空间建立">工作空间建立</h2>
+<p>在catkin_ws/src下新建文件夹navigator_q2。</p>
+<p>然后开始新建功能包，这里参照了比如turtlebot的规范。分别建立了两个包：q2_bringup、q2_nav。</p>
+<p>q2_bringup放的是底盘驱动相关的文件。q2_nav则是导航相关的:gmapping、amcl、move_base相关的配置和launch文件。</p>
+<h2 id="程序结构">程序结构</h2>
+<h3 id="crc校验">crc校验</h3>
+<p>crc校验的目的是为了验证传输数据的正确性，会把需要传输的数据按照一定的规定进行演算，得出一个校验码。所以数据接收方收到数据后，可使用相同的校验规则对数据进行校验得出校验码，然后与发送的数据包内的校验码对比。</p>
+<p>Navigator q2用的crc校验规则叫做&quot;CRC-16/XMODEM&quot;，在线crc校验链接：http://www.ip33.com/crc.html</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> crcmod <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#封装成函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">crc_exchange</span>(data_input):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#data = data.replace(&#34; &#34;, &#34;&#34;)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#print data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#转成hex</span>
+</span></span><span style="display:flex;"><span>    data_hex <span style="color:#f92672">=</span> data_input<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;hex&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#构造crc校验器</span>
+</span></span><span style="display:flex;"><span>    crc16 <span style="color:#f92672">=</span> crcmod<span style="color:#f92672">.</span>mkCrcFun(<span style="color:#ae81ff">0x11021</span>, rev<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, initCrc<span style="color:#f92672">=</span><span style="color:#ae81ff">0x0000</span>, xorOut<span style="color:#f92672">=</span><span style="color:#ae81ff">0x0000</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#生成校验值</span>
+</span></span><span style="display:flex;"><span>    crc <span style="color:#f92672">=</span> hex(crc16(data_hex))<span style="color:#75715e">#string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#print crc</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#排除高位为0而被省略的问题</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(crc)<span style="color:#f92672">==</span><span style="color:#ae81ff">4</span>:
+</span></span><span style="display:flex;"><span>        crc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0x00&#39;</span><span style="color:#f92672">+</span>crc[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> len(crc)<span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>:
+</span></span><span style="display:flex;"><span>        crc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0x0&#39;</span><span style="color:#f92672">+</span>crc[<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>:]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> len(crc)<span style="color:#f92672">==</span><span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>        crc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;0x000&#39;</span><span style="color:#f92672">+</span>crc[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#取出高、低位</span>
+</span></span><span style="display:flex;"><span>    print crc[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">4</span>],crc[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#拼接完整字符串</span>
+</span></span><span style="display:flex;"><span>    data_output<span style="color:#f92672">=</span>data_input<span style="color:#f92672">+</span>crc[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>:]<span style="color:#f92672">.</span>upper()<span style="color:#f92672">+</span>crc[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">4</span>]<span style="color:#f92672">.</span>upper()<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;0D&#39;</span>
+</span></span><span style="display:flex;"><span>    print data_output
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> data_output
+</span></span></code></pre></div><h3 id="python串口通信">python串口通信</h3>
+<p>这个就比较简单了，但还是记一下吧</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> serial
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> rospy
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rospy<span style="color:#f92672">.</span>init_node(<span style="color:#e6db74">&#39;serial_test&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定义串口</span>
+</span></span><span style="display:flex;"><span>ser<span style="color:#f92672">=</span>serial<span style="color:#f92672">.</span>Serial(<span style="color:#e6db74">&#34;/dev/ttyUSB2&#34;</span>,<span style="color:#ae81ff">115200</span>,timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>list<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;AA0F012F1700003200FEFF0000000005000000000000001100001C00BE700D&#39;</span>  
+</span></span><span style="display:flex;"><span>hexer<span style="color:#f92672">=</span>list<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;hex&#34;</span>)  
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> rospy<span style="color:#f92672">.</span>Rate(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 写入数据</span>
+</span></span><span style="display:flex;"><span>        ser<span style="color:#f92672">.</span>write(hexer)
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">=</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        print  i
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;---异常---：&#34;</span>,e)
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>sleep()
+</span></span></code></pre></div><h3 id="线程编程与程序框架">线程编程与程序框架</h3>
+<p>总程序见附件Navigator_controller.py。</p>
+<p>注：向底盘写入数据的部分就依靠一个订阅就好，然后在回调函数内将命令通过串口发往底盘（这里向底盘发送命令的频率就取决于/cmd_vel话题的频率）。里程反馈部分则另写一个线程实现，一个死循环，一直读串口数据（这个读数据是阻塞的，有数据才向下执行），然后按照一定的方式反馈里程（这里向ROS反馈的频率就取决于底盘向串口反馈里程的频率）。</p>
+<h2 id="不反馈odom的底盘驱动">不反馈odom的底盘驱动</h2>
+<p>那么ros底盘驱动只负责：将/cmd_vel的速度信息按对应的格式发往底盘即可。那么就等订阅/cmd_vel，等有消息了就触发回调函数。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#见附件navigator_controller_without_odom.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">crc_exchange</span>(data_input):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#crc校验，输出完整的的１６进制速度命令</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> data_output
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">velCallback</span>(msg):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#将/cmd_vel速度命令转化为对应16进制</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#crc校验</span>
+</span></span><span style="display:flex;"><span>    data_output<span style="color:#f92672">=</span>crc_exchange(data)
+</span></span><span style="display:flex;"><span>    hexer<span style="color:#f92672">=</span>data_output<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;hex&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#写入串口</span>
+</span></span><span style="display:flex;"><span>    ser<span style="color:#f92672">.</span>write(hexer)          
+</span></span><span style="display:flex;"><span>ser<span style="color:#f92672">=</span>serial<span style="color:#f92672">.</span>Serial(<span style="color:#e6db74">&#34;/dev/ttyUSB0&#34;</span>,<span style="color:#ae81ff">115200</span>,timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>rospy<span style="color:#f92672">.</span>init_node(<span style="color:#e6db74">&#39;teleop_navigator&#39;</span>)
+</span></span><span style="display:flex;"><span>rospy<span style="color:#f92672">.</span>Subscriber(<span style="color:#e6db74">&#39;/cmd_vel&#39;</span>,Twist,velCallback)
+</span></span><span style="display:flex;"><span>rospy<span style="color:#f92672">.</span>spin()
+</span></span></code></pre></div><h3 id="使用laser_scan_matcher发布odom到base_footprint的tf变换">使用laser_scan_matcher发布odom到base_footprint的tf变换</h3>
+<p>附官网地址：<a href="http://wiki.ros.org/laser_scan_matcher">laser_scan_matcher ROS wiki</a></p>
+<p>中间参考了两篇博客：<a href="https://blog.csdn.net/weixin_42958308/article/details/106355937">ROS AMCL定位个人问题汇总</a>、<a href="https://blog.csdn.net/vampirewolf/article/details/90042517">ROS：激光雷达+laser_scan_matcher 运行gmapping</a></p>
+<p>我的理解：它其实做的就是扫描匹配，利用激光雷达读入数据的变化，推算自身在环境中的位置。所以，这个过程中，需要环境有较明显的特征（机器人只要发生了移动，激光雷达的信息就会发生变化），比如在长直的走廊内，机器人如果沿着平行墙面的方向移动，激光雷达读入的数据是不会改变的（不难理解，思考一下），所以此时机器人无法做扫描匹配，不知道自己在哪。</p>
+<p>**需要注意的是：**这个节点只是发布了odom到base_footprint的tf变换，并没有向/odom话题发布里程计信息Odometry。因为它只是利用激光雷达信息做了位姿的匹配（激光雷达信息中无法体现速度信息）。所以，严格来说，这个节点并不是发布了里程计信息，因为Odometry包含了两部分：一个是位姿（位置和姿态），一个是速度（线速度和角速度）。</p>
+<p>安装过程：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt-get install ros-kinetic-scan-tools
+</span></span></code></pre></div><p>然后写了个启动的launch：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;launch&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;/use_sim_time&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">&lt;!-- 发布激光和底座的静态tf变换　--&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;node</span> <span style="color:#a6e22e">pkg=</span><span style="color:#e6db74">&#34;tf&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;static_transform_publisher&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;base_footprint_to_laser&#34;</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">args=</span><span style="color:#e6db74">&#34;0.25 0.0 0.175 0.0 0.0 0.0 /base_footprint /laser_frame 10&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">&lt;!-- 启动节点并设定参数　--&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;node</span> <span style="color:#a6e22e">pkg=</span><span style="color:#e6db74">&#34;laser_scan_matcher&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;laser_scan_matcher_node&#34;</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;laser_scan_matcher_node&#34;</span> <span style="color:#a6e22e">output=</span><span style="color:#e6db74">&#34;screen&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;use_imu&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;use_odom&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;use_cloud_input&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;fixed_frame&#34;</span> <span style="color:#a6e22e">value =</span> <span style="color:#e6db74">&#34;odom&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;base_frame&#34;</span> <span style="color:#a6e22e">value =</span> <span style="color:#e6db74">&#34;base_footprint&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;max_iterations&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;10&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/node&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/launch&gt;</span>
+</span></span></code></pre></div><h4 id="问题该节点能否用于导航过程呢">问题：该节点能否用于导航过程呢</h4>
+<p>问题描述：前面也说了，正常情况下，底盘的反馈包括两个部分，tf变换和/odom话题发数据。那么laser_scan_matcher实现了tf的变换，但是没有做向/odom发送历程信息这一部分，它能否用于导航过程呢？</p>
+<p>那么，抱着这个疑问，我就想知道：在导航过程中，到底谁在利用/odom话题呢？然后，我跑了一个假假机器人的导航实验。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>roslaunch bringup simulate-amada.launch 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 打开rqt_graph，效果如下</span>
+</span></span><span style="display:flex;"><span>rqt_graph
+</span></span></code></pre></div><p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20200712142147100.png" alt="image-20200712142147100"></p>
+<p>可以看到，就只有/move_base节点在订阅/odom，所以我立刻到ros wiki上去看了一下，它用/odom干嘛。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/navigation-stack.png" alt="image-20200712142518820"></p>
+<p>然后就发现是local_planner在用，所以又顺势打开了<a href="http://wiki.ros.org/base_local_planner">base_local_planner</a>，最终发现确实是它订阅了这个话题。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20200712143118971.png" alt="image-20200712143118971"></p>
+<p>我的理解是它拿到里程计实时反馈的速度就能够更好的根据反馈速度进行速度调节。</p>
+<p>那么问题来了：那我如果就真不要/odom了，可以吗？</p>
+<p>进行实操：</p>
+<p>最终发现，是可以的！</p>
+<h2 id="gmapping">gmapping</h2>
+<p>使用gmapping进行建图需要的组件。启动底盘、启动激光、启动gmapping、启动rviz。</p>
+<p>gmapping就是使用的ros自带的gmapping包，启动gmapping一般使用launch方法，常规的launch文件如下：（一些参数默认使用即可，关于坐标系名称之类的可以修改一下）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;launch&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;arg</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;scan_topic&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;scan&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;node</span> <span style="color:#a6e22e">pkg=</span><span style="color:#e6db74">&#34;gmapping&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;slam_gmapping&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;slam_gmapping&#34;</span> <span style="color:#a6e22e">output=</span><span style="color:#e6db74">&#34;screen&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;base_frame&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;base_footprint&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;odom_frame&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;odom&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;map_update_interval&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.5&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;maxUrange&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;5.6&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;maxRange&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;5.0&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;sigma&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.05&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;kernelSize&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.5&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;lstep&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.05&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;astep&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.05&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;iterations&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;5&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;lsigma&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.075&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ogain&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;5.0&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;lskip&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;srr&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.001&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;srt&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.002&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;str&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.001&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;stt&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.002&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;linearUpdate&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.2&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;angularUpdate&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.1&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;temporalUpdate&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;-1.0&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;resampleThreshold&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.5&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;particles&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;80&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">&lt;!--
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &lt;param name=&#34;xmin&#34; value=&#34;-50.0&#34;/&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &lt;param name=&#34;ymin&#34; value=&#34;-50.0&#34;/&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &lt;param name=&#34;xmax&#34; value=&#34;50.0&#34;/&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    &lt;param name=&#34;ymax&#34; value=&#34;50.0&#34;/&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  make the starting size small for the benefit of the Android client&#39;s memory...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">  --&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;xmin&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;-5.0&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ymin&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;-5.0&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;xmax&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;5.0&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ymax&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;5.0&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;delta&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.05&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;llsamplerange&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.01&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;llsamplestep&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.01&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;lasamplerange&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.005&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;param</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;lasamplestep&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;0.005&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;remap</span> <span style="color:#a6e22e">from=</span><span style="color:#e6db74">&#34;scan&#34;</span> <span style="color:#a6e22e">to=</span><span style="color:#e6db74">&#34;$(arg scan_topic)&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/node&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/launch&gt;</span>
+</span></span></code></pre></div><h2 id="move_base">move_base</h2>
+<p>move_base用于导航过程，在指定终点后move_base会一直向/cmd_vel输送速度命令，直至到达目标。如下是一个move_base.launch的文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;launch&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;arg</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;odom_topic&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;odom&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;node</span> <span style="color:#a6e22e">pkg=</span><span style="color:#e6db74">&#34;move_base&#34;</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;move_base&#34;</span> <span style="color:#a6e22e">respawn=</span><span style="color:#e6db74">&#34;false&#34;</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;move_base&#34;</span> <span style="color:#a6e22e">output=</span><span style="color:#e6db74">&#34;screen&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;rosparam</span> <span style="color:#a6e22e">file=</span><span style="color:#e6db74">&#34;$(find bringup)/param/costmap_common_params.yaml&#34;</span> <span style="color:#a6e22e">command=</span><span style="color:#e6db74">&#34;load&#34;</span> <span style="color:#a6e22e">ns=</span><span style="color:#e6db74">&#34;global_costmap&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;rosparam</span> <span style="color:#a6e22e">file=</span><span style="color:#e6db74">&#34;$(find bringup)/param/costmap_common_params.yaml&#34;</span> <span style="color:#a6e22e">command=</span><span style="color:#e6db74">&#34;load&#34;</span> <span style="color:#a6e22e">ns=</span><span style="color:#e6db74">&#34;local_costmap&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;rosparam</span> <span style="color:#a6e22e">file=</span><span style="color:#e6db74">&#34;$(find bringup)/param/local_costmap_params.yaml&#34;</span> <span style="color:#a6e22e">command=</span><span style="color:#e6db74">&#34;load&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;rosparam</span> <span style="color:#a6e22e">file=</span><span style="color:#e6db74">&#34;$(find bringup)/param/global_costmap_params.yaml&#34;</span> <span style="color:#a6e22e">command=</span><span style="color:#e6db74">&#34;load&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;rosparam</span> <span style="color:#a6e22e">file=</span><span style="color:#e6db74">&#34;$(find bringup)/param/base_local_planner_params.yaml&#34;</span> <span style="color:#a6e22e">command=</span><span style="color:#e6db74">&#34;load&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;rosparam</span> <span style="color:#a6e22e">file=</span><span style="color:#e6db74">&#34;$(find bringup)/param/move_base_params.yaml&#34;</span> <span style="color:#a6e22e">command=</span><span style="color:#e6db74">&#34;load&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;remap</span> <span style="color:#a6e22e">from=</span><span style="color:#e6db74">&#34;odom&#34;</span> <span style="color:#a6e22e">to=</span><span style="color:#e6db74">&#34;$(arg odom_topic)&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/node&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/launch&gt;</span>
+</span></span></code></pre></div><p>它主要注入了几个yaml文件，这几个yaml文件里面的参数关系到了各个规划器和move_base的行为。</p>
 
 
 <footer class="footline">
@@ -811,7 +954,6 @@ GitHub：https://github.com/ethan-li-coding
             
                 
                     
-                    
                 
                 
 
@@ -824,26 +966,6 @@ GitHub：https://github.com/ethan-li-coding
             
             
                 
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -861,8 +983,21 @@ GitHub：https://github.com/ethan-li-coding
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
-                        
+            
+            
+                
                     
                 
                 
@@ -915,6 +1050,7 @@ GitHub：https://github.com/ethan-li-coding
             
                 
                     
+                    
                 
                 
 
@@ -927,6 +1063,7 @@ GitHub：https://github.com/ethan-li-coding
             
             
                 
+                    
                     
                 
                 
@@ -943,6 +1080,9 @@ GitHub：https://github.com/ethan-li-coding
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1015,10 +1155,10 @@ GitHub：https://github.com/ethan-li-coding
 	 
 	 
 		
-			<a class="nav nav-prev" href="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" title="2D计算机视觉——原理、算法及应用"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/ros/" title="ROS"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/" title="射影变换与二视图几何" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/ros/moveit%E6%8E%A7%E5%88%B6fp%E6%9C%BA%E6%A2%B0%E8%87%82/" title="moveit控制FP机械臂" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
