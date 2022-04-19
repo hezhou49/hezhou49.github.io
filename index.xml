@@ -8,6 +8,25 @@
     <language>zh-cn</language>
     <lastBuildDate>Thu, 14 Apr 2022 10:08:35 +0800</lastBuildDate><atom:link href="https://hezhou49.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>01_Regression_P1</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/01_regression_p1/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/01_regression_p1/</guid>
+      <description>Regression Machine Learning ​	第一堂课 是要简单跟大家介绍一下machine learning还有deep learning的基本概念，等一下会讲一个跟宝可梦完全没有关係的故事。想必大家在报章杂志上其实往往都已经听过机器学习这一个词汇，那你可能也知道说机器学习就是跟今天很热门的AI好像有那么一点关联。
+​	那所谓的机器学习到底是什么呢？顾名思义，机器他具备有学习的能力，那些科普文章往往把机器学习这个东西吹得玄之又玄好像机器会学习以后，我们就有了人工智慧，有了人工智慧以后机器接下来就要统治人类了。那机器学习到底是什么呢？事实上，机器学习概括来说可以用一句话来描述机器学习这件事，==机器学习就是让机器具备找一个函式的能力==。
+​	那机器具备找函式的能力以后,他确实可以做很多事 举例来说
+ 假设你今天想要叫机器做语音辨识,机器听一段声音,產生这段声音对应的文字,那你需要的就是一个函式,这个函式的输入是声音讯号,输出是这段声音讯号的内容。那你可以想像说 这个可以把声音讯号,当作输入文字当作输出的函式,显然非常非常的复杂，他绝对不是,你可以用人手写出来的方程式,这个函式他非常非常的复杂,人类绝对没有能力把它写出来,所以我们期待凭藉著机器的力量,把这个函式自动找出来，这件事情,就是机器学习。  ​	2. 还有好多好多的任务,我们都需要找一个很复杂的函式,举例来说 假设我们现在要做,影像辨识 那这个影像辨识,我们需要什麼样的函式呢？这个函式的输入是一张图片,他的输出是什麼呢？他是这个,图片裡面 有什麼样的内容。
+​	3. 或者是大家都知道的AlphaGo,其实也可以看作是一个函式,要让机器下围棋 我们需要的,就是一个函式 这个函式的输入,是棋盘上黑子跟白子的位置,输出是什麼 输出是机器下一步,应该落子的位置 假设你可以,找到一个函式 这个函式的输入,就是棋盘上黑子跟白子的位置,输出就是下一步应该落子的位置,那我们就可以让机器做自动下围棋,这件事 就可以做一个AlphaGo。
+Different types of Functions ​	随著我们要找的函式不同,机器学习有不同的类别,那这边介绍几个专有名词给大家,认识一下 第一个专有名词,叫作==Regression==,Regression的意思是说,假设我们今天要找的函式,他的输出是一个数值,他的输出是一个 scalar,那这样子的机器学习的任务,我们称之為Regression。
+​	那这边举一个Regression的例子,假设我们今天要机器做的事情,是预测未来某一个时间的,PM2.5的数值 你要叫机器,做的事情是找一个函式,这个我们用f来表示,这个函式的输出,是明天中午的PM2.5的数值,他的输入可能是种种跟预测PM2.5,有关的指数 包括今天的PM2.5的数值,今天的平均温度,今天平均的臭氧浓度等等,这一个函式可以拿这些数值当作输入,输出明天中午的PM2.5的数值,那这一个找这个函式的任务,叫作Regression。
+​	除了Regression以外,另外一个大家耳熟能详的任务,叫作==Classification==,那Classification这个任务,要机器做的是选择题 我们人类,先準备好一些选项 那这些选项,又叫作类别 又叫作classes,我们现在要找的函式它的输出,就是从我们设定好的选项裡面,选择一个当作输出 那这个问题,这个任务就叫作Classification。举例来说,现在每个人都有gmail account,那gmail account裡面有一个函式,这个函式可以帮我们侦测一封邮件,是不是垃圾邮件,这个函式的输入是一封电子邮件,那他的输出是什麼呢,你要先準备好你要机器选的选项,在侦测垃圾邮件这个问题裡面,可能的选项就是两个,是垃圾邮件 或不是垃圾邮件,Yes或者是No,那机器要从Yes跟No裡面,选一个选项出来,这个问题叫作Classification,那Classification不一定只有两个选项,也可以有多个选项 。
+​	举例来说,alpha go本身也是一个Classification,的问题 那只是这个Classification,他的选项是比较多的,那如果要叫机器下围棋,你想做一个 alpha go的话,我们要给机器多少的选项呢,你就想想看 棋盘上有多少个位置,那我们知道棋盘上有19乘19个位置,那叫机器下围棋这个问题 其实,就是一个有19乘19个选项的选择题,你要叫机器做的就是找一个函式,这个函式的输入是棋盘上,黑子跟白子的位置,输出就是从19乘19个选项裡面,选出一个正确的选项,从19乘19个可以落子的位置裡面,选出下一步应该要落子的位置,那这个问题也是一个分类的问题。
+​	其实很多教科书 在讲机器学习的,种种不同类型的任务的时候,往往就讲到这边 告诉你说,机器学习 两大类任务,一个叫作Regression,一个叫作Classification,然后就结束了,但是假设你对机器学习的认知,只停留在机器学习就是两大类任务,Regression跟Classification,那就好像你以為说,这个世界只有五大洲一样。
+​	你知道这个世界不是只有五大洲,这个世界外面是有一个,黑暗大陆的 这鬼灭之刃连载之前,我们就已经出发前往黑暗大陆了,鬼灭之刃连载以后,我们居然都还没有到,可见这个黑暗大陆距离那麼远,那在机器学习这个领域裡面,所谓的黑暗大陆是什麼呢,在於Regression跟Classification以外,大家往往害怕碰触的问题,叫作Structured Learning,也就是机器今天不只是要做选择题,不只是输出一个数字 还要產生,一个有结构的物件 举例来说,机器画一张图 写一篇文章,这种叫机器產生有结构的东西的问题,就叫作Structured Learning,那如果要讲得比较拟人化,比较潮一点 Structured Learning,你可以用拟人化的讲法说,我就是要叫机器学会创造这件事情,好那到目前為止,我们就是讲了三个机器学习的任务,Regression Classification跟Structured Learning,</description>
+    </item>
+    
+    <item>
       <title>ros移动底座开发思路</title>
       <link>https://hezhou49.github.io/ros/ros%E7%A7%BB%E5%8A%A8%E5%BA%95%E5%BA%A7%E5%BC%80%E5%8F%91%E6%80%9D%E8%B7%AF/</link>
       <pubDate>Tue, 14 Jul 2020 10:08:35 +0800</pubDate>
@@ -67,6 +86,17 @@ FINDING OPTIMAL ROTATION AND TRANSLATION BETWEEN CORRESPONDING 3D POINTS</descri
     </item>
     
     <item>
+      <title>02_Regression_P2</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/02_regression_p2/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/02_regression_p2/</guid>
+      <description>Regression P2 Piecewise Linear Curves ​	Linear 的 Model,也许太过简单了,我们可以想像说 x1 跟 y,也许它中间有比较复杂的关係,对 Linear 的 Model 来说,x1 跟 y 的关係就是一条直线,随著 x1 越来越高,y 就应该越来越大,你可以设定不同的 w,改变这条线的斜率,你可以设定不同的 b,改变这一条蓝色的直线,跟 y 轴的交叉点,但是无论你怎麼改 w 跟 b,它永远都是一条直线,永远都是 x1 越大,y 就越大,前一天观看的人数越多,隔天的观看人数就越多
+​	但也许现实并不是这个样子
+ 也许在 x1 小於某一个数值的时候,前一天的观看人数跟隔天的观看人数是成正比, 也许当 x1 大於一个数值的时候,这个物极必反,过了一个假设 x1 太大,前天观看的人数太高,那隔天观看人数就会变少,也说不定 也许 x1 跟 y 中间,有一个比较复杂的,像这个红色线一样的关係  ​	但你不管怎麼摆弄w 跟 b,你永远製造不出红色那一条线,你永远无法用 Linear 的 Model,製造红色这一条线,显然 Linear 的 Model 有很大的限制,这一种来自於 Model 的限制,叫做 ==Model 的 Bias==,那其实我们刚才在课堂一开始的时候也叫做,也说 b 叫做 Bias,那这个地方有一点,在用词上有一点 Ambiguous,所以特别强调说,这个东西叫做 Model 的 Bias,跟 b 的这个 Bias 不太一样,它指的意思是说,没有办法模拟真实的状况</description>
+    </item>
+    
+    <item>
       <title>moveit控制FP机械臂</title>
       <link>https://hezhou49.github.io/ros/moveit%E6%8E%A7%E5%88%B6fp%E6%9C%BA%E6%A2%B0%E8%87%82/</link>
       <pubDate>Sat, 17 Oct 2020 10:08:35 +0800</pubDate>
@@ -89,6 +119,600 @@ JointTrajectoryAction 先看这张movieit的架构图：
 可以看到右侧move_group与RobotController（真实的机器人控制器）通过一个JointTrajectoryAction连接。所以可以得知他们的通信模式是ROS Action。那么则需要一对Action Sever和Action Client。
 首先，因为我们现在控制真的机器人运动，所以需要到demo.launch中修改如下的参数。将&amp;quot;fake_execution&amp;quot;改为false。
  &amp;lt;include file=&amp;#34;$(find ur5_moveit_config)/launch/move_group.launch&amp;#34;&amp;gt;  &amp;lt;arg name=&amp;#34;allow_trajectory_execution&amp;#34; value=&amp;#34;true&amp;#34;/&amp;gt;  &amp;lt;arg name=&amp;#34;fake_execution&amp;#34; value=&amp;#34;true&amp;#34;/&amp;gt;  &amp;lt;arg name=&amp;#34;info&amp;#34; value=&amp;#34;true&amp;#34;/&amp;gt;  &amp;lt;arg name=&amp;#34;debug&amp;#34; value=&amp;#34;$(arg debug)&amp;#34;/&amp;gt;  &amp;lt;/include&amp;gt; 然后再次运行demo.</description>
+    </item>
+    
+    <item>
+      <title>03_General Guidance</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/03_general-guidance/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/03_general-guidance/</guid>
+      <description>General Guidance : overfit Framework of ML ​	我们已经看了作业一了,其实之后好几个作业,它看起来的样子,基本上都是大同小异
+​	就是你会有一堆训练的资料,这些训练集裡面,会包含了$x$跟$y$的hat,$x¹$ 和跟它对应的$ŷ¹$,$x²$ 跟它对应的$ŷ²$,一直到$xⁿ$ 还有它对应的$ŷⁿ$
+​	测试集,测试集就是你只有x没有y,其实在之后每一个作业,看起来都是非常类似的格式
+ 作业二,其实是做语音辨识,我们的x就是非常小的一段声音讯号,其实这个不是真正完整的语音辨识系统,它是语音辨识系统的一个阉割版,ŷ是要去预测判断,这一小段声音讯号,它对应到哪一个phoneme。你不知道phoneme是什麼没有关係,你就把它想成是音标就可以了 作业三叫做图像识别,这个时候我们的x是一张图片,ŷ是机器要判断说这张图片裡面,有什麼样的东西 作业四是语者辨识,语者辨识要做的事情是,这个x也是一段声音讯号,ŷ现在不是phoneme,ŷ是现在是哪一个人在说话,这样的系统,现在其实非常的有用,如果你打电话去银行的客服,现在都有自动的语者辨认系统,它会听说现在打电话进来的人,是不是客户本人,就少了客服人员问你身份验证的时间 作业五是做机器翻译,x就是某一个语言,比如说,这是我唯一会的一句日文,痛みを知れ,它的ŷ就是另外一句话。  ​	训练集就要拿来训练我们的Model,训练Model的过程上週已经讲过了,训练的过程就是三个步骤
+ 第一步,你要先写出一个有未知数的function,这个未知数,以后我们都用$θ$来代表,一个Model裡面所有的未知函数,所以$f_θ(x)$的意思就是说,我现在有一个function叫f(x),它裡面有一些未知的参数,这些未知的参数表示成$θ$,它的input叫做x,这个input叫做feature 第二步，你要定一个东西叫做loss,loss是一个function,这个loss的输入就是一组参数,去判断说这一组参数是好还是不好 第三步，你要解一个,Optimization的problem,你要去找一个θ,这个θ 可以让loss的值越小越好,可以让loss的值 最小的那个$θ$,我们叫做$θ^*$  ​	有了$θ^$以后,那你就把它拿来用在测试集上,也就是你把$θ^$带入这些未知的参数,本来$f_θ(x)$裡面有一些未知的参数,现在这个$θ$ 用$θ^*$来取代,它的输入就是你现在的测试集,输出的结果 你就把它存起来,然后上传到Kaggle就结束了。
+​	接下来你就会遇到一个问题,直接执行助教的sample code,往往只能够给你simple baseline的结果而已,如果你想要做得更好,那应该要怎麼办,
+General Guide ​	以下就是如何让你做得更好的攻略,它适用於前期所有的作业,这个攻略是怎麼走的呢?
+​	从最上面开始走起,第一个是你今天如果你觉得,你在Kaggle上的结果不满意的话,第一件事情你要做的事情是,检查你的training data的loss
+​	有人说&amp;quot;我在意的不是应该是,testing data的loss吗,因為Kaggle上面的结果,呈现的是testing data的结果&amp;quot;
+​	但是你要先检查你的training data,看看你的model在training data上面,有没有学起来,再去看testing的结果,如果你发现,你的training data的loss很大,显然它在训练集上面也没有训练好,接下来你要分析一下,在训练集上面没有学好,是什麼样的原因,这边有两个可能,第一个可能是model的bias
+Model bias ​	model的bias这件事情,我们在上週已经跟大家讲过了,所谓model bias的意思是说,假设你的model太过简单。
+​	举例来说,我们现在写了一个有未知parameter的function,这个未知的parameter,我们可以代各种不同的数字,你代θ¹ 得到一个function $f_{θ^1}(x)$,我们把那个function用这个,一个点来表示,θ² 得到另一个function $f_{θ^1}(x)$,你把所有的function集合起来,得到一个function的set.
+​	但是这个function的set太小了,这个function的set裡面,没有包含任何一个function,可以让我们的loss变低,即可以让loss变低的function,不在你的model可以描述的范围内。
+​	在这个情况下,就算你找出了一个θ*,它是这些蓝色的function裡面,最好的那一个,也无济於事了,那个loss还是不够低。</description>
+    </item>
+    
+    <item>
+      <title>04_Local Minimum And Saddle Point</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/04_local-minimum-and-saddle-point/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/04_local-minimum-and-saddle-point/</guid>
+      <description>When gradient is small Critical Point Training Fails because ​	现在我们要讲的是Optimization的部分,所以我们要讲的东西基本上跟Overfitting没有什麼太大的关联,我们只讨论Optimization的时候,怎麼把gradient descent做得更好,那為什麼Optimization会失败呢？
+​	你常常在做Optimization的时候,你会发现,随著你的参数不断的update,你的training的loss不会再下降,但是你对这个loss仍然不满意,就像我刚才说的,你可以把deep的network,跟linear的model,或比较shallow network 比较,发现说它没有做得更好,所以你觉得deepnetwork,没有发挥它完整的力量,所以Optimization显然是有问题的
+​	但有时候你会甚至发现,一开始你的model就train不起来,一开始你不管怎麼update你的参数,你的loss通通都掉不下去,那这个时候到底发生了什麼事情呢？
+​	过去常见的一个猜想,是因為我们现在走到了一个地方,这个地方参数对loss的微分為零,当你的参数对loss微分為零的时候,gradient descent就没有办法再update参数了,这个时候training就停下来了,loss当然就不会再下降了。
+​	讲到gradient為零的时候,大家通常脑海中最先浮现的,可能就是==local minima==,所以常有人说做deep learning,用gradient descent会卡在local minima,然后所以gradient descent不work,所以deep learning不work。
+​	但是如果有一天你要写,跟deep learning相关paper的时候,你千万不要讲卡在local minima这种事情,别人会觉得你非常没有水準,為什麼
+​	因為不是只有local minima的gradient是零,还有其他可能会让gradient是零,比如说 ==saddle point==,所谓的saddle point,其实就是gradient是零,但是不是local minima,也不是local maxima的地方,像在右边这个例子裡面 红色的这个点,它在左右这个方向是比较高的,前后这个方向是比较低的,它就像是一个马鞍的形状,所以叫做saddle point,那中文就翻成鞍点
+​	像saddle point这种地方,它也是gradient為零,但它不是local minima,那像这种gradient為零的点,统称為==critical point==,所以你可以说你的loss,没有办法再下降,也许是因為卡在了critical point,但你不能说是卡在local minima,因為saddle point也是微分為零的点
+​	但是今天如果你发现你的gradient,真的很靠近零,卡在了某个critical point,我们有没有办法知道,到底是local minima,还是saddle point？其实是有办法的
+​	為什麼我们想要知道到底是卡在local minima,还是卡在saddle point呢
+ 因為如果是卡在local minima,那可能就没有路可以走了,因為四周都比较高,你现在所在的位置已经是最低的点,loss最低的点了,往四周走 loss都会比较高,你会不知道怎麼走到其他的地方去 但saddle point就比较没有这个问题,如果你今天是**卡在saddle point的话,saddle point旁边还是有路可以走的,**还是有路可以让你的loss更低的,你只要逃离saddle point,你就有可能让你的loss更低  ​	所以鉴别今天我们走到,critical point的时候,到底是local minima,还是saddle point,是一个值得去探讨的问题,那怎麼知道今天一个critical point,到底是属於local minima,还是saddle point呢？</description>
+    </item>
+    
+    <item>
+      <title>05_Batch and Momentum</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/05_batch-and-momentum/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/05_batch-and-momentum/</guid>
+      <description>Batch and Momentum Review： Optimization with Batch ​	上次我们有讲说,我们实际上在算微分的时候,并不是真的对所有 Data 算出来的 L 作微分,你是把所有的 Data 分成一个一个的 Batch,有的人是叫Mini Batch ,那我这边叫做 Batch,其实指的是一样的东西,助教投影片裡面,是写 Mini Batch
+​	每一个 Batch 的大小呢,就是大 B 一笔的资料,我们每次在 Update 参数的时候,我们是拿大 B 一笔资料出来,算个 Loss,算个 Gradient,Update 参数,拿另外B一笔资料,再算个 Loss,再算个 Gradient,再 Update 参数,以此类推,所以我们不会拿所有的资料一起去算出 Loss,我们只会拿一个 Batch 的资料,拿出来算 Loss
+​	所有的 Batch 看过一遍,叫做一个 Epoch,那事实上啊,你今天在做这些 Batch 的时候,你会做一件事情叫做 Shuffle
+​	Shuffle 有很多不同的做法,但一个常见的做法就是,在每一个 Epoch 开始之前,会分一次 Batch,然后呢,每一个 Epoch 的 Batch 都不一样,就是第一个 Epoch,我们分这样子的 Batch,第二个 Epoch,会重新再分一次 Batch,所以哪些资料在同一个 Batch 裡面,每一个 Epoch 都不一样的这件事情,叫做 Shuffle。
+Small Batch v.</description>
+    </item>
+    
+    <item>
+      <title>06_Adaptive Learning Rate</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/06_adaptive-learning-rate/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/06_adaptive-learning-rate/</guid>
+      <description>Tips for training: Adaptive Learning Rate critical point其实不一定是,你在训练一个Network的时候,会遇到的最大的障碍,今天要告诉大家的是一个叫做Adaptive Learning Rate的技术,我们要给每一个参数不同的learning rate
+Training stuck ≠ Small Gradient People believe training stuck because the parameters are around a critical point … 為什麼我说这个critical point不一定是我们训练过程中,最大的阻碍呢？
+往往同学们,在训练一个network的时候,你会把它的loss记录下来,所以你会看到,你的loss原来很大,随著你参数不断的update,横轴代表参数update的次数,随著你参数不断的update,这个loss会越来越小,最后就卡住了,你的loss不再下降
+那多数这个时候,大家就会猜说,那是不是走到了critical point,因為gradient等於零的关係,所以我们没有办法再更新参数,但是真的是这样吗
+当我们说 走到critical point的时候,意味著gradient非常的小,但是你有确认过,当**你的loss不再下降的时候,gradient真的很小吗？**其实多数的同学可能,都没有确认过这件事,而事实上在这个例子裡面,在今天我show的这个例子裡面,当我们的loss不再下降的时候,gradient并没有真的变得很小
+gradient是一个向量，下面是gradient的norm,即gradient这个向量的长度,随著参数更新的时候的变化,你会发现说虽然loss不再下降,但是这个gradient的norm,gradient的大小并没有真的变得很小
+这样子的结果其实也不难猜想,也许你遇到的是这样子的状况
+这个是我们的error surface,然后你现在的gradient,在error surface山谷的两个谷壁间,不断的来回的震荡
+这个时候你的loss不会再下降,所以你会觉得它真的卡到了critical point,卡到了saddle point,卡到了local minima吗？不是的,它的gradient仍然很大,只是loss不见得再减小了
+所以你要注意,当你今天训练一个network,train到后来发现,loss不再下降的时候,你不要随便说,我卡在local minima,我卡在saddle point,有时候根本两个都不是,你只是单纯的loss没有办法再下降
+就是為什麼你在在作业2-2,会有一个作业叫大家,算一下gradient的norm,然后算一下说,你现在是卡在saddle point,还是critical point,因為多数的时候,当你说你训练卡住了,很少有人会去分析卡住的原因,為了强化你的印象,我们有一个作业,让你来分析一下,卡住的原因是什麼,
+Wait a minute 有的同学就会有一个问题,如果我们在训练的时候,其实很少卡到saddle point,或者是local minima,那这一个图是怎麼做出来的呢?
+我们上次有画过这个图是说我们现在训练一个Network,训练到现在参数在critical point附近,然后我们再来根据eigen value的正负号,来判断说这个critical point,比较像是saddle point,还是local minima
+那如果实际上在训练的时候,要走到saddle point,或者是local minima,是一件困难的事情,那这个图到底是怎麼画出来的
+那这边告诉大家一个秘密,这个图你要训练出这样子的结果,你要训练到你的参数很接近critical point,用一般的gradient descend,其实是做不到的,用一般的gradient descend train,你往往会得到的结果是,你在这个gradient还很大的时候,你的loss就已经掉了下去,这个是需要特别方法train的</description>
+    </item>
+    
+    <item>
+      <title>07_Batch Normalization</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/07_batch-normalization/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/07_batch-normalization/</guid>
+      <description>Quick Introduction of Batch Normalization 本篇是一个很快地介绍,Batch Normalization 这个技术
+Changing Landscape 之前才讲过说,我们能不能够直接改error surface 的 landscape,我们觉得说 error surface 如果很崎嶇的时候,它比较难 train,那我们能不能够直接把山剷平,让它变得比较好 train 呢？
+==Batch Normalization== 就是其中一个,把山剷平的想法
+我们一开始就跟大家讲说,不要小看 optimization 这个问题,有时候就算你的 error surface 是 convex的,它就是一个碗的形状,都不见得很好 train
+假设你的两个参数啊,它们对 Loss 的斜率差别非常大,在 $w_1$ 这个方向上面,你的斜率变化很小,在 $w_2$ 这个方向上面斜率变化很大
+如果是固定的 learning rate,你可能很难得到好的结果,所以我们才说你需要adaptive 的 learning rate、 Adam 等等比较进阶的 optimization 的方法,才能够得到好的结果
+现在我们要从另外一个方向想,直接把难做的 error surface 把它改掉,看能不能够改得好做一点
+在做这件事之前,也许我们第一个要问的问题就是,有这一种状况,$w_1 $ 跟 $w_2$ 它们的斜率差很多的这种状况,到底是从什麼地方来的
+假设我现在有一个非常非常非常简单的 model,它的输入是 $x_1$ 跟 $x_2$,它对应的参数就是 $ w_1 $ 跟 $w_2$,它是一个 linear 的 model,没有 activation function</description>
+    </item>
+    
+    <item>
+      <title>08_Classification</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/08_classification/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/08_classification/</guid>
+      <description>Classification To learn more 接下来讲有关分类怎麼做这件事情,这边讲的是一个短的版本,因為时间有限的关係,如果你想要看长的版本的话,可以看一下过去上课的录影
+过去可能是花两个小时,到三个小时的时间才讲完,分类这件事情,我们这边用一个最快的方法,直接跟你讲分类是怎麼做的
+Classification as Regression？ 分类是怎麼做的呢 我们已经讲了,Regression就是输入一个向量,然后输出一个数值,我们希望输出的数值跟某一个label,也就是我们要学习的目标,越接近越好，这门课里面，如果是正确的答案就有加Hat,Model的输出没有加Hat
+有一个可能,假设你会用Regression的话,我们其实可以把Classification,当作是Regression来看
+这个方法不一定是个好方法,这是一个比较奇妙的方法,输入一个东西以后,我们的输出仍然是一个scaler,它叫做y 然后这一个y,我们要让它跟正确答案,那个Class越接近越好,但是y是一个数字,我们怎麼让它跟Class越接近越好呢,我们必须把Class也变成数字
+举例来说 Class1就是编号1,Class2就是编号2,Class3就是编号3,接下来呢 我们要做的事情,就是希望y可以跟Class的编号,越接近越好
+但是这会是一个好方法吗,如果你仔细想想的话,这个方法也许在某些状况下,是会有瑕疵的
+因為如果你假设说Class one就是编号1,Class two就是编号2,Class3就是编号3,意味著说你觉得Class1跟Class2是比较像,然后Class1跟Class3 它是比较不像,像这样子的表示Class的方式,有时候可行 有时候不可行
+  假设你的Class one two three真的有某种关係举例来说,你想要根据一个人的身高跟体重,然后预测他是几年级的小学生,一年级 二年级 还是三年级,那可能一年级真的跟二年级比较接近,一年级真的跟三年级比较没有关係
+  但是假设你的三个Class本身,并没有什麼特定的关係的话,你说Class one是1,Class two是2 Class two是3,那就很奇怪了,因為你这样是预设说,一二有比较近的关係,一三有比较远的关係,所以怎麼办呢
+  Class as one-hot vector 当你在做分类的问题的时候,比较常见的做法是把你的Class,用 One-hot vector来表示
+如果有三个Class,我们的 label 这个ŷ,就是一个三维的向量,然后呢 如果是Class1就是$\begin{bmatrix}{1} \\ {0}\\ {0}\end{bmatrix}$,如果是Class2就是$\begin{bmatrix} {0}\\ {1}\\ {0}\end{bmatrix}$,如果是Class3就是$\begin{bmatrix} {0}\\ {0}\\ {1}\end{bmatrix}$,所以每一个Class,你都用一个One-hot vector来表示
+而且你用One-hot vector来表示的话,就没有说Class1跟Class2比较接近,Class1跟Class3比较远这样子的问题,如果你把这个One-hot vector,用算距离的话,Class之间 两两它们的距离都是一样
+如果我们今天的目标y hat是一个向量 比如说,ŷ是有三个element的向量，那我们的network,也应该要Output的维度也是三个数字才行
+到目前為止我们讲的network,其实都只Output一个数值,因為我们过去做的都是Regression的问题,所以只Output一个数字
+其实从一个数值改到三个数值,它是没有什麼不同的</description>
+    </item>
+    
+    <item>
+      <title>09_CNN</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/09_cnn/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/09_cnn/</guid>
+      <description>CNN 我们开始探讨 Network 的架构设计,第一个Network 架构的变形是 Convolutional 的 Neural Network,它的缩写是 CNN,它是专门被用在影像上的,我希望透过 CNN 这个例子,来让大家知道Network 的架构,它的设计有什麼样的想法,那為什麼设计 Network 的架构,可以让我们的 Network 结果做得更好。
+Image Classification 接下来要讲的例子是跟影像有关的,我们要做影像的分类,也就是给机器一张图片,它要去决定说这张图片裡面有什麼样的东西,那怎麼做呢
+我们已经跟大家讲过怎麼做分类这件事情,在以下的讨论裡面,我们都假设我们的模型输入的图片大小是固定的,举例来说 它固定输入的图片大小,都是 100 × 100 的解析度,就算是今天 Deep Learning 已经这麼的 Popular,我们往往都还是需要假设说,一个模型输入的影像大小都是一样的
+图片可能有大有小,而且不是所有图片都是正方形的啊,有长方形的怎麼办
+今天常见的处理方式,丢进影像辨识系统处理方式就是,把所有图片都先 Rescale 成大小一样,再丢到影像的辨识系统裡面,
+我们的模型的输出应该是什麼呢,我们模型的目标是分类,所以我们会把每一个类别,表示成一个 One-Hot 的 Vector,我的目标就叫做 $\hat{y}$
+在这个 One-Hot 的 Vector 裡面,假设我们现在类别是一个猫的话,那猫所对应的 Dimension,它的数值就是 1,其他的东西所对的 Dimension 的数值就是 0
+那这个 Dimension 的长度就决定了,你现在的模型可以辨识出多少不同种类的东西,如果你向量的长度是 2000,就代表说你这个模型,可以辨识出 2000 种不同的东西,那今天比较强的影像辨识系统,往往可以辨识出 1000 种以上的东西,甚至到上万种不同的 Object,那如果你今天希望你的影像辨识系统,它可以辨识上万种 Object,那你的 Label 就会是一个上万维,维度是上万的 One-Hot Vector
+我的模型的输出通过 Softmax 以后,输出是 $y&amp;rsquo;$,然后我们希望 $y&amp;rsquo;$ 和$\hat{y}$的 Cross Entropy 越小越好,接下来的问题是怎麼把一张影像当做一个模型的输入</description>
+    </item>
+    
+    <item>
+      <title>10_Self-attention_P1</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/10_self-attention_p1/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/10_self-attention_p1/</guid>
+      <description>Self-attention CNN以后,我们要讲另外一个常见的Network架构,这个架构叫做Self-Attention,而这个Self-Attention
+Sophisticated Input 到目前為止,我们的Network的Input都是一个向量,不管是在预测这个,YouTube观看人数的问题上啊,还是影像处理上啊,我们的输入都可以看作是一个向量,然后我们的输出,可能是一个数值,这个是Regression,可能是一个类别,这是Classification
+但假设我们遇到更復杂的问题呢,假设我们说输入是多个向量,而且这个输入的向量的数目是会改变的呢
+我们刚才在讲影像辨识的时候,我还特别强调我们假设输入的影像大小都是一样的,那现在假设每次我们Model输入的Sequence的数目,Sequence的长度都不一样呢,那这个时候应该要怎麼处理？
+Vector Set as Input 文字处理 假设我们今天要Network的输入是一个句子,每一个句子的长度都不一样,每个句子裡面词汇的数目都不一样
+如果我们把一个句子裡面的每一个词汇,都描述成一个向量,那我们的Model的输入,就会是一个Vector Set,而且这个Vector Set的大小,每次都不一样,句子的长度不一样,那你的Vector Set的大小就不一样
+那怎麼把一个词汇表示成一个向量,最简单的做法是==One-Hot的Encoding==
+你就开一个很长很长的向量,这个向量的长度跟世界上存在的词汇的数目是一样多的,每一个维度对应到一个词汇,Apple就是100,Bag就是010,Cat就是001,以此类推
+但是这样子的表示方法有一个非常严重的问题,它假设所有的词汇彼此之间都是没有关係的,从这个向量裡面你看不到：Cat跟Dog都是动物所以他们比较接近,Cat跟Apple一个动物一个植物,所以他们比较不相像。这个向量裡面,没有任何语义的资讯
+有另外一个方法叫做==Word Embedding==
+Word Embedding就是,我们会给每一个词汇一个向量,而这个向量是有语义的资讯的
+如果你把Word Embedding画出来的话,你会发现,所有的动物可能聚集成一团,所有的植物可能聚集成一团,所有的动词可能聚集成一团等等
+Word Embedding，如果你有兴趣的话,可以看一下以下的录影https://youtu.be/X7PH3NuYW0Q,总之你现在在网路上,可以载到一种东西叫做Word Embedding,这个Word Embedding,会给每一个词汇一个向量,而一个句子就是一排长度不一的向量
+声音信号 一段声音讯号其实是一排向量,怎麼说呢,我们会把一段声音讯号取一个范围,这个范围叫做一个==Window==
+把这个Window裡面的资讯描述成一个向量,这个向量就叫做一个==Frame==,在语音上,我们会把一个向量叫做一个Frame,通常这个Window的长度就是25个Millisecond
+把这麼一个小段的声音讯号变成一个Frame,变成一个向量就有百百种做法,那这边就不细讲
+一小段25个Millisecond裡面的语音讯号,為了要描述一整段的声音讯号,你会把这个Window往右移一点,通常移动的大小是10个Millisecond
+一段声音讯号,你就是用一串向量来表示,而因為每一个Window啊,他们往右移都是移动10个Millisecond,所以一秒鐘的声音讯号有100个向量,所以一分鐘的声音讯号,就有这个100乘以60,就有6000个向量
+所以语音其实很复杂的,一小段的声音讯号,它裡面包含的资讯量其实是非常可观的
+图 一个Graph 一个图,也是一堆向量,我们知道说Social Network就是一个Graph
+在Social Network上面每一个节点就是一个人,然后节点跟节点之间的edge就是他们两个的关系连接,比如说是不是朋友等等
+而每一个节点可以看作是一个向量,你可以拿每一个人的,比如说他的Profile裡面的资讯啊,他的性别啊 他的年龄啊,他的工作啊 他讲过的话啊等等,把这些资讯用一个向量来表示
+所以一个Social Network 一个Graph,你也可以看做是一堆的向量所组成的
+分子信息 一个分子,它也可以看作是一个Graph
+现在Drug Discovery的应用非常地受到重视,尤其是在Covid-19这一段时间,很多人都期待,也许用机器学习,可以在Drug Discovery上面做到什麼突破,那这个时候,你就需要把一个分子,当做是你的模型的输入
+一个分子可以看作是一个Graph,分子上面的每一个球,也就是每一个原子，可以表述成一个向量
+一个原子可以用One-Hot Vector来表示,氢就是1000,碳就是0100,然后这个氧就是0010,所以一个分子就是一个Graph,它就是一堆向量。
+What is the output? 我们刚才已经看说输入是一堆向量,它可以是文字,可以是语音,可以是Graph,那这个时候,我们有可能有什麼样的输出呢,有三种可能性
+1. 每一个向量都有一个对应的Label 当你的模型,看到输入是四个向量的时候,它就要输出四个Label,而每一个Label,它可能是一个数值,那就是Regression的问题,如果每个Label是一个Class,那就是一个Classification的问题
+  举例来说 在文字处理上,假设你今天要做的是==POS Tagging==,POS Tagging就是词性标註,你要让机器自动决定每一个词汇 它是什麼样的词性,它是名词 还是动词 还是形容词等等</description>
+    </item>
+    
+    <item>
+      <title>11_Self-attention_P2</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/11_self-attention_p2/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/11_self-attention_p2/</guid>
+      <description>Self-attention_P2 从这一排 vector 得到 $b^1$,跟从这一排 vector 得到 $b^2$,它的操作是一模一样的.要强调一点是,这边的 $b^1$ 到 $b^4$,它们并不需要依序產生,它们是一次同时被计算出来的
+怎麼计算这个 $b^2$？我们现在的主角,就变成 $a^2$
+  把 $a^2$ 乘上一个 matrix,变成 $q^2$
+  然后接下来根据 $q^2$,去对$a^1$到 $a^4$ 这四个位置,都去计算 attention 的 score
+ 把 $q^2$ 跟 $k^1$ 做个这个 dot product 把 $q^2$ 跟 $k^2$ 也做个 dot product 把 $q^2$ 跟 $k^3$ 也做 dot product 把 $q^2$ 跟 $k^4$ 也做 dot product,得到四个分数    得到这四个分数以后,可能还会做一个 normalization,比如说 softmax,然后得到最后的 attention 的 score,$α&amp;rsquo;{2,1} \space α&amp;rsquo;{2,2} \space α&amp;rsquo;{2,3} \space α&amp;rsquo;{2,4}$那我们这边用 $α&amp;rsquo;$表示经过 normalization 以后的attention score</description>
+    </item>
+    
+    <item>
+      <title>12_Transformer_P1</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/12_transformer_p1/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/12_transformer_p1/</guid>
+      <description>Transformer_P1_Encoder 变形金刚的英文就是Transformer,那Transformer也跟我们之后会,提到的BERT有非常强烈的关係,所以这边有一个BERT探出头来,代表说Transformer跟BERT,是很有关係的
+Sequence-to-sequence (Seq2seq) Transformer就是一个,==Sequence-to-sequence==的model,他的缩写,我们会写做==Seq2seq==,那Sequence-to-sequence的model,又是什麼呢
+我们之前在讲input a sequence的,case的时候,我们说input是一个sequence,那output有几种可能
+ 一种是input跟output的长度一样,这个是在作业二的时候做的 有一个case是output指,output一个东西,这个是在作业四的时候做的 那接来作业五的case是,我们不知道应该要output多长,由机器自己决定output的长度,即Seq2seq    举例来说,Seq2seq一个很好的应用就是 语音辨识
+在做语音辨识的时候,输入是声音讯号,声音讯号其实就是一串的vector,输出是语音辨识的结果,也就是输出的这段	声音讯号,所对应的文字
+我们这边用圈圈来代表文字,每一个圈圈就代表,比如说中文裡面的一个方块子,今天输入跟输出的长度,当然是有一些关係,但是却没有绝对的关係，输入的声音讯号,他的长度是大T,我们并没有办法知道说,根据大T输出的这个长度N一定是多少。
+输出的长度由机器自己决定,由机器自己去听这段声音讯号的内容,自己决定他应该要输出几个文字,他输出的语音辨识结果,输出的句子裡面应该包含几个字,由机器自己来决定,这个是语音辨识
+  还有很多其他的例子,比如说作业五我们会做机器翻译
+让机器读一个语言的句子,输出另外一个语言的句子,那在做机器翻译的时候,输入的文字的长度是N,输出的句子的长度是N&amp;rsquo;,那N跟N&amp;rsquo;之间的关係,也要由机器自己来决定
+输入机器学习这个句子,输出是machine learning,输入是有四个字,输出有两个英文的词汇,但是并不是所有中文跟英文的关係,都是输出就是输入的二分之一,到底输入一段句子,输出英文的句子要多长,由机器自己决定
+  甚至可以做更复杂的问题,比如说做语音翻译
+语音翻译就是,你对机器说一句话,比如说machine learning,他输出的不是英文,他直接把他听到的英文的声音讯号翻译成中文文字
+你对他说machine learning,他输出的是机器学习
+為什麼我们要做,Speech Translation这样的任务,為什麼我们不直接先做一个语音辨识,再做一个机器翻译,把语音辨识系统跟机器翻译系统,接起来 就直接是语音翻译？
+因為世界上有很多语言,他根本连文字都没有,世界上有超过七千种语言,那其实在这七千种语言,有超过半数其实是没有文字的,对这些没有文字的语言而言,你要做语音辨识,可能根本就没有办法,因為他没有文字,所以你根本就没有办法做语音辨识,但我们有没有可能对这些语言,做语音翻译,直接把它翻译成,我们有办法阅读的文字
+  Hokkien（闽南语、台语） 一个很好的例子也许就是,台语的语音辨识,但我不会说台语没有文字,很多人觉得台语是有文字的,但台语的文字并没有那麼普及,现在听说小学都有教台语的文字了,但台语的文字,并不是一般人能够看得懂的
+如果你做语音辨识,你给机器一段台语,然后它可能输出是母汤,你根本就不知道,这段话在说什麼。
+所以我们期待说机器也许可以做语音的翻译,对它讲一句台语,它直接输出的是同样意思的,中文的句子,那这样一般人就可以看懂
+我们可以训练一个类神经网路,这个类神经网路听某一种语言,的声音讯号,输出是另外一种语言的文字。
+今天你要训练一个neural network,你就需要有input跟output的配合,你需要有台语的声音讯号,跟中文文字的对应关係,那这样的资料是比较容易收集的。比如说YouTube上面,有很多的乡土剧
+乡土剧就是,台语语音 中文字幕,所以你只要它的台语语音载下来,中文字幕载下来,你就有台语声音讯号,跟中文之间的对应关係,你就可以硬train一个模型,然后叫机器直接做台语的语音辨识,输入台语 输出中文
+那你可能会觉得这个想法很狂,而且好像听起来有很多很多的问题,那我们实验室就载了,一千五百个小时的乡土剧的资料,然后 就真的拿来训练一个,语音辨识系统
+你可能会觉得说,这听起来有很多的问题
+ 乡土剧有很多杂讯,有很多的音乐,不要管它这样子 乡土剧的字幕,不一定跟声音有对起来,就不要管它这样子 台语还有一些,比如说台罗拼音,台语也是有类似音标这种东西,也许我们可以先辨识成音标,当作一个中介,然后在从音标转成中文,也没有这样做  直接训练一个模型,输入是声音讯号,输出直接就是中文的文字,这种没有想太多 直接资料倒进去,就训练一个模型的行為,就叫作==硬train一发==
+那你可能会想说,这样子硬train一发到底能不能够,做一个台语语音辨识系统呢,其实 还真的是有可能的,以下是一些真正的结果
+机器在听的一千五百个小时的,乡土剧以后,你可以对它输入一句台语,然后他就输出一句中文的文字,以下是真正的例子
+机器听到的声音是这样子的
+ 你的身体撑不住(台语),那机器输出是什麼呢,它的输出是 你的身体撑不住,这个声音讯号是你的身体撑不住(台语),但机器并不是输出无勘,而是它就输出撑不住 或者是机器听到的,是这样的声音讯号,没事你為什麼要请假(台语),没事你為什麼要请假,机器听到没事(台语),它并不是输出 没代没誌,它是输出 没事,这样听到四个音节没代没誌(台语),但它知道说台语的没代没誌(台语),翻成中文 也许应该输出 没事,所以机器的输出是,没事你為什麼要请假 但机器其实也是蛮容易犯错的,底下特别找机个犯错的例子,给你听一下,你听听这一段声音讯号,不会腻吗(台语),他说不会腻吗(台语),我自己听到的时候我觉得,我跟机器的答案是一样的,就是说要生了吗,但其实这句话,正确的答案就是,不会腻吗(台语),不会腻吗 当然机器在倒装,你知道有时候你从台语,转成中文句子需要倒装,在倒装的部分感觉就没有太学起来,举例来说它听到这样的句子,我有跟厂长拜託(台语),他说我有跟厂长拜託(台语),那机器的输出是,我有帮厂长拜託,但是你知道说这句话,其实是倒装,我有跟厂长拜託(台语),是我拜託厂长,但机器对於它来说,如果台语跟中文的关係需要倒装的话,看起来学习起来还是有一点困难  这个例子想要告诉你说,直接台语声音讯号转繁体中文,不是没有可能,是有可能可以做得到的,那其实台湾有很多人都在做,台语的语音辨识,如果你想要知道更多有关,台语语音辨识的事情的话,可以看一下下面这个网站</description>
+    </item>
+    
+    <item>
+      <title>13_Transformer_P2</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/13_transformer_p2/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/13_transformer_p2/</guid>
+      <description>Transformer P2_Decoder Decoder – Autoregressive (AT) Decoder其实有两种,接下来会花比较多时间介绍,比较常见的 ==Autoregressive Decoder==,这个 Autoregressive 的 Decoder,是怎麼运作的
+用语音辨识,来当作例子来说明,或用在作业裡面的机器翻译,其实是一模一样的,你只是把输入输出,改成不同的东西而已
+语音辨识就是输入一段声音,输出一串文字,你会把一段声音输入给 Encoder,比如说你对机器说,机器学习,机器收到一段声音讯号,声音讯号 进入 Encoder以后,输出会是什麼,输出会变成一排 Vector
+Encoder 做的事情,就是输入一个 Vector Sequence,输出另外一个 Vector Sequence
+接下来,就轮到 Decoder 运作了,Decoder 要做的事情就是產生输出,也就是產生语音辨识的结果, Decoder 怎麼產生这个语音辨识的结果
+Decoder 做的事情,就是把 Encoder 的输出先读进去,至於怎麼读进去,这个我们等一下再讲 我们先,你先假设 Somehow 就是有某种方法,把 Encoder 的输出读到 Decoder 裡面,这步我们等一下再处理
+Decoder 怎麼產生一段文字
+首先,你要先给它一个特殊的符号,这个特殊的符号,代表开始,在助教的投影片裡面,是写 Begin Of Sentence,缩写是 BOS
+就是 Begin 的意思,这个是一个 Special 的 Token,你就是在你的个 Lexicon 裡面,你就在你可能,本来 Decoder 可能產生的文字裡面,多加一个特殊的字,这个字就代表了 BEGIN,代表了开始这个事情
+在这个机器学习裡面,假设你要处理 NLP 的问题,每一个 Token,你都可以把它用一个 One-Hot 的 Vector 来表示,One-Hot Vector 就其中一维是 1,其他都是 0,所以 BEGIN 也是用 One-Hot Vector 来表示,其中一维是 1,其他是 0</description>
+    </item>
+    
+    <item>
+      <title>14_GAN_P1</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/14_gan_p1/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/14_gan_p1/</guid>
+      <description>GAN_P1 Generation Network as Generator 接下来要进入一个,新的主题 我们要讲==生成==这件事情
+到目前為止大家学到的network,都是一个function,你给他一个X就可以输出一个Y
+我们已经学到各式各样的,network架构,可以处理不同的X 不同的Y
+我们学到输入的X
+ 如果是一张图片的时候怎麼办 如果是一个sequence的时候怎麼办  我们也学到输出的Y
+ 可以是一个数值 可以是一个类别 也可以是一个sequence  接下来我们要进入一个新的主题,这个新的主题是要把network,当做一个==generator==来用,我们要把network拿来做生成使用
+那把network拿来,当作generator使用,他特别的地方是现在network的输入,会加上一个random的variable,会加上一个Z
+这个Z,是从某一个,distribution sample出来的,所以现在network它不是只看一个固定的X得到输出,它是同时看X跟Z得到输出
+network怎麼同时看X跟Z，有很多不同的做法,就看你怎样设计你的network架构
+  你可以说X是个向量,Z是个向量 两个向量直接接起来,变成一个比较长的向量,就当作network的input
+  或者是你的X跟Z正好长度一模一样,把它们相加以后,当做network的input
+  等等
+  Z特别的地方是 它是不固定的,每一次我们用这个network的时候,都会随机生成一个Z,所以Z每次都不一样,它是从一个distribution裡面,sample出来的
+这个distribution,这边有一个限制是,它必须够简单，够简单的意思是,我们知道它的式子长什麼样子,我们可以从这个distribution,去做sample
+举例来说这个distribution,可以是一个function distribution,你知道function distribution的式子,你知道怎麼从,gaussian distribution做sample
+它也可以是uniform distribution,那uniform distribution,的式子你一定知道,你也知道怎麼从,uniform distribution做sample,所以这一个distribution,的形状你自己决定,但你只要记得说它是简单的,你能够sample它的 就结束了
+所以每次今天,有一个X进来的时候,你都从这个distribution,裡面做一个sample,然后得到一个output,随著你sample到的Z不同,Y的输出也就不一样,所以这个时候我们的network输出,不再是单一一个固定的东西,而变成了一个复杂的distribution,同样的X作為输入,我们这边每次sample到,不一样的东西,通过一个复杂的network转换以后,它就会变成一个复杂的分布,你的network的输出,就变成了一个distribution
+那这种可以输出,一个distribution的network,我们就叫它==generator==
+Why distribution 在讲怎麼训练出generator之前,我们第一个想要回答的问题是,為什麼我们需要generator输出是一个分布？输入X输出Y,这样固定的输入跟输出关係不好吗？
+所以以下就举一个例子来跟你说明,為什麼输出有时候需要是一个分布
+这边举的例子,是video prediction,就是给机器一段的影片,然后它要预测接下来会发生什麼事情
+那这个例子,是我从上面这个,github的连结 https://github.com/dyelax/Adversarial_Video_Generation找到的,那在这个连结裡面 它要做的事情,是去预测小精灵这个游戏,接下来的游戏画面会长什麼样子
+video prediction,那你就给你的network过去的游戏画面,然后它的输出就是新的游戏画面,下一秒的下一个时间点的游戏画面
+有人可能会问说怎麼输出一张图片？
+这个一张图片就是一个很长的向量,所以你只要让你的network,可以输出一个很长的向量,然后这个向量整理成图片以后,跟你的目标越接近越好
+其实在这个github裡面,它不是直接把整个画面当做输入,它是从画面裡面只切一小块当做输入,就它把这整个画面切成很多块,然后分开来处理,不过我们这边為了简化说明,就当作network是一次,输入一整个这样的画面
+如果你用我们学过的network training的方法,Supervise learning train下去,你得到的结果可能会是这个样子,这个是机器预测出来的结果(第三部分 Non-Adversarial)</description>
+    </item>
+    
+    <item>
+      <title>15_GAN_P2</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/15_gan_p2/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/15_gan_p2/</guid>
+      <description>GAN_P2_Theory behind GAN P1是用了一堆比喻说明GAN 的操作是怎麼进行的
+接下来,我们告诉你说实际上,為什麼这个 Generator 跟 Discriminator 的互动,可以让我们的 Generator產生像是真正的人脸的图片,那这背后的互动在做的,到底是什麼样的事情
+那我们先来弄清楚,我们今天的训练的目标到底是什麼
+我们在训练 Network 的时候,你就是要
+ 定一个 Loss Function 定完以后用 Gradient Descent 去调你的参数 去 Minimize 那个 Loss Function 就结束了  在这个 Generation 的问题裡面,我们要 Minimize,或者是 Maximize 什麼样的东西,我们要把这些事弄清楚,才能够做接下来的事情
+我们想要 Minimize 的东西是这个样子的，我们有一个 Generator
+ 给它一大堆的 Vector,给它从 Normal Distribution Sample 出来的东西 丢进这个 Generator 以后,会產生一个比较复杂的 Distribution,这个复杂 Distribution,我们叫它 ==PG== 然后 我们有一堆的 Data,这个是真正的 Data,真正的 Data 也形成了另外一个 Distribution,叫做 ==Pdata==,我们期待 PG 跟 Pdata 越接近越好  Our objective 如果你一下子没有办法想像,这个 PG 、Pdata 是怎麼一回事的话,那我们用一维的状况来跟大家说明</description>
+    </item>
+    
+    <item>
+      <title>16_GAN_P3</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/16_gan_p3/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/16_gan_p3/</guid>
+      <description>GAN_P3 虽然说已经有 WGAN,但其实并不代表说,GAN 就一定特别好 Train,GAN 仍然是以,很难把它 Train 起来而闻名的,那為什麼 GAN 很难被 Train 起来？
+它有一个本质上困难的地方
+ Discriminator 做的事情,是要分辨真的图片跟產生出来的,也就是假的图片的差异 而 Generator 在做的事情,它是要去產生假的图片,骗过 Discriminator  而事实上这两个 Network,这个 Generator 跟 Discriminator,它们是互相砥砺,才能互相成长的,只要其中一者,发生什麼问题停止训练,另外一者就会跟著停下训练,就会跟著变差
+  假设你在 Train Discriminator 的时候,一下子没有 Train 好
+  你的 Discriminator 没有办法分辨,真的跟產生出来的图片的差异
+  那 Generator,它就失去了可以进步的目标,Generator 就没有办法再进步了
+  如果 Generator 没有办法再进步,它没有办法再產生更真实的图片,那 Discriminator 就没有办法再跟著进步了
+  但是到目前為止,大家已经 Train 过了很多次的 Network,我们没有办法保证 Train 下去,它的 Loss 就一定会下降，你要让 Network Train 起来,往往你需要调一下 Hyperparameter,才有可能把它 Train 起来
+那今天这个 Discriminator 跟 Generator,它们互动的过程是自动的,因為我们不会在中间,每一次 Train Discriminator 的时候,你都换 Hyperparameter</description>
+    </item>
+    
+    <item>
+      <title>17_GAN_P4</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/17_gan_p4/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/17_gan_p4/</guid>
+      <description>GAN_P4 Learning from Unpaired Data 有关GAN的最后一段,是一个GAN的神奇应用,它把GAN用在==unsupervised Learning==上,到目前為止,我们讲的几乎都是==Supervised Learning==
+我们要训练一个Network,Network的输入叫做X输出叫做Y,我们需要成对的资料,才有办法训练这样子的Network,
+但是你可能会遇到一个状况是,我们有一堆X我们有一堆Y,但X跟Y是不成对的,在这种状况下,我们有没有办法拿这样的资料,来训练Network呢,像这一种没有成对的资料,我们就叫做==unlabeled==的资料
+其实在作业三跟作业五裡面,都提供给你两个例子,我们就把这个怎麼用,没有标註的资料,怎麼做S==emi-supervised Learning==,这件事情放在作业裡面,如果你有兴致的话就可以来,体验一下semi-supervised Learning,到底可以带多大的帮助
+但是不管是作业三的pseudo labeling,还是作业五的back translation,这些方法或多或少,都还是需要一些成对的资料
+在作业三裡面,你得先训练出一个模型,这个模型可以帮你提供pseudo label,如果你一开始,根本就没有太多有标註的资料,你的模型很差,你根本就没有办法產生,比较好的pseudo label,或是back translation,你也得有一个,back translation 的model,你才办法做back translation,所以不管是作业三,还是作业五的方法,还是都需要一些成对的资料
+但是假设我们遇到,一个更艰鉅的状况,是我们一点成对的资料都没有,那要什麼怎麼办呢？
+我们这边举一个例子,影像风格转换,假设今天我要训练,一个Deep Network,它要做的事情是把X domain的图,X domain的图,我们假设是真人的照片,Y domain的图是二次元人物的头像
+在这个例子裡面我们可能,就没有任何的成对的资料，在这种状况下,还有没有办法训练一个Network,输入一个X產生一个Y呢,这个就是GAN可以帮我们做的事情
+那接下来我们就是看看怎麼用GAN,在这种完全没有成对资料的情况下,进行学习
+这个是我们之前在讲,unconditional的generation的时候,你看到的generator的架构
+输入是一个Gaussian的分佈,输出可能是一个复杂的分佈
+现在我们在稍微,转换一下我们的想法,输入我们不说它是Gaussian的分佈,我们说它是X domain的图片的分佈,那输出我们说,是Y domain图片的分佈
+乍听之下好像没有很难,你完全可以套用原来的GAN的想法,在原来的GAN裡面我们说,我们从Gaussian sample一个向量,丢到Generator裡面
+那我们一开始也说,其实不一定只要Gaussian sample这一个distribution,只要是有办法被sample的就行了,我们选Gaussian只是因為Gaussian的formulation我们知道
+那我们现在如果,输入是X domain的distribution,我们只要改成可以,从X domain sample就结束了,那你有没有办法,从X domain sample呢
+可以 你就从人脸的照片裡面,真实的人脸裡面随便挑一张出来,这是一个死臭酸宅(老师本人)然后就结束了,你就可以从X domain,sample照片出来,你把这个照片丢到generator裡面,让它產生另外一张图片,產生另外一个distribution裡面的图片
+那怎麼让它变成,是Y domain的distribution呢？
+那就要两三个discriminator,那这个discriminator给它,看过很多Y domain的图,所以它能够分辨Y domain的图,跟不是Y domain的图的差异
+看到Y domain的图就给它高分,看到不是Y domain的图,不是二次元人物就给它低分,那就这样结束了
+但是光是套用原来的GAN训练,generator跟discriminator,好像是不够的,因為我们现在的discriminator,它要做的事情是要让这个generator,输出一张Y domain的图
+那generator它可能真的,可以学到输出Y domain的图,但是它输出的Y domain的图,一定要跟输入有关係吗,你没有任何的限制要求你的generator做这件事
+你的generator也许就把这张图片,当作一个Gaussian的noise,然后反正它就是看到,不管你输入什麼它都无视它,反正它就输出一个,像是二次元人物的图片,discriminator觉得它做得很好,其实就结束了
+所以如果我们完全只套用,这个一般的GAN的做法,只训练一个generator,这个generator input的distribution,从Gaussian变成X domain的image,然后训练一个discriminator,显然是不够的,因為你训练出来的generator,它可以產生二次元人物的头像,但是跟输入的真实的照片,没有什麼特别的关係,那这个不是我们要的,
+我们在conditional GAN的时候,是不是也看过一模一样的问题呢,在讲conditional GAN的时候,我有特别提到说,假设你的discriminator只看Y,那它可能会无视generator的输入,那產生出来的结果不是我们要的,但是这边啊,如果我们要从unpaired的data学习,我们也没有办法,直接套用conditional GAN的想法,因為在刚才讲的,conditional GAN裡面,我们是有成对的资料,来训练的discriminator</description>
+    </item>
+    
+    <item>
+      <title>18_BERT_P1</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/18_bert_p1/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/18_bert_p1/</guid>
+      <description>BERT 简介 Self-supervised Learning   每个人都应该熟悉监督学习，当我们做监督学习时，我们只有一个模型，这个模型的输入是x，输出是y。
+假设你今天想做情感分析，你就是让机器阅读一篇文章，而机器需要对这篇文章进行分类，是正面的还是负面的，你必须先找到大量的文章，你需要对所有的文章进行label。我们需要有标签和文章数据来训练监督模型
+  &amp;ldquo;Self-supervised &amp;ldquo;是用另一种方式来监督，没有标签。假设我们只有一堆没有label的文章，但我们试图找到一种方法把它分成两部分。
+我们让其中一部分作为模型的输入数据，另一部分作为标签。
+假设你有没有label的数据，例如，一篇文章叫x，我们把x分成两部分，一部分叫x&amp;rsquo;，另一部分叫x&amp;rsquo;&amp;rsquo;，我知道现在的说明很抽象。稍后，当我们真正谈论BERT时，你可以更好地理解Self-supervised的含义，以及如何在明明没有办法进行监督训练的情况下，最终还是找到了自己进行监督训练的方法。
+我们把x分成两部分，x&amp;rsquo;和x&amp;rsquo;&amp;rsquo;，然后把x&amp;rsquo;输入模型，让它输出y。如果我们在模型训练中使用标签，我们称之为监督学习。由于在Self-supervised学习中不使用标签，我们可以说，Self-supervised学习也是一种无监督的学习方法。但之所以叫Self-supervised Learning，是为了让定义更清晰。
+  &amp;ldquo;Self-supervised Learning &amp;ldquo;这个词，当初Yann LeCun说过，其实并不是一个老词。根据2019年4月在Facebook上的一个帖子，他说，我现在说的这个方法，他叫Self-supervised Learning。为什么不叫无监督学习呢？因为无监督学习是一个比较大的家族，里面有很多不同的方法，为了让定义更清晰，我们叫它 &amp;ldquo;自监督&amp;rdquo;，比如我们之前提到的cycle gan，也是无监督学习的一个案例，我们也不使用标注的配对数据，但是，它和Self-supervised Learning还是有点区别。在无监督学习的范畴内，有很多方法，Self-supervised Learning就是其中之一。
+  Masking Input Self-supervised Learning是什么意思呢，我们直接拿BERT模型来说。
+首先，BERT是一个transformer的Encoder，我们已经讲过transformer了，我们也花了很多时间来介绍Encoder和Decoder，transformer中的Encoder它实际上是BERT的架构，它和transformer的Encoder完全一样，里面有很多Self-Attention和Residual connection，还有Normalization等等，那么，这就是BERT。
+如果你已经忘记了Encoder里有哪些部件，你需要记住的关键点是，BERT可以输入一行向量，然后输出另一行向量，输出的长度与输入的长度相同。
+BERT一般用于自然语言处理，用于文本场景，所以一般来说，它的输入是一串文本，也是一串数据。
+当我们真正谈论Self-Attention的时候，我们也说不仅文本是一种序列，而且语音也可以看作是一种序列，甚至图像也可以看作是一堆向量。BERT同样的想法是，不仅用于NLP，或者用于文本，它也可以用于语音和视频。
+接下来我们需要做的是，随机盖住一些输入的文字，被mask的部分是随机决定的，例如，我们输入100个token，什么是token？在中文文本中，我们通常把一个汉字看作是一个token，当我们输入一个句子时，其中的一些词会被随机mask。
+mask的具体实现有两种方法。
+ 第一种方法是，用一个特殊的符号替换句子中的一个词，我们用 &amp;ldquo;MASK &amp;ldquo;标记来表示这个特殊符号，你可以把它看作一个新字，这个字完全是一个新词，它不在你的字典里，这意味着mask了原文。 另外一种方法，随机把某一个字换成另一个字。中文的 &amp;ldquo;湾&amp;quot;字被放在这里，然后你可以选择另一个中文字来替换它，它可以变成 &amp;ldquo;一 &amp;ldquo;字，变成 &amp;ldquo;天 &amp;ldquo;字，变成 &amp;ldquo;大 &amp;ldquo;字，或者变成 &amp;ldquo;小 &amp;ldquo;字，我们只是用随机选择的某个字来替换它  所以有两种方法来做mask，一种是添加一个特殊的标记 &amp;ldquo;MASK&amp;rdquo;，另一种是用一个字来替换某个字。
+两种方法都可以使用。使用哪种方法也是随机决定的。因此，当BERT进行训练时，向BERT输入一个句子，先随机决定哪一部分的汉字将被mask。
+mask后，一样是输入一个序列，我们把BERT的相应输出看作是另一个序列，接下来，我们在输入序列中寻找mask部分的相应输出，然后，这个向量将通过一个==Linear transform==。
+所谓的Linear transform是指，输入向量将与一个矩阵相乘，然后做softmax，输出一个分布。
+这与我们在Seq2Seq模型中提到的使用transformer进行翻译时的输出分布相同。输出是一个很长的向量，包含我们想要处理的每个汉字，每一个字都对应到一个分数。
+在训练过程中。我们知道被mask的字符是什么，而BERT不知道，我们可以用一个one-hot vector来表示这个字符，并使输出和one-hot vector之间的交叉熵损失最小。
+或者说得简单一点，我们实际上是在解决一个分类问题。现在，BERT要做的是，预测什么被盖住。被掩盖的字符，属于 &amp;ldquo;湾&amp;quot;类。
+在训练中，我们在BERT之后添加一个线性模型，并将它们一起训练。所以，BERT里面是一个transformer的Encoder，它有一堆参数。这两个需要共同训练，并试图预测被覆盖的字符是什么，这叫做mask。
+Next Sentence Prediction 事实上，当我们训练BERT时，除了mask之外，我们还会使用另一种方法，这种额外的方法叫做==Next Sentence Prediction== 。</description>
+    </item>
+    
+    <item>
+      <title>19_BERT_P2</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/19_bert_p2/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/19_bert_p2/</guid>
+      <description>BERT P2_Fun Facts about BERT Why does BERT work? &amp;ldquo;为什么BERT有用？&amp;rdquo;
+最常见的解释是，当输入一串文本时，每个文本都有一个对应的向量。对于这个向量，我们称之为embedding。
+它的特别之处在于，这些向量代表了输入词的含义。例如，模型输入 &amp;ldquo;台湾大学&amp;rdquo;（国立台湾大学），输出4个向量。这4个向量分别代表 &amp;ldquo;台&amp;rdquo;、&amp;ldquo;湾&amp;rdquo;、&amp;ldquo;大 &amp;ldquo;和 &amp;ldquo;学&amp;rdquo;
+更具体地说，如果你把这些词所对应的向量画出来，或者计算它们之间的距离
+你会发现，意思比较相似的词，它们的向量比较接近。例如，水果和草都是植物，它们的向量比较接近。但这是一个假的例子，我以后会给你看一个真正的例子。&amp;ldquo;鸟 &amp;ldquo;和 &amp;ldquo;鱼 &amp;ldquo;是动物，所以它们可能更接近。
+你可能会问，中文有歧义，其实不仅是中文，很多语言都有歧义，BERT可以考虑上下文，所以，同一个词，比如说 &amp;ldquo;苹果&amp;rdquo;，它的上下文和另一个 &amp;ldquo;苹果 &amp;ldquo;不同，它们的向量也不会相同。
+水果 &amp;ldquo;苹果 &amp;ldquo;和手机 &amp;ldquo;苹果 &amp;ldquo;都是 &amp;ldquo;苹果&amp;rdquo;，但根据上下文，它们的含义是不同的。所以，它的向量和相应的embedding会有很大不同。水果 &amp;ldquo;苹果 &amp;ldquo;可能更接近于 &amp;ldquo;草&amp;rdquo;，手机 &amp;ldquo;苹果 &amp;ldquo;可能更接近于 &amp;ldquo;电&amp;rdquo;。
+现在我们看一个真实的例子。假设我们现在考虑 &amp;ldquo;苹果 &amp;ldquo;这个词，我们会收集很多有 &amp;ldquo;苹果 &amp;ldquo;这个词的句子，比如 &amp;ldquo;喝苹果汁&amp;rdquo;、&amp;ldquo;苹果Macbook &amp;ldquo;等等。然后，我们把这些句子放入BERT中。
+接下来，我们将计算 &amp;ldquo;苹果 &amp;ldquo;一词的相应embedding。输入 &amp;ldquo;喝苹果汁&amp;rdquo;，得到一个 &amp;ldquo;苹果 &amp;ldquo;的向量。为什么不一样呢？在Encoder中存在Self-Attention，所以根据 &amp;ldquo;苹果 &amp;ldquo;一词的不同语境，得到的向量会有所不同。接下来，我们计算这些结果之间的==cosine similarity==，即计算它们的相似度。
+结果是这样的，这里有10个句子
+  前5个句子中的 &amp;ldquo;苹果 &amp;ldquo;代表可食用的苹果。例如，第一句是 &amp;ldquo;我今天买了苹果吃&amp;rdquo;，第二句是 &amp;ldquo;进口富士苹果平均每公斤多少钱&amp;rdquo;，第三句是 &amp;ldquo;苹果茶很难喝&amp;rdquo;，第四句是 &amp;ldquo;智利苹果的季节来了&amp;rdquo;，第五句是 &amp;ldquo;关于进口苹果的事情&amp;rdquo;，这五个句子都有 &amp;ldquo;苹果 &amp;ldquo;一词，
+  后面五个句子也有 &amp;ldquo;苹果 &amp;ldquo;一词，但提到的是苹果公司的苹果。例如，&amp;ldquo;苹果即将在下个月发布新款iPhone&amp;rdquo;，&amp;ldquo;苹果获得新专利&amp;rdquo;，&amp;ldquo;我今天买了一部苹果手机&amp;rdquo;，&amp;ldquo;苹果股价下跌&amp;rdquo;，&amp;ldquo;苹果押注指纹识别技术&amp;rdquo;，共有十个 &amp;ldquo;苹果&amp;rdquo;</description>
+    </item>
+    
+    <item>
+      <title>20_BERT_P3</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/20_bert_p3/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/20_bert_p3/</guid>
+      <description>BERT P3_GPT3 除了BERT以外,还有下一个,也是鼎鼎有名的模型,就是==GPT==系列的模型
+BERT做的是填空题,GPT就是改一下我们现在在,self-supervised learning的时候,要模型做的任务
+Predict Next Token GPT要做的任务是,预测接下来,会出现的token是什麼
+举例来说,假设你的训练资料裡面,有一个句子是台湾大学,那GPT拿到这一笔训练资料的时候,它做的事情是这样
+你给它BOS这个token,然后GPT output一个embedding,然后接下来,你用这个embedding去预测下一个,应该出现的token是什麼
+那在这个句子裡面,根据这笔训练资料,下一个应该出现的token是&amp;quot;台&amp;quot;,所以你要训练你的模型,根据第一个token,根据BOS给你的embedding,那它要输出&amp;quot;台&amp;quot;这个token
+这个部分,详细来看就是这样,你有一个embedding,这边用h来表示,然后通过一个Linear Transform,再通过一个softmax,得到一个distribution,跟一般你做分类的问题是一样的,接下来,你希望你output的distribution,跟正确答案的Cross entropy,越小越好,也就是你要去预测,下一个出现的token是什麼
+好那接下来要做的事情,就是以此类推了,你给你的GPT,BOS跟&amp;quot;台&amp;quot;,它產生embedding,接下来它会预测,下一个出现的token是什麼,那你告诉它说,下一个应该出现的token,是&amp;quot;湾&amp;quot;
+好 再反覆继续下去,你给它BOS &amp;ldquo;台&amp;quot;跟&amp;quot;湾&amp;rdquo;,然后预测下一个应该出现的token,它应该要预测&amp;quot;大&amp;quot;
+你给它&amp;quot;台&amp;quot;跟&amp;quot;湾&amp;quot;跟&amp;quot;大&amp;quot;,接下来,下一个应该出现的token是&amp;quot;学&amp;quot;
+那这边呢,是指拿一笔资料 一个句子,来给GPT训练,当然实际上你不会只用一笔句子,你会用成千上万个句子,来训练这个模型,然后就这样子说完了
+它厉害的地方就是,用了很多资料,训了一个异常巨大的模型
+那这边有一个小小的,应该要跟大家说的地方,是说这个GPT的模型,它像是一个transformer的decoder,不过拿掉BOS的attention这个部分,也就是说,你会做那个mask的attention
+就是你现在在预测给BOS,预测台的时候,你不会看到接下来出现的词汇,给它台要预测湾的时候,你不会看到接下来要输入的词汇,以此类推 这个就是GPT
+那这个GPT最知名的就是,因為GPT可以预测下一个token,那所以它有生成的能力,你可以让它不断地预测下一个token,產生完整的文章,所以我每次提到GPT的时候,它的形象都是一隻独角兽
+GPT系列最知名的一个例子,就是用GPT写了一篇,跟独角兽有关的新闻,因為他放一个假新闻,然后那个假新闻裡面说,在安地斯山脉发现独角兽等等,一个活灵活现的假新闻
+為了让你更清楚了解,GPT运作起来是什麼样子,那这个线上有一个demo的网页,叫做talk to transformer,就是有人把一个比较小的,不是那个最大的GPT的模型,不是public available的,有人把比较小的GPT模型放在线上,让你可以输入一个句子,让它会把接下来的其餘的内容,把它补完
+How to use GPT? 怎麼把它用在downstream 的任务上呢,举例来说,怎麼把它用在question answering,或者是其他的,跟人类语言处理有关的任务上呢
+GPT用的想法跟BERT不一样,其实我要强调一下,GPT也可以跟BERT用一样的做法
+在使用BERT时，把BERT model 拿出来,后面接一个简单的linear的classifier,那你就可以做很多事情,你也可以把GPT拿出来,接一个简单的classifier,我相信也是会有效
+但是在GPT的论文中,它没有这样做,它有一个更狂的想法,為什麼会有更狂的想法呢,因為首先就是,BERT那一招BERT用过了嘛,所以总不能再用一样的东西,这样写paper就没有人觉得厉害了,然后再来就是,GPT这个模型,也许真的太大了,大到连fine tune可能都有困难
+我们在用BERT的时候,你要把BERT模型,后面接一个linear classifier,然后BERT也是你的,要train的model的一部分,所以它的参数也是要调的,所以在刚才助教公告的,BERT相关的作业裡面,你还是需要花一点时间来training,虽然助教说你大概20分鐘,就可以train完了,因為你并不是要train一个,完整的BERT的模型,BERT的模型在之前,在做这个填空题的时候,已经训练得差不多了,你只需要微调它就好了,但是微调还是要花时间的,也许GPT实在是太过巨大,巨大到要微调它,要train一个epoch,可能都有困难,所以GPT系列,有一个更狂的使用方式
+这个更狂的使用方式和人类更接近,你想想看假设你去考,譬如说托福的听力测验,你是怎麼去考
+  首先你会看到一个题目的说明,告诉你说现在要考选择题,请从ABCD四个选项裡面,选出正确的答案等等
+  然后给你一个范例,告诉你说这是题目,然后正确的答案是多少
+  然后你看到新的问题,期待你就可以举一反三开始作答
+GPT系列要做的事情就是,这个模型能不能够,做一样的事情呢
+  “In-context” Learning “Few-shot” Learning 举例来说假设要GPT这个模型做翻译
+  你就先打Translate English to French</description>
+    </item>
+    
+    <item>
+      <title>21_Auto-encoder_P1</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/21_auto-encoder_p1/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/21_auto-encoder_p1/</guid>
+      <description>Auto-Encoder P1 Self-supervised Learning Framework 在讲 Auto-Encoder 之前,其实 Auto-Encoder 也可以算是,Self-Supervised Learning 的一环,所以再让我们用非常短的时间,来看一下Self-Supervised Learning 的 Framework
+首先你有大量的没有标注的资料,用这些没有标注的资料,你可以去训练一个模型,你必须发明一些不需要标注资料的任务,比如说做填空题,比如说预测下一个 Token
+这个不用标注资料的学习叫做,==Self-Supervised Learning==,或者是也有人叫 ==Pre-Training==,那用这些不用标注资料的任务,学完一个模型以后,它本身没有什麽用,BERT 只能做填空题,GPT 只能够把一句话补完,但是你可以把它用在其他下游的任务裡面
+你可以把 Self-Supervised Learning 的 Model,做一点点的微微的调整,就可以用在下游的任务裡面
+在有 BERT 在有 GPT 之前,其实有一个更古老的任务,更古老的不需要用标注资料的任务,就叫做 Auto-Encoder,所以你也可以把 Auto-Encoder,看作是 Self-Supervised Learning 的,一种 Pre-Train 的方法
+当然可能不是所有人都会同意这个观点,有人可能会说这个 Auto-Encoder,不算是 Self-Supervised Learning,这个 Auto-Encoder 很早就有了嘛,2006 年 15 年前就有了嘛,然后 Self-Supervised Learning 是,19 年才有这个词彙嘛,所以 Auto-Encoder,不算 Self-Supervised Learning 的一环
+那这个都是见仁见智的问题,这种名词定义的问题,真的我们就不用太纠结在这个地方,从 Self-Supervised Learning,它是不需要用 Label Data 来训练,这个观点来看,Auto-Encoder 我认为它可以算是,Self-Supervised Learning 的其中的一种方法,它就跟填空 预测,接下来的 Token 是很类似的概念,只是用的是另外不一样的想法
+Auto-encoder Auto-Encoder 是怎麽运作的呢,那现在我们,因为刚才在讲 Self-Supervised Learning 的时候,都是用文字做例子,那现在我们换成用影像来做例子</description>
+    </item>
+    
+    <item>
+      <title>22_Auto-encoder_P2</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/22_auto-encoder_p2/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/22_auto-encoder_p2/</guid>
+      <description>Auto-Encoder P2 Feature Disentangle 接下来啊,除了 Aauto-Encoder,可以用来做当 strime 的任务以外,我还想跟大家分享一下,Aauto-Encoder 其他有意思的应用： ==Feature Disentanglement==
+Disentangle 的意思就是,把一堆本来纠缠在一起的东西把它解开
+那为什么会有 Disentangle 这个议题呢,我们来想想看,Aauto-Encoder 它在做的事情是什么
+Auto-Encoder 在做的事情是
+ 如果是图片的话,就是把一张图片变成一个 Code,再把 Code 呢 变回图片,既然这个 Code 可以变回图片,代表说这个 Code 裡面啊,有很多的资讯,包含图片裡面所有的资讯,举例来说,图片裡面有什么样的东西啊,图片的色泽纹理啊等等 Auto-Encoder 这个概念也不是只能用在影像上,如果用在语音上,你可以把一段声音丢到 Encoder 裡面,变成向量 再丢回 Decoder,变回原来的声音,代表这个向量包含了,语音裡面所有重要的资讯,包括这句话的内容是什么,就是 Encoder 的资讯,还有这句话是谁说的,就是 Speaker 语者的资讯 那如果今天是一篇文章,丢到 Encoder 裡面变成向量,这个向量通过 Decoder 会变回原来的文章,那这个向量裡面有什么,它可能包含文章裡面,文句的句法的资讯,也包含了语意的资讯,但是这些资讯是全部纠缠在一个向量裡面,我们并不知道一个向量的哪些维,代表了哪些资讯  举例来说,如果我们今天把一段声音讯号丢进 Encoder,它会给我们一个向量,但是这个向量裡面,哪些维度代表了这句话的内容,哪些维度代表这句话的语者,也就是谁说的,我们没有这样的资讯
+而 Feature Disentangle 想要做到的事情就是,我们有没有可能想办法,在 Train 一个 Aauto-Encoder 的时候,同时有办法知道,这个 Representation,或又叫做 Embedding,或又叫做 Code,我们这个 Embedding 的哪些维度代表了哪些资讯呢
+我们有没有可能做到说 Encoder 输出一个,举例来说 100 维的向量,我们知道说前 50 维就代表了这句话的内容,后 50 维就代表了这句话说话人的特徵呢,那这样子的技术就叫做 Feature Disentangle</description>
+    </item>
+    
+    <item>
+      <title>23_Adversarial Attack_P1</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/23_adversarial-attack_p1/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/23_adversarial-attack_p1/</guid>
+      <description>Adversarial Attack P1-Basic Conception Adversarial Attack 要讲这个主题,我们这边要讲的是,我们在作业裡面,我们已经训练了非常多,各式各样的类神经网路,那我们当然期待说,我们可以把这些技术用在真正的应用上
+但是光是把这些 Network 用在真正的应用上,要把这些 Network 用在真正应用上,光是它们正确率高是不够的,它们还需要什麼能力呢
+他们需要能够应付来自人类的恶意,有时候你的 Network,它的工作是為了要侦测一些有恶意的行為,如果今天它的工作是要侦测有恶意的行為,这些它要侦测的对象,会去想办法骗过 Network,Network 在一般的情况下,都可以得到高的正确率是不够的,它要在有人试图想要欺骗它的情况下,也得到高的正确率
+举例来说 我们今天都会用 Network,来做 E-Mail 的 Filtering,你会用 Network 来做侦测一封邮件,它是不是垃圾邮件,那今天对於一个垃圾邮件的发信者而言,他也会想尽办法避免,他的邮件被分类為垃圾邮件,如果今天有人他想办法去更改邮件的内容,想要去欺骗过 Network 的话,那 Network 到底能不能不要被欺骗呢
+所以今天我们希望我们的类神经网路,它光是正确率高还不够,我们希望它可以应付来自人类的恶意
+举例来说 这个是蚁王
+牠叫做梅路艾姆,牠是站在生物顶点,牠是生物顶点的一个存在,牠非常地强,人类没有办法打赢牠,那牠会消灭掉所有的人类,但是人类并没有跟牠打,人类是不讲武德的,人类就直接放一个核弹就把牠炸死,然后故事就结束了 就这样
+Example of Attack 我们先来看一个真正的例子,我们今天在好多个作业裡面,我们都已经训练了影像辨识的模型,也就是说你有一个影像辨识的系统,给它一张照片,它可以告诉我们说,这张照片属於什麼样的类别
+那今天我们要做的事情是,在这张照片上面加入一个非常小的杂讯,一张照片可以被看作是一个非常长的向量,我们在这个非常长的向量上加入,每一个维度都加入一个小小的杂讯,把这个有加入杂讯以后的照片丢到 Network,看看会发生什麼样的事情
+那一般这个杂讯都非常非常地小,小到什麼地步呢,最好小到人肉眼没有办法看出来,所以这个例子裡面加的杂讯其实太大了,一般这个杂讯是小到人肉眼看不出来的
+有被加杂讯的照片叫做 Attacked Image,有被攻击的照片,那还没有被加杂讯的照片呢,我们一般就叫做 Benign Image,它是好的 Image,它是还没有被攻击的图片
+Benign Image 丢到 Network 裡面,它的输出是猫,那我们期待说 Attacked Image,就我们现在是攻击方 我们是坏人,我们希望 Attacked Image 丢到 Network 裡面,它的输出不可以是猫,要变成其他的东西
+那攻击呢 大致上可以分成两种类型,一种是没有目标的攻击,没有目标的攻击是,原来的答案是猫,只要你能够让 Network 的输出不是猫,你就算是成功了
+但是还有另外一种更困难的攻击,是有目标的攻击,也就是说我们希望 Network,不止它输出不能是猫,还要输出别的东西,比如说 我们希望加了一个杂讯以后,Network 输出呢 是海星,它把猫错误判断成一隻海星,才算是攻击成功,好 那这样子的攻击真的有可能做到吗,我们真的可以加入一个人肉眼看不到的杂讯,去改变 Network 的输出吗</description>
+    </item>
+    
+    <item>
+      <title>24_Adversarial Attack_P2</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/24_adversarial-attack_p2/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/24_adversarial-attack_p2/</guid>
+      <description>Adversarial Attack P2-Attack and Defense White Box v.s. Black Box 到目前為止啊,我们在上课讲的内容,其实都是 ==White Box 的 Attack==
+也就是说 我们要计算这个 Gradient,我们做 FGSM 在计算 Gradient 的时候,我们需要知道模型的参数,才有办法计算这个 Gradient,才有办法去在 Image 上加上 Noise
+像这种知道模型参数的攻击叫做 White Box 的 Attack,那中文有时候就翻译成白箱攻击,那白箱就是一个动画了,这个是白箱 没有很重要,没有很重要 不用管我
+那但是你可能会觉得说,哇 这个攻击需要知道 Network 的参数,看来这个攻击呢 不是很危险
+因為一般线上的服务,你当然要攻击一定是去攻击别人的模型嘛,某一个线上的服务嘛,线上的服务它的模型,你又不知道参数是什麼,所以也许要攻击一个线上的服务,并没有那麼容易,所以其实如果我们要保护,我们的模型不被别人攻击,也许我们只要记住,不要随便把自己的模型放到网路上,公开让大家取用,也许我们的模型就会是安全的
+但真的是这样吗,不知道模型参数下的攻击叫做 ==Black Box Attack== 也就是黑箱攻击,黑箱攻击是有可能的吗,黑箱攻击是有可能,怎麼做黑箱攻击呢,我们到目前為止讲说,我们在做攻击的时候,都需要计算 Gradient,就像 Gradient 需要知道 Model 的参数,那黑箱攻击是怎麼做到的呢
+Black Box Attack 所以网路上有一个模型,这个模型你是没有办法拿到的,你根本不知道它的参数是什麼,这个其实就是JudgeBoi上面的那一个模型,你并不知道助教使用了哪一个模型,你并不知道它的参数是什麼,那怎麼办呢
+假设你知道这个 Network,是用什麼样的训练资料训练出来的话,那你可以去训练一个 Proxy 的 Network
+也就是你训练一个 Network,让这个 Network 来模仿我们要攻击的对象,那我们要攻击的对象跟 Proxy 的 Network,如果都是用同样的训练资料训练出来的话,也许它们就会有一定程度的相似度
+如果 Proxy Network 跟要被攻击的对象,有同样的 有一定程度的相似程度的话,那我们只要对 Proxy 的 Network 进行攻击,也许这个有被攻击过的 Image,拿去丢到我们不知道参数的 Network 上,攻击也会成功</description>
+    </item>
+    
+    <item>
+      <title>25_Explainable AI_P1</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/25_explainable-ai_p1/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/25_explainable-ai_p1/</guid>
+      <description>Explainable Machine Learning P1-Why Does the Model Make This Prediction 到目前為止,我们已经训练了很多很多的模型,你可能我们训练过影像辨识的模型,给它一张图片,它会给你答案,但我们并不满足於此,接下来我们要机器给我们,它得到答案的理由,这个就是 Explainable 的 Machine Learning
+Why we need Explainable ML? 那开始之前,开始介绍技术之前,我们需要讲一下,為什么 Explainable 的 Machine Learning,是一个重要的议题呢,我觉得那个本质上的原因是,就算今天机器可以得到正确的答案,也不代表它一定非常地聪明,举一个例子,过去有一匹马它很聪明,所以大家叫它神马汉斯,那这个神马汉斯可以做什么事情呢
+它会做数学问题,举例来说,你问它根号 9 是多少,然后它就开始计算得到答案,它怎么告诉你它的答案呢,它会用它的马蹄去跺地板,所以如果答案是 3,它就敲三下,然后就停下来,代表它得到正确的答案,然后旁边的人就会欢呼,所以这个是神马汉斯,然后一堆人呢,在看它解数学问题
+后来有人就很怀疑说,為什么汉斯可以解数学问题呢,它只是一匹马,它為什么能够理解数学问题呢,后来有人发现说,只要没有人围观的时候,汉斯就会答不出数学问题,没有人看它的时候,你问它一个数学的问题,它就会不断地敲它的马蹄,不知道什么时候停下来,所以它其实只是侦测到,旁边人类微妙的情感变化,知道它什么时候要停下跺马蹄,它就可以有胡萝卜吃,它并不是真的学会解数学的问题,而今天我们看到种种人工智慧的应用,有没有可能跟神马汉斯是一样的状况
+而今天在很多真实的应用中,Explainable 的 Machine Learning,可解释性的模型往往是必须的
+举例来说
+ 银行今天可能会用机器学习的模型,来判断要不要贷款给某一个客户,但是根据法律的规定,银行作用机器学习模型来做自动的判断,它必须要给出一个理由,所以这个时候,我们不是只训练机器学习模型就好,我们还需要机器学习的模型,是具有解释力的 或者是说机器学习未来,也会被用在医疗诊断上,但医疗诊断人命关天的事情,如果机器学习的模型只是一个黑箱,不会给出诊断的理由的话,那我们又要怎么相信,它做出的是正确的判断呢 今天也有人想,把机器学习的模型用在法律上,比如说帮助法官判案,帮助法官自动判案说,一个犯人能不能够被假释,但是我们怎么知道机器学习的模型,它是公正的呢,我们怎么知道它在做判断的时候,没有种族歧视等其他的问题呢,所以我们希望机器学习的模型,不只得到答案,它还要给我们得到答案的理由 再更进一步,今天自驾车未来可能会满街跑,当今天自驾车突然急剎的时候,甚至急剎导致车上的乘客受伤,那这个自驾车到底有没有问题呢,这也许取决於它急剎的理由,如果它是看到有一个老太太在过马路,所以急剎,那也许自驾车是对的,但是假设它只是无缘无故,就突然发狂要急剎,那这个模型就有问题了,所以对自驾车,它的种种的行為 种种的决策,我们希望知道决策背后的理由  更进一步,也许机器学习的模型,如果具有解释力的话,那未来我们可以凭藉著解释的结果,再去修正我们的模型
+今天在使用这些深度学习技术的时候,往往状况是这个样子,有某人说,这个就是你的机器学习的系统,是啊 我就是把资料丢进去,裡面就是有很多矩阵的相乘,接下来呢,就会跑出我的结果,如果结果不如预期的话,怎么样呢,现在大家都知道就爆调一下参数对不对,改个 Learning Rate 对不对,调一下 Network 的架构对不对,你根本不知道自己在做什么对不对,就调一下 Network 的架构,我就把这一堆数学,这一堆 Linear Algebra 再重新打乱一下,看看结果会不会比较好,那如果其它没有做过 Deep Learning 的人,就会大吃一惊,觉得哇 这样怎么可以呢
+但实际上今天深度学习的模型,你往往要改进模型,就是需要调一些 Hyperparameter,但是我们期待也许未来,当我们知道,Deep Learning 的模型犯错的时候,它是错在什么样的地方,它為什么犯错,也许我们可以有更好的方法,更有效率的方法,来 Improve 我的模型,当然这个是未来的目标,今天离用 Explainable 的 Machine Learning,做到上述 Improve Model 的想法,还有很长的一段距离</description>
+    </item>
+    
+    <item>
+      <title>26_Explainable AI_P2</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/26_explainable-ai_p2/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/26_explainable-ai_p2/</guid>
+      <description>Explainable AI_P2: Why Does a Cat Look Like (for a Model) Global Explanation: Explain the whole Model Global 的 Explanation 是什麼意思呢,我们在前一堂课讲的是 Local 的 Explanation,也就是给机器一张照片,那它告诉我们说,看到这张图片,它為什麼觉得裡面有一隻猫
+而 Global 的 Explanation 并不是针对,特定某一张照片来进行分析,而是把我们训练好的那个模型拿出来,根据这个模型裡面的参数去检查说,对这个 Network 而言,到底一隻猫长什麼样子,对一个 Network 而言,它心裡想像的猫长什麼样子
+What does a filter detect? 举例来说,假设你今天 Train 好一个,Convolutional 的 Neural Network,Train 好在这边,那你知道在 Convolutional 的,Neural Network 裡面呢,就是有很多的 Filter,有很多的这个 Convolutional Layer
+Convolutional Layer 裡面呢,有一堆的 Filter,那你把一张图片作為输入,Convolutional 的 Layer,它的输出是什麼呢,它的输出是一个 Feature Map,那每一个 Filter 都会给我们一个 Metric
+那今天呢,假设我们有一张图片,作為这个 Convolutional Neural Network 的输入,这张图片我们用一个大写的 X 来表示,因為图片呢,通常是一个矩阵,我们用大写的 X,来表示这个图片所构成的矩阵,而如果把这张图片丢进去,你发现某一个 Filter,比如说 Filter 1,它在它的 Feature Map 裡面,很多位置都有比较大的值,那意味著什麼</description>
+    </item>
+    
+    <item>
+      <title>27_Domain Adaptation</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/27_domain-adaptation/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/27_domain-adaptation/</guid>
+      <description>27 Domain Adaptation 到目前為止,我们已经训练了很多,Machine Learning 的 Model,所以对大家来说,训练一个 Classifier 完全不是一个问题
+所以假设要你训练一个数字的 Classifier,你只要有给你训练资料,你训练好一个模型,然后 Apply 在 用在测试资料上就结束了,那像数字辨识这麼简单的问题,你在 Benchmark Corpus,在MNIST Benchmark Corpus 上,随便做一做,可能都会做到 99.5% 的正确率
+但是假设今天测试资料,跟训练资料的分布不一样,怎麼办呢
+我们举一个简单的例子,假设训练的时候,你的数字是黑白的,但测试的时候,你的数字是彩色的,会发生什麼样的事情呢
+你可能会觉得说,一边是黑白的 一边是,虽然一边是黑白的 一边是彩色的,但是对 Model 来说,数字的形状是一样的,它能够在黑白的图片上认出数字来,在彩色的图片上,会不会应该也可以认出数字来呢
+但实际上不是,如果你今天在这样子黑白的数字上面,训练一个模型,直接用到彩色的数字上,你得到的正确率会非常地低,会低到只有 57%,不能算是一个及格的分数
+所以我们今天知道说,一旦训练资料跟测试资料,它中间有一些差异,它们中间的分布是不一样的,你在训练资料上训练出来的模型,在测试资料上面可能就会坏掉,那这种问题 叫做 ==Domain Shift==,也就是当你的训练资料跟测试资料,它的分布有些不同的时候,这种状况叫做 Domain Shift
+在多数的这种作业裡面,或者是 Benchmark Corpus 裡面,我们都假设无视 Domain Shift 这个问题,我们的训练资料跟测试资料,往往有著一样的分布,那这样都会给大家一个错误的印象就是,哇 这个今天的什麼人工智慧,真的是很厉害,都超越人类啦,在很多任务上面都有极高的正确率,但是实际上用在真实的应用上,当你的训练资料跟测试资料的中间,有一点差异的时候,机器能不能够做得好,就是一个未知数了
+那我们今天就是要来讲说,假设训练资料跟测试资料,有一点差异的时候,有没有什麼方法可以让我们,能够做得比什麼都不做结果还要好
+那今天就是要讲 ==Domain Adaptation== 的技术,那 Domain Adaptation 的技术,也可以看做是 ==Transfer Learning== 的一种
+Transfer Learning 就是,你在 A 任务上学到的技能,可以被用在 B 任务上,那对於 Domain Adaptation 来说,你的训练资料是一个 Domain,你的测试资料是另外一个 Domain,你在训练资料上面,某一个 Domain 上学到的资讯,你要把它用到另外一个 Domain,用到测试资料上面,所以你是把一个 Domain 学到的知识,用在另外一个 Domain 上,所以它可以看做是,Transfer Learning 的其中一个环节,那在过去上课的录影裡面,有完整的讲了 Transfer Learning 相关的技术,那因為今天时间有限,我们就只 Focus 在,Domain Adaptation 的部分就好,如果你有兴趣的话,你可以再看一下过去上课的录影</description>
+    </item>
+    
+    <item>
+      <title>28_Reinforcement Learning_P1</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/28_reinforcement-learning_p1/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/28_reinforcement-learning_p1/</guid>
+      <description>Reinforcement Learning P1 ：Basics 那这一堂课啊,我们要讲的是,Deep Reinforcement Learning,也就是 RL,那我想这个 RL 啊,Reinforcement Learning 啊,大家一定一点都不陌生,因为你知道很多很潮的应用,AlphaGo 等等,它背后呢,用的就是 RL 的技术,那 RL 可以讲的技术啊,非常非常地多,它不是在一堂课裡面可以讲得完的,我甚至觉得说,如果有人要把它开成一整个学期的课,可能也是有这麽多东西可以讲
+所以今天啊,这堂课的目的,并不是要告诉你有关 RL 的一切,而是让大家有一个基本的认识,大概知道 RL 是什么样的东西,那 RL 相关的课程,你其实在网路上可以找到,非常非常多的参考的资料,那 RL 如果要讲得非常地艰涩,其实也是可以讲得非常地艰涩的
+可是今天这一堂课啊,我们儘量避开太过理论的部分,我期待这堂课可以让你做到的,并不是让你听了觉得,哇 RL 很困难啊,搞不清楚在做什么,而是期待让你觉得说,啊 RL 原来就只是这样而已,我自己应该也做得起来,希望这一堂课可以达到这一个目的
+Supervised Learning→RL 那什么是 Reinforcement Learning 呢,到目前为止啊,我们讲的几乎都是 Supervised Learning,假设你要做一个 Image 的 Classifier,你不只要告诉机器,它的 Input 是什么,你还要告诉机器,它应该输出什么样的 Output,然后接下来呢,你就可以 Train 一个 Image 的 Classifier
+那在多数这门课讲到目前为止的技术,基本上都是基于 Supervised Learning 的方法,就算是我们在讲 Self Supervised Learning 的时候,我们其实也是,很类似 Supervised Learning 的方法,只是我们的 Label,不需要特别僱用人力去标记,它可以自动产生
+或者是我们在讲 Auto-encoder 的时候,我们虽然说它是一个 Unsupervised 的方法,我们没有用到人类的标记,但事实上,我们还是有一个 Label,只是这个 Label,不需要耗费人类的力量来产生而已
+但是 RL 就是另外一个面向的问题了,在 RL 裡面,我们遇到的问题是这样子的,我们,机器当我们给它一个输入的时候,我们不知道最佳的输出应该是什么</description>
+    </item>
+    
+    <item>
+      <title>29_Reinforcement Learning_P2</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/29_reinforcement-learning_p2/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/29_reinforcement-learning_p2/</guid>
+      <description>讲到目前为止,你可能觉得跟 Supervised Lea$rN$ing,没有什么不同,那确实就是没有什么不同,接下来真正的重点是,在我们怎么定义 a 上面
+Version 0 那先讲一个最简单的,但是其实是不正确的版本,那这个其实也是,助教的 Sample Code 的版本,那这个不正确的版本是怎么做的呢
+首先我们还是需要收集一些训练资料,就是需要收集 s 跟 a 的 Pair
+怎么收集这个 s 跟 a 的 Pair 呢?
+你需要先有一个 Actor,这个 Actor 去跟环境做互动,它就可以收集到 s 跟 a 的 Pair
+那这个 Actor 是哪裡来的呢,你可能觉得很奇怪,我们今天的目标,不就是要训练一个 Actor 吗,那你又说你需要拿一个 Actor,去跟环境做互动,然后把这个 Actor,它的 s 跟 a 记录下来,那这个 Actor 是哪裡来的呢?
+你先把这个 Actor,想成就是一个随机的 Actor 好了,就它是一个,它就是一个随机的东西,那看到 $s1$,然后它执行的行为就是乱七八糟的,就是随机的,但是我们会把它在,每一个 s 执行的行为 a,通通都记录下来,好 那通常我们在这个收集资料的话,你不会只把 Actor 跟环境做一个 Episode,通常会做多个 Episode,然后期待你可以收集到足够的资料,比如说在助教 Sample Code裡面,可能就是跑了 5 个 Episode,然后才收集到足够的资料
+所以我们就是去观察,某一个 Actor 它跟环境互动的状况,那把这个 Actor,它在每一个 Observation,执行的 Action 都记录下来,然后接下来,我们就去评价每一个 Action,它到底是好还是不好,评价完以后,我们就可以拿我们评价的结果,来训练我们的 Actor</description>
+    </item>
+    
+    <item>
+      <title>30_Reinforcement Learning_P3</title>
+      <link>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/30_reinforcement-learning_p3/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/30_reinforcement-learning_p3/</guid>
+      <description>Critic 那上一次 RL 的部分,我们讲说我们要 Learn 一个 Actor,那这一次,我们要 Learn 另外一个东西,这个东西叫做 Critic
+我会先解释 Critic 是什麽,然后我们再来讲说,这个 Critic 对 Learn Actor 这个东西,有什麽样的帮助
+Critic 它的工作是要来评估一个 Actor 的好坏,就你现在已经有一个 Actor,它的参数叫 θ,那 Critic 的工作就是,它要评估说如果这个 Actor,它看到某个样子的 Observation,看到某一个游戏画面,接下来它可能会得到多少的 Reward
+那 Critic 有好多种不同的变形,有的 Critic 是只看游戏画面来判断,有的 Critic 是说采取某,看到某一个游戏画面,接下来又发现 Actor 採取某一个 Action,在这两者都具备的前提下,那接下来会得到多少 Reward
+那这样讲,还是有点抽象,所以我们讲的更具体一点,我们直接介绍一个,我们等一下会真的被用上,你在作业裡面真的派得上用场的,这个 Critic 叫做 ==Value Function==,那这个 Value Function,我们这边用大写的 $V^θ(S)$ 来表示
+它的输入是 s,也就是现在游戏的状况,比如说游戏的画面,那这边要特别注意一下 V,它是有一个上标 θ 的
+这个上标 θ 代表这个 V ,它观察的对象是 θ 这个 Actor,它观察的这个 Actor 它的参数是 θ,那这个 V ,$V^θ $就是一个 Function,它的输入是 S,那输出是一个 Scalar,这边用 $V^θ(S)$ 来表示这一个 Scalar</description>
     </item>
     
     <item>
