@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>机器学习基础 on hezhou notebook</title>
+    <link>https://hezhou49.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</link>
+    <description>Recent content in 机器学习基础 on hezhou notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 14 Apr 2021 10:08:35 +0800</lastBuildDate><atom:link href="https://hezhou49.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深度学习基础概要</title>
+      <link>https://hezhou49.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E8%A6%81/</link>
+      <pubDate>Fri, 16 Jul 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E8%A6%81/</guid>
+      <description>反向传播 Back Propagation 完整PDF
+反向传播是一种用来计算执行梯度下降的算法。包含Foward Pass 和 Backward Pass两个步骤。
+network的所有参数为$\theta=\left{w_{1}, w_{2}, \cdots, b_{1}, b_{2}, \cdots\right}$，需要计算每一个参数的梯度，即进行偏微分。
+这里以某一权重为例计算$\partial C / \partial w$。针对下面偏微分的展开，分别分为Forward pass和Backward pass。
+Forward pass 计算$\partial z / \partial w$，很明显等于当前层的输入：
+Backward pass 计算$\partial C / \partial z$，该计算依赖下一层的值，正向无法立刻计算出来，使用反向递推。
+其中：$\partial a / \partial c$等于激活函数的倒数，是已知的，不用管。可以得出递推公式： $$ \frac{\partial C}{\partial z}=\sigma^{\prime}(z)\left[w_{3} \frac{\partial C}{\partial z^{\prime}}+w_{4} \frac{\partial C}{\partial z^{\prime \prime}}\right] $$ 所以一个求偏导的过程就变成了：
+ 正向前进时，记住每一层的input。 反向前进时，递推计算$\partial C / \partial z$直到当前参数所在层。 再乘以正向时保存的$\partial z / \partial w$值，得到最终偏导。  Optimization reference：李宏毅2021-Batch and Momentum、Adaptive Learning Rate</description>
+    </item>
+    
+  </channel>
+</rss>

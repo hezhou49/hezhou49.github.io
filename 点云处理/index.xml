@@ -43,5 +43,20 @@ k-means聚类 聚类方法认为当模型点云与场景点云正确匹配时，
 FINDING OPTIMAL ROTATION AND TRANSLATION BETWEEN CORRESPONDING 3D POINTS</description>
     </item>
     
+    <item>
+      <title>深度学习点云配准</title>
+      <link>https://hezhou49.github.io/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</link>
+      <pubDate>Tue, 12 Apr 2022 10:08:35 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</guid>
+      <description>使用深度学习处理点云 数据集    name 备注 常用于     ModelNet CAD模型生成 分类   KITTI、nuScenes、WOD 自动驾驶数据集 3D物体检测   3D Match RGBD拼接点云，来源与同名论文 生成特征描述子    基础框架 VoxNet, IROS 2015 2400 PDF, author VoxNet: A 3D Convolutional Neural Network for Real-Time Object Recognition
+ 基于体素处理点云，类似处理二维的图像，在voxel上面进行三维卷积操作。(二维卷像素，三维卷体素)
+ 卷积+pool，将feature map处理到较小尺寸，然后拉直
+PointNet, CVPR 2017 7200 Charles Ruizhongtai Qi, PDF, video
+作者在video中提到如今三维点云的处理方式依旧是沿用2D的卷积类型，有没有直接作用在点云上特征学习网络呢。
+ 基于点处理点云
+ core idea : max pool。忽略transform部分，后续研究证明没用。shared MLP + max pool</description>
+    </item>
+    
   </channel>
 </rss>
