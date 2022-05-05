@@ -12,22 +12,22 @@
     <title>2D计算机视觉——原理、算法及应用 :: hezhou notebook</title>
 
     
-    <link href="/css/nucleus.css?1651458174" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1651458174" rel="stylesheet">
-    <link href="/css/hybrid.css?1651458174" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1651458174" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1651458174" rel="stylesheet">
-    <link href="/css/auto-complete.css?1651458174" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1651458174" rel="stylesheet">
-    <link href="/css/theme.css?1651458174" rel="stylesheet">
-    <link href="/css/tabs.css?1651458174" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1651458174" rel="stylesheet">
+    <link href="/css/nucleus.css?1651761512" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1651761512" rel="stylesheet">
+    <link href="/css/hybrid.css?1651761512" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1651761512" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1651761512" rel="stylesheet">
+    <link href="/css/auto-complete.css?1651761512" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1651761512" rel="stylesheet">
+    <link href="/css/theme.css?1651761512" rel="stylesheet">
+    <link href="/css/tabs.css?1651761512" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1651761512" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1651458174" rel="stylesheet">
+    <link href="/css/theme-green.css?1651761512" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1651458174"></script>
+    <script src="/js/jquery-3.3.1.min.js?1651761512"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -137,14 +137,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1651458174"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1651458174"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1651761512"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1651761512"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/hezhou49.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1651458174"></script>
+<script type="text/javascript" src="/js/search.js?1651761512"></script>
 
     
   </div>
@@ -1378,23 +1378,30 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#参考">参考</a></li>
+    <li><a href="#第3章-空域增强">第3章 空域增强</a></li>
+    <li><a href="#第4章-频域增强">第4章 频域增强</a></li>
+    <li><a href="#第7章-图像分割">第7章 图像分割</a>
       <ul>
-        <li><a href="#参考">参考</a></li>
-        <li><a href="#第3章-空域增强">第3章 空域增强</a></li>
-        <li><a href="#第4章-频域增强">第4章 频域增强</a></li>
-        <li><a href="#第7章-图像分割">第7章 图像分割</a>
-          <ul>
-            <li><a href="#微分边缘检测">微分边缘检测</a></li>
-          </ul>
-        </li>
+        <li><a href="#微分边缘检测">微分边缘检测</a></li>
         <li><a href="#基于灰度相似性的区域检测">基于灰度相似性的区域检测</a>
           <ul>
             <li><a href="#阈值分割">阈值分割</a></li>
             <li><a href="#区域生长">区域生长</a></li>
           </ul>
         </li>
-        <li><a href="#第8章-基元检测">第8章 基元检测</a></li>
+      </ul>
+    </li>
+    <li><a href="#第8章-基元检测">第8章 基元检测</a>
+      <ul>
+        <li><a href="#角点检测">角点检测</a>
+          <ul>
+            <li><a href="#二阶导">二阶导</a></li>
+            <li><a href="#哈里斯">哈里斯</a></li>
+            <li><a href="#积分角点检测">积分角点检测</a></li>
+          </ul>
+        </li>
+        <li><a href="#哈夫变换">哈夫变换</a></li>
       </ul>
     </li>
   </ul>
@@ -1421,9 +1428,9 @@
         
 
 
-<h3 id="参考">参考</h3>
+<h2 id="参考">参考</h2>
 <p>《2D计算机视觉——原理、算法及应用》</p>
-<h3 id="第3章-空域增强">第3章 空域增强</h3>
+<h2 id="第3章-空域增强">第3章 空域增强</h2>
 <p>算数运算：</p>
 <p>图像相减：体现两图的差别，可用于运动检测。</p>
 <p>对比度拉伸：增加原始图像里某两个灰度值的动态范围实现对比度的拉伸。</p>
@@ -1442,16 +1449,16 @@
 </blockquote>
 <p>平滑（模糊）</p>
 <p>锐化</p>
-<h3 id="第4章-频域增强">第4章 频域增强</h3>
+<h2 id="第4章-频域增强">第4章 频域增强</h2>
 <p>傅里叶变换在这个应用中的应用：把一个关于图像亮度的函数从空域（位置与亮度的关系）转化到频域（频率与亮度的关系）。</p>
 <p><a href="https://www.zhihu.com/question/21040374">https://www.zhihu.com/question/21040374</a>。连接中是从时域变换到频域。</p>
 <img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220221205234755.png" alt="image-20220221205234755" style="zoom: 80%;" />
-<h3 id="第7章-图像分割">第7章 图像分割</h3>
+<h2 id="第7章-图像分割">第7章 图像分割</h2>
 <p>在对图像的研究和应用中，人们往往仅对图像中的某些部分感兴趣，这些部分常称为<strong>目标或前景</strong>(其他部分称为<strong>背景</strong>)，一般对应图像中特定的、具有独特性质的区域。为了辨识和分析目标，需要将这些区域分离并提取出来,如进行特征提取。</p>
 <img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220331164235340.png" alt="image-20220331164235340" style="zoom:80%;" />
 <p>先不管串、并行，分割的主要依据是<strong>检测边界</strong>或者<strong>检测区域</strong>，由此划分图像。</p>
 <hr>
-<h4 id="微分边缘检测">微分边缘检测</h4>
+<h3 id="微分边缘检测">微分边缘检测</h3>
 <img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220331195105714.png" alt="image-20220331195105714" style="zoom:80%;" />
 <p>但是，图像是离散并非连续的，所以不能直接求导。所以数字图像的求导是利用<strong>差分来近似微分</strong>的。</p>
 <p>二维的差分使用<strong>卷积</strong>来实现。</p>
@@ -1464,7 +1471,19 @@
 <p>(1) 选择或确定一组能正确代表所需区域的种子像素。</p>
 <p>(2) 确定在生长过程中能将相邻像素包括进来的生长(或相似)准则。</p>
 <p>(3) 确定让生长过程停止的条件或规则。</p>
-<h3 id="第8章-基元检测">第8章 基元检测</h3>
+<h2 id="第8章-基元检测">第8章 基元检测</h2>
+<p>基元检测本质上还是图像分割。</p>
+<h3 id="角点检测">角点检测</h3>
+<h4 id="二阶导">二阶导</h4>
+<h4 id="哈里斯">哈里斯</h4>
+<p>使用局部模板两个方向的梯度来定义。卷积的情况下，梯度的平方和也就是领域灰度值平方差的和。</p>
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220503202812860.png" alt="image-20220503202812860" style="zoom:80%;" />
+<h4 id="积分角点检测">积分角点检测</h4>
+<p>使用圆形模板遍历每一个点，比较模板内其它点与中心点（核）的灰度值差异，小于阈值则记为“相同”，统计相同区域的面积比例。</p>
+<p><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220503204105437.png" alt="image-20220503204105437"></p>
+<p>可以发现，当中心点（核）恰好在角点上时，该面积可以取最小值，其它大多数时候面积大小都是大于2分之1的。</p>
+<h3 id="哈夫变换">哈夫变换</h3>
+<p>图像空间到参数空间的变换。</p>
 
 
 <footer class="footline">
@@ -2313,16 +2332,16 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1651458174"></script>
-    <script src="/js/perfect-scrollbar.min.js?1651458174"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1651458174"></script>
-    <script src="/js/jquery.sticky.js?1651458174"></script>
-    <script src="/js/featherlight.min.js?1651458174"></script>
-    <script src="/js/highlight.pack.js?1651458174"></script>
+    <script src="/js/clipboard.min.js?1651761512"></script>
+    <script src="/js/perfect-scrollbar.min.js?1651761512"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1651761512"></script>
+    <script src="/js/jquery.sticky.js?1651761512"></script>
+    <script src="/js/featherlight.min.js?1651761512"></script>
+    <script src="/js/highlight.pack.js?1651761512"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1651458174"></script>
-    <script src="/js/learn.js?1651458174"></script>
-    <script src="/js/hugo-learn.js?1651458174"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1651761512"></script>
+    <script src="/js/learn.js?1651761512"></script>
+    <script src="/js/hugo-learn.js?1651761512"></script>
     
         
             <script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script>
