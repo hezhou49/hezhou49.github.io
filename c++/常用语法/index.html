@@ -12,22 +12,22 @@
     <title>常用语法 :: hezhou notebook</title>
 
     
-    <link href="/css/nucleus.css?1651762246" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1651762246" rel="stylesheet">
-    <link href="/css/hybrid.css?1651762246" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1651762246" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1651762246" rel="stylesheet">
-    <link href="/css/auto-complete.css?1651762246" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1651762246" rel="stylesheet">
-    <link href="/css/theme.css?1651762246" rel="stylesheet">
-    <link href="/css/tabs.css?1651762246" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1651762246" rel="stylesheet">
+    <link href="/css/nucleus.css?1652442953" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1652442953" rel="stylesheet">
+    <link href="/css/hybrid.css?1652442953" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1652442953" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1652442953" rel="stylesheet">
+    <link href="/css/auto-complete.css?1652442953" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1652442953" rel="stylesheet">
+    <link href="/css/theme.css?1652442953" rel="stylesheet">
+    <link href="/css/tabs.css?1652442953" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1652442953" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1651762246" rel="stylesheet">
+    <link href="/css/theme-green.css?1652442953" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1651762246"></script>
+    <script src="/js/jquery-3.3.1.min.js?1652442953"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -137,14 +137,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1651762246"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1651762246"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1652442953"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1652442953"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/hezhou49.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1651762246"></script>
+<script type="text/javascript" src="/js/search.js?1652442953"></script>
 
     
   </div>
@@ -1378,14 +1378,21 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#数据结构">数据结构</a>
       <ul>
-        <li><a href="#unordered_map--map">unordered_map // map</a>
+        <li><a href="#unordered_map--set">unordered_map // set</a>
           <ul>
             <li><a href="#重载">重载[]</a></li>
           </ul>
         </li>
         <li><a href="#string">string</a></li>
+      </ul>
+    </li>
+    <li><a href="#常用算法">常用算法</a>
+      <ul>
+        <li><a href="#sort">sort</a></li>
+        <li><a href="#reverse">reverse</a></li>
+        <li><a href="#accumulate">accumulate</a></li>
       </ul>
     </li>
   </ul>
@@ -1412,7 +1419,8 @@
         
 
 
-<h3 id="unordered_map--map">unordered_map // map</h3>
+<h2 id="数据结构">数据结构</h2>
+<h3 id="unordered_map--set">unordered_map // set</h3>
 <p>键和值是pair形式，调用时使用first,second</p>
 <table>
 <thead>
@@ -1562,11 +1570,56 @@ hashtable[key].emplace_back(value);
 <td></td>
 </tr>
 <tr>
-<td></td>
+<td>empty()</td>
 <td></td>
 </tr>
 </tbody>
 </table>
+<h2 id="常用算法">常用算法</h2>
+<h3 id="sort">sort</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><h3 id="reverse">reverse</h3>
+<p>翻转容器</p>
+<pre tabindex="0"><code>reverse(nums.begin(), nums.end())
+</code></pre><h3 id="accumulate">accumulate</h3>
+<p><strong>功能描述：</strong></p>
+<ul>
+<li>计算区间内 容器元素累计总和</li>
+</ul>
+<p><strong>函数原型：</strong></p>
+<ul>
+<li>
+<p><code>accumulate(iterator beg, iterator end, value);  </code></p>
+<p>// 计算容器元素累计总和</p>
+<p>// beg 开始迭代器</p>
+<p>// end 结束迭代器</p>
+<p>// value 起始值</p>
+</li>
+</ul>
+<p><strong>示例：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;numeric&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test01</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">100</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>		v.push_back(i);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> total <span style="color:#f92672">=</span> accumulate(v.begin(), v.end(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;total = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> total <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	test01();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	system(<span style="color:#e6db74">&#34;pause&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>**总结：**accumulate使用时头文件注意是 numeric，这个算法很实用</p>
 
 
 <footer class="footline">
@@ -2415,16 +2468,16 @@ hashtable[key].emplace_back(value);
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1651762246"></script>
-    <script src="/js/perfect-scrollbar.min.js?1651762246"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1651762246"></script>
-    <script src="/js/jquery.sticky.js?1651762246"></script>
-    <script src="/js/featherlight.min.js?1651762246"></script>
-    <script src="/js/highlight.pack.js?1651762246"></script>
+    <script src="/js/clipboard.min.js?1652442953"></script>
+    <script src="/js/perfect-scrollbar.min.js?1652442953"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1652442953"></script>
+    <script src="/js/jquery.sticky.js?1652442953"></script>
+    <script src="/js/featherlight.min.js?1652442953"></script>
+    <script src="/js/highlight.pack.js?1652442953"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1651762246"></script>
-    <script src="/js/learn.js?1651762246"></script>
-    <script src="/js/hugo-learn.js?1651762246"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1652442953"></script>
+    <script src="/js/learn.js?1652442953"></script>
+    <script src="/js/hugo-learn.js?1652442953"></script>
     
         
             <script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script>
