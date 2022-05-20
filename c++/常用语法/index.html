@@ -12,22 +12,22 @@
     <title>常用语法 :: hezhou notebook</title>
 
     
-    <link href="/css/nucleus.css?1652442953" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1652442953" rel="stylesheet">
-    <link href="/css/hybrid.css?1652442953" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1652442953" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1652442953" rel="stylesheet">
-    <link href="/css/auto-complete.css?1652442953" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1652442953" rel="stylesheet">
-    <link href="/css/theme.css?1652442953" rel="stylesheet">
-    <link href="/css/tabs.css?1652442953" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1652442953" rel="stylesheet">
+    <link href="/css/nucleus.css?1653035380" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1653035380" rel="stylesheet">
+    <link href="/css/hybrid.css?1653035380" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1653035380" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1653035380" rel="stylesheet">
+    <link href="/css/auto-complete.css?1653035380" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1653035380" rel="stylesheet">
+    <link href="/css/theme.css?1653035380" rel="stylesheet">
+    <link href="/css/tabs.css?1653035380" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1653035380" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1652442953" rel="stylesheet">
+    <link href="/css/theme-green.css?1653035380" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1652442953"></script>
+    <script src="/js/jquery-3.3.1.min.js?1653035380"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -137,14 +137,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1652442953"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1652442953"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1653035380"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1653035380"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/hezhou49.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1652442953"></script>
+<script type="text/javascript" src="/js/search.js?1653035380"></script>
 
     
   </div>
@@ -1385,7 +1385,12 @@
             <li><a href="#重载">重载[]</a></li>
           </ul>
         </li>
-        <li><a href="#string">string</a></li>
+        <li><a href="#string">string</a>
+          <ul>
+            <li><a href="#istringstream">istringstream</a></li>
+          </ul>
+        </li>
+        <li><a href="#queue">queue</a></li>
       </ul>
     </li>
     <li><a href="#常用算法">常用算法</a>
@@ -1393,6 +1398,13 @@
         <li><a href="#sort">sort</a></li>
         <li><a href="#reverse">reverse</a></li>
         <li><a href="#accumulate">accumulate</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据类型转换与判定">数据类型转换与判定</a>
+      <ul>
+        <li><a href="#atoi">atoi</a></li>
+        <li><a href="#to_string">to_string</a></li>
+        <li><a href="#字符判定">字符判定</a></li>
       </ul>
     </li>
   </ul>
@@ -1575,6 +1587,38 @@ hashtable[key].emplace_back(value);
 </tr>
 </tbody>
 </table>
+<h4 id="istringstream">istringstream</h4>
+<blockquote>
+<p>将字符串变成字符串迭代器一样，将字符串流在依次拿出，因为它不会将空格作为流。这样就实现了字符串的空格切割。</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;       // std::string</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;     // std::cout</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sstream&gt;      // std::istringstream</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()  
+</span></span><span style="display:flex;"><span>{      
+</span></span><span style="display:flex;"><span>    string str<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;i am a boy&#34;</span>;      
+</span></span><span style="display:flex;"><span>    istringstream is(str);     
+</span></span><span style="display:flex;"><span>    string s;      
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(is<span style="color:#f92672">&gt;&gt;</span>s)      
+</span></span><span style="display:flex;"><span>         cout<span style="color:#f92672">&lt;&lt;</span>s<span style="color:#f92672">&lt;&lt;</span>endl;          
+</span></span><span style="display:flex;"><span>} 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// i
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//am
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//a
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//boy
+</span></span></span></code></pre></div><h3 id="queue">queue</h3>
+<p>数据存取：</p>
+<ul>
+<li><code>push(elem);</code>                             //往队尾添加元素</li>
+<li><code>pop();</code>                                      //从队头移除第一个元素</li>
+<li><code>back();</code>                                    //返回最后一个元素</li>
+<li><code>front(); </code>                                  //返回第一个元素</li>
+</ul>
+<p>大小操作：</p>
+<ul>
+<li><code>empty();</code>            //判断堆栈是否为空</li>
+<li><code>size(); </code>              //返回栈的大小</li>
+</ul>
 <h2 id="常用算法">常用算法</h2>
 <h3 id="sort">sort</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
@@ -1620,6 +1664,19 @@ hashtable[key].emplace_back(value);
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>**总结：**accumulate使用时头文件注意是 numeric，这个算法很实用</p>
+<h2 id="数据类型转换与判定">数据类型转换与判定</h2>
+<h3 id="atoi">atoi</h3>
+<p>字符串转数字</p>
+<h3 id="to_string">to_string</h3>
+<p>数字转字符串</p>
+<h3 id="字符判定">字符判定</h3>
+<p>islower(char c) 是否为小写字母
+isupper(char c) 是否为大写字母
+isdigit(char c) 是否为数字
+isalpha(char c) 是否为字母
+isalnum(char c) 是否为字母或者数字
+toupper(char c) 字母小转大
+tolower(char c) 字母大转小</p>
 
 
 <footer class="footline">
@@ -2468,16 +2525,16 @@ hashtable[key].emplace_back(value);
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1652442953"></script>
-    <script src="/js/perfect-scrollbar.min.js?1652442953"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1652442953"></script>
-    <script src="/js/jquery.sticky.js?1652442953"></script>
-    <script src="/js/featherlight.min.js?1652442953"></script>
-    <script src="/js/highlight.pack.js?1652442953"></script>
+    <script src="/js/clipboard.min.js?1653035380"></script>
+    <script src="/js/perfect-scrollbar.min.js?1653035380"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1653035380"></script>
+    <script src="/js/jquery.sticky.js?1653035380"></script>
+    <script src="/js/featherlight.min.js?1653035380"></script>
+    <script src="/js/highlight.pack.js?1653035380"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1652442953"></script>
-    <script src="/js/learn.js?1652442953"></script>
-    <script src="/js/hugo-learn.js?1652442953"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1653035380"></script>
+    <script src="/js/learn.js?1653035380"></script>
+    <script src="/js/hugo-learn.js?1653035380"></script>
     
         
             <script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script>
