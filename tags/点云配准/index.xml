@@ -1,40 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>点云处理 on hezhou notebook</title>
-    <link>https://hezhou49.github.io/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/</link>
-    <description>Recent content in 点云处理 on hezhou notebook</description>
+    <title>点云配准 on hezhou notebook</title>
+    <link>https://hezhou49.github.io/tags/%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</link>
+    <description>Recent content in 点云配准 on hezhou notebook</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 14 Apr 2022 10:08:35 +0800</lastBuildDate><atom:link href="https://hezhou49.github.io/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>点云处理基础</title>
-      <link>https://hezhou49.github.io/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/</link>
-      <pubDate>Thu, 26 May 2022 10:08:35 +0800</pubDate>
-      
-      <guid>https://hezhou49.github.io/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/</guid>
-      <description>Reference   《深蓝学院三维点云处理课程》
-  open3d docs
-  点云简介 一些三维的表达形式：
-  mesh：多用于计算机图形学；
-  voxel grid：排列整齐、有序，可以对标二维的像素，但是空间大部分位置是空的，造成浪费；
-  八叉树： 只向下细分内部有东西的格子，空间紧凑了，但是结构复杂，可能的计算开销相对变大。
-   点云：一种简单且紧凑的数据格式。
- 点云处理的困难：
-其中，无序和旋转不变性是深度学习方法需要想办法处理的，因为变换顺序或者旋转后输入网络的矩阵的数值就完全变了，但点云还是点云。
-POINT NET就是在矩阵中的数据维度上做max pool，不管顺序怎么变，max pool的值都是相同的，解决了无序的问题。
-旋转不变性依然是一个比较大的问题。
-数学工具与基础算法 pca-主成分分析 b站链接：https://www.bilibili.com/video/BV1E5411E71z?from=search&amp;amp;seid=12219938521484233618
-PCA主要用于数据降维与表面法向量估计等。
-数据降维的目的用更少的空间保留尽可能多的信息。主成分就是所有数据投影到这个方向时，能够保留最大的信息（即方差最大）。假想下图中的二维点如果投影到某个方向时变成了一个点，那么就没有保留到原始的分布信息，所以要求方差最大，就是想把差异最大化，从而保留原始数据的分布特点。
-求解主成分 协方差矩阵的推到，过程不用记：
-主成分为旋转矩阵R的列向量。
-协方差的特征值：
-评论区 这是挖掘数据线性分布规律的最重要算法。其实不仅仅用来降维，凡是涉及到分析数据分布特点的都可以用到。如：现在获得了某曲面大量的采样点云，要估计曲面在某采样点的法向量方向。则通过PCA分析该点及周围采样点的分布规律，找到数据点分布离散程度最大的两个正交方向，则这两个方向就近似构成曲面在该点的切平面，与此两方向正交的第三个方向就是曲面在该点的近似法矢
-最初知道这个算法就是在研究点云处理、逆向工程时查文献了解的。后来开始转向机器学习又遇到这个。后面学了矩阵论加强了线代基础，把这个算法自己又推导了一遍，在看此视频之前已经从理论到直观透彻理解了
-降采样 离群点去除 聚类 </description>
-    </item>
-    
+    <lastBuildDate>Thu, 14 Apr 2022 10:08:35 +0800</lastBuildDate><atom:link href="https://hezhou49.github.io/tags/%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于特征的点云配准</title>
       <link>https://hezhou49.github.io/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E7%9A%84%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</link>

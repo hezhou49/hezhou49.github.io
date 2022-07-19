@@ -13,8 +13,7 @@
       <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
       
       <guid>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/</guid>
-      <description>参考 《计算机视觉中的多视图几何》 第二版 （太数学了） 基于局部特征的图像与点云配准研究[D] 《视觉SLAM 14讲》 知乎：射影平面的直观理解 维基百科：单应性 opencv: Feature Matching + Homography to find Objects 二视图从运动到结构&amp;mdash;-对极几何和基础矩阵
-射影空间与射影变换 射影空间  齐次坐标
+      <description>参考  《计算机视觉中的多视图几何》 第二版 （太数学了） 基于局部特征的图像与点云配准研究[D] 《视觉SLAM 14讲》 知乎：射影平面的直观理解 维基百科：单应性 opencv: Feature Matching + Homography to find Objects 二视图从运动到结构&amp;mdash;-对极几何和基础矩阵  射影空间与射影变换 射影空间  齐次坐标
 点、直线的齐次表示
 射影空间
 n维射影空间用n+1维（除去全0）齐次向量组成。

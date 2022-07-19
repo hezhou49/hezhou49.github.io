@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>深度学习 on hezhou notebook</title>
+    <link>https://hezhou49.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in 深度学习 on hezhou notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 12 Apr 2022 10:08:35 +0800</lastBuildDate><atom:link href="https://hezhou49.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深度学习物体检测</title>
+      <link>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</guid>
+      <description>2D Reference   教学视频与文档
+  三维点云处理技术，深蓝学院，Lecture 6-3D Obeject detection，PDF
+  cs231n, Detection and Segmentation（19年密歇根拓展版 lecture 15&amp;amp;16）。slides，b站视频包含17年斯坦福以及19年密歇根
+  讲得最细，不用看17版cs231n了：cs231n 密歇根2019，pages, lecture 15-object detection PDF，b站链接就在上面。
+  代码与结构剖析
+  一文读懂Faster RCNN：里面也包含了代码讲解
+  https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection：一个图像检测库，可以直接跑训练和测试，代码是torch官方代码加注释，虽然不是最新代码，但是几乎一样。
+  https://github.com/open-mmlab/mmdetection/blob/master/docs/zh_cn/article.md：mmdetection教程与实战。（讲得也比较详细）
+  物体检测里程 图源见下标，这篇论文也被CS231n提到。
+检测=定位+分类
+引用参考 截至2022-04
+   name year cition     r-cnn 2014 CVPR 2.4W   Fast r-cnn 2015 CVPR 1.9W   ResNet 2016 CVPR 11W   Mask r-cnn 2017 CVPR 1.</description>
+    </item>
+    
+    <item>
+      <title>深度学习点云配准</title>
+      <link>https://hezhou49.github.io/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</link>
+      <pubDate>Tue, 12 Apr 2022 10:08:35 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</guid>
+      <description>使用深度学习处理点云 数据集    name 备注 常用于     ModelNet CAD模型生成 分类   KITTI、nuScenes、WOD 自动驾驶数据集 3D物体检测   3D Match RGBD拼接点云，来源与同名论文 生成特征描述子    基础框架 VoxNet, IROS 2015 2400 PDF, author VoxNet: A 3D Convolutional Neural Network for Real-Time Object Recognition
+ 基于体素处理点云，类似处理二维的图像，在voxel上面进行三维卷积操作。(二维卷像素，三维卷体素)
+ 卷积+pool，将feature map处理到较小尺寸，然后拉直
+PointNet, CVPR 2017 7200 Charles Ruizhongtai Qi, PDF, video
+作者在video中提到如今三维点云的处理方式依旧是沿用2D的卷积类型，有没有直接作用在点云上特征学习网络呢。
+ 基于点处理点云
+ core idea : max pool。忽略transform部分，后续研究证明没用。shared MLP + max pool</description>
+    </item>
+    
+  </channel>
+</rss>

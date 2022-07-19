@@ -58,5 +58,25 @@ ORB  Oriented FAST and Rotated BRIEF ，改进了FAST角点与BRIEF描述子
  Fast是一个非常快速的关键点检测算法（不带特征描述），思路是直接比较当前点与邻域点的亮度差异。没有什么求导、积分、卷积操作，只比较亮度大小，所以很快。流程如下（图源视觉SLAM 14讲）：</description>
     </item>
     
+    <item>
+      <title>深度学习物体检测</title>
+      <link>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</guid>
+      <description>2D Reference   教学视频与文档
+  三维点云处理技术，深蓝学院，Lecture 6-3D Obeject detection，PDF
+  cs231n, Detection and Segmentation（19年密歇根拓展版 lecture 15&amp;amp;16）。slides，b站视频包含17年斯坦福以及19年密歇根
+  讲得最细，不用看17版cs231n了：cs231n 密歇根2019，pages, lecture 15-object detection PDF，b站链接就在上面。
+  代码与结构剖析
+  一文读懂Faster RCNN：里面也包含了代码讲解
+  https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection：一个图像检测库，可以直接跑训练和测试，代码是torch官方代码加注释，虽然不是最新代码，但是几乎一样。
+  https://github.com/open-mmlab/mmdetection/blob/master/docs/zh_cn/article.md：mmdetection教程与实战。（讲得也比较详细）
+  物体检测里程 图源见下标，这篇论文也被CS231n提到。
+检测=定位+分类
+引用参考 截至2022-04
+   name year cition     r-cnn 2014 CVPR 2.4W   Fast r-cnn 2015 CVPR 1.9W   ResNet 2016 CVPR 11W   Mask r-cnn 2017 CVPR 1.</description>
+    </item>
+    
   </channel>
 </rss>

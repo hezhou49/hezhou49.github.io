@@ -13,7 +13,13 @@
       <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
       
       <guid>https://hezhou49.github.io/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%80%89%E5%9E%8B/</guid>
-      <description>参考 2013 《机器视觉实用教程》 ！！！选型上基本就够了，觉得不深入的地方再检索。 图像处理、分析与机器视觉 一文详解工业相机和镜头选取： https://zhuanlan.zhihu.com/p/264904019 知乎专栏：相机标定原理与实战讲解： https://www.zhihu.com/column/c_1339327809273753600 爱特蒙特光学系列教程！！： https://www.edmundoptics.com/knowledge-center/industry-expertise/imaging-optics/imaging-resource-guide/ 日本VST镜头-辉视科技: https://space.bilibili.com/1210076026 （镜头知识与选型） 相机帧率和曝光时间的关系：https://blog.csdn.net/maopig/article/details/88068892
+      <description>参考 2013 《机器视觉实用教程》 ！！！选型上基本就够了，觉得不深入的地方再检索。
+图像处理、分析与机器视觉
+一文详解工业相机和镜头选取： https://zhuanlan.zhihu.com/p/264904019
+知乎专栏：相机标定原理与实战讲解： https://www.zhihu.com/column/c_1339327809273753600
+爱特蒙特光学系列教程！！： https://www.edmundoptics.com/knowledge-center/industry-expertise/imaging-optics/imaging-resource-guide/
+日本VST镜头-辉视科技: https://space.bilibili.com/1210076026 （镜头知识与选型）
+相机帧率和曝光时间的关系：https://blog.csdn.net/maopig/article/details/88068892
 成像  数字图像是对真实世界亮度的采样
  图像 《图像处理、分析与机器视觉》第二章
 数字化 图像传感器 所以相机的芯片（图像传感器）就是一个二维阵列（下图红色内的方块）。图像传感器的作用是将光信号转换为电信号，如果相机的分辨率为1920X1080，则代表着这块传感器上分布了1920X1080个感光单元，他们把连续的光信号采样为离散的电信号。

@@ -102,13 +102,32 @@ ORB  Oriented FAST and Rotated BRIEF ，改进了FAST角点与BRIEF描述子
     </item>
     
     <item>
+      <title>深度学习物体检测</title>
+      <link>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</guid>
+      <description>2D Reference   教学视频与文档
+  三维点云处理技术，深蓝学院，Lecture 6-3D Obeject detection，PDF
+  cs231n, Detection and Segmentation（19年密歇根拓展版 lecture 15&amp;amp;16）。slides，b站视频包含17年斯坦福以及19年密歇根
+  讲得最细，不用看17版cs231n了：cs231n 密歇根2019，pages, lecture 15-object detection PDF，b站链接就在上面。
+  代码与结构剖析
+  一文读懂Faster RCNN：里面也包含了代码讲解
+  https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection：一个图像检测库，可以直接跑训练和测试，代码是torch官方代码加注释，虽然不是最新代码，但是几乎一样。
+  https://github.com/open-mmlab/mmdetection/blob/master/docs/zh_cn/article.md：mmdetection教程与实战。（讲得也比较详细）
+  物体检测里程 图源见下标，这篇论文也被CS231n提到。
+检测=定位+分类
+引用参考 截至2022-04
+   name year cition     r-cnn 2014 CVPR 2.4W   Fast r-cnn 2015 CVPR 1.9W   ResNet 2016 CVPR 11W   Mask r-cnn 2017 CVPR 1.</description>
+    </item>
+    
+    <item>
       <title>射影变换与二视图几何</title>
       <link>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/</link>
       <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
       
       <guid>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/</guid>
-      <description>参考 《计算机视觉中的多视图几何》 第二版 （太数学了） 基于局部特征的图像与点云配准研究[D] 《视觉SLAM 14讲》 知乎：射影平面的直观理解 维基百科：单应性 opencv: Feature Matching + Homography to find Objects 二视图从运动到结构&amp;mdash;-对极几何和基础矩阵
-射影空间与射影变换 射影空间  齐次坐标
+      <description>参考  《计算机视觉中的多视图几何》 第二版 （太数学了） 基于局部特征的图像与点云配准研究[D] 《视觉SLAM 14讲》 知乎：射影平面的直观理解 维基百科：单应性 opencv: Feature Matching + Homography to find Objects 二视图从运动到结构&amp;mdash;-对极几何和基础矩阵  射影空间与射影变换 射影空间  齐次坐标
 点、直线的齐次表示
 射影空间
 n维射影空间用n+1维（除去全0）齐次向量组成。
@@ -131,8 +150,7 @@ n维射影空间用n+1维（除去全0）齐次向量组成。
       <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
       
       <guid>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%8C%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%99%A8%E6%A2%B0%E8%B7%9F%E8%B8%AA/</guid>
-      <description>参考 知乎主页：李迎松 GitHub：https://github.com/ethan-li-coding 视频教程：立体视觉之立体匹配理论与实战 手术器械的光学跟踪技术研究[D]，王志刚 《视觉SLAM14讲》第7章 3D点集之间计算转移矩阵，旋转R，转移T，新增缩放s (总结全面)
-关于双目立体匹配与三维重建 一种分类方式是：稠密三维重建与稀疏三维重建。
+      <description>参考  知乎主页：李迎松 GitHub：https://github.com/ethan-li-coding 视频教程：立体视觉之立体匹配理论与实战 手术器械的光学跟踪技术研究[D]，王志刚 《视觉SLAM14讲》第7章 3D点集之间计算转移矩阵，旋转R，转移T，新增缩放s (总结全面)  关于双目立体匹配与三维重建 一种分类方式是：稠密三维重建与稀疏三维重建。
 顾名思义，稀松三维重建是只讲视野内的部分点重建，稠密三维重建通常是将所有点的三维坐标都重建出来。
  我们的项目是稀疏点三维重建。两种方案很多基础知识和术语是相同的
  目前，学界研究的基于双目的三维重建几乎都是稠密的深度图重建，因为说实话，稀疏点重建挺简单的。稀疏点的三维重建左右点的匹配关系可以做的非常精确，所以，通常情况下，稀疏点的三维重建的精度会比稠密三维重建高很多。

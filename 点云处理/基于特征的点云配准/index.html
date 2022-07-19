@@ -12,22 +12,22 @@
     <title>基于特征的点云配准 :: hezhou notebook</title>
 
     
-    <link href="/css/nucleus.css?1658234162" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1658234162" rel="stylesheet">
-    <link href="/css/hybrid.css?1658234162" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1658234162" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1658234162" rel="stylesheet">
-    <link href="/css/auto-complete.css?1658234162" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1658234162" rel="stylesheet">
-    <link href="/css/theme.css?1658234162" rel="stylesheet">
-    <link href="/css/tabs.css?1658234162" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1658234162" rel="stylesheet">
+    <link href="/css/nucleus.css?1658235360" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1658235360" rel="stylesheet">
+    <link href="/css/hybrid.css?1658235360" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1658235360" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1658235360" rel="stylesheet">
+    <link href="/css/auto-complete.css?1658235360" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1658235360" rel="stylesheet">
+    <link href="/css/theme.css?1658235360" rel="stylesheet">
+    <link href="/css/tabs.css?1658235360" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1658235360" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1658234162" rel="stylesheet">
+    <link href="/css/theme-green.css?1658235360" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1658234162"></script>
+    <script src="/js/jquery-3.3.1.min.js?1658235360"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -137,14 +137,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1658234162"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1658234162"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1658235360"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1658235360"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/hezhou49.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1658234162"></script>
+<script type="text/javascript" src="/js/search.js?1658235360"></script>
 
     
   </div>
@@ -485,6 +485,27 @@
       <li data-nav-id="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%E7%9A%84%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/" title="基于特征模板匹配的物体检测" class="dd-item ">
         <a href="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%E7%9A%84%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/">
         基于特征模板匹配的物体检测
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/" title="深度学习物体检测" class="dd-item ">
+        <a href="/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/">
+        深度学习物体检测
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -942,6 +963,7 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#写在前面">写在前面</a></li>
     <li><a href="#基于特征的点云配准">基于特征的点云配准</a>
       <ul>
         <li><a href="#特征点检测与降采样">特征点检测与降采样</a></li>
@@ -975,6 +997,12 @@
             
         <div id="head-tags">
         
+<div class="tags">
+
+  <a class="tag-link" href="/tags/%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86">点云配准</a>
+
+</div>
+
         </div>
         
         <div id="body-inner">
@@ -988,7 +1016,8 @@
         
 
 
-<p>点云配准的方法有很多，比如基于特征的方法、基于概率模型的方法、基于深度学习的方法等，基于特征的方法是较早提出的一种方法。</p>
+<h2 id="写在前面">写在前面</h2>
+<p><u>点云配准的方法有很多，比如基于特征的方法、基于概率模型的方法、基于深度学习的方法等，基于特征的方法是较早提出的一种方法。</u></p>
 <p>基于特征的点云配准方法常常作为点云的粗配准流程，得到粗略的点云变换后再使用ICP等算法求解更精确变换。值得注意的是：粗略和精确这两个词的定义都是相对的，是对应具体的使用场景的，如果一些场景精度要求不是很高，有时使用粗配准即能达到精度要求。</p>
 <p>几何特征量可以分为全局特征和局部特征，全局特征是对整个三维点云的几何属性，进行编码形成一个特征集合，局部特征则只针对特征点的局部邻域的信息进行编码。在粗配准领域，使用基于特征的配准方法比使用基于 RANSAC 的配准方法，无论是在时间效率和精度方面，都更胜一筹；而且基于局部特征的配准方法比基于全局特征的配准方法在面对杂乱和遮挡的三维点云配准时，更具鲁棒性。(熊风光，2018)</p>
 <p>采用的是“先粗后精”的配准思路。研究的重点是局部特征的相关技术，包括特征点的检测、特征点描述与特征匹配、误匹配对剔除，最后将这些技术应用到三维点云配准中，结合精细配准，实现三维点云自动化配准。</p>
@@ -1038,13 +1067,29 @@
 <h2 id="使用icp进行精配准">使用ICP进行精配准</h2>
 <p>常规步骤，使用ICP达到精确解。</p>
 <h2 id="参考文献">参考文献</h2>
-<p>[1] 熊风光. 三维点云配准技术研究 [D]; 中北大学, 2018.</p>
-<p>[2]李佳骏. 基于局部特征的图像与点云配准研究 [D]; 大连理工大学, 2021.</p>
+<ol>
+<li>
+<p>熊风光. 三维点云配准技术研究 [D]; 中北大学, 2018.</p>
+</li>
+<li>
+<p>李佳骏. 基于局部特征的图像与点云配准研究 [D]; 大连理工大学, 2021.</p>
+</li>
+<li>
 <p>知乎链接：https://zhuanlan.zhihu.com/p/192343758</p>
+</li>
+<li>
 <p>PCL源链接：https://pcl.readthedocs.io/projects/tutorials/en/latest/pfh_estimation.html?highlight=PFH</p>
+</li>
+<li>
 <p>Rusu Dissertation： <a href="https://link.zhihu.com/?target=http%3A//mediatum.ub.tum.de/doc/800632/941254.pdf">Semantic 3D Object Maps for Everyday Manipulation in Human Living Environments. 2009.</a></p>
+</li>
+<li>
 <p>open3d 全局粗配准：http://www.open3d.org/docs/release/tutorial/pipelines/global_registration.html</p>
+</li>
+<li>
 <p>对应点求解空间变化：http://nghiaho.com/?page_id=671</p>
+</li>
+</ol>
 
 
 <footer class="footline">
@@ -1357,6 +1402,22 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -1560,16 +1621,16 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1658234162"></script>
-    <script src="/js/perfect-scrollbar.min.js?1658234162"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1658234162"></script>
-    <script src="/js/jquery.sticky.js?1658234162"></script>
-    <script src="/js/featherlight.min.js?1658234162"></script>
-    <script src="/js/highlight.pack.js?1658234162"></script>
+    <script src="/js/clipboard.min.js?1658235360"></script>
+    <script src="/js/perfect-scrollbar.min.js?1658235360"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1658235360"></script>
+    <script src="/js/jquery.sticky.js?1658235360"></script>
+    <script src="/js/featherlight.min.js?1658235360"></script>
+    <script src="/js/highlight.pack.js?1658235360"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1658234162"></script>
-    <script src="/js/learn.js?1658234162"></script>
-    <script src="/js/hugo-learn.js?1658234162"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1658235360"></script>
+    <script src="/js/learn.js?1658235360"></script>
+    <script src="/js/hugo-learn.js?1658235360"></script>
     
         
             <script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script>
