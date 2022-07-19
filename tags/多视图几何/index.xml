@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>多视图几何 on hezhou notebook</title>
+    <link>https://hezhou49.github.io/tags/%E5%A4%9A%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/</link>
+    <description>Recent content in 多视图几何 on hezhou notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 14 Apr 2021 02:23:00 +0800</lastBuildDate><atom:link href="https://hezhou49.github.io/tags/%E5%A4%9A%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>射影变换与二视图几何</title>
+      <link>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/</guid>
+      <description>参考 《计算机视觉中的多视图几何》 第二版 （太数学了） 基于局部特征的图像与点云配准研究[D] 《视觉SLAM 14讲》 知乎：射影平面的直观理解 维基百科：单应性 opencv: Feature Matching + Homography to find Objects 二视图从运动到结构&amp;mdash;-对极几何和基础矩阵
+射影空间与射影变换 射影空间  齐次坐标
+点、直线的齐次表示
+射影空间
+n维射影空间用n+1维（除去全0）齐次向量组成。
+知乎：射影平面的直观理解
+ 射影空间只是一组齐次向量的集合，它是为了方便运算而被制造出来，其实没有必要去研究他的物理或几何意义，重要的是关注射影变换
+ 射影变换 射影空间是最一般的空间变换。
+多视图几何几何给出的比较专业的定义如下，分为几何定义与代数定义。
+ 维基百科：单应性在计算机视觉领域中，空间中同一平面的任意两幅图像通过单应性关联在一起（假定是针孔相机）。比如,一个物体可以通过旋转相机镜头获取两张不同的照片(这两张照片的内容不一定要完全对应,部分对应即可),我们可以把单应性设为一个二维矩阵M,那么照片1乘以M就是照片2。
+  基于局部特征的图像与点云配准研究[D]中，关于2D射影变换的描述：（其内容几乎来自多视图几何一书）
+ 关于透视变换（perspective）与射影变换（projective）的区别：很多地方并不区分透视变换与射影变换。
+透视变换是射影变换的一种特殊场景。（参考书P25）
+区别：如图，两个透视变换的复合一般不是透视变换，而是射影变换。
+比如opencv的getPerspectiveTransform方法，字面意思就是改变给定图像的透视图。（是在改变给定的一张图，射影变换通常是在两张图之间寻求变换（相当于更换相机位置重新拍了一张图），比如opencv: Feature Matching + Homography to find Objects）
+# In Perspective Transformation, we can change the perspective of a given image or video for getting better insights into the required information.</description>
+    </item>
+    
+  </channel>
+</rss>

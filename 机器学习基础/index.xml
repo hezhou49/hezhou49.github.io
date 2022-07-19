@@ -13,7 +13,9 @@
       <pubDate>Fri, 16 Jul 2021 02:23:00 +0800</pubDate>
       
       <guid>https://hezhou49.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E8%A6%81/</guid>
-      <description>反向传播 Back Propagation 完整PDF
+      <description>[TOC]
+Reference 李宏毅2022课程主页，课程B站链接，课程github（全是作业）
+反向传播 Back Propagation 完整PDF
 反向传播是一种用来计算执行梯度下降的算法。包含Foward Pass 和 Backward Pass两个步骤。
 network的所有参数为$\theta=\left{w_{1}, w_{2}, \cdots, b_{1}, b_{2}, \cdots\right}$，需要计算每一个参数的梯度，即进行偏微分。
 这里以某一权重为例计算$\partial C / \partial w$。针对下面偏微分的展开，分别分为Forward pass和Backward pass。

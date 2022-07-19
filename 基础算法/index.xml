@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>基础算法 on hezhou notebook</title>
+    <link>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 基础算法 on hezhou notebook</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 14 Apr 2022 10:08:35 +0800</lastBuildDate><atom:link href="https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RANSAC</title>
+      <link>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/ransac/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/ransac/</guid>
+      <description>RANSAC——随机一致性采样 RANSAC 主要解决样本中的外点问题，最多可处理 50% 的外点情况。（RANSAC具有很强的抗噪声能力，只要迭代次数够多，肯定能找到最优解，如果噪声大于50%，那么实际上噪声就是主要的点而不是噪声了）
+基本思想：
+RANSAC 通过反复选择数据中的一组随机子集来达成目标。被选取的子集被假设为局内点，并用下述方法进行验证：
+ 有一个模型适用于假设的局内点，即所有的未知参数都能从假设的局内点计算得出。 用 1 中得到的模型去测试所有的其它数据，如果某个点适用于估计的模型，认为它也是局内点。 如果有足够多的点被归类为假设的局内点，那么估计的模型就足够合理。 然后，用所有假设的局内点去重新估计模型，因为它仅仅被初始的假设局内点估计过。 最后，通过估计局内点与模型的错误率来评估模型。  这个过程被重复执行固定的次数，每次产生的模型要么因为局内点太少而被舍弃，要么因为它比现有的模型更好而被选用。
+对上述步骤，进行简单总结如下：
+举个例子：使用 RANSAC——拟合直线 应用举例-拟合平面  solvePnPRansac findFundamentalMat  是用open3d拟合点云内的平面。
+import open3d as o3d import numpy as np from matplotlib import pyplot as plt  &amp;#39;&amp;#39;&amp;#39; RANSAC算法 随机一致性采样 &amp;#39;&amp;#39;&amp;#39;  pcd = o3d.io.read_point_cloud(&amp;#34;./test_data/fragment.pcd&amp;#34;) print(pcd) # 0.01m以内都算内点，3点确定一个平面，迭代次数为1000次 plane_model, inliers = pcd.segment_plane(distance_threshold=0.01,  ransac_n=3,  num_iterations=1000) [a, b, c, d] = plane_model print(f&amp;#34;Plane equation: {a:.2f}x + {b:.</description>
+    </item>
+    
+    <item>
+      <title>pca</title>
+      <link>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/pca/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/pca/</guid>
+      <description>pca-主成分分析 b站链接：https://www.bilibili.com/video/BV1E5411E71z?from=search&amp;amp;seid=12219938521484233618
+PCA主要用于数据降维与表面法向量估计等。
+数据降维的目的用更少的空间保留尽可能多的信息。主成分就是所有数据投影到这个方向时，能够保留最大的信息（即方差最大）。假想下图中的二维点如果投影到某个方向时变成了一个点，那么就没有保留到原始的分布信息，所以要求方差最大，就是想把差异最大化，从而保留原始数据的分布特点。
+求解主成分 协方差矩阵的推到，过程不用记：
+主成分为旋转矩阵R的列向量。
+协方差的特征值：
+评论区 这是挖掘数据线性分布规律的最重要算法。其实不仅仅用来降维，凡是涉及到分析数据分布特点的都可以用到。如：现在获得了某曲面大量的采样点云，要估计曲面在某采样点的法向量方向。则通过PCA分析该点及周围采样点的分布规律，找到数据点分布离散程度最大的两个正交方向，则这两个方向就近似构成曲面在该点的切平面，与此两方向正交的第三个方向就是曲面在该点的近似法矢
+最初知道这个算法就是在研究点云处理、逆向工程时查文献了解的。后来开始转向机器学习又遇到这个。后面学了矩阵论加强了线代基础，把这个算法自己又推导了一遍，在看此视频之前已经从理论到直观透彻理解了</description>
+    </item>
+    
+    <item>
+      <title>svd</title>
+      <link>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/svd/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/svd/</guid>
+      <description>EVD-特征值分解 在理解奇异值分解之前，需要先回顾一下特征值分解，如果矩阵$A$是一个$m\times m$的实对称矩阵（即$A = A^T$），那么它可以被分解成如下的形式
+$$ A = Q\Sigma Q^T= Q\left[ \begin{matrix} \lambda_1 &amp;amp; \cdots &amp;amp; \cdots &amp;amp; \cdots\ \cdots &amp;amp; \lambda_2 &amp;amp; \cdots &amp;amp; \cdots\ \cdots &amp;amp; \cdots &amp;amp; \ddots &amp;amp; \cdots\ \cdots &amp;amp; \cdots &amp;amp; \cdots &amp;amp; \lambda_m\ \end{matrix} \right]Q^T $$ 其中$Q$为标准正交阵，即有$QQ^T = I$，$\Sigma$为对角矩阵，且上面的矩阵的维度均为$m\times m$。$\lambda_i$称为特征值，$q_i$是$Q$（特征矩阵）中的列向量，称为特征向量。
+ 注意到要进行特征分解，矩阵A必须为方阵。那么如果A不是方阵，即行和列不相同时，我们需要使用SVD。
+ SVD-奇异值分解 定义 奇异值分解是一个能适用于任意的矩阵的一种分解的方法： $$ M=U \Sigma V^{T} $$ 假设M是一个M *N的矩阵，那么得到的U是一个M *M的方阵（里面的向量是正交的，U里面的向量称为左奇异向量），Σ是一个M * N的矩阵（除了对角线的元素都是0，对角线上的元素称为奇异值），V的转置是一个N * N的矩阵，里面的向量也是正交的，V里面的向量称为右奇异向量）。
+那么我们如何求出 SVD 分解后的 $U, \Sigma, V$这三个矩阵呢？</description>
+    </item>
+    
+    <item>
+      <title>DBSCAN聚类</title>
+      <link>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/dbscan%E8%81%9A%E7%B1%BB/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/dbscan%E8%81%9A%E7%B1%BB/</guid>
+      <description>基于密度的噪声应用空间聚类 (DBSCAN) 基于密度的噪声应用空间聚类 (DBSCAN) 是一种无监督的 ML 聚类算法。无监督的意思是它不使用预先标记的目标来聚类数据点。聚类是指试图将相似的数据点分组到人工确定的组或簇中。它可以替代 KMeans 和层次聚类等流行的聚类算法。
+KMeans vs DBSCAN：
+KMeans 尤其容易受到异常值的影响。当算法遍历质心时，在达到稳定性和收敛性之前，离群值对质心的移动方式有显著的影响。此外，KMeans 在集群大小和密度不同的情况下还存在数据精确聚类的问题。K-Means 只能应用球形簇，如果数据不是球形的，它的准确性就会受到影响。最后，KMeans 要求我们首先选择希望找到的集群的数量。下面是 KMeans 和 DBSCAN 如何聚类同一个数据集的示例。
+另一方面，DBSCAN 不要求我们指定集群的数量，避免了异常值，并且在任意形状和大小的集群中工作得非常好。它没有质心，聚类簇是通过将相邻的点连接在一起的过程形成的。
+DBSCAN 是如何实现的呢? 首先，让我们定义 Epsilon 和最小点、应用 DBSCAN 算法时需要的两个参数以及一些额外的参数。
+ **Epsilon (ɛ)：**社区的最大半径。如果数据点的相互距离小于或等于指定的 epsilon，那么它们将是同一类的。换句话说，它是 DBSCAN 用来确定两个点是否相似和属于同一类的距离。更大的 epsilon 将产生更大的簇 (包含更多的数据点)，更小的 epsilon 将构建更小的簇。一般来说，我们喜欢较小的值是因为我们只需要很小一部分的数据点在彼此之间的距离内。但是如果太小，您会将集群分割的越来越小。 **最小点 (minPts)：**在一个邻域的半径内 minPts 数的邻域被认为是一个簇。请记住，初始点包含在 minPts 中。一个较低的 minPts 帮助算法建立更多的集群与更多的噪声或离群值。较高的 minPts 将确保更健壮的集群，但如果集群太大，较小的集群将被合并到较大的集群中。  如果 “最小点”= 4，则在彼此距离内的任意 4 个或 4 个以上的点都被认为是一个簇。
+其他参数：
+核心点: 核心数据点在其近邻距离内至少有的最小的数据点个数。
+我一直认为 DBSCAN 需要一个名为 “core_min” 的第三个参数，它将确定一个邻域点簇被认为是聚类簇之前的最小核心点数量。
+边界点: 边界数据点位于郊区，就像它们属于近邻点一样。(比如 w / 在 epsilon 距离内的核心点)，但需要小于 minPts。</description>
+    </item>
+    
+    <item>
+      <title>高斯混合模型（GMM）</title>
+      <link>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8Bgmm/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      
+      <guid>https://hezhou49.github.io/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8Bgmm/</guid>
+      <description>混合模型（Mixture Model） 混合模型是一个可以用来表示在总体分布（distribution）中含有 K 个子分布的概率模型，换句话说，混合模型表示了观测数据在总体中的概率分布，它是一个由 K 个子分布组成的混合分布。混合模型不要求观测数据提供关于子分布的信息，来计算观测数据在总体分布中的概率。
+高斯模型 单高斯模型
+当样本数据 X 是一维数据（Univariate）时，高斯分布遵从下方概率密度函数（Probability Density Function）：
+其中 为数据均值（期望）， 为数据标准差（Standard deviation）。
+当样本数据 X 是多维数据（Multivariate）时，高斯分布遵从下方概率密度函数：
+其中， 为数据均值（期望）， 为协方差（Covariance），D 为数据维度。
+高斯混合模型
+高斯混合模型可以看作是由 K 个单高斯模型组合而成的模型，这 K 个子模型是混合模型的隐变量（Hidden variable）。一般来说，一个混合模型可以使用任何概率分布，这里使用高斯混合模型是因为高斯分布具备很好的数学性质以及良好的计算性能。
+举个不是特别稳妥的例子，比如我们现在有一组狗的样本数据，不同种类的狗，体型、颜色、长相各不相同，但都属于狗这个种类，此时单高斯模型可能不能很好的来描述这个分布，因为样本数据分布并不是一个单一的椭圆，所以用混合高斯分布可以更好的描述这个问题，如下图所示：
+首先定义如下信息：
+ 表示第 个观测数据，  是混合模型中子高斯模型的数量，  是观测数据属于第 个子模型的概率， ，  是第 个子模型的高斯分布密度函数， 。其展开形式与上面介绍的单高斯模型相同 表示第 个观测数据属于第 个子模型的概率  高斯混合模型的概率分布为：
+对于这个模型而言，参数 ，也就是每个子模型的期望、方差（或协方差）、在混合模型中发生的概率。
+模型参数学习 对于单高斯模型，我们可以用最大似然法（Maximum likelihood）估算参数 的值，
+这里我们假设了每个数据点都是独立的（Independent），似然函数由概率密度函数（PDF）给出。
+由于每个点发生的概率都很小，乘积会变得极其小，不利于计算和观察，因此通常我们用 Maximum Log-Likelihood 来计算（因为 Log 函数具备单调性，不会改变极值的位置，同时在 0-1 之间输入值很小的变化可以引起输出值相对较大的变动）：
+对于高斯混合模型，Log-Likelihood 函数是：
+如何计算高斯混合模型的参数呢？这里我们无法像单高斯模型那样使用最大似然法来求导求得使 likelihood 最大的参数，因为对于每个观测数据点来说，事先并不知道它是属于哪个子分布的（hidden variable），因此 log 里面还有求和，对于每个子模型都有未知的 ，直接求导无法计算。需要通过迭代的方法求解。</description>
+    </item>
+    
+  </channel>
+</rss>
