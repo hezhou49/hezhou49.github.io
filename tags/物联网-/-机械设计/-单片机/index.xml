@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>物联网 / 机械设计/ 单片机 | FEZZY</title>
+    <link>https://hezhou49.github.io/tags/%E7%89%A9%E8%81%94%E7%BD%91-/-%E6%9C%BA%E6%A2%B0%E8%AE%BE%E8%AE%A1/-%E5%8D%95%E7%89%87%E6%9C%BA/</link>
+      <atom:link href="https://hezhou49.github.io/tags/%E7%89%A9%E8%81%94%E7%BD%91-/-%E6%9C%BA%E6%A2%B0%E8%AE%BE%E8%AE%A1/-%E5%8D%95%E7%89%87%E6%9C%BA/index.xml" rel="self" type="application/rss+xml" />
+    <description>物联网 / 机械设计/ 单片机</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 26 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>物联网 / 机械设计/ 单片机</title>
+      <link>https://hezhou49.github.io/tags/%E7%89%A9%E8%81%94%E7%BD%91-/-%E6%9C%BA%E6%A2%B0%E8%AE%BE%E8%AE%A1/-%E5%8D%95%E7%89%87%E6%9C%BA/</link>
+    </image>
+    
+    <item>
+      <title>智能物联医疗箱</title>
+      <link>https://hezhou49.github.io/project/%E6%99%BA%E8%83%BD%E7%89%A9%E8%81%94%E5%8C%BB%E7%96%97%E7%AE%B1/</link>
+      <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/project/%E6%99%BA%E8%83%BD%E7%89%A9%E8%81%94%E5%8C%BB%E7%96%97%E7%AE%B1/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;为了解决公共场所内突发的 需医疗介入的 紧急情况，用户可以使用微信小程序在地图内找到医疗箱位置并预约药物，到达后凭二维码自动获取药物。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;微信小程序 / 物联网 / Mosquito / ESP 32 / 机械设计 / 电机控制&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;一些图片&#34;&gt;一些图片&lt;/h2&gt;
+&lt;div class=&#34;&#34;&gt;
+&lt;img src=&#34;image-20241208162025362.png&#34;  style=&#34;width: 300px; display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;image-20241208162048124.png&#34; style=&#34;width: 300px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;image-20241208161830006.png&#34; style=&#34;width: 300px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;image-20241208165942684.png&#34; style=&#34;width: 300px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;/div&gt;
+&lt;iframe src=&#34;final.mp4&#34;  style=&#34;width: 600px; height: 400px;&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; framespacing=&#34;0&#34;  autoplay=&#34;true&#34; muted=&#34;true&#34;&gt; &lt;/iframe&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

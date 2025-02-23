@@ -1,0 +1,2651 @@
+<!doctype html>
+<!-- This site was created with Hugo Blox. https://hugoblox.com -->
+<!-- Last Published: February 23, 2025 --><html lang="en-us" dir="ltr"
+      data-wc-theme-default="system">
+  
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="generator" content="Hugo Blox Builder 0.2.0" />
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="何 舟" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="2D Reference 教学视频与文档
+三维点云处理技术，深蓝学院，Lecture 6-3D Obeject detection，PDF
+cs231n, Detection and Segmentation（19年密歇根拓展版 lecture 15&amp;16）。slides，b站视频包含17年斯坦福以及19年密歇根
+讲得最细，不用看17版cs231n了：cs231n 密歇根2019，pages, lecture 15-object detection PDF，b站链接就在上面。
+代码与结构剖析
+一文读懂Faster RCNN：里面也包含了代码讲解
+https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection：一个图像检测库，可以直接跑训练和测试，代码是torch官方代码加注释，虽然不是最新代码，但是几乎一样。
+https://github.com/open-mmlab/mmdetection/blob/master/docs/zh_cn/article.md：mmdetection教程与实战。（讲得也比较详细）
+物体检测里程 图源见下标，这篇论文也被CS231n提到。
+检测=定位&#43;分类
+引用参考 截至2022-04
+name year cition r-cnn 2014 CVPR 2." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/" />
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="/css/themes/blue.min.css" />
+  
+
+  
+  
+    
+    <link href="/dist/wc.min.css" rel="stylesheet" />
+  
+
+  
+  
+  
+
+  
+
+  <script>
+     
+    window.hbb = {
+       defaultTheme: document.documentElement.dataset.wcThemeDefault,
+       setDarkTheme: () => {
+        document.documentElement.classList.add("dark");
+        document.documentElement.style.colorScheme = "dark";
+      },
+       setLightTheme: () => {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.style.colorScheme = "light";
+      }
+    }
+
+    console.debug(`Default Hugo Blox Builder theme is ${window.hbb.defaultTheme}`);
+
+    if ("wc-color-theme" in localStorage) {
+      localStorage.getItem("wc-color-theme") === "dark" ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+    } else {
+      window.hbb.defaultTheme === "dark" ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+      if (window.hbb.defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? window.hbb.setDarkTheme() : window.hbb.setLightTheme();
+      }
+    }
+  </script>
+
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      
+      let checkboxes = document.querySelectorAll('li input[type=\'checkbox\'][disabled]');
+      checkboxes.forEach(e => {
+        e.parentElement.parentElement.classList.add('task-list');
+      });
+
+      
+      const liNodes = document.querySelectorAll('.task-list li');
+      liNodes.forEach(nodes => {
+        let textNodes = Array.from(nodes.childNodes).filter(node => node.nodeType === 3 && node.textContent.trim().length > 1);
+        if (textNodes.length > 0) {
+          const span = document.createElement('label');
+          textNodes[0].after(span);  
+          span.appendChild(nodes.querySelector('input[type=\'checkbox\']'));
+          span.appendChild(textNodes[0]);
+        }
+      });
+    });
+  </script>
+
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  <link rel="icon" type="image/png" href="/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@GetResearchDev" />
+    <meta property="twitter:creator" content="@GetResearchDev" />
+  
+  <meta property="og:site_name" content="FEZZY" />
+  <meta property="og:url" content="https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/" />
+  <meta property="og:title" content="深度学习物体检测 | FEZZY" />
+  <meta property="og:description" content="2D Reference 教学视频与文档
+三维点云处理技术，深蓝学院，Lecture 6-3D Obeject detection，PDF
+cs231n, Detection and Segmentation（19年密歇根拓展版 lecture 15&amp;16）。slides，b站视频包含17年斯坦福以及19年密歇根
+讲得最细，不用看17版cs231n了：cs231n 密歇根2019，pages, lecture 15-object detection PDF，b站链接就在上面。
+代码与结构剖析
+一文读懂Faster RCNN：里面也包含了代码讲解
+https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection：一个图像检测库，可以直接跑训练和测试，代码是torch官方代码加注释，虽然不是最新代码，但是几乎一样。
+https://github.com/open-mmlab/mmdetection/blob/master/docs/zh_cn/article.md：mmdetection教程与实战。（讲得也比较详细）
+物体检测里程 图源见下标，这篇论文也被CS231n提到。
+检测=定位&#43;分类
+引用参考 截至2022-04
+name year cition r-cnn 2014 CVPR 2." /><meta property="og:image" content="https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-04-14T02:23:00&#43;08:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-04-14T02:23:00&#43;08:00">
+  
+
+  
+
+
+
+  
+
+
+  <title>深度学习物体检测 | FEZZY</title>
+
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <style>
+    @font-face {
+      font-family: 'Inter var';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url(/dist/font/Inter.var.woff2) format(woff2);
+    }
+  </style>
+
+  
+
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+  
+  
+  
+  
+  
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+  
+  
+  
+  
+  
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+      
+      
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+      
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="/dist/pagefind/pagefind-ui.be766eb419317a14ec769d216e9779bfe8f3737c80e780f4ba0dafb57a41a482.css" integrity="sha256-vnZutBkxehTsdp0hbpd5v&#43;jzc3yA54D0ug2vtXpBpII=" />
+
+
+<script src="/dist/pagefind/pagefind-ui.87693d7c6f2b3b347ce359d0ede762c033419f0a32b22ce508c335a81d841f1b.js" integrity="sha256-h2k9fG8rOzR841nQ7ediwDNBnwoysizlCMM1qB2EHxs="></script>
+
+
+<script>window.hbb.pagefind = {"baseUrl":"/"};</script>
+
+<style>
+  html.dark {
+    --pagefind-ui-primary: #eeeeee;
+    --pagefind-ui-text: #eeeeee;
+    --pagefind-ui-background: #152028;
+    --pagefind-ui-border: #152028;
+    --pagefind-ui-tag: #152028;
+  }
+</style>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({
+      element: "#search",
+      showSubResults: true,
+      baseUrl: window.hbb.pagefind.baseUrl,
+      bundlePath: window.hbb.pagefind.baseUrl + "pagefind/",
+    });
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    let element = document.getElementById('search');
+    let trigger = document.getElementById('search_toggle');
+
+    if (trigger) {
+      trigger.addEventListener('click', () => {
+        element.classList.toggle('hidden');
+        element.querySelector("input").value = ""
+        element.querySelector("input").focus()
+
+        if (!element.classList.contains('hidden')) {
+          let clear_trigger = document.querySelector('.pagefind-ui__search-clear');
+
+          if (clear_trigger && !clear_trigger.hasAttribute('listenerOnClick')) {
+            clear_trigger.setAttribute('listenerOnClick', 'true');
+
+            clear_trigger.addEventListener('click', () => {
+              element.classList.toggle('hidden');
+            });
+          }
+        }
+
+      });
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  <script
+    defer
+    src="/js/hugo-blox-en.min.e5fa931947cac2d947732ea37a770aae2b5bd4a50b6048060cd129b46159a06d.js"
+    integrity="sha256-5fqTGUfKwtlHcy6jencKritb1KULYEgGDNEptGFZoG0="
+  ></script>
+
+  
+  
+
+
+
+
+
+
+
+
+  
+    
+      
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+      
+    
+  
+
+
+
+
+</head>
+
+  <body class="dark:bg-hb-dark dark:text-white page-wrapper" id="top">
+    <div id="page-bg"></div>
+    <div class="page-header sticky top-0 z-30">
+      
+      
+      
+        
+        
+        
+          <header id="site-header" class="header">
+  <nav class="navbar px-3 flex justify-left">
+    <div class="order-0 h-100">
+      
+      <a class="navbar-brand" href="/" title="FEZZY">
+        Fezzy on the page
+      </a>
+    </div>
+    
+    <input id="nav-toggle" type="checkbox" class="hidden" />
+    <label
+      for="nav-toggle"
+      class="order-3 cursor-pointer flex items-center lg:hidden text-dark dark:text-white lg:order-1">
+      <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
+        <title>Open Menu</title>
+        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+      </svg>
+      <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
+        <title>Close Menu</title>
+        <polygon
+          points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+          transform="rotate(45 10 10)"></polygon>
+      </svg>
+    </label>
+    
+
+    
+    
+    <ul
+      id="nav-menu"
+      class="navbar-nav order-3 hidden lg:flex w-full pb-6 lg:order-1 lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8 justify-left
+      ">
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/"
+        >Home</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/docs/"
+        >Tech Blog</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/experience/"
+        >Experience</a
+        >
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="nav-item">
+        <a
+          class="nav-link "
+          
+          href="/projects/"
+        >Projects</a
+        >
+      </li>
+      
+      
+      
+    </ul>
+
+    <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+
+      
+      
+      
+      <button
+        aria-label="search"
+        class="text-black hover:text-primary  inline-block px-3 text-xl dark:text-white"
+        id="search_toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="currentColor"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+      </button>
+      
+
+      
+      
+      <div class="px-3 text-black hover:text-primary-700 dark:text-white dark:hover:text-primary-300
+            [&.active]:font-bold [&.active]:text-black/90 dark:[&.active]:text-white">
+        <button class="theme-toggle mt-1" accesskey="t" title="appearance">
+          <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" class="dark:hidden">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" class=" dark:block [&:not(dark)]:hidden">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+      
+
+      
+      
+
+      
+      
+    </div>
+  </nav>
+</header>
+
+
+<div id="search" class="hidden p-3"></div>
+
+
+        
+      
+    </div>
+    <div class="page-body  my-10">
+      <div class="mx-auto flex max-w-screen-xl">
+  
+
+  
+  <div class="hb-sidebar-mobile-menu fixed inset-0 z-10 bg-white dark:bg-black/80 hidden"></div>
+
+
+
+<aside class="hb-sidebar-container max-lg:[transform:translate3d(0,-100%,0)] lg:sticky">
+  
+  <div class="px-4 pt-4 lg:hidden">
+    
+    
+  </div>
+  <div class="hb-scrollbar lg:h-[calc(100vh-var(--navbar-height))]">
+    <ul class="flex flex-col gap-1 lg:hidden">
+      
+      
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/event/"
+    
+  >Recent &amp; Upcoming Talks
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/event/example/"
+    
+  >Example Talk
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/"
+    
+  >Projects
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/"
+    
+  >仓储搬运机器人系统
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/"
+    
+  >双目、结构光视觉引导的机器人系统
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/%E6%99%BA%E6%85%A7%E5%B7%A5%E5%8E%82mes%E7%B3%BB%E7%BB%9F/"
+    
+  >智慧工厂MES系统
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/robocup%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%96%E7%95%8C%E6%9D%AF/"
+    
+  >RoboCup机器人世界杯
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/%E6%99%BA%E8%83%BD%E7%89%A9%E8%81%94%E5%8C%BB%E7%96%97%E7%AE%B1/"
+    
+  >智能物联医疗箱
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/project/and-more/"
+    
+  >and more
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/projects/"
+    
+  >Projects
+    </a></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/"
+    
+  >Blog
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/get-started/"
+    
+  >🎉 Easily create your own simple yet highly customizable blog
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/second-brain/"
+    
+  >🧠 Sharpen your thinking with a second brain
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/data-visualization/"
+    
+  >📈 Communicate your results effectively with the best data visualizations
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/teach-courses/"
+    
+  >👩🏼‍🏫 Teach academic courses
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/post/project-management/"
+    
+  >✅ Manage your projects
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/experience/"
+    
+  >Experience
+    </a></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/teaching/"
+    
+  >Teaching
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/teaching/js/"
+    
+  >Learn JavaScript
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/teaching/python/"
+    
+  >Learn Python
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class="open"><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/"
+    
+  >fezzy&#39;s notebook
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/"
+    
+  >基础算法
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/ransac/"
+    
+  >RANSAC
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/pca/"
+    
+  >pca
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/svd/"
+    
+  >svd
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/dbscan%E8%81%9A%E7%B1%BB/"
+    
+  >DBSCAN聚类
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/"
+    
+  >最小二乘
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8Bgmm/"
+    
+  >高斯混合模型（GMM）
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/"
+    
+  >点云处理
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/"
+    
+  >点云处理基础
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E7%9A%84%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/"
+    
+  >基于特征的点云配准
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/"
+    
+  >深度学习点云配准
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="flex flex-col open"><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"
+    
+  >2D计算机视觉
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"
+    
+  >2D计算机视觉——原理、算法及应用
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%B7%9F%E8%B8%AA/"
+    
+  >跟踪
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%B7%9F%E8%B8%AA/%E8%B7%9F%E8%B8%AA/"
+    
+  >光流
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BC%A0%E7%BB%9F%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/"
+    
+  >传统物体检测
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%E7%9A%84%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/"
+    
+  >基于特征模板匹配的物体检测
+    </a>
+              
+            </li><li class="flex flex-col open"><a
+    class="hb-sidebar-custom-link
+      sidebar-active-item bg-primary-100 font-semibold text-primary-800 dark:bg-primary-300 dark:text-primary-900"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/"
+    
+  >深度学习物体检测
+    </a>
+  
+    <ul class="hb-sidebar-mobile-toc"><li>
+              <a
+                href="#reference"
+                class="hb-docs-link"
+              >Reference</a>
+            </li>
+          <li>
+              <a
+                href="#%e7%89%a9%e4%bd%93%e6%a3%80%e6%b5%8b%e9%87%8c%e7%a8%8b"
+                class="hb-docs-link"
+              >物体检测里程</a>
+            </li>
+          <li>
+              <a
+                href="#two-stage"
+                class="hb-docs-link"
+              >two stage</a>
+            </li>
+          <li>
+              <a
+                href="#one-stage"
+                class="hb-docs-link"
+              >one stage</a>
+            </li>
+          </ul>
+  
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/"
+    
+  >射影变换与二视图几何
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%8C%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%99%A8%E6%A2%B0%E8%B7%9F%E8%B8%AA/"
+    
+  >二视图三维重建与器械跟踪
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/"
+    
+  >相机模型与选型
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%80%89%E5%9E%8B/"
+    
+  >工业相机选型
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/ros/"
+    
+  >ROS
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/ros/ros%E7%A7%BB%E5%8A%A8%E5%BA%95%E5%BA%A7%E5%BC%80%E5%8F%91%E6%80%9D%E8%B7%AF/"
+    
+  >ros移动底座开发思路
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/ros/moveit%E6%8E%A7%E5%88%B6fp%E6%9C%BA%E6%A2%B0%E8%87%82/"
+    
+  >moveit控制FP机械臂
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/"
+    
+  >机器学习基础
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E8%A6%81/"
+    
+  >深度学习基础概要
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"
+    
+  >李宏毅2021机器学习
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/c&#43;&#43;/"
+    
+  >C&#43;&#43;
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/c&#43;&#43;/%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/"
+    
+  >常用语法
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/c&#43;&#43;/template/"
+    
+  >template
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%B7%A5%E5%85%B7/"
+    
+  >工具
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%B7%A5%E5%85%B7/picgo%E4%B8%8Eoss%E5%9B%BE%E5%BA%8A/"
+    
+  >typora&#43;picgo&#43;oss实现图床
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%85%B6%E5%AE%83/c&#43;&#43;%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"
+    
+  >c&#43;&#43;开发环境
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/reference/"
+    
+  >Reference
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/reference/customization/"
+    
+  >Customization
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/reference/i18n/"
+    
+  >Internationalization (i18n)
+    </a>
+              
+            </li></ul>
+      </div>
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/"
+    
+  >Publications
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/preprint/"
+    
+  >An example preprint / working paper
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/journal-article/"
+    
+  >An example journal article
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/publication/conference-paper/"
+    
+  >An example conference paper
+    </a>
+              
+            </li></ul>
+      </div></li>
+    </ul>
+
+    <ul class="flex flex-col gap-1 max-lg:hidden">
+        
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/"
+    
+  >基础算法
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/ransac/"
+    
+  >RANSAC
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/pca/"
+    
+  >pca
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/svd/"
+    
+  >svd
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/dbscan%E8%81%9A%E7%B1%BB/"
+    
+  >DBSCAN聚类
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/"
+    
+  >最小二乘
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8Bgmm/"
+    
+  >高斯混合模型（GMM）
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/"
+    
+  >点云处理
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/"
+    
+  >点云处理基础
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E7%9A%84%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/"
+    
+  >基于特征的点云配准
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/"
+    
+  >深度学习点云配准
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class="open"><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"
+    
+  >2D计算机视觉
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"
+    
+  >2D计算机视觉——原理、算法及应用
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%B7%9F%E8%B8%AA/"
+    
+  >跟踪
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a>
+              <div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%B7%9F%E8%B8%AA/%E8%B7%9F%E8%B8%AA/"
+    
+  >光流
+    </a>
+              
+            </li></ul>
+      </div>
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BC%A0%E7%BB%9F%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/"
+    
+  >传统物体检测
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%E7%9A%84%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/"
+    
+  >基于特征模板匹配的物体检测
+    </a>
+              
+            </li><li class="flex flex-col open"><a
+    class="hb-sidebar-custom-link
+      sidebar-active-item bg-primary-100 font-semibold text-primary-800 dark:bg-primary-300 dark:text-primary-900"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/"
+    
+  >深度学习物体检测
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/"
+    
+  >射影变换与二视图几何
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%8C%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%99%A8%E6%A2%B0%E8%B7%9F%E8%B8%AA/"
+    
+  >二视图三维重建与器械跟踪
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/"
+    
+  >相机模型与选型
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B%E4%B8%8E%E9%80%89%E5%9E%8B/%E5%B7%A5%E4%B8%9A%E7%9B%B8%E6%9C%BA%E9%80%89%E5%9E%8B/"
+    
+  >工业相机选型
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/ros/"
+    
+  >ROS
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/ros/ros%E7%A7%BB%E5%8A%A8%E5%BA%95%E5%BA%A7%E5%BC%80%E5%8F%91%E6%80%9D%E8%B7%AF/"
+    
+  >ros移动底座开发思路
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/ros/moveit%E6%8E%A7%E5%88%B6fp%E6%9C%BA%E6%A2%B0%E8%87%82/"
+    
+  >moveit控制FP机械臂
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/"
+    
+  >机器学习基础
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E6%A6%82%E8%A6%81/"
+    
+  >深度学习基础概要
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/%E6%9D%8E%E5%AE%8F%E6%AF%852021%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"
+    
+  >李宏毅2021机器学习
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/c&#43;&#43;/"
+    
+  >C&#43;&#43;
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/c&#43;&#43;/%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/"
+    
+  >常用语法
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/c&#43;&#43;/template/"
+    
+  >template
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%B7%A5%E5%85%B7/"
+    
+  >工具
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%B7%A5%E5%85%B7/picgo%E4%B8%8Eoss%E5%9B%BE%E5%BA%8A/"
+    
+  >typora&#43;picgo&#43;oss实现图床
+    </a>
+              
+            </li></ul>
+      </div></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/%E5%85%B6%E5%AE%83/c&#43;&#43;%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"
+    
+  >
+    </a></li>
+        <li class=""><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/reference/"
+    
+  >Reference
+        <span data-hb-sidebar-toggle>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+        </span>
+    </a><div class="ltr:pr-0 overflow-hidden">
+        <ul class="hb-sidebar-list"><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/reference/customization/"
+    
+  >Customization
+    </a>
+              
+            </li><li class="flex flex-col "><a
+    class="hb-sidebar-custom-link
+      text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-primary-800 dark:hover:text-gray-50"
+    href="/docs/reference/i18n/"
+    
+  >Internationalization (i18n)
+    </a>
+              
+            </li></ul>
+      </div></li>
+        
+      </ul>
+    </div>
+
+</aside>
+  
+
+<nav class="hb-toc order-last hidden w-64 shrink-0 xl:block print:hidden px-4" aria-label="table of contents">
+  
+
+
+
+
+
+
+
+
+
+
+
+  <div class="hb-scrollbar text-sm [hyphens:auto] sticky top-16 overflow-y-auto pr-4 pt-6 max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] -mr-4 rtl:-ml-4"><p class="mb-4 font-semibold tracking-tight">On this page</p><ul>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#reference">Reference</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e7%89%a9%e4%bd%93%e6%a3%80%e6%b5%8b%e9%87%8c%e7%a8%8b">物体检测里程</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#two-stage">two stage</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#rcnn">RCNN</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#fast-rcnn">Fast RCNN</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#roi-pooling">ROI Pooling</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#roi-align">ROI Align</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e8%af%84%e4%bb%b7">评价</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#faster-rcnn">Faster RCNN</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#anchor%e6%a6%82%e5%bf%b5">Anchor概念</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#faster-rcnn%e4%bb%a3%e7%a0%81%e5%89%96%e6%9e%90">Faster RCNN代码剖析</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%95%b4%e4%bd%93%e6%a1%86%e6%9e%b6">整体框架</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#transform%e4%b8%8ebackbone">transform与Backbone</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#regionproposalnetwork">RegionProposalNetwork</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#roi-head">ROI HEAD</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-4 rtl:pr-4 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e5%ae%b6%e6%97%8f%e5%af%b9%e6%af%94">家族对比</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e6%94%b9%e8%bf%9b%e6%96%b9%e5%90%91">改进方向</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#%e9%80%9f%e5%ba%a6%e6%af%94%e5%af%b9">速度比对</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="pl-8 rtl:pr-8 inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#need-two-stage">need two stage?</a>
+      </li>
+      <li class="my-2 scroll-my-6 scroll-py-6">
+        <a class="font-semibold inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 w-full break-words" href="#one-stage">one stage</a>
+      </li></ul>
+
+  
+  
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  </nav>
+
+
+  <article class="flex w-full min-w-0 min-h-[calc(100vh-var(--navbar-height))] justify-center break-words pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+    <main class="prose prose-slate lg:prose-xl dark:prose-invert w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12">
+      <div class="mb-1">
+        <div class="mt-1.5 flex items-center gap-1 overflow-hidden text-sm text-gray-500 dark:text-gray-400">
+      <div class="whitespace-nowrap transition-colors min-w-[24px] overflow-hidden text-ellipsis hover:text-gray-900 dark:hover:text-gray-100">
+        <a href="https://hezhou49.github.io/docs/">fezzy&#39;s notebook</a>
+      </div><svg class="w-3.5 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m8.25 4.5l7.5 7.5l-7.5 7.5"/></svg>
+      <div class="whitespace-nowrap transition-colors min-w-[24px] overflow-hidden text-ellipsis hover:text-gray-900 dark:hover:text-gray-100">
+        <a href="https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">2D计算机视觉</a>
+      </div><svg class="w-3.5 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m8.25 4.5l7.5 7.5l-7.5 7.5"/></svg><div class="whitespace-nowrap font-medium text-gray-700 dark:text-gray-100">深度学习物体检测</div>
+</div>
+
+      </div>
+
+      <div class="content text-base">
+        <h1>深度学习物体检测</h1>
+        <h1 id="2d">2D</h1>
+<h2 id="reference">Reference</h2>
+<ol>
+<li>
+<p>教学视频与文档</p>
+</li>
+<li>
+<p>三维点云处理技术，深蓝学院，Lecture 6-3D Obeject detection，<a href="">PDF</a></p>
+</li>
+<li>
+<p>cs231n, Detection and Segmentation（19年密歇根拓展版 lecture 15&amp;16）。<a href="http://cs231n.stanford.edu/slides/" target="_blank" rel="noopener">slides</a>，<a href="https://www.bilibili.com/video/BV1hi4y1t7kF?p=31&amp;vd_source=02a668bab41ac04d089449d71a07db41" target="_blank" rel="noopener">b站视频包含17年斯坦福以及19年密歇根</a></p>
+</li>
+<li>
+<p>讲得最细，不用看17版cs231n了：cs231n 密歇根2019，<a href="https://web.eecs.umich.edu/~justincj/teaching/eecs498/FA2020/schedule.html" target="_blank" rel="noopener">pages</a>, <a href="">lecture 15-object detection PDF</a>，b站链接就在上面。</p>
+</li>
+<li>
+<p>代码与结构剖析</p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/31426458" target="_blank" rel="noopener">一文读懂Faster RCNN</a>：里面也包含了代码讲解</p>
+</li>
+<li>
+<p><a href="https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection" target="_blank" rel="noopener">https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection</a>：一个图像检测库，可以直接跑训练和测试，代码是torch官方代码加注释，虽然不是最新代码，但是几乎一样。</p>
+</li>
+<li>
+<p><a href="https://github.com/open-mmlab/mmdetection/blob/master/docs/zh_cn/article.md" target="_blank" rel="noopener">https://github.com/open-mmlab/mmdetection/blob/master/docs/zh_cn/article.md</a>：mmdetection教程与实战。（讲得也比较详细）</p>
+</li>
+</ol>
+<h2 id="物体检测里程">物体检测里程</h2>
+<p>图源见下标，这篇论文也被CS231n提到。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420110503221.png" alt="image-20220420110503221" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>检测=定位+分类</p>
+<p>引用参考 截至2022-04</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>year</th>
+<th>cition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r-cnn</td>
+<td>2014 CVPR</td>
+<td>2.4W</td>
+</tr>
+<tr>
+<td>Fast r-cnn</td>
+<td>2015 CVPR</td>
+<td>1.9W</td>
+</tr>
+<tr>
+<td>ResNet</td>
+<td>2016 CVPR</td>
+<td>11W</td>
+</tr>
+<tr>
+<td>Mask r-cnn</td>
+<td>2017 CVPR</td>
+<td>1.8W</td>
+</tr>
+</tbody>
+</table>
+<p>CNN处理图像输入一个feature map（H X W X C），现在都喜欢这么干，在感受域不断变大的过程中，H、W不断变小。通常CNN是块结构，包含标准的卷积操作、max pool、resnet结构。</p>
+<h2 id="two-stage">two stage</h2>
+<p>深度学习物体检测的基础是我们已经掌握了深度学习图像识别问题。</p>
+<p>所以一种可能的物体检测思路是：在原始图像上通过一些方法框选出一部分区域（该方法称为region proposal），直接丢给识别网络，就能实现物体检测。框选取（region proposal）的策略中，一个简单而暴力的方法就是——使用滑动窗口，使用不同大小的窗口从左上滑倒右下，对每一个窗口都塞进网络进行一次分类识别。</p>
+<p>显然这种方法是很耗时，就是最简单暴力法，目标物体的数量、位置、大小（比例）在图中都是未知的，暴力滑动窗口的步幅和框大小等都需要调整，也因此会产生巨量的框。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612174908366.png" alt="image-20220612174908366" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>来看看怎样一步步改进。</p>
+<h3 id="rcnn">RCNN</h3>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612181803718.png" alt="image-20220612181803718" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>RCNN就是提出了一种region proposal的方法（非深度学习，selective search，原理是颜色聚类）来生成候选框，大概每张图像生成2k个候选框，然后再将候选框resize到统一大小丢尽网络，一个head做分类，一个head做x,y,w,h的回归。</p>
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612180756275.png" alt="image-20220612180756275" style="border: 1px solid;" />
+<p>问题来了，虽然现在这种方式已经比暴力方法快很多了，但是还是很慢。因为几乎是把crop的图片丢尽了一整个网络2000次，一张图片的运行时间在47s（当时）这个量级。</p>
+<blockquote>
+<p>思考如何改进：这2000张输入图片是有大量重叠的，所以说网络其实进行了很多重复的计算。</p>
+</blockquote>
+<h3 id="fast-rcnn">Fast RCNN</h3>
+<p>所以，为了避免上述这部分重复计算，Fast RCNN直接把原始图像先丢尽CNN得到一个feature map，再在feature map上做裁剪，这样就避免掉了大量重复的区域进入网络被重复计算。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612211210540.png" alt="image-20220612211210540" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<blockquote>
+<p>Q: feature map长宽与原图长宽不一致，那么如何做裁剪？以及裁剪出来后怎么变成大小一致？</p>
+<p>A: 使用ROI Pooling</p>
+</blockquote>
+<h4 id="roi-pooling">ROI Pooling</h4>
+<p>ROI Pooling过程示意如下：经过初始CNN后，经由3X640X480变成了512X20X15的feature map。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612211612193.png" alt="image-20220612211612193" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>对feature map每一个通道：框等比例缩小后，框先停靠在就近像素点上（图右上红变黑），假如是2X2的max pool，那么每个方向上均分格子（整数），然后每个格子内做max pool。这就是ROI Pooling，实际上很简单。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612212724652.png" alt="image-20220612212724652" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>但是实际上由红框变黑框这样是有精度损失的，最后从feature map尺度变回原图时，这个放缩过程也将会带来一定的精度损失。所以提出了ROI Align。</p>
+<h4 id="roi-align">ROI Align</h4>
+<p>ROI Align是在Mask RCNN内被提出的。核心的思路就是一切都采用浮点数来表示。如下图所示：要把本来大小是6.25 X 4.53的边框统一到3 X 3。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612214441058.png" alt="image-20220612214441058" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p><strong>使用插值方法</strong>：图中每一个角点的位置都是已知的，如图左下，在绿框（最终要resize成的3 X 3）内生成4个点（长宽等分3份）。如右下角图所示，然后这四个点的每一个点的值又由相邻四个feature map的像素值插值而得。最终，在将四个点做一个max操作就能得到3 X 3中的一个像素的值了。</p>
+<h4 id="评价">评价</h4>
+<p>总之，Fast RCNN首先将原图丢入卷积网络生成特征图，再在特征图上做region proposal，这样避免的不必要的重叠部分多次进入网络造成的重复计算，从而降低了时间开支。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612215832083.png" alt="image-20220612215832083" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>但是，从上图可以看出，Fast RCNN已经够快了。但现在Fast RCNN的时间开销主要来自于传统的region proposal方法，改进这个非传统方法就给整体算法带来较大时间上的性能提升。</p>
+<blockquote>
+<p>所以，Faster RCNN应运而生，采用深度学习的方法代替传统方法。使用CNN做region proposal。</p>
+</blockquote>
+<h3 id="faster-rcnn">Faster RCNN</h3>
+<p>将fast rcnn中的传统region proposal方法替换为深度学习方法。叫做Region Proposal Network(RPN)。</p>
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420131808460.png" alt="image-20220420131808460" style="zoom:80%;border:1px solid" />
+<blockquote>
+<p>那么RPN又是如何在feature map生成候选框的呢？</p>
+</blockquote>
+<h4 id="anchor概念">Anchor概念</h4>
+<p>对feature map上每一个点(格子或像素)生成多个不同大小和尺度（下图三个颜色代表三个尺度）的&quot;Anchor&quot;作为初始候选，判断该anchor内是否包含有目标（包含有目标的概率和不包含目标的概率），包含则继续预测从当前anchor到ground truth的4个值的偏差。</p>
+<p>下半图简单的把RPN当成是全连接网络举例，把C X anchor W X anchor H（加入是3X3 anchor）的向量拉成9C进入全连接网络输出为256维，然后外加两个做分类和回归的head。比如：分类问题用一个softmax来表示该anchor含有目标的概率和不包含目标的概率，所以输出的2*k个score，k为anchor数量。</p>
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612225550287.png" alt="image-20220612225550287" style="zoom:80%;border:1px solid" />
+<p>然后根据含有object的score排序，选择预测出的前300个region，即完成region proposal工作。如果总共是20X15规格的feature map，每个点6个anchor，那么初始的候选框其实也有2100种了（但是这2000个是以最简单的规则暴力生成的，不是复杂算法生成的，几乎不耗时）</p>
+<h3 id="faster-rcnn代码剖析">Faster RCNN代码剖析</h3>
+<p>基于<a href="#Reference">Reference</a>里的几个链接，以及实际调试代码。</p>
+<h4 id="整体框架">整体框架</h4>
+<p>首先看一下这个整体架构图。</p>
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/fasterRCNN.png" alt="img" style="border:1px solid" />
+<p>根据调试结构讲一下整个输入、输出。</p>
+<p>首先，整个代码的流程是在<a href="https://github.com/pytorch/vision/blob/main/torchvision/models/detection/generalized_rcnn.py" target="_blank" rel="noopener">generalized_rcnn.py</a>里，这是一个基类，FasterRCNN(GeneralizedRCNN)将集成它，可以点进去看看forward函数明确框出代码的大结构。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span>
+</span></span><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">backbone</span> <span class="o">=</span> <span class="n">backbone</span>
+</span></span><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">rpn</span> <span class="o">=</span> <span class="n">rpn</span>
+</span></span><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">roi_heads</span> <span class="o">=</span> <span class="n">roi_heads</span>
+</span></span></code></pre></div><p>继承时的默认参数都在这了</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220620224012662.png" alt="image-20220620224012662" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h4 id="transform与backbone">transform与Backbone</h4>
+<blockquote>
+<p>1.首先是transform与主干网络</p>
+</blockquote>
+<ol>
+<li>
+<p>如下图，假设batch size是4，图片大小是(375, 500)，他会把图片resize到minsize=800，maxsize=1333。800这个尺度基本上是一定的，另外一个在根据大小一般在1000-1300漂浮，并记录下原始的尺寸（最终检测结果再恢复回去）</p>
+</li>
+<li>
+<p>丢尽主干网络，原始的论文没有采用FPN，这里采用了FPN将输出5种大小尺度的特征图，通道数是256，批量大小是4。</p>
+</li>
+</ol>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220620224603719.png" alt="image-20220620224603719" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h4 id="regionproposalnetwork">RegionProposalNetwork</h4>
+<blockquote>
+<p>2.进入RPN，RegionProposalNetwork（时刻对照<a href="#%e4%bb%a3%e7%a0%81%e5%89%96%e6%9e%90">大图</a>看）</p>
+</blockquote>
+<p>注：RPN的最终目的是提供一推RegionProposal，相当于很多张在transform后的图像上的框。</p>
+<p>RPN网络部分涉及到网络训练，所以训练和推理的过程不同，训练或多出一些求loss的步骤，会额外说明。</p>
+<p>流程可见RegionProposalNetwork类的<a href="https://github.com/pytorch/vision/blob/d0d7058a36fb4ea702dcb6c92c03d90ca91d8281/torchvision/models/detection/rpn.py#L339" target="_blank" rel="noopener">forward函数</a>：</p>
+<ol>
+<li>
+<p>RPN HEAD，进行分类（有无）与框回归。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="c1"># 5张特征图</span>
+</span></span><span class="line"><span class="cl"><span class="n">objectness</span><span class="p">,</span> <span class="n">pred_bbox_deltas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+</span></span></code></pre></div><p>在所有的feature map丢尽卷积网络，预设的是每个特征图上的一点对应会生成3个Anchor，所以需要把(4,256,200,304)的map卷积成(4,3,200,304)的分类和(4,3X4,200,304)的框回归。</p>
+</li>
+</ol>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220620231117190.png" alt="image-20220620231117190" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<ol start="2">
+<li>
+<p>生成anchor，如上图所示，此时每张图片应生成的anchor的数量是3X(200X304+100X152+50X76+25X38+13X19)=242991，anchor的尺度也是在“原图”上生成的。将HEAD输出的4X242991个box作为原始的proposal。</p>
+</li>
+<li>
+<p>接下来对proposal进行过滤。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">boxes</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_proposals</span><span class="p">(</span><span class="n">proposals</span><span class="p">,</span> <span class="n">objectness</span><span class="p">,</span> <span class="n">images</span><span class="o">.</span><span class="n">image_sizes</span><span class="p">,</span> <span class="n">num_anchors_per_level</span><span class="p">)</span>
+</span></span></code></pre></div><p>对于每一张输入图片，首先根据HEAD输出的objectness，在其每张特征图上选取rpn_pre_nms_top_n_train个即头2000个box（Test是1000），由于最小的特征图只有13X19X3=741个proposal，所以总共在pre_nms阶段选出了8741个proposal，再对舍去小面积box，根据阈值移除score小的proposal，再根据超参数rpn_nms_thresh=0.7进行NMS（比如NMS后可能还剩下3200个），最后选取rpn_post_nms_top_n_train=2000选取score前2000的proposal。一张图片最终生成2000个proposal，4张即8000个。</p>
+</li>
+</ol>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220620235543673.png" alt="image-20220620235543673" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p>如果是训练阶段，还要进行正负样本的判断并计算分类与回归的loss。</p>
+<ol>
+<li>
+<p>计算每个anchor是正样本还是负样本，并计算box的偏移量。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">labels</span><span class="p">,</span> <span class="n">matched_gt_boxes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">assign_targets_to_anchors</span><span class="p">(</span><span class="n">anchors</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">regression_targets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_coder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">matched_gt_boxes</span><span class="p">,</span> <span class="n">anchors</span><span class="p">)</span> <span class="c1"># 结合anchors以及对应的gt，计算regression参数</span>
+</span></span></code></pre></div><p>根据超参数rpn_fg_iou_thresh=0.7，如果anchor与gt_boxes的iou大于0.7则是前景，根据rpn_bg_iou_thresh=0.3，小于0.3则是负样本。label的数量还是跟每张图anchor的总数量相同。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220621001307192.png" alt="image-20220621001307192" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+</li>
+<li>
+<p>选择预设数量的正、负样本计算loss。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">loss_objectness</span><span class="p">,</span> <span class="n">loss_rpn_box_reg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_loss</span><span class="p">(</span><span class="n">objectness</span><span class="p">,</span> <span class="n">pred_bbox_deltas</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">regression_targets</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># self.compute_loss 函数内</span>
+</span></span><span class="line"><span class="cl"><span class="n">sampled_pos_inds</span><span class="p">,</span> <span class="n">sampled_neg_inds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fg_bg_sampler</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+</span></span></code></pre></div><p>根据rpn_batch_size_per_image=256, rpn_positive_fraction=0.5，采样正负样本，即每张图像<strong>随机采样</strong>（可以进代码看）128个正样本，128个负样本；4张图的话就是使用总共4X256=1024个样本计算loss。**注：**有可能一张图的正样本数量到不了128，那么就用负样本来补齐（如下，4张图才86个正样本，跑了下代码，感觉大多数时候都只有100个左右的正样本）。</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220621002826926.png" alt="image-20220621002826926" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+</li>
+</ol>
+<h4 id="roi-head">ROI HEAD</h4>
+<blockquote>
+<p>每张图得到2000个proposal后，进入ROI HEAD</p>
+</blockquote>
+<p>ROI HEAD的训练和测试依然是有差异的，训练阶段的话是想得到比较好的loss所以选择部分proposal进行训练，不需要得到结果；而测试阶段不计算loss，直接把全部proposal丢进网络得出分类和回归结果，再进行包含有NMS的后处理得到最终结果。</p>
+<p>所以，以下完全分为train和Test来说：（对比RPN网络，不管是train还是test都是要得出proposal的，所以train比test前部分总体相同，train多出一个计算loss）</p>
+<table>
+<thead>
+<tr>
+<th>train：主要为了计算loss</th>
+<th>test：主要为了得出最终结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.选择出部分proposal以及对应的label</td>
+<td>1.不操作，使用全部proposal</td>
+</tr>
+<tr>
+<td>2.ROI Align</td>
+<td>2.ROI Align</td>
+</tr>
+<tr>
+<td>3.丢尽网络得出预测的分类（目标种类）和框回归结果</td>
+<td>3.丢尽网络得出预测的分类（目标种类）和框回归结果</td>
+</tr>
+<tr>
+<td>4.计算loss</td>
+<td>4.包含NMS的后处理得出结果</td>
+</tr>
+</tbody>
+</table>
+<p><code>train：</code></p>
+<ol>
+<li>得出proposal对应的label，并采样正负样本。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 得到所有proposal的label</span>
+</span></span><span class="line"><span class="cl"><span class="n">matched_idxs</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">assign_targets_to_proposals</span><span class="p">(</span><span class="n">proposals</span><span class="p">,</span> <span class="n">gt_boxes</span><span class="p">,</span> <span class="n">gt_labels</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 前景与背景的IOU</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># box_fg_iou_thresh=0.5, box_bg_iou_thresh=0.5,</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 每张图从2000个采样至512个proposal，并且正样本最高占有1/4（因为大部分时候正样本数量不足）</span>
+</span></span><span class="line"><span class="cl"><span class="n">box_batch_size_per_image</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">box_positive_fraction</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+</span></span></code></pre></div><ol start="2">
+<li>ROI Align。ROI的输入是proposal以及feature maps，根据proposal把特征图裁剪到7X7。注意观察下图中feature map变到box_features的变化，批量本来是4，然后每张图512个proposal，所以第一维度变成了4X512=2048，通道数不变，HXW变成了7X7</li>
+</ol>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220621151056504.png" alt="image-20220621151056504" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<ol start="3">
+<li>
+<p>丢尽网络分类与回归。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 拉成一维并进入两层全连接层</span>
+</span></span><span class="line"><span class="cl"><span class="n">box_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_head</span><span class="p">(</span><span class="n">box_features</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 分类、回归</span>
+</span></span><span class="line"><span class="cl"><span class="n">class_logits</span><span class="p">,</span> <span class="n">box_regression</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">box_predictor</span><span class="p">(</span><span class="n">box_features</span><span class="p">)</span>
+</span></span></code></pre></div></li>
+<li>
+<p>计算loss。两个loss，没什么好说的。加上RPN反馈的loss，总共就是4个loss，调试的这份代码是直接把所有loss加到一起进行梯度下降的。</p>
+</li>
+</ol>
+<p><code>test:</code></p>
+<ol>
+<li>
+<p>test阶段只会从RPN得到rpn_post_nms_top_n_test=1000个proposal！</p>
+</li>
+<li>
+<p>ROI Align，不具体说了，由于单图proposal有1000个，所以box_features应该是(4000,256,7,7)</p>
+</li>
+<li>
+<p>丢尽网络分类与回归。跟上面一样。</p>
+</li>
+<li>
+<p>后处理</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">boxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">postprocess_detections</span><span class="p">(</span><span class="n">class_logits</span><span class="p">,</span> <span class="n">box_regression</span><span class="p">,</span> <span class="n">proposals</span><span class="p">,</span> <span class="n">image_shapes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">对网络的预测数据进行后处理，包括
+</span></span></span><span class="line"><span class="cl"><span class="s2">（1）根据proposal以及预测的回归参数计算出最终bbox坐标
+</span></span></span><span class="line"><span class="cl"><span class="s2">（2）对预测类别结果进行softmax处理
+</span></span></span><span class="line"><span class="cl"><span class="s2">（3）裁剪预测的boxes信息，将越界的坐标调整到图片边界上
+</span></span></span><span class="line"><span class="cl"><span class="s2">（4）移除所有背景信息
+</span></span></span><span class="line"><span class="cl"><span class="s2">（5）移除低概率目标                    box_score_thresh=0.05
+</span></span></span><span class="line"><span class="cl"><span class="s2">（6）移除小尺寸目标
+</span></span></span><span class="line"><span class="cl"><span class="s2">（7）执行nms处理，并按scores进行排序     box_nms_thresh=0.5
+</span></span></span><span class="line"><span class="cl"><span class="s2">（8）根据scores排序返回前topk个目标      box_detections_per_img=100
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="家族对比">家族对比</h3>
+<h4 id="改进方向">改进方向</h4>
+<img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420152346937.png" alt="image-20220420152346937" style="zoom:80%;" />
+<h4 id="速度比对">速度比对</h4>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420131618419.png" alt="image-20220420131618419" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h4 id="need-two-stage">need two stage?</h4>
+<p>是否可以不要第二阶段？</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="flex justify-center	">
+    <div class="w-100" ><img src="https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612220311614.png" alt="image-20220612220311614" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="one-stage">one stage</h2>
+<p>RPN HEAD和ROI HEAD完成的工作类似，所以现在网上教程一般都是先从one stage入手，再讲two stage。但是先学two stage家族有一个好处就是：可以清晰的看出物体检测这一任务从传统方法到深度学习方法的过渡，思路和逻辑都很明确。</p>
+
+      </div>
+
+      
+  <time class="mt-12 mb-8 block text-xs text-gray-500 ltr:text-right rtl:text-left dark:text-gray-400" datetime="2021-04-14T02:23:00.000Z">
+    <span>Last updated on</span>
+    Apr 14, 2021</time>
+      
+      
+  
+    
+    
+    
+      
+      
+    
+<div class="pt-1 no-prose w-full">
+  <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+  <div class="flex flex-col md:flex-row flex-nowrap justify-between gap-5 pt-2">
+    <div class="">
+      
+        <a class="group flex no-underline" href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%E7%9A%84%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/">
+          <span
+            class="mt-[-0.3rem] me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+          ><span class="ltr:inline rtl:hidden">&larr;</span></span>
+          <span class="flex flex-col">
+            <span
+              class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+            >基于特征模板匹配的物体检测</span>
+            <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+              
+                Apr 14, 2021
+              
+            </span>
+          </span>
+        </a>
+      
+    </div>
+    <div class="">
+      
+        <a class="group flex text-right no-underline" href="/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/">
+          <span class="flex flex-col">
+            <span
+              class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+            >射影变换与二视图几何</span
+            >
+            <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+              
+                Apr 14, 2021
+              
+            </span>
+          </span>
+          <span
+            class="mt-[-0.3rem] ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+          ><span class="ltr:inline">&rarr;</span></span>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+      
+
+
+
+    </main>
+  </article>
+</div>
+
+    </div>
+    <div class="page-footer">
+      <footer class="container mx-auto flex flex-col justify-items-center text-sm leading-6 mt-24 mb-4 text-slate-700 dark:text-slate-200">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by text-center">
+    © 2025 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+
+  <p class="powered-by text-center">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://hugoblox.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Hugo Blox Builder</a> — the free, <a href="https://github.com/HugoBlox/hugo-blox-builder" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+
+</footer>
+
+    </div>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

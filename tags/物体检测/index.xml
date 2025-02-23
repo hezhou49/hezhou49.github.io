@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>物体检测 | FEZZY</title>
+    <link>https://hezhou49.github.io/tags/%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</link>
+      <atom:link href="https://hezhou49.github.io/tags/%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/index.xml" rel="self" type="application/rss+xml" />
+    <description>物体检测</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Wed, 14 Apr 2021 02:23:00 +0800</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>物体检测</title>
+      <link>https://hezhou49.github.io/tags/%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</link>
+    </image>
+    
+    <item>
+      <title>传统物体检测</title>
+      <link>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BC%A0%E7%BB%9F%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BC%A0%E7%BB%9F%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</guid>
+      <description>&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;
+&lt;p&gt;如今，当讨论到物体检测时，通常理解的是“区域提议+物体识别”这个组合，零几年的时候出现了类似滑动窗口+HOG+SVM这种检测行人的方案，即做了特征提取后使用分类器将该特征进行分类，这就是传统物体检测的思路。后面深度学习也是这种思路，只是使用了深度神经网络代替传统方法实现了特征提取与分类。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但是，在这种特征提取+分类的思路出现前莫非就不能做物体的识别和检测了？比如：下文提到的模板匹配的方法，模板匹配的关键是有一个或一组事先已经生成的模板。匹配模板图像与目标图像的特征点实现物体检测。特征的也有颜色、纹理、形状等多种定义。&lt;u&gt;比如《基于 Kinect 的物体分割与识别算法研究，D》中介绍了统计模板图像的颜色HSV空间分布直方图，H分为8个Bin，S和V各分为3个，由此形成72维特征向量的模板，在目标图像内先使用分割算法进行区域提议，然后将得到的区域进行颜色特征提取并于模板匹配。&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;所以，应该宽泛的理解“物体检测”，不是只有“特征提取+分类”这种思路，在很多简单的应用场景下可以使用比较简单的方法达到物体检测的目的。（比如之前识别可乐拉罐直接简单的识别红色色块，这不也是达到了物体检测的目的？）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;此处还是记录基于“特征提取+分类”这种通常意义中的物体识别。传统方法做“区域提议”思路也比较多、杂，比如：使用各种方法分割出固定区域、一些颜色聚类方法等，当然最简单还是滑动窗口，区域提议的方法不展开说，主要还是focus在“特征提取+分类”上，所以这篇文章本质上应该叫做传统物体识别。&lt;/p&gt;
+&lt;h2 id=&#34;hogsvm&#34;&gt;HOG+SVM&lt;/h2&gt;
+&lt;h2 id=&#34;harradaboost&#34;&gt;HARR+Adaboost&lt;/h2&gt;
+&lt;h2 id=&#34;opencv-multiscale滑动窗口&#34;&gt;opencv multiScale滑动窗口&lt;/h2&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>基于特征模板匹配的物体检测</title>
+      <link>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%E7%9A%84%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%E7%9A%84%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</guid>
+      <description>&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;p&gt;知乎专栏，opencv实现，40+文章，不错：https://www.zhihu.com/column/lowkeyway-OpenCV&lt;/p&gt;
+&lt;p&gt;opencv docs——Feature Matching：https://opencv24-python-tutorials.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_matcher/py_matcher.html&lt;/p&gt;
+&lt;p&gt;很早之前看过这个教程，但没想到这其实就是传统的基于2D图像特征模板做匹配实现物体识别的技术路线。&lt;/p&gt;
+&lt;h2 id=&#34;主要思路&#34;&gt;主要思路&lt;/h2&gt;
+&lt;p&gt;如今，当讨论到物体检测时，通常理解的是“区域提议+物体识别”这个组合，零几年的时候出现了类似滑动窗口+HOG+SVM这种检测行人的方案，即做了特征提取后使用分类器将该特征进行分类，这就是传统物体检测的思路。后面深度学习也是这种思路，只是使用了深度神经网络代替传统方法实现了特征提取与分类。&lt;/p&gt;
+&lt;p&gt;但是，在这种特征提取+分类的思路出现前莫非就不能做物体的识别和检测了？比如：下文提到的模板匹配的方法，模板匹配的关键是有一个或一组事先已经生成的模板。匹配模板图像与目标图像的特征点实现物体检测。特征的也有颜色、纹理、形状等多种定义。&lt;u&gt;比如《基于 Kinect 的物体分割与识别算法研究，D》中介绍了统计模板图像的颜色HSV空间分布直方图，H分为8个Bin，区域各分为3个，由此形成72维特征向量的模板，在目标图像内先使用分割算法进行区域提议，然后将得到的区域进行颜色特征提取并于模板匹配。&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;所以，应该宽泛的理解“物体检测”，不是只有“特征提取+分类”这种思路，在很多简单的应用场景下可以使用比较简单的方法达到物体检测的目的。（比如之前识别可乐拉罐直接简单的识别红色色块，这不也是达到了物体检测的目的？）&lt;/p&gt;
+&lt;h2 id=&#34;算法流程&#34;&gt;算法流程&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/matcher_flann.jpg&#34; alt=&#34;FLANN based matching&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;what we need？流程简述：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;目标物体模板：用一张（多张，maybe不同角度）仅包含目标物的图像进行特征点检测与描述，从而生成一组（多组）特征描述子模板。一组模板的shape为m X n，m为点特征点个数，n为特征向量的维度。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;待查找图片（包含有目标物体）：对该图像进行特征点检测与描述，生成一组特征描述子。shape为k X n。k为特征点个数，n为特征向量的维度。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特征匹配过程：将模板与步骤2生成的特征描述子进行匹配（查找最近邻）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算单应性矩阵，实现目标物体图像到实际查找图像的转换。（最少需要4组点对计算单应矩阵，使用ransac方法对原始匹配进行误匹配剔除并计算最优转换）（这样就实现在检测图片出框选出了模板图片，如果还有对齐的深度图，可以直接在深度图上把物体抠出来）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/homography_findobj.jpg&#34; alt=&#34;Finding object with feature homography&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;几种2d特征点算法&#34;&gt;几种2D特征点算法&lt;/h2&gt;
+&lt;p&gt;特征点=关键点（key points）+对应的特征描述（descriptor）&lt;/p&gt;
+&lt;p&gt;机器视觉在工业机器人分拣系统中的应用[D]，2018，宋玉雪&lt;/p&gt;
+&lt;p&gt;知乎专栏，三个算法都有讲解：https://www.zhihu.com/column/c_1296447643791560704&lt;/p&gt;
+&lt;p&gt;SIFT算法：https://zhuanlan.zhihu.com/p/343522892（更清晰）&lt;/p&gt;
+&lt;p&gt;SIFT特征详解 ：https://www.cnblogs.com/wangguchangqing/p/4853263.html&lt;/p&gt;
+&lt;h3 id=&#34;sift&#34;&gt;SIFT&lt;/h3&gt;
+&lt;p&gt;看上面链接吧，高斯尺度空间。&lt;/p&gt;
+&lt;p&gt;128维特征描述。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主要思路：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;为了提取尺度不变的特征点，在图像金字塔内进行特征点检测。早期的图像金字塔直接将图像不断降采样到原来的1/2，高斯尺度空间额外对同一大小的图像进行不同大小的高斯模糊（模拟人眼看物体的模糊程度）&lt;/p&gt;
+&lt;p&gt;为了应对方向不变，计算特征点的邻域内的梯度方向与梯度值（使用直方图，360分为8个bin，每个bin45度，然后统计梯度值累加），统计最大的方向作为主方向。&lt;/p&gt;
+&lt;p&gt;特征描述：选取16X16的邻域，选取4X4的格子作为种子邻域，同样也使用直方图统计每一个种子邻域的直方图，那么每个种子邻域形成8维向量，16个种子形成128维向量，然后再进行一行额外操作，比如归一化等。&lt;/p&gt;
+&lt;h3 id=&#34;surf&#34;&gt;SURF&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Speeded  Up  Robust Features.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（1）在生成尺度空间方面，SIFT中下一组图像的尺寸是上一组的一半，同一组间图像尺寸一样，但是所使用的高斯模糊系数逐渐增大。而在SURF中，&lt;strong&gt;不同组间图像的尺寸都是一致的&lt;/strong&gt;，但不同组间使用的盒式滤波器的模板尺寸逐渐增大，同一组间不同层间使用相同尺寸的滤波器，但是滤波器的模糊系数逐渐增大。&lt;/p&gt;
+&lt;p&gt;（2）在特征点检验时，SIFT算子是先对图像进行非极大值抑制，再去除对比度较低的点。然后通过Hessian矩阵去除边缘的点。SURF算法是先通过Hessian矩阵来检测候选特征点，然后再对非极大值的点进行抑制。&lt;/p&gt;
+&lt;p&gt;（3）在特征向量的方向确定上，SIFT算法是在正方形区域内统计梯度的幅值的直方图，找到最大梯度幅值所对应的方向。SIFT算子确定的特征点可以有一个或一个以上方向，其中包括一个主方向与多个辅方向。SURF算法则是在圆形邻域内，检测&lt;strong&gt;各个扇形范围内水平、垂直方向上的Haar小波响应&lt;/strong&gt;，找到模值最大的扇形指向，且该算法的方向只有一个。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220709160518873.png&#34; alt=&#34;image-20220709160518873&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;（4）SIFT算法生成描述子时，是将16x16的采样点划分为4x4的区域，从而计算每个分区种子点的幅值并确定其方向，共计4x4x8=128维。SURF算法在生成特征描述子时将的正方形分割成4x4的小方格，每个子区域25个采样点，计算小波haar响应，一共4x4x4=64维。&lt;/p&gt;
+&lt;p&gt;综上，SURF算法在各个步骤上都简化了一些繁琐的工作，仅仅计算了特征点的一个主方向，生成的特征描述子也与前者相比降低了维数。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220709160136397.png&#34; alt=&#34;image-20220709160136397&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;orb&#34;&gt;ORB&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Oriented FAST and Rotated BRIEF ，改进了FAST角点与BRIEF描述子&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Fast是一个非常快速的关键点检测算法（不带特征描述），思路是直接比较当前点与邻域点的亮度差异。没有什么求导、积分、卷积操作，只比较亮度大小，所以很快。流程如下（图源视觉SLAM 14讲）：&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220708165659707.png&#34; alt=&#34;image-20220708165659707&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;p&gt;&lt;strong&gt;关键点：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;但是FAST关键点没有尺度和方向，使用图像金字塔（简单的上、下采样）解决尺度问题，方向是通过灰度质心法解决。&lt;/p&gt;
+&lt;p&gt;灰度质心法顾名思义是计算邻域内灰度的质心，公式很简单，就是加权平均。
+&lt;/p&gt;
+$$
+x_0=\frac {\sum_{x, y \in B} x I(x, y)} {\sum_{x, y \in B}  I(x, y)}, y_0=\frac {\sum_{x, y \in B} y I(x, y)} {\sum_{x, y \in B}  I(x, y)}
+$$
+&lt;p&gt;
+将当前点与质心进行连线，就生成了该关键点的方向了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;特征描述：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;特征点检测-ORB：https://zhuanlan.zhihu.com/p/91479558&lt;/p&gt;
+&lt;p&gt;邻域内随机选取两点，比较点的亮度强弱关系，从而赋值0或1。选取N=256组，形成256维向量。上述链接为数不多的介绍了brief描述子的特征匹配规则，及使用汉明距离，因为每一维要么是0要么是1，所以距离的理论值是[0, N]&lt;/p&gt;
+&lt;p&gt;为了解决旋转不变性，使用关键点提取部分得到的方向旋转邻域，然后再计算描述子。&lt;/p&gt;
+&lt;p&gt;为了优化性能，其实还做了一步使用贪心算法的优化，但不过多介绍。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>深度学习物体检测</title>
+      <link>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</guid>
+      <description>&lt;h1 id=&#34;2d&#34;&gt;2D&lt;/h1&gt;
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;教学视频与文档&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;三维点云处理技术，深蓝学院，Lecture 6-3D Obeject detection，&lt;a href=&#34;&#34;&gt;PDF&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;cs231n, Detection and Segmentation（19年密歇根拓展版 lecture 15&amp;amp;16）。&lt;a href=&#34;http://cs231n.stanford.edu/slides/&#34;&gt;slides&lt;/a&gt;，&lt;a href=&#34;https://www.bilibili.com/video/BV1hi4y1t7kF?p=31&amp;amp;vd_source=02a668bab41ac04d089449d71a07db41&#34;&gt;b站视频包含17年斯坦福以及19年密歇根&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;讲得最细，不用看17版cs231n了：cs231n 密歇根2019，&lt;a href=&#34;https://web.eecs.umich.edu/~justincj/teaching/eecs498/FA2020/schedule.html&#34;&gt;pages&lt;/a&gt;, &lt;a href=&#34;&#34;&gt;lecture 15-object detection PDF&lt;/a&gt;，b站链接就在上面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;代码与结构剖析&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/31426458&#34;&gt;一文读懂Faster RCNN&lt;/a&gt;：里面也包含了代码讲解&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection&#34;&gt;https://github.com/WZMIAOMIAO/deep-learning-for-image-processing/tree/master/pytorch_object_detection&lt;/a&gt;：一个图像检测库，可以直接跑训练和测试，代码是torch官方代码加注释，虽然不是最新代码，但是几乎一样。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/open-mmlab/mmdetection/blob/master/docs/zh_cn/article.md&#34;&gt;https://github.com/open-mmlab/mmdetection/blob/master/docs/zh_cn/article.md&lt;/a&gt;：mmdetection教程与实战。（讲得也比较详细）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;物体检测里程&#34;&gt;物体检测里程&lt;/h2&gt;
+&lt;p&gt;图源见下标，这篇论文也被CS231n提到。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420110503221.png&#34; alt=&#34;image-20220420110503221&#34;&gt;&lt;/p&gt;
+&lt;p&gt;检测=定位+分类&lt;/p&gt;
+&lt;p&gt;引用参考 截至2022-04&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;name&lt;/th&gt;
+&lt;th&gt;year&lt;/th&gt;
+&lt;th&gt;cition&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;r-cnn&lt;/td&gt;
+&lt;td&gt;2014 CVPR&lt;/td&gt;
+&lt;td&gt;2.4W&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Fast r-cnn&lt;/td&gt;
+&lt;td&gt;2015 CVPR&lt;/td&gt;
+&lt;td&gt;1.9W&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ResNet&lt;/td&gt;
+&lt;td&gt;2016 CVPR&lt;/td&gt;
+&lt;td&gt;11W&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Mask r-cnn&lt;/td&gt;
+&lt;td&gt;2017 CVPR&lt;/td&gt;
+&lt;td&gt;1.8W&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;CNN处理图像输入一个feature map（H X W X C），现在都喜欢这么干，在感受域不断变大的过程中，H、W不断变小。通常CNN是块结构，包含标准的卷积操作、max pool、resnet结构。&lt;/p&gt;
+&lt;h2 id=&#34;two-stage&#34;&gt;two stage&lt;/h2&gt;
+&lt;p&gt;深度学习物体检测的基础是我们已经掌握了深度学习图像识别问题。&lt;/p&gt;
+&lt;p&gt;所以一种可能的物体检测思路是：在原始图像上通过一些方法框选出一部分区域（该方法称为region proposal），直接丢给识别网络，就能实现物体检测。框选取（region proposal）的策略中，一个简单而暴力的方法就是——使用滑动窗口，使用不同大小的窗口从左上滑倒右下，对每一个窗口都塞进网络进行一次分类识别。&lt;/p&gt;
+&lt;p&gt;显然这种方法是很耗时，就是最简单暴力法，目标物体的数量、位置、大小（比例）在图中都是未知的，暴力滑动窗口的步幅和框大小等都需要调整，也因此会产生巨量的框。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612174908366.png&#34; alt=&#34;image-20220612174908366&#34;&gt;&lt;/p&gt;
+&lt;p&gt;来看看怎样一步步改进。&lt;/p&gt;
+&lt;h3 id=&#34;rcnn&#34;&gt;RCNN&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612181803718.png&#34; alt=&#34;image-20220612181803718&#34;&gt;&lt;/p&gt;
+&lt;p&gt;RCNN就是提出了一种region proposal的方法（非深度学习，selective search，原理是颜色聚类）来生成候选框，大概每张图像生成2k个候选框，然后再将候选框resize到统一大小丢尽网络，一个head做分类，一个head做x,y,w,h的回归。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612180756275.png&#34; alt=&#34;image-20220612180756275&#34; style=&#34;border: 1px solid;&#34; /&gt;
+&lt;p&gt;问题来了，虽然现在这种方式已经比暴力方法快很多了，但是还是很慢。因为几乎是把crop的图片丢尽了一整个网络2000次，一张图片的运行时间在47s（当时）这个量级。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;思考如何改进：这2000张输入图片是有大量重叠的，所以说网络其实进行了很多重复的计算。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;fast-rcnn&#34;&gt;Fast RCNN&lt;/h3&gt;
+&lt;p&gt;所以，为了避免上述这部分重复计算，Fast RCNN直接把原始图像先丢尽CNN得到一个feature map，再在feature map上做裁剪，这样就避免掉了大量重复的区域进入网络被重复计算。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612211210540.png&#34; alt=&#34;image-20220612211210540&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Q: feature map长宽与原图长宽不一致，那么如何做裁剪？以及裁剪出来后怎么变成大小一致？&lt;/p&gt;
+&lt;p&gt;A: 使用ROI Pooling&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;roi-pooling&#34;&gt;ROI Pooling&lt;/h4&gt;
+&lt;p&gt;ROI Pooling过程示意如下：经过初始CNN后，经由3X640X480变成了512X20X15的feature map。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612211612193.png&#34; alt=&#34;image-20220612211612193&#34;&gt;&lt;/p&gt;
+&lt;p&gt;对feature map每一个通道：框等比例缩小后，框先停靠在就近像素点上（图右上红变黑），假如是2X2的max pool，那么每个方向上均分格子（整数），然后每个格子内做max pool。这就是ROI Pooling，实际上很简单。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612212724652.png&#34; alt=&#34;image-20220612212724652&#34;&gt;&lt;/p&gt;
+&lt;p&gt;但是实际上由红框变黑框这样是有精度损失的，最后从feature map尺度变回原图时，这个放缩过程也将会带来一定的精度损失。所以提出了ROI Align。&lt;/p&gt;
+&lt;h4 id=&#34;roi-align&#34;&gt;ROI Align&lt;/h4&gt;
+&lt;p&gt;ROI Align是在Mask RCNN内被提出的。核心的思路就是一切都采用浮点数来表示。如下图所示：要把本来大小是6.25 X 4.53的边框统一到3 X 3。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612214441058.png&#34; alt=&#34;image-20220612214441058&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用插值方法&lt;/strong&gt;：图中每一个角点的位置都是已知的，如图左下，在绿框（最终要resize成的3 X 3）内生成4个点（长宽等分3份）。如右下角图所示，然后这四个点的每一个点的值又由相邻四个feature map的像素值插值而得。最终，在将四个点做一个max操作就能得到3 X 3中的一个像素的值了。&lt;/p&gt;
+&lt;h4 id=&#34;评价&#34;&gt;评价&lt;/h4&gt;
+&lt;p&gt;总之，Fast RCNN首先将原图丢入卷积网络生成特征图，再在特征图上做region proposal，这样避免的不必要的重叠部分多次进入网络造成的重复计算，从而降低了时间开支。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612215832083.png&#34; alt=&#34;image-20220612215832083&#34;&gt;&lt;/p&gt;
+&lt;p&gt;但是，从上图可以看出，Fast RCNN已经够快了。但现在Fast RCNN的时间开销主要来自于传统的region proposal方法，改进这个非传统方法就给整体算法带来较大时间上的性能提升。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;所以，Faster RCNN应运而生，采用深度学习的方法代替传统方法。使用CNN做region proposal。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;faster-rcnn&#34;&gt;Faster RCNN&lt;/h3&gt;
+&lt;p&gt;将fast rcnn中的传统region proposal方法替换为深度学习方法。叫做Region Proposal Network(RPN)。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420131808460.png&#34; alt=&#34;image-20220420131808460&#34; style=&#34;zoom:80%;border:1px solid&#34; /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;那么RPN又是如何在feature map生成候选框的呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;anchor概念&#34;&gt;Anchor概念&lt;/h4&gt;
+&lt;p&gt;对feature map上每一个点(格子或像素)生成多个不同大小和尺度（下图三个颜色代表三个尺度）的&amp;quot;Anchor&amp;quot;作为初始候选，判断该anchor内是否包含有目标（包含有目标的概率和不包含目标的概率），包含则继续预测从当前anchor到ground truth的4个值的偏差。&lt;/p&gt;
+&lt;p&gt;下半图简单的把RPN当成是全连接网络举例，把C X anchor W X anchor H（加入是3X3 anchor）的向量拉成9C进入全连接网络输出为256维，然后外加两个做分类和回归的head。比如：分类问题用一个softmax来表示该anchor含有目标的概率和不包含目标的概率，所以输出的2*k个score，k为anchor数量。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612225550287.png&#34; alt=&#34;image-20220612225550287&#34; style=&#34;zoom:80%;border:1px solid&#34; /&gt;
+&lt;p&gt;然后根据含有object的score排序，选择预测出的前300个region，即完成region proposal工作。如果总共是20X15规格的feature map，每个点6个anchor，那么初始的候选框其实也有2100种了（但是这2000个是以最简单的规则暴力生成的，不是复杂算法生成的，几乎不耗时）&lt;/p&gt;
+&lt;h3 id=&#34;faster-rcnn代码剖析&#34;&gt;Faster RCNN代码剖析&lt;/h3&gt;
+&lt;p&gt;基于&lt;a href=&#34;#Reference&#34;&gt;Reference&lt;/a&gt;里的几个链接，以及实际调试代码。&lt;/p&gt;
+&lt;h4 id=&#34;整体框架&#34;&gt;整体框架&lt;/h4&gt;
+&lt;p&gt;首先看一下这个整体架构图。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/fasterRCNN.png&#34; alt=&#34;img&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;p&gt;根据调试结构讲一下整个输入、输出。&lt;/p&gt;
+&lt;p&gt;首先，整个代码的流程是在&lt;a href=&#34;https://github.com/pytorch/vision/blob/main/torchvision/models/detection/generalized_rcnn.py&#34;&gt;generalized_rcnn.py&lt;/a&gt;里，这是一个基类，FasterRCNN(GeneralizedRCNN)将集成它，可以点进去看看forward函数明确框出代码的大结构。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;transform&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;transform&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;backbone&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;backbone&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rpn&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rpn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;roi_heads&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;roi_heads&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;继承时的默认参数都在这了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220620224012662.png&#34; alt=&#34;image-20220620224012662&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;transform与backbone&#34;&gt;transform与Backbone&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.首先是transform与主干网络&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;如下图，假设batch size是4，图片大小是(375, 500)，他会把图片resize到minsize=800，maxsize=1333。800这个尺度基本上是一定的，另外一个在根据大小一般在1000-1300漂浮，并记录下原始的尺寸（最终检测结果再恢复回去）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;丢尽主干网络，原始的论文没有采用FPN，这里采用了FPN将输出5种大小尺度的特征图，通道数是256，批量大小是4。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220620224603719.png&#34; alt=&#34;image-20220620224603719&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;regionproposalnetwork&#34;&gt;RegionProposalNetwork&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;2.进入RPN，RegionProposalNetwork（时刻对照&lt;a href=&#34;#%E4%BB%A3%E7%A0%81%E5%89%96%E6%9E%90&#34;&gt;大图&lt;/a&gt;看）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注：RPN的最终目的是提供一推RegionProposal，相当于很多张在transform后的图像上的框。&lt;/p&gt;
+&lt;p&gt;RPN网络部分涉及到网络训练，所以训练和推理的过程不同，训练或多出一些求loss的步骤，会额外说明。&lt;/p&gt;
+&lt;p&gt;流程可见RegionProposalNetwork类的&lt;a href=&#34;https://github.com/pytorch/vision/blob/d0d7058a36fb4ea702dcb6c92c03d90ca91d8281/torchvision/models/detection/rpn.py#L339&#34;&gt;forward函数&lt;/a&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;RPN HEAD，进行分类（有无）与框回归。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;features&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;features&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;values&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 5张特征图&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;objectness&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pred_bbox_deltas&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;features&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在所有的feature map丢尽卷积网络，预设的是每个特征图上的一点对应会生成3个Anchor，所以需要把(4,256,200,304)的map卷积成(4,3,200,304)的分类和(4,3X4,200,304)的框回归。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220620231117190.png&#34; alt=&#34;image-20220620231117190&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;生成anchor，如上图所示，此时每张图片应生成的anchor的数量是3X(200X304+100X152+50X76+25X38+13X19)=242991，anchor的尺度也是在“原图”上生成的。将HEAD输出的4X242991个box作为原始的proposal。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;接下来对proposal进行过滤。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;boxes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;scores&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filter_proposals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;proposals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;objectness&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;images&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;image_sizes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;num_anchors_per_level&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;对于每一张输入图片，首先根据HEAD输出的objectness，在其每张特征图上选取rpn_pre_nms_top_n_train个即头2000个box（Test是1000），由于最小的特征图只有13X19X3=741个proposal，所以总共在pre_nms阶段选出了8741个proposal，再对舍去小面积box，根据阈值移除score小的proposal，再根据超参数rpn_nms_thresh=0.7进行NMS（比如NMS后可能还剩下3200个），最后选取rpn_post_nms_top_n_train=2000选取score前2000的proposal。一张图片最终生成2000个proposal，4张即8000个。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220620235543673.png&#34; alt=&#34;image-20220620235543673&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如果是训练阶段，还要进行正负样本的判断并计算分类与回归的loss。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;计算每个anchor是正样本还是负样本，并计算box的偏移量。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;matched_gt_boxes&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assign_targets_to_anchors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;anchors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;targets&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;regression_targets&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;box_coder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;matched_gt_boxes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;anchors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 结合anchors以及对应的gt，计算regression参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;根据超参数rpn_fg_iou_thresh=0.7，如果anchor与gt_boxes的iou大于0.7则是前景，根据rpn_bg_iou_thresh=0.3，小于0.3则是负样本。label的数量还是跟每张图anchor的总数量相同。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220621001307192.png&#34; alt=&#34;image-20220621001307192&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选择预设数量的正、负样本计算loss。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;loss_objectness&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loss_rpn_box_reg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compute_loss&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;objectness&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pred_bbox_deltas&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;regression_targets&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# self.compute_loss 函数内&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;sampled_pos_inds&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sampled_neg_inds&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fg_bg_sampler&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;根据rpn_batch_size_per_image=256, rpn_positive_fraction=0.5，采样正负样本，即每张图像&lt;strong&gt;随机采样&lt;/strong&gt;（可以进代码看）128个正样本，128个负样本；4张图的话就是使用总共4X256=1024个样本计算loss。**注：**有可能一张图的正样本数量到不了128，那么就用负样本来补齐（如下，4张图才86个正样本，跑了下代码，感觉大多数时候都只有100个左右的正样本）。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220621002826926.png&#34; alt=&#34;image-20220621002826926&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;roi-head&#34;&gt;ROI HEAD&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;每张图得到2000个proposal后，进入ROI HEAD&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ROI HEAD的训练和测试依然是有差异的，训练阶段的话是想得到比较好的loss所以选择部分proposal进行训练，不需要得到结果；而测试阶段不计算loss，直接把全部proposal丢进网络得出分类和回归结果，再进行包含有NMS的后处理得到最终结果。&lt;/p&gt;
+&lt;p&gt;所以，以下完全分为train和Test来说：（对比RPN网络，不管是train还是test都是要得出proposal的，所以train比test前部分总体相同，train多出一个计算loss）&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;train：主要为了计算loss&lt;/th&gt;
+&lt;th&gt;test：主要为了得出最终结果&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1.选择出部分proposal以及对应的label&lt;/td&gt;
+&lt;td&gt;1.不操作，使用全部proposal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2.ROI Align&lt;/td&gt;
+&lt;td&gt;2.ROI Align&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3.丢尽网络得出预测的分类（目标种类）和框回归结果&lt;/td&gt;
+&lt;td&gt;3.丢尽网络得出预测的分类（目标种类）和框回归结果&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4.计算loss&lt;/td&gt;
+&lt;td&gt;4.包含NMS的后处理得出结果&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;train：&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;得出proposal对应的label，并采样正负样本。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 得到所有proposal的label&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;matched_idxs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assign_targets_to_proposals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;proposals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gt_boxes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gt_labels&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 前景与背景的IOU&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# box_fg_iou_thresh=0.5, box_bg_iou_thresh=0.5,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 每张图从2000个采样至512个proposal，并且正样本最高占有1/4（因为大部分时候正样本数量不足）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;box_batch_size_per_image&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;512&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;box_positive_fraction&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.25&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;ROI Align。ROI的输入是proposal以及feature maps，根据proposal把特征图裁剪到7X7。注意观察下图中feature map变到box_features的变化，批量本来是4，然后每张图512个proposal，所以第一维度变成了4X512=2048，通道数不变，HXW变成了7X7&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220621151056504.png&#34; alt=&#34;image-20220621151056504&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;丢尽网络分类与回归。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 拉成一维并进入两层全连接层&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;box_features&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;box_head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;box_features&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 分类、回归&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;class_logits&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;box_regression&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;box_predictor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;box_features&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算loss。两个loss，没什么好说的。加上RPN反馈的loss，总共就是4个loss，调试的这份代码是直接把所有loss加到一起进行梯度下降的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;test:&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;test阶段只会从RPN得到rpn_post_nms_top_n_test=1000个proposal！&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ROI Align，不具体说了，由于单图proposal有1000个，所以box_features应该是(4000,256,7,7)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;丢尽网络分类与回归。跟上面一样。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;后处理&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;boxes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;scores&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;postprocess_detections&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;class_logits&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;box_regression&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;proposals&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;image_shapes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;对网络的预测数据进行后处理，包括
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;（1）根据proposal以及预测的回归参数计算出最终bbox坐标
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;（2）对预测类别结果进行softmax处理
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;（3）裁剪预测的boxes信息，将越界的坐标调整到图片边界上
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;（4）移除所有背景信息
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;（5）移除低概率目标                    box_score_thresh=0.05
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;（6）移除小尺寸目标
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;（7）执行nms处理，并按scores进行排序     box_nms_thresh=0.5
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;（8）根据scores排序返回前topk个目标      box_detections_per_img=100
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;家族对比&#34;&gt;家族对比&lt;/h3&gt;
+&lt;h4 id=&#34;改进方向&#34;&gt;改进方向&lt;/h4&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420152346937.png&#34; alt=&#34;image-20220420152346937&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;h4 id=&#34;速度比对&#34;&gt;速度比对&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420131618419.png&#34; alt=&#34;image-20220420131618419&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;need-two-stage&#34;&gt;need two stage?&lt;/h4&gt;
+&lt;p&gt;是否可以不要第二阶段？&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220612220311614.png&#34; alt=&#34;image-20220612220311614&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;one-stage&#34;&gt;one stage&lt;/h2&gt;
+&lt;p&gt;RPN HEAD和ROI HEAD完成的工作类似，所以现在网上教程一般都是先从one stage入手，再讲two stage。但是先学two stage家族有一个好处就是：可以清晰的看出物体检测这一任务从传统方法到深度学习方法的过渡，思路和逻辑都很明确。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

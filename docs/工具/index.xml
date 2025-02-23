@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具 | FEZZY</title>
+    <link>https://hezhou49.github.io/docs/%E5%B7%A5%E5%85%B7/</link>
+      <atom:link href="https://hezhou49.github.io/docs/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <description>工具</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 14 Apr 2022 10:08:35 +0800</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>工具</title>
+      <link>https://hezhou49.github.io/docs/%E5%B7%A5%E5%85%B7/</link>
+    </image>
+    
+    <item>
+      <title>typora&#43;picgo&#43;oss实现图床</title>
+      <link>https://hezhou49.github.io/docs/%E5%B7%A5%E5%85%B7/picgo%E4%B8%8Eoss%E5%9B%BE%E5%BA%8A/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E5%B7%A5%E5%85%B7/picgo%E4%B8%8Eoss%E5%9B%BE%E5%BA%8A/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;转载至https://blog.csdn.net/weixin_45525272/article/details/125884516&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;阿里云设置&#34;&gt;阿里云设置&lt;/h2&gt;
+&lt;h3 id=&#34;创建用户权限&#34;&gt;创建用户权限&lt;/h3&gt;
+&lt;p&gt;进入阿里云官网https://www.aliyun.com/，登入阿里云，首先要开通阿里云oss&lt;a href=&#34;https://so.csdn.net/so/search?q=%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8&amp;amp;spm=1001.2101.3001.7020&#34;&gt;对象存储&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/img_convert/ca4578effb6ea9662deb9f4a3cb7130c.webp?x-oss-process=image/format,png&#34; alt=&#34;image-20211028101132499&#34;&gt;&lt;/p&gt;
+&lt;p&gt;之后进入下面这个界面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/img_convert/ac975a72fb11714915e676c3304d001a.webp?x-oss-process=image/format,png&#34; alt=&#34;image-20211028101314650&#34;&gt;&lt;br&gt;
+点击立即购买即可扫码付款&lt;/p&gt;
+&lt;p&gt;再点击头像，点击AccessKey管理&lt;br&gt;
+&lt;img src=&#34;https://img-blog.csdnimg.cn/8ddc54cecce14f82bdf910900aa31695.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;br&gt;
+为了安全考虑，点击开始使用子用户的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/b195dae2745d4335af298a8bb1abb228.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://img-blog.csdnimg.cn/004dc90c2b2b4de6ae86c46fce2a2fb3.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;勾选调用API&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/b8a89b8fb5f6449995a4e422de76084a.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;br&gt;
+复制下来秘钥到记事本（存好后面用）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/05705f16523f4a9dafb962cf09ff14f3.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;br&gt;
+点击权限管理设置权限&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/2f2876a60866430dbba4c7dd4759e678.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;br&gt;
+按下面步骤添加oss操作权限&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/57a7fde6fd394a57b16a91b290ec5897.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;创建仓库&#34;&gt;创建仓库&lt;/h3&gt;
+&lt;p&gt;再在控制台选择对象存储oss 创建储存空间（&lt;strong&gt;存储空间名&lt;/strong&gt; 就是bucket名称，如果没有，请自行创建）&lt;/p&gt;
+&lt;p&gt;按照如下选择，创建&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/img_convert/4d6c4b4f6a132cb0b2657c0ae827f8b4.webp?x-oss-process=image/format,png&#34; alt=&#34;image-20211028105303870&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/img_convert/c3d0b08c72352b1305b040af07f4d711.webp?x-oss-process=image/format,png&#34; alt=&#34;image-20211028110622621&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/img_convert/b99143c20da3847dfe07d6427862112a.webp?x-oss-process=image/format,png&#34; alt=&#34;image-20211028110037015&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;确定存储区域&lt;/strong&gt; 就是地域节点前部分，例如我的就是&lt;code&gt;oss-cn-beijing&lt;/code&gt; (同样复制保存到记事本待会配置上传工具PicGo的时候会用上)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/img_convert/47f808c342d87636bee6ff7a6d49756f.webp?x-oss-process=image/format,png&#34; alt=&#34;image-20211028111230211&#34;&gt;&lt;/p&gt;
+&lt;p&gt;进入文件管理界面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/img_convert/6bdecc0940eb4e888e899d099978ee3a.webp?x-oss-process=image/format,png&#34; alt=&#34;image-20211028111841384&#34;&gt;&lt;/p&gt;
+&lt;p&gt;再新建目录/img&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/img_convert/5f8b05fa610636b069a23b811c6fed6c.webp?x-oss-process=image/format,png&#34; alt=&#34;image-20211028111916751&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;picgo-设置&#34;&gt;PicGo 设置&lt;/h2&gt;
+&lt;p&gt;首先要进行PicGo （安装过的跳过这一步）&lt;/p&gt;
+&lt;h3 id=&#34;picgo-安装&#34;&gt;PicGo 安装&lt;/h3&gt;
+&lt;p&gt;PicGo：一个用于快速上传图片并获取图片 URL 链接的工具。&lt;/p&gt;
+&lt;p&gt;官网地址：&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/&#34;&gt;https://picgo.github.io/PicGo-Doc/&lt;/a&gt;&lt;br&gt;
+&lt;img src=&#34;https://img-blog.csdnimg.cn/f2c7df2189384dce8aaf4f4a30883284.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;下载&#34;&gt;下载&lt;/h4&gt;
+&lt;p&gt;官网下载地址：Release 2.3.0 · Molunerfinn/PicGo · GitHub&lt;br&gt;
+&lt;a href=&#34;https://github.com/Molunerfinn/PicGo/releases&#34;&gt;https://github.com/Molunerfinn/PicGo/releases&lt;/a&gt;&lt;br&gt;
+&lt;img src=&#34;https://img-blog.csdnimg.cn/7b00930ffbdc4a41a04b780c2e65e545.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;百度网盘链接：&lt;br&gt;
+链接：&lt;a href=&#34;https://pan.baidu.com/s/1EtomXfKlGklXbRNhsLnC6A?pwd=bolu&#34;&gt;https://pan.baidu.com/s/1EtomXfKlGklXbRNhsLnC6A?pwd=bolu&lt;/a&gt;&lt;br&gt;
+提取码：bolu&lt;br&gt;
+–来自百度网盘超级会员V6的分享&lt;/p&gt;
+&lt;h4 id=&#34;安装&#34;&gt;安装&lt;/h4&gt;
+&lt;p&gt;直接打开 .exe 文件，一步步安装即可。&lt;/p&gt;
+&lt;p&gt;安装后软件如下：&lt;br&gt;
+&lt;img src=&#34;https://img-blog.csdnimg.cn/dfc4f5472c444be9ac24e3341fe2530c.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;picgo配置&#34;&gt;picgo配置&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/e75d0a848e77495dbde0bb11534a8e54.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;br&gt;
+存储地区不知道就去oss那看看：&lt;br&gt;
+点击对象存储，点击bucket，点击你的存储区，点击概览&lt;br&gt;
+&lt;img src=&#34;https://img-blog.csdnimg.cn/4b26b27098554934a65552a5262b6698.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;在-typora-中使用&#34;&gt;在 Typora 中使用&lt;/h2&gt;
+&lt;p&gt;点击 文件 =&amp;gt; 偏好设置，然后按照下图进行配置&lt;br&gt;
+&lt;img src=&#34;https://img-blog.csdnimg.cn/d1065be5b9a3451bb71ed29a00fac03f.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以验证一下，OK上传成功&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://img-blog.csdnimg.cn/aaa831da012443b29cdba81a58be0ffa.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

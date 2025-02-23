@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>双目 | FEZZY</title>
+    <link>https://hezhou49.github.io/tags/%E5%8F%8C%E7%9B%AE/</link>
+      <atom:link href="https://hezhou49.github.io/tags/%E5%8F%8C%E7%9B%AE/index.xml" rel="self" type="application/rss+xml" />
+    <description>双目</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Wed, 14 Apr 2021 02:23:00 +0800</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>双目</title>
+      <link>https://hezhou49.github.io/tags/%E5%8F%8C%E7%9B%AE/</link>
+    </image>
+    
+    <item>
+      <title>射影变换与二视图几何</title>
+      <link>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B0%84%E5%BD%B1%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%BA%8C%E8%A7%86%E5%9B%BE%E5%87%A0%E4%BD%95/</guid>
+      <description>&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;《计算机视觉中的多视图几何》 第二版 （太数学了）&lt;/li&gt;
+&lt;li&gt;基于局部特征的图像与点云配准研究[D]&lt;/li&gt;
+&lt;li&gt;《视觉SLAM 14讲》&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/102022619&#34;&gt;知乎：射影平面的直观理解&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E5%8D%95%E5%BA%94%E6%80%A7&#34;&gt;维基百科：单应性&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://opencv24-python-tutorials.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_feature_homography/py_feature_homography.html&#34;&gt;opencv: Feature Matching + Homography to find Objects&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.cnblogs.com/sunny-li/p/7500541.html&#34;&gt;二视图从运动到结构&amp;mdash;-对极几何和基础矩阵&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;射影空间与射影变换&#34;&gt;射影空间与射影变换&lt;/h3&gt;
+&lt;h4 id=&#34;射影空间&#34;&gt;射影空间&lt;/h4&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;齐次坐标&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321114417446.png&#34; alt=&#34;image-20220321114417446&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;点、直线的齐次表示&lt;/strong&gt;&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321115621439.png&#34; alt=&#34;image-20220321115621439&#34;  /&gt;
+&lt;p&gt;&lt;strong&gt;射影空间&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;n维射影空间用n+1维（除去全0）齐次向量组成。&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/102022619&#34;&gt;知乎：射影平面的直观理解&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;射影空间只是一组齐次向量的集合，它是为了方便运算而被制造出来，其实没有必要去研究他的物理或几何意义，重要的是关注射影变换&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;射影变换&#34;&gt;射影变换&lt;/h4&gt;
+&lt;p&gt;射影空间是最&lt;strong&gt;一般&lt;/strong&gt;的空间变换。&lt;/p&gt;
+&lt;p&gt;多视图几何几何给出的比较专业的定义如下，分为几何定义与代数定义。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/20220321152854.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E5%8D%95%E5%BA%94%E6%80%A7&#34;&gt;维基百科：单应性&lt;/a&gt;在计算机视觉领域中，&lt;strong&gt;空间中同一平面的任意两幅图像&lt;/strong&gt;通过单应性关联在一起（假定是针孔相机）。比如,一个物体可以通过旋转相机镜头获取两张不同的照片(这两张照片的内容不一定要完全对应,部分对应即可),我们可以把单应性设为一个二维矩阵M,那么照片1乘以M就是照片2。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;基于局部特征的图像与点云配准研究[D]中，关于2D射影变换的描述：（其内容几乎来自多视图几何一书）&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321150106448.png&#34; alt=&#34;image-20220321150106448&#34; style=&#34;zoom: 67%;&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321150136237.png&#34; alt=&#34;image-20220321150136237&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321150512847.png&#34; alt=&#34;image-20220321150512847&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;关于透视变换（perspective）与射影变换（projective）的区别：很多地方并不区分透视变换与射影变换。&lt;/p&gt;
+&lt;p&gt;透视变换是射影变换的一种特殊场景。（参考书P25）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321155655449.png&#34; alt=&#34;image-20220321155655449&#34;&gt;&lt;/p&gt;
+&lt;p&gt;区别：如图，两个透视变换的复合一般不是透视变换，而是射影变换。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321160030395.png&#34; alt=&#34;image-20220321160030395&#34;&gt;&lt;/p&gt;
+&lt;p&gt;比如opencv的&lt;strong&gt;getPerspectiveTransform&lt;/strong&gt;方法，字面意思就是改变给定图像的透视图。（是在改变给定的&lt;strong&gt;一张图&lt;/strong&gt;，射影变换通常是在两张图之间寻求变换（相当于更换相机位置重新拍了一张图），比如&lt;a href=&#34;https://opencv24-python-tutorials.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_feature_homography/py_feature_homography.html&#34;&gt;opencv: Feature Matching + Homography to find Objects&lt;/a&gt;）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220323202307667.png&#34; alt=&#34;image-20220323202307667&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# In Perspective Transformation, we can change the perspective of a given image or video for getting better insights into the required information.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;cv2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;getPerspectiveTransform&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;method&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Parameters&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Coordinates&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;quadrangle&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vertices&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;原图像四边形顶点&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;像素坐标&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dst&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Coordinates&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;corresponding&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;quadrangle&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vertices&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;destination&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;期望的目标图像四边形顶点&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;像素坐标&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所以，应该从上下文理解意思，不要太纠结字眼。&lt;strong&gt;透视&lt;/strong&gt;一词来自的中心投影，比如相机成像、针孔模型、人眼。（通常）&lt;/p&gt;
+&lt;p&gt;快速分辨透视变换与射影变换。（图3是图像拼接）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220323204243319.png&#34; alt=&#34;image-20220323204243319&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;《视觉SLAM14讲》中也给出类似定义：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321153212134.png&#34; alt=&#34;image-20220321153212134&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321153251128.png&#34; alt=&#34;image-20220321153251128&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;求解&#34;&gt;求解&lt;/h4&gt;
+&lt;p&gt;齐次方程有8个自由度，需要8个线性方程组，一组对应点能提供两个方程，至少需要4组对应点。&lt;/p&gt;
+&lt;p&gt;使用cv2.getPerspectiveTransform提供精准四组点对可以求得变换矩阵。&lt;/p&gt;
+&lt;p&gt;在特征匹配的场合，对应点可能出现无匹配，并且匹配对数可能远大于4对，可以使用&lt;a href=&#34;https://blog.csdn.net/fengyeer20120/article/details/87798638&#34;&gt;cv2.findHomography&lt;/a&gt;，使用最小均方误差或者RANSAC方法优化输出结果。&lt;/p&gt;
+&lt;h3 id=&#34;摄像机模型&#34;&gt;摄像机模型&lt;/h3&gt;
+&lt;p&gt;摄像机模型已经比较清楚了，相关的常规一点的链接比如。&lt;a href=&#34;https://blog.csdn.net/weixin_43206570/article/details/84797361&#34;&gt;相机模型 16个参数&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;参考书内使用齐次坐标详细推导了摄像机模型P的形成。参考书 #6.1&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220322111246449.png&#34; alt=&#34;image-20220322111246449&#34;&gt;&lt;/p&gt;
+&lt;p&gt;需要注意的是，P是将3D投影到2D，是3X4矩阵，所以P是作用到世界坐标上的，x=PX。所以，R和t也是从&lt;strong&gt;世界坐标系到相机坐标系&lt;/strong&gt;的转换（相机坐标系是中间过程）。
+&lt;/p&gt;
+$$
+\widetilde{\mathbf{X}}_{\mathrm{cam}}=\mathrm{R}(\widetilde{\mathbf{X}}-\widetilde{\mathbf{C}})
+$$
+&lt;p&gt;
+其中，C~代表摄像机中心在世界坐标系中的坐标。&lt;/p&gt;
+&lt;h4 id=&#34;求解-1&#34;&gt;求解&lt;/h4&gt;
+&lt;p&gt;通过相机标定流程获取相机矩阵。&lt;/p&gt;
+&lt;p&gt;求解外参可以使用PnP方法。[^PnP（ Perspective-n-Point）]是求解 3D 到 2D 点对运动的方法。它描述了当知道 n 个 3D 空间点及其投影位置时，如何估计相机的位姿。如果两张图像中其中一张特征点的 3D 位置已知，那么&lt;strong&gt;最少只需 3 个点对&lt;/strong&gt;（需要至少一个额外点验证结果）就可以估计相机运动。&lt;/p&gt;
+&lt;p&gt;opencv提供了solvePnP函数来解决此问题。点对比较多的时候可以使用solvePnPRansac()消除噪声，提高鲁棒性。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/qq_30815237/article/details/87606687&#34;&gt;相机标定（3） opencv中solvePnPRansac()和solvePnP()计算外参数&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;二视图几何&#34;&gt;二视图几何&lt;/h3&gt;
+&lt;h4 id=&#34;基本矩阵&#34;&gt;基本矩阵&lt;/h4&gt;
+&lt;p&gt;基本矩阵是对极几何的代数表示。&lt;/p&gt;
+&lt;p&gt;它表示在第一幅图像上的一个&lt;strong&gt;点&lt;/strong&gt;到另一幅图像上与之对应的对&lt;strong&gt;极线&lt;/strong&gt;的映射。&lt;strong&gt;是点到直线的映射。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/827012-20170910104028476-1239104682.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;性质&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321171505518.png&#34; alt=&#34;image-20220321171505518&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220321172244630.png&#34; alt=&#34;image-20220321172244630&#34; style=&#34;zoom:90%;&#34; /&gt;
+&lt;p&gt;&lt;strong&gt;求解&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;书上有介绍使用8点法或者7点法等数学方法求解F，但那是在未知相机参数的情况下。在双目相机的应用中，相机标定后，可以很轻松的使用上面红线的公式求出基本矩阵F。&lt;/p&gt;
+&lt;h4 id=&#34;本质矩阵&#34;&gt;本质矩阵&lt;/h4&gt;
+&lt;p&gt;博客讲得比较清楚。&lt;a href=&#34;https://www.cnblogs.com/sunny-li/p/7500541.html&#34;&gt;二视图从运动到结构&amp;mdash;-对极几何和基础矩阵&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;博客是从本质矩阵E讲到基本矩阵F的，参考书是先将F再讲E，不同的切入而已。&lt;/p&gt;
+&lt;p&gt;注意，叉乘转矩阵运算的方法：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/827012-20170911213138000-1685547295.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;由基本矩阵恢复E：
+&lt;/p&gt;
+$$
+\mathrm{E}=\mathrm{K}^{\prime \top} \mathrm{FK}
+$$
+&lt;p&gt;
+&lt;strong&gt;从无标定参数的二试图求解本质矩阵：&lt;/strong&gt;（14讲——本质矩阵）&lt;/p&gt;
+&lt;p&gt;本质矩阵只有5个自由度，照理说最少只需要5组点对即可求解，但是比较麻烦，所以通常使用8点法求解（8组）。（从工程实现角度考虑，由于平时通常会有几十对乃至上百对的匹配点，从 8 对减至 5 对意义并不明显。）&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>二视图三维重建与器械跟踪</title>
+      <link>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%8C%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%99%A8%E6%A2%B0%E8%B7%9F%E8%B8%AA/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%8C%E8%A7%86%E5%9B%BE%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%99%A8%E6%A2%B0%E8%B7%9F%E8%B8%AA/</guid>
+      <description>&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;知乎主页：&lt;a href=&#34;https://www.zhihu.com/people/yingsongli&#34;&gt;李迎松&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GitHub：https://github.com/ethan-li-coding&lt;/li&gt;
+&lt;li&gt;视频教程：&lt;a href=&#34;https://www.bilibili.com/video/BV1Uv411q7GU&#34;&gt;立体视觉之立体匹配理论与实战&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;手术器械的光学跟踪技术研究[D]，王志刚&lt;/li&gt;
+&lt;li&gt;《视觉SLAM14讲》第7章&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/gangeqian2/article/details/119172447&#34;&gt;3D点集之间计算转移矩阵，旋转R，转移T，新增缩放s (总结全面)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;关于双目立体匹配与三维重建&#34;&gt;关于双目立体匹配与三维重建&lt;/h3&gt;
+&lt;p&gt;一种分类方式是：稠密三维重建与稀疏三维重建。&lt;/p&gt;
+&lt;p&gt;顾名思义，稀松三维重建是只讲视野内的部分点重建，稠密三维重建通常是将所有点的三维坐标都重建出来。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们的项目是稀疏点三维重建。两种方案很多基础知识和术语是相同的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;目前，学界研究的基于双目的三维重建几乎都是稠密的深度图重建，因为说实话，稀疏点重建挺简单的。稀疏点的三维重建左右点的匹配关系可以做的非常精确，所以，通常情况下，稀疏点的三维重建的精度会比稠密三维重建高很多。&lt;/p&gt;
+&lt;h3 id=&#34;稠密点三维重建&#34;&gt;稠密点三维重建&lt;/h3&gt;
+&lt;h4 id=&#34;概述&#34;&gt;概述&lt;/h4&gt;
+&lt;p&gt;从双目图像中恢复整张深度图（通常是以左摄像机坐标系为参考）。一些技术相似的任务：MVS、SFM&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220404225227485.png&#34; alt=&#34;image-20220404225227485&#34;&gt;&lt;/p&gt;
+&lt;p&gt;场景：无人机、智能驾驶、机器人。&lt;/p&gt;
+&lt;p&gt;方法：传统算法效果还不错，近几年出现大量基于深度学习的方法（以lidar值为groundtruth）。&lt;/p&gt;
+&lt;h4 id=&#34;恢复相机运动&#34;&gt;&lt;strong&gt;恢复相机运动&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;对于MVS或者SFM等任务，没有相机间的坐标转换关系。对极约束简洁地给出了两个匹配点的空间位置关系。于是，相机位姿估计问题变为以下两步：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;根据配对点的像素位置求出 E 或者 F。（E用8点法）&lt;/li&gt;
+&lt;li&gt;根据 E 或者 F 求出 R、 t。（SVD，四组解，使用深度值为正的一组）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;由于 E 和 F 只相差了相机内参，而内参在 SLAM 中通常是已知的，所以实践当中往往使用形式更简单的 E。&lt;/p&gt;
+&lt;p&gt;除了基本矩阵和本质矩阵，二视图几何中还存在另一种常见的矩阵：单应矩阵（ Homography）H，它描述了两个平面之间的映射关系。若场景中的特征点都落在同一平面上（比如墙、地面等），则可以通过单应性来进行运动估计。&lt;/p&gt;
+&lt;h4 id=&#34;方法框架&#34;&gt;方法框架&lt;/h4&gt;
+&lt;p&gt;关于极限纠正的代码，opencv也提供了相应的接口，我们自己程序内也有，但是实际操作时没用而已。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220404224636480.png&#34; alt=&#34;image-20220404224636480&#34;&gt;&lt;/p&gt;
+&lt;p&gt;右边是视差三维矩阵，横轴是像素坐标x,y，纵轴是视差d。C(x,y,d)记录的是左图(x,y)与右图(x+d,y)的匹配代价。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220405003528506.png&#34; alt=&#34;image-20220405003528506&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;稀疏点三维重建&#34;&gt;稀疏点三维重建&lt;/h3&gt;
+&lt;p&gt;场景：刚体跟踪。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220405161616853.png&#34; alt=&#34;image-20220405161616853&#34; style=&#34;zoom: 67%;&#34; /&gt;
+&lt;h4 id=&#34;匹配与重建&#34;&gt;匹配与重建&lt;/h4&gt;
+&lt;p&gt;已实现具有精确的双目标定信息，所以只要左右对应点正确匹配，那么就可以使用&lt;strong&gt;三角测量&lt;/strong&gt;的方式将点精确重建。&lt;/p&gt;
+&lt;p&gt;三维重建的任务是计算点的三维坐标，但我们的任务还要从点信息中恢复空间变换，所以实际上是一个&lt;strong&gt;刚体追踪&lt;/strong&gt;任务。需要确定哪些点是属于一个刚体的。所以这个问题不仅仅是立体匹配而已。关于点的分类，我们可以在二维图像中完成点的归类（比较困难），也可以在重建后（三维坐标）再对点进行分类。&lt;/p&gt;
+&lt;p&gt;可以看出，点的归类与立体匹配其实是完全可以分开的两个任务。立体匹配只是为了找到精准的对应关系，要在这个环节创新的话，就是找到消除误匹配的方法。距离编码使用距离信息编码同时解决了误匹配和点排序问题。如果只是为了解决误匹配，可以直接只是用距离信息，无需编码。&lt;/p&gt;
+&lt;p&gt;我个人觉得稀疏点这个任务是不太复杂的，因为我们手里的数据量其实也就只有那么几种：真实的点间距离，点的左右图像二维坐标，相机的标定参数。&lt;/p&gt;
+&lt;h4 id=&#34;距离编码代码复现&#34;&gt;距离编码代码复现&lt;/h4&gt;
+&lt;p&gt;这个方法是早先2012年王志刚的硕士毕业论文出现的，后面2016年才发小论文，小论文的数据和图是直接从大论文里面拿出来的，感觉是后来挤出来的小论文。发的&lt;strong&gt;中科院医学4区&lt;/strong&gt;Computer Assisted Surgery。&lt;/p&gt;
+&lt;p&gt;手术器械的光学跟踪技术研究[D]-4.4&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220405142439014.png&#34; alt=&#34;image-20220405142439014&#34;&gt;&lt;/p&gt;
+&lt;p&gt;简述步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;进行编码，按照预先指定的点的顺序（比如第一个器械是前三个点&amp;hellip;）编码角点与距离，是&lt;strong&gt;一一对应&lt;/strong&gt;的（n个点）。&lt;/li&gt;
+&lt;li&gt;执行对极匹配，输出所有的匹配关系（包含错误匹配），使用三角测量将每一对匹配重建为三维坐标（长度为m*m，m&amp;gt;n）。&lt;/li&gt;
+&lt;li&gt;计算任意两点的欧式距离，填入矩阵形成m*m的上三角矩阵。&lt;/li&gt;
+&lt;li&gt;遍历矩阵，判断值是否与真实的器械边长相等，则在新的m*m矩阵内填入对应的距离编码。遍历结束后，对称一下矩阵，将值填满。&lt;/li&gt;
+&lt;li&gt;遍历每一行，使任意两个距离编码相加。如果等于角点编码，则匹配成功。（如果角点编码对应的是第4点，那么该点即为第4点）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;随笔&#34;&gt;随笔&lt;/h4&gt;
+&lt;p&gt;三维空间点中求空间变换，其实两个点就可以，总共6个自由度，两组点就能提供6个方程。（但是会出现方向歧义，绑定手术器械后，绕中心旋转180度，靶点位置没有变化，手术器械变了）？对吗，在思考一下。（SVD提供的对应点的集合，所以是否不存在这个问题？）（两点无法建立一个参考坐标系！无法规定x、y的方向，空间变换描述的是参考坐标系之间的变换）&lt;/p&gt;
+&lt;p&gt;为什么空间中刚体跟踪通常使用的是三个点而不是两个点呢？因为两点只能绑定一条直线，无法描述一个平面，实际的刚体位置可以在绕该直线旋转的任意位置。&lt;/p&gt;
+&lt;p&gt;所以两点之间的转换是能求的，但是两点不能绑定一个三维的刚体，因为两点无法创建坐标系，所以无法描述两点与刚体的固定转换。&lt;/p&gt;
+&lt;p&gt;关于SVD，因为SVD的输入是对应点的集合，所以计算是没问题的。但是如何确定对应点关系呢？如果是2个点，从检测手段来看，你根本不知道哪个是点1哪个是点2。另外，不能是等腰三角形，这样绕中轴旋转180度靶点没有变。&lt;/p&gt;
+&lt;p&gt;使用大小不一的靶点？&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

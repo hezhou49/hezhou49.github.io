@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>模板匹配 | FEZZY</title>
+    <link>https://hezhou49.github.io/tags/%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D/</link>
+      <atom:link href="https://hezhou49.github.io/tags/%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D/index.xml" rel="self" type="application/rss+xml" />
+    <description>模板匹配</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Wed, 14 Apr 2021 02:23:00 +0800</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>模板匹配</title>
+      <link>https://hezhou49.github.io/tags/%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D/</link>
+    </image>
+    
+    <item>
+      <title>基于特征模板匹配的物体检测</title>
+      <link>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%E7%9A%84%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%E7%9A%84%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B/</guid>
+      <description>&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;p&gt;知乎专栏，opencv实现，40+文章，不错：https://www.zhihu.com/column/lowkeyway-OpenCV&lt;/p&gt;
+&lt;p&gt;opencv docs——Feature Matching：https://opencv24-python-tutorials.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_matcher/py_matcher.html&lt;/p&gt;
+&lt;p&gt;很早之前看过这个教程，但没想到这其实就是传统的基于2D图像特征模板做匹配实现物体识别的技术路线。&lt;/p&gt;
+&lt;h2 id=&#34;主要思路&#34;&gt;主要思路&lt;/h2&gt;
+&lt;p&gt;如今，当讨论到物体检测时，通常理解的是“区域提议+物体识别”这个组合，零几年的时候出现了类似滑动窗口+HOG+SVM这种检测行人的方案，即做了特征提取后使用分类器将该特征进行分类，这就是传统物体检测的思路。后面深度学习也是这种思路，只是使用了深度神经网络代替传统方法实现了特征提取与分类。&lt;/p&gt;
+&lt;p&gt;但是，在这种特征提取+分类的思路出现前莫非就不能做物体的识别和检测了？比如：下文提到的模板匹配的方法，模板匹配的关键是有一个或一组事先已经生成的模板。匹配模板图像与目标图像的特征点实现物体检测。特征的也有颜色、纹理、形状等多种定义。&lt;u&gt;比如《基于 Kinect 的物体分割与识别算法研究，D》中介绍了统计模板图像的颜色HSV空间分布直方图，H分为8个Bin，区域各分为3个，由此形成72维特征向量的模板，在目标图像内先使用分割算法进行区域提议，然后将得到的区域进行颜色特征提取并于模板匹配。&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;所以，应该宽泛的理解“物体检测”，不是只有“特征提取+分类”这种思路，在很多简单的应用场景下可以使用比较简单的方法达到物体检测的目的。（比如之前识别可乐拉罐直接简单的识别红色色块，这不也是达到了物体检测的目的？）&lt;/p&gt;
+&lt;h2 id=&#34;算法流程&#34;&gt;算法流程&lt;/h2&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/matcher_flann.jpg&#34; alt=&#34;FLANN based matching&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;what we need？流程简述：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;目标物体模板：用一张（多张，maybe不同角度）仅包含目标物的图像进行特征点检测与描述，从而生成一组（多组）特征描述子模板。一组模板的shape为m X n，m为点特征点个数，n为特征向量的维度。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;待查找图片（包含有目标物体）：对该图像进行特征点检测与描述，生成一组特征描述子。shape为k X n。k为特征点个数，n为特征向量的维度。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特征匹配过程：将模板与步骤2生成的特征描述子进行匹配（查找最近邻）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算单应性矩阵，实现目标物体图像到实际查找图像的转换。（最少需要4组点对计算单应矩阵，使用ransac方法对原始匹配进行误匹配剔除并计算最优转换）（这样就实现在检测图片出框选出了模板图片，如果还有对齐的深度图，可以直接在深度图上把物体抠出来）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/homography_findobj.jpg&#34; alt=&#34;Finding object with feature homography&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;几种2d特征点算法&#34;&gt;几种2D特征点算法&lt;/h2&gt;
+&lt;p&gt;特征点=关键点（key points）+对应的特征描述（descriptor）&lt;/p&gt;
+&lt;p&gt;机器视觉在工业机器人分拣系统中的应用[D]，2018，宋玉雪&lt;/p&gt;
+&lt;p&gt;知乎专栏，三个算法都有讲解：https://www.zhihu.com/column/c_1296447643791560704&lt;/p&gt;
+&lt;p&gt;SIFT算法：https://zhuanlan.zhihu.com/p/343522892（更清晰）&lt;/p&gt;
+&lt;p&gt;SIFT特征详解 ：https://www.cnblogs.com/wangguchangqing/p/4853263.html&lt;/p&gt;
+&lt;h3 id=&#34;sift&#34;&gt;SIFT&lt;/h3&gt;
+&lt;p&gt;看上面链接吧，高斯尺度空间。&lt;/p&gt;
+&lt;p&gt;128维特征描述。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主要思路：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;为了提取尺度不变的特征点，在图像金字塔内进行特征点检测。早期的图像金字塔直接将图像不断降采样到原来的1/2，高斯尺度空间额外对同一大小的图像进行不同大小的高斯模糊（模拟人眼看物体的模糊程度）&lt;/p&gt;
+&lt;p&gt;为了应对方向不变，计算特征点的邻域内的梯度方向与梯度值（使用直方图，360分为8个bin，每个bin45度，然后统计梯度值累加），统计最大的方向作为主方向。&lt;/p&gt;
+&lt;p&gt;特征描述：选取16X16的邻域，选取4X4的格子作为种子邻域，同样也使用直方图统计每一个种子邻域的直方图，那么每个种子邻域形成8维向量，16个种子形成128维向量，然后再进行一行额外操作，比如归一化等。&lt;/p&gt;
+&lt;h3 id=&#34;surf&#34;&gt;SURF&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Speeded  Up  Robust Features.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（1）在生成尺度空间方面，SIFT中下一组图像的尺寸是上一组的一半，同一组间图像尺寸一样，但是所使用的高斯模糊系数逐渐增大。而在SURF中，&lt;strong&gt;不同组间图像的尺寸都是一致的&lt;/strong&gt;，但不同组间使用的盒式滤波器的模板尺寸逐渐增大，同一组间不同层间使用相同尺寸的滤波器，但是滤波器的模糊系数逐渐增大。&lt;/p&gt;
+&lt;p&gt;（2）在特征点检验时，SIFT算子是先对图像进行非极大值抑制，再去除对比度较低的点。然后通过Hessian矩阵去除边缘的点。SURF算法是先通过Hessian矩阵来检测候选特征点，然后再对非极大值的点进行抑制。&lt;/p&gt;
+&lt;p&gt;（3）在特征向量的方向确定上，SIFT算法是在正方形区域内统计梯度的幅值的直方图，找到最大梯度幅值所对应的方向。SIFT算子确定的特征点可以有一个或一个以上方向，其中包括一个主方向与多个辅方向。SURF算法则是在圆形邻域内，检测&lt;strong&gt;各个扇形范围内水平、垂直方向上的Haar小波响应&lt;/strong&gt;，找到模值最大的扇形指向，且该算法的方向只有一个。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220709160518873.png&#34; alt=&#34;image-20220709160518873&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;（4）SIFT算法生成描述子时，是将16x16的采样点划分为4x4的区域，从而计算每个分区种子点的幅值并确定其方向，共计4x4x8=128维。SURF算法在生成特征描述子时将的正方形分割成4x4的小方格，每个子区域25个采样点，计算小波haar响应，一共4x4x4=64维。&lt;/p&gt;
+&lt;p&gt;综上，SURF算法在各个步骤上都简化了一些繁琐的工作，仅仅计算了特征点的一个主方向，生成的特征描述子也与前者相比降低了维数。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220709160136397.png&#34; alt=&#34;image-20220709160136397&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;orb&#34;&gt;ORB&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Oriented FAST and Rotated BRIEF ，改进了FAST角点与BRIEF描述子&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Fast是一个非常快速的关键点检测算法（不带特征描述），思路是直接比较当前点与邻域点的亮度差异。没有什么求导、积分、卷积操作，只比较亮度大小，所以很快。流程如下（图源视觉SLAM 14讲）：&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220708165659707.png&#34; alt=&#34;image-20220708165659707&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;p&gt;&lt;strong&gt;关键点：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;但是FAST关键点没有尺度和方向，使用图像金字塔（简单的上、下采样）解决尺度问题，方向是通过灰度质心法解决。&lt;/p&gt;
+&lt;p&gt;灰度质心法顾名思义是计算邻域内灰度的质心，公式很简单，就是加权平均。
+&lt;/p&gt;
+$$
+x_0=\frac {\sum_{x, y \in B} x I(x, y)} {\sum_{x, y \in B}  I(x, y)}, y_0=\frac {\sum_{x, y \in B} y I(x, y)} {\sum_{x, y \in B}  I(x, y)}
+$$
+&lt;p&gt;
+将当前点与质心进行连线，就生成了该关键点的方向了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;特征描述：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;特征点检测-ORB：https://zhuanlan.zhihu.com/p/91479558&lt;/p&gt;
+&lt;p&gt;邻域内随机选取两点，比较点的亮度强弱关系，从而赋值0或1。选取N=256组，形成256维向量。上述链接为数不多的介绍了brief描述子的特征匹配规则，及使用汉明距离，因为每一维要么是0要么是1，所以距离的理论值是[0, N]&lt;/p&gt;
+&lt;p&gt;为了解决旋转不变性，使用关键点提取部分得到的方向旋转邻域，然后再计算描述子。&lt;/p&gt;
+&lt;p&gt;为了优化性能，其实还做了一步使用贪心算法的优化，但不过多介绍。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

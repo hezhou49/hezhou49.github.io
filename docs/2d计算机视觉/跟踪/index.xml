@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>跟踪 | FEZZY</title>
+    <link>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%B7%9F%E8%B8%AA/</link>
+      <atom:link href="https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%B7%9F%E8%B8%AA/index.xml" rel="self" type="application/rss+xml" />
+    <description>跟踪</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 14 Apr 2022 10:08:35 +0800</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>跟踪</title>
+      <link>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%B7%9F%E8%B8%AA/</link>
+    </image>
+    
+    <item>
+      <title>光流</title>
+      <link>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%B7%9F%E8%B8%AA/%E8%B7%9F%E8%B8%AA/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/2d%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%B7%9F%E8%B8%AA/%E8%B7%9F%E8%B8%AA/</guid>
+      <description>&lt;h2 id=&#34;思路&#34;&gt;思路&lt;/h2&gt;
+&lt;p&gt;使用光流场估计运动场。&lt;/p&gt;
+&lt;p&gt;**光流场：**图像灰度模式的表面运动（像素的运动）。&lt;/p&gt;
+&lt;h3 id=&#34;光流约束方程&#34;&gt;光流约束方程&lt;/h3&gt;
+&lt;p&gt;三个核心假设：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;图像亮度恒定&lt;/li&gt;
+&lt;li&gt;小运动&lt;/li&gt;
+&lt;li&gt;空间一致性(英语求解，假设领域内具有相同的速度)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img src=&#34;跟踪.assets/image-20220912210505124.png&#34; alt=&#34;image-20220912210505124&#34;  style=&#34;border:1px solid&#34;/&gt;
+&lt;p&gt;未知数为u、v。&lt;/p&gt;
+&lt;img src=&#34;跟踪.assets/image-20220912210746841.png&#34; alt=&#34;image-20220912210746841&#34;  style=&#34;border:1px solid&#34;/&gt;
+&lt;p&gt;理论上两个未知数两个方程即可求解，但是为了结果更鲁棒，使用MXM的邻域信息，并用最小二乘求得最优解。&lt;/p&gt;
+&lt;img src=&#34;跟踪.assets/image-20220912210903417.png&#34; alt=&#34;image-20220912210903417&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;h3 id=&#34;流程&#34;&gt;&lt;strong&gt;流程&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;%e8%b7%9f%e8%b8%aa.assets/image-20220912162944286.png&#34; alt=&#34;image-20220912162944286&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;一般流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;先使用模板匹配找过要跟踪的对象并框选&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在bbox内查找特征点&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对于每一个特征点计算光流：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​	输入：前后帧图像，前一帧特征点及其邻域（邻域用来构造方程并使用最小二乘求最优解）&lt;/p&gt;
+&lt;p&gt;​	输出：每个特征点的u,v（x、y方向速度）。（根据uv就能求出该特征点在下一帧的对应点）&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;使用一些条件删除结果差的特征点匹配对。（比如模长，方向）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;n对匹配对平均一下即得到目标在下一帧的位置。&lt;/p&gt;
+&lt;p&gt;然后将前述的下一帧作为当前帧，再次进入流程，判断当前帧内的特征点够不够，不够再检测一些。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

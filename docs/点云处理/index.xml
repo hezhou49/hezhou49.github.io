@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>点云处理 | FEZZY</title>
+    <link>https://hezhou49.github.io/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/</link>
+      <atom:link href="https://hezhou49.github.io/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <description>点云处理</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 14 Apr 2022 10:08:35 +0800</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>点云处理</title>
+      <link>https://hezhou49.github.io/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/</link>
+    </image>
+    
+    <item>
+      <title>点云处理基础</title>
+      <link>https://hezhou49.github.io/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Thu, 26 May 2022 10:08:35 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/</guid>
+      <description>&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;《深蓝学院三维点云处理课程》&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;open3d docs&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;点云简介&#34;&gt;点云简介&lt;/h2&gt;
+&lt;p&gt;一些三维的表达形式：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220527100811864.png&#34; alt=&#34;image-20220527100811864&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;mesh：多用于计算机图形学；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;voxel grid：排列整齐、有序，可以对标二维的像素，但是空间大部分位置是空的，造成浪费；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;八叉树： 只向下细分内部有东西的格子，空间紧凑了，但是结构复杂，可能的计算开销相对变大。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;点云：一种简单且紧凑的数据格式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;点云处理的困难：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220527102324743.png&#34; alt=&#34;image-20220527102324743&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;其中，无序和旋转不变性是深度学习方法需要想办法处理的，因为变换顺序或者旋转后输入网络的矩阵的数值就完全变了，但点云还是点云。&lt;/p&gt;
+&lt;p&gt;POINT NET就是在矩阵中的数据维度上做&lt;code&gt;max pool&lt;/code&gt;，不管顺序怎么变，max pool的值都是相同的，解决了无序的问题。&lt;/p&gt;
+&lt;p&gt;旋转不变性依然是一个比较大的问题。&lt;/p&gt;
+&lt;h2 id=&#34;数学工具与基础算法&#34;&gt;数学工具与基础算法&lt;/h2&gt;
+&lt;h3 id=&#34;pca-主成分分析&#34;&gt;pca-主成分分析&lt;/h3&gt;
+&lt;p&gt;b站链接：https://www.bilibili.com/video/BV1E5411E71z?from=search&amp;amp;seid=12219938521484233618&lt;/p&gt;
+&lt;p&gt;PCA主要用于数据降维与表面法向量估计等。&lt;/p&gt;
+&lt;p&gt;数据降维的目的用更少的空间保留尽可能多的信息。主成分就是所有数据投影到这个方向时，能够保留最大的信息（即方差最大）。假想下图中的二维点如果投影到某个方向时变成了一个点，那么就没有保留到原始的分布信息，所以要求方差最大，就是想把差异最大化，从而保留原始数据的分布特点。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210721161606188.png&#34; alt=&#34;image-20210721161606188&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;h4 id=&#34;求解主成分&#34;&gt;求解主成分&lt;/h4&gt;
+&lt;p&gt;协方差矩阵的推到，过程不用记：&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210723144841574.png&#34; alt=&#34;image-20210723144841574&#34; style=&#34;zoom: 33%;&#34; /&gt;
+&lt;p&gt;主成分为旋转矩阵R的列向量。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210723143942632.png&#34; alt=&#34;image-20210723143942632&#34; style=&#34;zoom: 33%;&#34; /&gt;
+&lt;p&gt;协方差的特征值：&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210723145627502.png&#34; alt=&#34;image-20210723145627502&#34; style=&#34;zoom: 33%;&#34; /&gt;
+&lt;h4 id=&#34;评论区&#34;&gt;评论区&lt;/h4&gt;
+&lt;p&gt;这是挖掘数据线性分布规律的最重要算法。其实不仅仅用来降维，凡是涉及到分析数据分布特点的都可以用到。如：现在获得了某曲面大量的采样点云，要估计曲面在某采样点的法向量方向。则通过PCA分析该点及周围采样点的分布规律，找到数据点分布离散程度最大的两个正交方向，则这两个方向就近似构成曲面在该点的切平面，与此两方向正交的第三个方向就是曲面在该点的近似法矢&lt;/p&gt;
+&lt;p&gt;最初知道这个算法就是在研究点云处理、逆向工程时查文献了解的。后来开始转向机器学习又遇到这个。后面学了矩阵论加强了线代基础，把这个算法自己又推导了一遍，在看此视频之前已经从理论到直观透彻理解了&lt;/p&gt;
+&lt;h2 id=&#34;滤波&#34;&gt;滤波&lt;/h2&gt;
+&lt;h3 id=&#34;降采样&#34;&gt;降采样&lt;/h3&gt;
+&lt;p&gt;随机降采样，栅格降采样。&lt;/p&gt;
+&lt;h4 id=&#34;随机降采样&#34;&gt;随机降采样&lt;/h4&gt;
+&lt;p&gt;优点：速度非常快。&lt;/p&gt;
+&lt;p&gt;对于一些体量极大的点云很有效。比如一些工业大型构件（车体等）扫描出来的点云有可能达到上千万、上亿的点，直接去做处理是非常慢的，可以先做随机降采样处理到几千或者是几万的一个水平。&lt;/p&gt;
+&lt;h4 id=&#34;栅格降采样&#34;&gt;栅格降采样&lt;/h4&gt;
+&lt;p&gt;栅格内选取一个点：&lt;/p&gt;
+&lt;p&gt;求平均或加权（慢一点但精准），随机（快但可能不精准）。&lt;/p&gt;
+&lt;p&gt;步骤如下图，注意：&lt;/p&gt;
+&lt;p&gt;体素降采样后，点云是有序的，就是栅格（体素）的顺序。&lt;/p&gt;
+&lt;p&gt;三维的坐标是(h_x,h_y,h_z)，一维数组内的索引就是下图中的h。&lt;/p&gt;
+&lt;p&gt;排序的时间复杂是O(NlogN)（快排）。所以如果不做优化整体算法是O(NlogN)。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220724152633460.png&#34; alt=&#34;image-20220724152633460&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用哈希表优化&lt;/strong&gt;，能使用哈希表优化的主要原因是，我们知道最终这些点都会被放到h个容器中，&lt;strong&gt;每个点的ind正好代表了容器的编号&lt;/strong&gt;，所以先把每个点放到对应的容器中，然后保留非空容器，最后在每一个容器内选择一个点。&lt;strong&gt;所以是使用空间节省时间。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;最远点采样&#34;&gt;最远点采样&lt;/h4&gt;
+&lt;p&gt;先随机选一个点，然后遍历点云，选择一个最远点加入已选择点集S；&lt;/p&gt;
+&lt;p&gt;遍历点云，选择与S中所有点距离和最远的点加入S。重复这个过程。&lt;/p&gt;
+&lt;p&gt;由此优势：有些地方密度太大也只会选少部分点，得到的结果比较均衡，原始点云的分布特征也保留了下来。&lt;/p&gt;
+&lt;p&gt;但是复杂度比较高，至少是大于O(KN)的，应该是O(KlogKN)？（猜的，K是降采样后点数）&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220724161621153.png&#34; alt=&#34;image-20220724161621153&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;nss法向量空间采样&#34;&gt;NSS法向量空间采样&lt;/h4&gt;
+&lt;p&gt;思路就是对法向量建立区间（类似直方图），比如0-360分成36个区间，每个区间内采样固定数量的点。这样最终得到的点的法向量分布比较均衡，法向量可以理解为一种几何结构特征的描述，由此NSS后由于法向量分布比较均衡，所以原始点云的几何结构特征也得到了较好保留（不会直接把一些凸起直接滤掉什么的）。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220724162809013.png&#34; alt=&#34;image-20220724162809013&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;h3 id=&#34;上采样&#34;&gt;上采样&lt;/h3&gt;
+&lt;h4 id=&#34;双边滤波&#34;&gt;双边滤波&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;先粘贴一点关于双边滤波在图像内做平滑的解释。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;两个高斯权重相乘：
+&lt;/p&gt;
+$$
+W S=e^{\left(-\frac{(i-k)^{2}+(j-l)^{2}}{2 \sigma_{s}^{2}}\right)}
+$$
+$$
+w r=e^{\left(-\frac{\|f(i, j)-f(k, l)\|^{2}}{2 \sigma_{r}^{2}}\right)}
+$$
+&lt;p&gt;上面是二维的高斯分布，跟位置有关系，下面这个是图像的亮度差值的一维高斯分布。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/v2-916cb4a58d778a17052eab96d74884b5_b.jpg&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220707145424837.png&#34; alt=&#34;image-20220707145424837&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;由于在空域，像素是整齐排列的，所以在函数上采样的ws（权重）是上图左侧均匀变化的，但是在color space亮度是没有规律的，所以就是越亮度或色彩越相似，权重越高；如果在边缘区域出现剧烈的亮度变化，那么不相似的一侧分配到的权重就会很小，于是出现上图所示的“断崖式”缩减。&lt;/p&gt;
+&lt;p&gt;opencv给出的实现中，给出的双边滤波器bilateralFilter的3个主要参数如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;bilateralFilter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sigmaColor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sigmaSpace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;d				邻域半径
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;sigmaColor		color空间的sigma值，也就是高斯分布的标准差值，值越大也就是亮度差值大的也会获得较高权重；接近无穷大时，那么退化成普通高斯滤波。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;sigmaSpace		普通的空域高斯函数的标准差值。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;双边滤波做深度图点云补全&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如下做传感器数据融合时，把稀疏的激光点云数据与图像融合，导致很多图像像素的位置没有深度信息，由此常规思路是高斯滤波用邻域深度数据得到当前像素的深度信息。&lt;/p&gt;
+&lt;p&gt;双边滤波的优化就是加入色彩信息的高斯函数，颜色相近，权值大，颜色不向近，权值小。（下图：双边，中值，均值）&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220724171453439.png&#34; alt=&#34;image-20220724171453439&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;离群点去除&#34;&gt;离群点去除&lt;/h3&gt;
+&lt;h4 id=&#34;半径滤波&#34;&gt;半径滤波&lt;/h4&gt;
+&lt;p&gt;半径离群点去除，规定半径内的最少邻居数量&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220723221725983.png&#34; alt=&#34;image-20220723221725983&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;统计滤波&#34;&gt;统计滤波&lt;/h4&gt;
+&lt;p&gt;m个点，计算每个点邻域内k个点的距离，把所有距离当成是高斯分布计算其均值和标准差，然后通过控制sigma前的权重只保留邻域距离的均值在指定范围的点。&lt;/p&gt;
+&lt;p&gt;所以这个方法基本上可以不用调参（比如半径）就能取得比较好的结果。所以是根据整个分布的统计信息来进行滤波的。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220723222523044.png&#34; alt=&#34;image-20220723222523044&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;p&gt;open3d的接口，两个参数，基本可以不调。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;print(&amp;#34;Statistical oulier removal&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cl, ind = voxel_down_pcd.remove_statistical_outlier(nb_neighbors=20,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                                    std_ratio=2.0)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;display_inlier_outlier(voxel_down_pcd, ind)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;近邻点查找&#34;&gt;近邻点查找&lt;/h2&gt;
+&lt;p&gt;可用于法向量估计、离群点去除。knn-k近邻;radius nn-半径近邻&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;近邻点查找的核心思路，使用空间节约时间。由于raw点云数据是无序的，查找一个点的时间复杂度是o(n)，n个点是o(n^2)。使用一些数据结构比如KD树或者八叉树存放数据使得点云数据变得有序。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;knn查找一个点的的一个近邻点(1nn)的时间复杂度是o(logn)&lt;/p&gt;
+&lt;h3 id=&#34;kd树&#34;&gt;KD树&lt;/h3&gt;
+&lt;p&gt;k-dimentional tree&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;每个维度都执行一次二分，本质上还是一种二叉树&lt;/strong&gt;。如下图，按照x、y的顺序分割，除非在某一方向上不用再分割则略过。（此时的leaf_size=1）&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220727185309429.png&#34; alt=&#34;image-20220727185309429&#34; style=&#34;zoom:80%;border:1px solid&#34; /&gt;
+&lt;p&gt;结构如下：（多了一些约束的二叉树）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;axis:当前区域下一步要使用哪个轴分割
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;value:轴的位置
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;left,right:左右节点（分成了两个）
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;point_indices:包含有哪些点
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220727200626574.png&#34; alt=&#34;image-20220727200626574&#34; style=&#34;zoom:80%;border:1px solid&#34; /&gt;
+&lt;p&gt;&lt;strong&gt;建立knn树的复杂度？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;先看时间复杂度：由于需要每次用一个超平面把数据分成两半，&lt;strong&gt;所以需要分log(n)次&lt;/strong&gt;，每次把数据分成两半时，需要把当前的维度排序（比如排序所有的x），&lt;strong&gt;快排需要nlogn&lt;/strong&gt;，所以总体的时间复杂度为o(n logn logn)。有没有可能使用一种求中值的方法？因为目的只是分成两半。如果求中值是o(n)，那么总体时间复杂度为o(nlogn)&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220727194235635.png&#34; alt=&#34;image-20220727194235635&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;查找knn&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;以图中自定义红点为例先说1nn，通过不断比较跟切平面的大小关系，最终定位到一个子节点g，从而确定了一个worst distance。由于这个圆与一些切平面相交了，所以需要继续考虑，先会返回s4到达s5右侧，e在最小范围内，ok，则更新worst distance，再继续运行知道满足条件。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220727202954678.png&#34; alt=&#34;image-20220727202954678&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;所以，理论上1nn的查找是大于o(logn)的（到达叶子节点后可能还要继续计算），但通常可以当成是o(logn)。如果是knn的的话那么复杂度就在o(logn)到o(n)之间了。&lt;/p&gt;
+&lt;h3 id=&#34;octree&#34;&gt;octree&lt;/h3&gt;
+&lt;p&gt;八叉树。八叉树对空间进行均匀分割，KD树是在每个维度对点的分布进行均匀分割。&lt;/p&gt;
+&lt;p&gt;对比KD树的主要优势：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;可以提前结束查找，如上图KD树的图，在到达g点时，根据最坏距离画一个圆，&lt;u&gt;没办法知道这个圆是否与之前的分割平面相交&lt;/u&gt;（栈空间，只有当前层的参数），所以只有等DFS&lt;strong&gt;返回各个根节点&lt;/strong&gt;的时候才能判断是否可以终止遍历。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;八叉树可以提前终止，主要原因就是因为是均匀分割，所以可以计算出树上层的各个分割平面的位置，从而判断是否可以提前终止。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;%e7%82%b9%e4%ba%91%e5%a4%84%e7%90%86%e5%9f%ba%e7%a1%80.assets/image-20220802164150304.png&#34; alt=&#34;image-20220802164150304&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;聚类&#34;&gt;聚类&lt;/h2&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>基于特征的点云配准</title>
+      <link>https://hezhou49.github.io/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E7%9A%84%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</link>
+      <pubDate>Thu, 14 Apr 2022 10:08:35 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E7%9A%84%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</guid>
+      <description>&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;
+&lt;p&gt;&lt;u&gt;点云配准的方法有很多，比如基于特征的方法、基于概率模型的方法、基于深度学习的方法等，基于特征的方法是较早提出的一种方法。&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;基于特征的点云配准方法常常作为点云的粗配准流程，得到粗略的点云变换后再使用ICP等算法求解更精确变换。值得注意的是：粗略和精确这两个词的定义都是相对的，是对应具体的使用场景的，如果一些场景精度要求不是很高，有时使用粗配准即能达到精度要求。&lt;/p&gt;
+&lt;p&gt;几何特征量可以分为全局特征和局部特征，全局特征是对整个三维点云的几何属性，进行编码形成一个特征集合，局部特征则只针对特征点的局部邻域的信息进行编码。在粗配准领域，使用基于特征的配准方法比使用基于 RANSAC 的配准方法，无论是在时间效率和精度方面，都更胜一筹；而且基于局部特征的配准方法比基于全局特征的配准方法在面对杂乱和遮挡的三维点云配准时，更具鲁棒性。(熊风光，2018)&lt;/p&gt;
+&lt;p&gt;采用的是“先粗后精”的配准思路。研究的重点是局部特征的相关技术，包括特征点的检测、特征点描述与特征匹配、误匹配对剔除，最后将这些技术应用到三维点云配准中，结合精细配准，实现三维点云自动化配准。&lt;/p&gt;
+&lt;h2 id=&#34;基于特征的点云配准&#34;&gt;基于特征的点云配准&lt;/h2&gt;
+&lt;p&gt;未包含误匹配删除的基于特征的点云配准流程：&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/特征点云配准流程.png&#34; alt=&#34;特征点云配准流程&#34; style=&#34;zoom: 67%;&#34; /&gt;
+&lt;h3 id=&#34;特征点检测与降采样&#34;&gt;特征点检测与降采样&lt;/h3&gt;
+&lt;p&gt;在早期对点云配准的研究中，通常对点云数据预先计算具有区分力和描述力的关键点，再进一步进行处理。但是最近有研究表明，现有关键点检测方法在实际的应用中不仅较为费时，且效果较差。而均匀采样和随机采样方法被证明是一种有效的方法，可以用于取代关键点检测算法。（李佳骏，2021）&lt;/p&gt;
+&lt;p&gt;实操试下来，在实时性要求高一点的应用里，特征检测算法确实是比较耗时的，现在也有一些开源的基于特征的配准算法使用降采样代替特征检测（open3d global registration）。&lt;/p&gt;
+&lt;h3 id=&#34;特征描述&#34;&gt;特征描述&lt;/h3&gt;
+&lt;p&gt;这里的特征描述讲得是局部的特征描述子。比较熟知的有(点特征直方图)PFH&amp;amp;FPFH、3DSC&amp;amp;USC等，主要以PFH和FPFH为例介绍。最主要的是要明白算法的原理和输出是什么。&lt;strong&gt;输出的是一个n维的向量。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;pfhfpfh&#34;&gt;PFH&amp;amp;FPFH&lt;/h4&gt;
+&lt;p&gt;介绍的文章和链接其实也很多，给出一些链接然后简要介绍。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/192343758&#34;&gt;知乎链接&lt;/a&gt;;&lt;a href=&#34;https://pcl.readthedocs.io/projects/tutorials/en/latest/pfh_estimation.html?highlight=PFH&#34;&gt;PCL源链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;描述的几个特征为下面几个值，d在最后时限的时候没怎么管，主要看前面3个角度。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220210134934978.png&#34; alt=&#34;image-20220210134934978&#34; style=&#34;zoom: 80%;&#34; /&gt;
+&lt;p&gt;问题来了，是如何把这几个特征值的变为一个n维的向量的呢？规则是：（图源: PCL作者Rusu Dissertation： Semantic 3D Object Maps for Everyday Manipulation in Human Living Environments. 2009.）&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220210140743057.png&#34; alt=&#34;image-20220210140743057&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;p&gt;即将每个角度均匀划分为5个区间，那么3个角度将产生125个区间，并且每一个bin都将完全对应一个唯一的代表三个角度特征的值（即为图中所述fully correlated）。由此可以生成一个直方图，横轴是0-125，纵轴则是统计在该点的邻域内有多少个点出现在了对应区间。于是就产生了一个125维的向量，每一维代表的是——特征位于该区间内的点的数量。（直方图如下所示，可以发现，这样做很多地方都是0值）&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/v2-a20284bf63faebba9ae5fa739469da3d_b.jpg&#34; alt=&#34;img&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;FPFH做出了改进，公式上有少许改进不详细说，主要是将特征抽象为特征向量时有改变：不再是b&lt;sup&gt;d&lt;/sup&gt;个区间，而是b*d个区间，相当于是单独给每个特征做一个直方图，然后在水平方向上把直方图拼起来。PCL给出的实现不是分的5个区间，分的11个区间（区间多，分辨率高），所以总共33维。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220210150814873.png&#34; alt=&#34;image-20220210150814873&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;h4 id=&#34;3dscusc&#34;&gt;3DSC&amp;amp;USC&lt;/h4&gt;
+&lt;p&gt;描述的局部特征不同，但是抽象特征的思路是一样的。&lt;/p&gt;
+&lt;p&gt;统计每个网格内的点数加权值即为 3DSC 描述子。描述子是高维向量，特征向量长度为总的格子数。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220210152014344.png&#34; alt=&#34;image-20220210152014344&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;小结&#34;&gt;小结&lt;/h4&gt;
+&lt;p&gt;所以，局部特征的描述有很多的切入点，有描述角度的，有描述点分布的，但是最终都把这些特征抽象成了一个特征向量或者特征矩阵（也有用矩阵的，匹配的时候比较矩阵的相似度），方便后续进行对应的特征匹配。&lt;/p&gt;
+&lt;h3 id=&#34;特征匹配&#34;&gt;特征匹配&lt;/h3&gt;
+&lt;p&gt;目的是研究如何对两个特征描述子集合中的特征描述子进行匹配，建立特征描述子间的对应关系，从而确立特征点之间的对应关系。确定了匹配关系，就可以使用SVD求解空间变换。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：特征匹配不是匹配的特征点的坐标值，而是匹配的特征点的特征描述子，通过描述子的匹配，得出对应的点对。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;所以很多文献在特征匹配时都会说，计算两个特征值之间的距离，这里的距离不是指的特征点三维坐标的距离，而是代表高维特征向量之间的高维距离。&lt;/p&gt;
+&lt;p&gt;在机器学习中，常用的距离公式有闵可夫斯基距离[92]、欧几里得距离[93]、曼哈顿距离[94]、切比雪夫距离[95]、马氏距离[96]、余弦相似度[97]、汉明距离[98]等。(熊风光，博，2018) 这里的距离应该直接用的欧式距离。&lt;/p&gt;
+&lt;p&gt;匹配的方法也不多介绍了，博士论文里有说，要么小于距离阈值的都配对上，要么只配对一个距离最小的。&lt;/p&gt;
+&lt;h3 id=&#34;误匹配剔除&#34;&gt;误匹配剔除&lt;/h3&gt;
+&lt;p&gt;上一部特征匹配中肯定存在一部分误匹配，这些结果将会影响计算的空间变换的准确性，可以视作是噪声，需要被剔除。&lt;/p&gt;
+&lt;p&gt;主要介绍基于RANSAC和基于k-means聚类的方法。&lt;/p&gt;
+&lt;h4 id=&#34;ransac&#34;&gt;RANSAC&lt;/h4&gt;
+&lt;p&gt;随机采样一致性算法，太熟悉了，是一种有效的对抗噪声的方法。每次随机采用m组匹配对，计算出变换关系，统计满足该变换关系的特征点匹配对的数量；重复该过程，直到迭代上限或是满足设定要求。现在open3d给出的基于局部特征的点云配准就是使用的RANSAC。&lt;a href=&#34;http://www.open3d.org/docs/release/tutorial/pipelines/global_registration.html&#34;&gt;open3d 全局粗配准&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;k-means聚类&#34;&gt;k-means聚类&lt;/h4&gt;
+&lt;p&gt;聚类方法认为当模型点云与场景点云正确匹配时，得到的大部分变换关系应聚集在真实矩阵附近。进而对这些变换关系进行聚类形成 k个聚类，&lt;strong&gt;并将包括元素最多的聚类作为正确的聚类结果&lt;/strong&gt;，其中的特征匹配对为正确的匹配对，其它聚类中的匹配对则认为是错误的匹配对而被剔除掉。&lt;/p&gt;
+&lt;h3 id=&#34;对应点求解空间变换&#34;&gt;对应点求解空间变换&lt;/h3&gt;
+&lt;p&gt;也是熟悉的内容了，直接使用SVD是较为流行的一种方法。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://nghiaho.com/?page_id=671&#34;&gt;FINDING OPTIMAL ROTATION AND TRANSLATION BETWEEN CORRESPONDING 3D POINTS&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;使用icp进行精配准&#34;&gt;使用ICP进行精配准&lt;/h2&gt;
+&lt;p&gt;常规步骤，使用ICP达到精确解。&lt;/p&gt;
+&lt;h2 id=&#34;参考文献&#34;&gt;参考文献&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;熊风光. 三维点云配准技术研究 [D]; 中北大学, 2018.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;李佳骏. 基于局部特征的图像与点云配准研究 [D]; 大连理工大学, 2021.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;知乎链接：https://zhuanlan.zhihu.com/p/192343758&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PCL源链接：https://pcl.readthedocs.io/projects/tutorials/en/latest/pfh_estimation.html?highlight=PFH&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Rusu Dissertation： &lt;a href=&#34;https://link.zhihu.com/?target=http%3A//mediatum.ub.tum.de/doc/800632/941254.pdf&#34;&gt;Semantic 3D Object Maps for Everyday Manipulation in Human Living Environments. 2009.&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;open3d 全局粗配准：http://www.open3d.org/docs/release/tutorial/pipelines/global_registration.html&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对应点求解空间变化：http://nghiaho.com/?page_id=671&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>深度学习点云配准</title>
+      <link>https://hezhou49.github.io/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</link>
+      <pubDate>Tue, 12 Apr 2022 10:08:35 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%89%B9%E5%BE%81%E7%82%B9%E4%BA%91%E9%85%8D%E5%87%86/</guid>
+      <description>&lt;h2 id=&#34;使用深度学习处理点云&#34;&gt;使用深度学习处理点云&lt;/h2&gt;
+&lt;h2 id=&#34;数据集&#34;&gt;数据集&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;name&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;th&gt;常用于&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ModelNet&lt;/td&gt;
+&lt;td&gt;CAD模型生成&lt;/td&gt;
+&lt;td&gt;分类&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;KITTI、nuScenes、WOD&lt;/td&gt;
+&lt;td&gt;自动驾驶数据集&lt;/td&gt;
+&lt;td&gt;3D物体检测&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3D Match&lt;/td&gt;
+&lt;td&gt;RGBD拼接点云，来源与同名论文&lt;/td&gt;
+&lt;td&gt;生成特征描述子&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;基础框架&#34;&gt;基础框架&lt;/h2&gt;
+&lt;h3 id=&#34;voxnet-iros-2015-2400&#34;&gt;VoxNet, IROS 2015 2400&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://ieeexplore.ieee.org/abstract/document/7353481&#34;&gt;PDF&lt;/a&gt;, &lt;a href=&#34;https://scholar.google.com/citations?user=JcZUd5IAAAAJ&amp;amp;hl=zh-CN&amp;amp;oi=sra&#34;&gt;author&lt;/a&gt; VoxNet: A 3D Convolutional Neural Network for Real-Time Object Recognition&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;基于体素处理点云，类似处理二维的图像，在voxel上面进行三维卷积操作。(二维卷像素，三维卷体素)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;卷积+pool，将feature map处理到较小尺寸，然后拉直&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220421170038186.png&#34; alt=&#34;image-20220421170038186&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;h3 id=&#34;pointnet-cvpr-2017-7200&#34;&gt;PointNet, CVPR 2017 7200&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://scholar.google.com/citations?user=4jODkxsAAAAJ&amp;amp;hl=zh-CN&amp;amp;oi=sra&#34;&gt;Charles Ruizhongtai Qi&lt;/a&gt;, &lt;a href=&#34;https://openaccess.thecvf.com/content_cvpr_2017/papers/Qi_PointNet_Deep_Learning_CVPR_2017_paper.pdf&#34;&gt;PDF&lt;/a&gt;, &lt;a href=&#34;https://www.youtube.com/watch?v=Cge-hot0Oc0&#34;&gt;video&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;作者在video中提到如今三维点云的处理方式依旧是沿用2D的卷积类型，有没有直接作用在点云上特征学习网络呢。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;基于点处理点云&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220419150646419.png&#34; alt=&#34;image-20220419150646419&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;core idea :&lt;/strong&gt; max pool。忽略transform部分，后续研究证明没用。&lt;strong&gt;shared MLP +  max pool&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;输入点云，经过多层全连接层并max pool后可以得到该输入点云的global feature。这一点至关重要。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;分类任务：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;直接使用全连接将1024降到k维。（k为类别）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;语义分割：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;将1024的全局特征叠加到每个64维的单点特征上，得到NX1088的特征矩阵，包含了局部和全局的信息，再使用全连接输出为nXm的shape。m为类别。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决乱序输入的问题：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220419163910709.png&#34; alt=&#34;image-20220419163910709&#34;&gt;&lt;/p&gt;
+&lt;p&gt;不管点云内输入的顺序是怎样的（即交换上图行的位置），经过max pool后，结果都是一样的！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;缺少分层的特征聚合（Lack of hierarchical feature aggregation），没有向2D卷积提出的金字塔结构一般的感知域。&lt;/p&gt;
+&lt;h3 id=&#34;pointnet-2017-4700&#34;&gt;PointNet++ 2017 4700&lt;/h3&gt;
+&lt;p&gt;总体框架&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220419210713041.png&#34; alt=&#34;image-20220419210713041&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;p&gt;&lt;strong&gt;core idea:&lt;/strong&gt; Hierarchical point set feature learning, 分层的点集特征学习&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220419204246900.png&#34; alt=&#34;image-20220419204246900&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;p&gt;一次set abstraction的流程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;采样（最远点采样）&lt;/li&gt;
+&lt;li&gt;分组：可以使用knn或者半径阈值+随机采样。因为要保证输入的数量相同，所以需要的基于半径的方式随机采样。&lt;/li&gt;
+&lt;li&gt;将k个点输入pointnet得到该点集的特征向量，局部的&amp;quot;global feature&amp;quot;。输入N1组，每组K个点，点的channel包含三维坐标和一些额外特征C，比如法向量。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;数据增广trick：&lt;/p&gt;
+&lt;p&gt;DP数据预处理手段。（随机将样本降采样到100-5000个点）&lt;/p&gt;
+&lt;p&gt;加噪声&lt;/p&gt;
+&lt;p&gt;加旋转&lt;/p&gt;
+&lt;h2 id=&#34;深度学习特征点云配准&#34;&gt;深度学习特征点云配准&lt;/h2&gt;
+&lt;p&gt;做特征提取的少（对于特征的定义不绝对，如何判断检测出来的点是特征点？），做特征描述的多（方便训练，可以检验描述子是否有效）。&lt;/p&gt;
+&lt;h2 id=&#34;特征点提取&#34;&gt;特征点提取&lt;/h2&gt;
+&lt;h3 id=&#34;usip-iccv-2019-60&#34;&gt;USIP, ICCV 2019, 60&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://openaccess.thecvf.com/content_ICCV_2019/html/Li_USIP_Unsupervised_Stable_Interest_Point_Detection_From_3D_Point_Clouds_ICCV_2019_paper.html&#34;&gt;PDF&lt;/a&gt;, &lt;a href=&#34;https://scholar.google.com/citations?user=YH6mOWsAAAAJ&amp;amp;hl=zh-CN&amp;amp;oi=sra&#34;&gt;Jiaxin Li&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;点云特征点提取网络。&lt;/p&gt;
+&lt;p&gt;两个idea:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;特征点从哪看都是特征点，旋转平移不变&lt;/li&gt;
+&lt;li&gt;特征点跟尺度大小有关（感受域）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220421191938737.png&#34; alt=&#34;image-20220421191938737&#34; style=&#34;zoom:80%;border: 1px solid&#34; /&gt;
+&lt;p&gt;How to train？两个loss：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;输入点云，产生特征点集1，将输入点云随机旋转后再次输入网络得到特征点集2，令点集2与点集1相等。&lt;/li&gt;
+&lt;li&gt;使产生的特征点集与原点云的距离尽量小。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;特征描述&#34;&gt;特征描述&lt;/h2&gt;
+&lt;p&gt;局部描述子。起到FPFH、SHOT等描述子的作用：输入局部的点集，生成特征向量。&lt;/p&gt;
+&lt;p&gt;**传统描述子的问题：**用传统描述子做特征匹配误匹配比较高，效果不是很好，提升空间还比较大。是否可以用深度学习生成更高维、更抽象的描述子呢？&lt;/p&gt;
+&lt;h3 id=&#34;3d-match-cvpr-2017-500&#34;&gt;3D Match, CVPR 2017 500&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://openaccess.thecvf.com/content_cvpr_2017/html/Zeng_3DMatch_Learning_Local_CVPR_2017_paper.html&#34;&gt;PDF&lt;/a&gt;, &lt;a href=&#34;https://scholar.google.com/citations?user=q7nFtUcAAAAJ&amp;amp;hl=zh-CN&amp;amp;oi=sra&#34;&gt;Andy Zeng&lt;/a&gt;, &lt;a href=&#34;https://www.youtube.com/watch?v=qNVZl7bCjsU&#34;&gt;video&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;voxel based；一直进行卷积层，最后输出512维向量。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420190621981.png&#34; alt=&#34;image-20220420190621981&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;p&gt;&lt;strong&gt;How to train?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;contrastive loss.选取不同视角的同一点（&amp;lt;指定值）为中心的两个patch，由于是同一点，即使输出的descriptor相同。不同点则使descriptor不同。&lt;/p&gt;
+&lt;p&gt;loss function: 令positive接近0，令negative大于tao。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420214425673.png&#34; alt=&#34;image-20220420214425673&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3dsmoothnet-cvpr-2019-190&#34;&gt;3DSmoothNet, CVPR 2019 190&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://openaccess.thecvf.com/content_CVPR_2019/html/Gojcic_The_Perfect_Match_3D_Point_Cloud_Matching_With_Smoothed_Densities_CVPR_2019_paper.html&#34;&gt;PDF&lt;/a&gt;, &lt;a href=&#34;https://scholar.google.com/citations?user=8KsqL4gAAAAJ&amp;amp;hl=zh-CN&amp;amp;oi=sra&#34;&gt;author&lt;/a&gt;, &lt;a href=&#34;https://github.com/zgojcic/3DSmoothNet&#34;&gt;github 350&lt;/a&gt;, The Perfect Match: 3D Point Cloud Matching With Smoothed Densities&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;voxel based&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;改进3D Match:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;引入LRF决解旋转问题（Local Reference frame，局部参考坐标系）（类似SHOT描述子，使用PCA求三个主方向）&lt;/li&gt;
+&lt;li&gt;改进loss function&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420220632184.png&#34; alt=&#34;image-20220420220632184&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ppfnet-cvpr-2018-280&#34;&gt;PPFNET, CVPR 2018 280&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://openaccess.thecvf.com/content_cvpr_2018/html/Deng_PPFNet_Global_Context_CVPR_2018_paper.html&#34;&gt;PDF&lt;/a&gt;, &lt;a href=&#34;https://scholar.google.com/citations?user=GKDwAdIAAAAJ&amp;amp;hl=zh-CN&amp;amp;oi=sra&#34;&gt;Haowen Deng&lt;/a&gt;,&lt;a href=&#34;https://www.youtube.com/watch?v=WrEKJeK-Wow&amp;amp;list=PL_bDvITUYucCIT8iNGW8zCXeY5_u6hg-y&amp;amp;index=17&#34;&gt;video at 1:04:48 &lt;/a&gt; PPFNet: Global Context Aware Local Features for Robust 3D Point Matching&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Point based. Point pair featrue network.很经典的思路，对n个局部特征使用max pool得到全局特征，再将全局特征contact到局部特征上。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;输入的得PPF是点坐标+&amp;lt;距离，三个角度&amp;gt;。输入两帧数据，每一帧有N个patch。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220420163959385.png&#34; alt=&#34;image-20220420163959385&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How to train?&lt;/strong&gt;(输入为2N个patch，2 frame各N patch)&lt;/p&gt;
+&lt;p&gt;n-tuple loss. 其中，M为只包含0,1的mark（NXN），是一个corresponding matrix，描述xi和yj是否是对应点。D矩阵也是NXN，描述的是网络输出即特征空间的距离。&lt;/p&gt;
+&lt;center&gt;
+    &lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220421162041261.png&#34; alt=&#34;image-20220421162041261&#34; style=&#34;zoom:80%;&#34; /&gt;
+    &lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220421162106389.png&#34; alt=&#34;image-20220421162106389&#34; style=&#34;zoom:70%;&#34; /&gt;
+&lt;/center&gt;
+### PPF-FoldNet, ECCV 2018 200
+&lt;p&gt;&lt;a href=&#34;https://openaccess.thecvf.com/content_ECCV_2018/html/Tolga_Birdal_PPF-FoldNet_Unsupervised_Learning_ECCV_2018_paper.html&#34;&gt;PDF&lt;/a&gt;, PPF-FoldNet: Unsupervised Learning of Rotation Invariant 3D Local Descriptors&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;原作者借鉴了同年CVPR的FoldNet迅速又发了一篇ECCV&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;预测的话就只使用encoder得到descriptor即可。&lt;/p&gt;
+&lt;p&gt;**注：**输入的4D PPF没有坐标信息，只有相对的距离和角度，类似FPFH，解决PPF-NET无法应对旋转问题（因为输入含有坐标信息）。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20220421103839227.png&#34; alt=&#34;image-20220421103839227&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How to train?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;无监督思路&lt;/p&gt;
+&lt;p&gt;训练思路很简单，输入4D的point pair feature通过encoder变成descriptor，然后再通过decoder变换回去，使两组PPF相等。&lt;/p&gt;
+&lt;h3 id=&#34;time&#34;&gt;Time&lt;/h3&gt;
+&lt;p&gt;3DMatch benchmark&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/fps_acc.png&#34; alt=&#34;Accuracy vs. Speed&#34; style=&#34;zoom: 33%;&#34; /&gt;
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;p&gt;斯坦福大学在读博士生祁芮中台：点云上的深度学习及其在三维场景理解中的应用: &lt;a href=&#34;https://www.youtube.com/watch?v=Ew24Rac8eYE&#34;&gt;https://www.youtube.com/watch?v=Ew24Rac8eYE&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3D Match dataset : &lt;a href=&#34;https://paperswithcode.com/dataset/3dmatch&#34;&gt;https://paperswithcode.com/dataset/3dmatch&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;awesome-point-cloud-registration： &lt;a href=&#34;https://github.com/XuyangBai/awesome-point-cloud-registration&#34;&gt;https://github.com/XuyangBai/awesome-point-cloud-registration&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Xuyang BAI 白旭阳（港科技博士）: &lt;a href=&#34;https://xuyangbai.github.io/&#34;&gt;https://xuyangbai.github.io/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Jiaxin（新加坡国立博士）: &lt;a href=&#34;https://www.jiaxinli.me/&#34;&gt;https://www.jiaxinli.me/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;FCGF: &lt;a href=&#34;https://github.com/chrischoy/FCGF&#34;&gt;https://github.com/chrischoy/FCGF&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;深度学习点云匹配CSDN博客： &lt;a href=&#34;https://blog.csdn.net/xckkcxxck/category_8468359.html&#34;&gt;https://blog.csdn.net/xckkcxxck/category_8468359.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;国内外点云处理著名的研究小组和学者： &lt;a href=&#34;https://github.com/dongzhenwhu/Research-Groups-of-Point-Cloud-Processing&#34;&gt;https://github.com/dongzhenwhu/Research-Groups-of-Point-Cloud-Processing&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;stargazer of YOHO: &lt;a href=&#34;https://github.com/HpWang-whu/YOHO/stargazers&#34;&gt;https://github.com/HpWang-whu/YOHO/stargazers&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;**排名：**Point Cloud Registration on 3DMatch Benchmark： &lt;a href=&#34;https://paperswithcode.com/sota/point-cloud-registration-on-3dmatch-benchmark?p=generalisable-and-distinctive-3d-local-deep&#34;&gt;https://paperswithcode.com/sota/point-cloud-registration-on-3dmatch-benchmark?p=generalisable-and-distinctive-3d-local-deep&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

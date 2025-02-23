@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>家庭服务机器人 | FEZZY</title>
+    <link>https://hezhou49.github.io/tags/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E6%9C%BA%E5%99%A8%E4%BA%BA/</link>
+      <atom:link href="https://hezhou49.github.io/tags/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E6%9C%BA%E5%99%A8%E4%BA%BA/index.xml" rel="self" type="application/rss+xml" />
+    <description>家庭服务机器人</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 31 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>家庭服务机器人</title>
+      <link>https://hezhou49.github.io/tags/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E6%9C%BA%E5%99%A8%E4%BA%BA/</link>
+    </image>
+    
+    <item>
+      <title>RoboCup机器人世界杯</title>
+      <link>https://hezhou49.github.io/project/robocup%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%96%E7%95%8C%E6%9D%AF/</link>
+      <pubDate>Mon, 31 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/project/robocup%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%96%E7%95%8C%E6%9D%AF/</guid>
+      <description>&lt;p&gt;在室内场景下，识别人类意图，并进行对应的服务。&lt;/p&gt;
+&lt;p&gt;比如：“你好Max，帮我去客厅的桌上拿一瓶可乐回来。”&lt;/p&gt;
+&lt;p&gt;由此，机器人需要完成：语音辨识、路径规划与导航（提前的建图与实时的定位）、目标识别与位姿估计、目标抓取等任务。&lt;/p&gt;
+&lt;h2 id=&#34;照片墙&#34;&gt;照片墙&lt;/h2&gt;
+&lt;div &gt;
+&lt;img src=&#34;./robo1.jpg&#34; alt=&#34;robo1&#34; style=&#34;width: 300px; height: 225px;display: inline-block; margin: 2px 0px;padding: 0px&#34; /&gt;
+&lt;img src=&#34;18机器人.jpg&#34; alt=&#34;18机器人&#34; style=&#34;width: 300px;height: 225px;display: inline-block; margin: 2px 0px; padding: 0&#34; /&gt;
+&lt;img src=&#34;18专项.jpg&#34; alt=&#34;18专项&#34; style=&#34;width: 300px;height: 225px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;19服务机器人.JPG&#34; alt=&#34;19服务机器人&#34; style=&#34;width: 300px;height: 225px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;19机器人.jpg&#34; alt=&#34;19机器人&#34; style=&#34;width: 300px;height: 225px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

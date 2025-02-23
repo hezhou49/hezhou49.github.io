@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>基础算法 | FEZZY</title>
+    <link>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/</link>
+      <atom:link href="https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <description>基础算法</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 14 Apr 2022 10:08:35 +0800</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>基础算法</title>
+      <link>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/</link>
+    </image>
+    
+    <item>
+      <title>RANSAC</title>
+      <link>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/ransac/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/ransac/</guid>
+      <description>&lt;h3 id=&#34;ransac随机一致性采样&#34;&gt;&lt;strong&gt;RANSAC——随机一致性采样&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;RANSAC 主要解决样本中的外点问题，最多可处理 50% 的外点情况。（RANSAC具有很强的抗噪声能力，只要迭代次数够多，肯定能找到最优解，如果噪声大于50%，那么实际上噪声就是主要的点而不是噪声了）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;基本思想：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;RANSAC 通过反复选择数据中的一组随机子集来达成目标。被选取的子集被假设为局内点，并用下述方法进行验证：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;有一个模型适用于假设的局内点，即所有的未知参数都能从假设的局内点计算得出。&lt;/li&gt;
+&lt;li&gt;用 1 中得到的模型去测试所有的其它数据，如果某个点适用于估计的模型，认为它也是局内点。&lt;/li&gt;
+&lt;li&gt;如果有足够多的点被归类为假设的局内点，那么估计的模型就足够合理。&lt;/li&gt;
+&lt;li&gt;然后，用所有假设的局内点去重新估计模型，因为它仅仅被初始的假设局内点估计过。&lt;/li&gt;
+&lt;li&gt;最后，通过估计局内点与模型的错误率来评估模型。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这个过程被重复执行固定的次数，每次产生的模型要么因为局内点太少而被舍弃，要么因为它比现有的模型更好而被选用。&lt;/p&gt;
+&lt;img src=&#34;https://pic2.zhimg.com/v2-d9e4b96fd378243b21c77b39904ef6c5_r.jpg&#34; style=&#34;zoom: 50%;&#34; /&gt;
+&lt;p&gt;对上述步骤，进行简单总结如下：&lt;/p&gt;
+&lt;img src=&#34;https://pic1.zhimg.com/v2-92f0ad1a9054d4bd19a759b7e3167bcc_r.jpg&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;h3 id=&#34;举个例子使用-ransac拟合直线&#34;&gt;举个例子：使用 RANSAC——拟合直线&lt;/h3&gt;
+&lt;img src=&#34;https://pic2.zhimg.com/v2-67e966c92f04f232010255dc5cd1b92d_r.jpg&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;img src=&#34;https://pic1.zhimg.com/v2-3693478f142577031cfc29b9d61e58c8_r.jpg&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;img src=&#34;https://pic3.zhimg.com/v2-bd7445a60766817022f8506274f2eeba_r.jpg&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;img src=&#34;https://pic2.zhimg.com/v2-fcd467425195baccd67f7d8ec6101c2d_r.jpg&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;img src=&#34;https://pic1.zhimg.com/v2-7225d7e8e5dd5d6ea19aa560c866dd9c_r.jpg&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;img src=&#34;https://pic2.zhimg.com/v2-959cf86f0907368c4acc60c6d43d22d5_r.jpg&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;h3 id=&#34;应用举例-拟合平面&#34;&gt;应用举例-拟合平面&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;solvePnPRansac&lt;/li&gt;
+&lt;li&gt;findFundamentalMat&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;是用open3d拟合点云内的平面。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;open3d&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;o3d&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;numpy&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;np&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;matplotlib&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pyplot&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;RANSAC算法 随机一致性采样
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;pcd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;o3d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read_point_cloud&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;./test_data/fragment.pcd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pcd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 0.01m以内都算内点，3点确定一个平面，迭代次数为1000次&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plane_model&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inliers&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pcd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;segment_plane&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;distance_threshold&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.01&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                         &lt;span class=&#34;n&#34;&gt;ransac_n&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                         &lt;span class=&#34;n&#34;&gt;num_iterations&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;plane_model&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Plane equation: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.2f&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;x + &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.2f&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;y + &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.2f&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;z + &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.2f&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; = 0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;inlier_cloud&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pcd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;select_by_index&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;inliers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;inlier_cloud&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;paint_uniform_color&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;1.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;outlier_cloud&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pcd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;select_by_index&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;inliers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;invert&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;o3d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;visualization&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;draw_geometries&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;inlier_cloud&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;outlier_cloud&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                  &lt;span class=&#34;n&#34;&gt;zoom&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                  &lt;span class=&#34;n&#34;&gt;front&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.4999&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.1659&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.8499&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                  &lt;span class=&#34;n&#34;&gt;lookat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;2.1813&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2.0619&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2.0999&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                  &lt;span class=&#34;n&#34;&gt;up&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.1204&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.9852&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.1215&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;效果：红色为平面，绿色为噪声。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210901191509153.png&#34; alt=&#34;image-20210901191509153&#34; style=&#34;zoom:67%;&#34; /&gt;</description>
+    </item>
+    
+    <item>
+      <title>pca</title>
+      <link>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/pca/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/pca/</guid>
+      <description>&lt;h2 id=&#34;pca-主成分分析&#34;&gt;pca-主成分分析&lt;/h2&gt;
+&lt;p&gt;b站链接：https://www.bilibili.com/video/BV1E5411E71z?from=search&amp;amp;seid=12219938521484233618&lt;/p&gt;
+&lt;p&gt;PCA主要用于数据降维与表面法向量估计等。&lt;/p&gt;
+&lt;p&gt;数据降维的目的用更少的空间保留尽可能多的信息。主成分就是所有数据投影到这个方向时，能够保留最大的信息（即方差最大）。假想下图中的二维点如果投影到某个方向时变成了一个点，那么就没有保留到原始的分布信息，所以要求方差最大，就是想把差异最大化，从而保留原始数据的分布特点。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210721161606188.png&#34; alt=&#34;image-20210721161606188&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;求解主成分&#34;&gt;求解主成分&lt;/h2&gt;
+&lt;p&gt;协方差矩阵的推到，过程不用记：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210723144841574.png&#34; alt=&#34;image-20210723144841574&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+主成分为旋转矩阵R的列向量。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210723143942632.png&#34; alt=&#34;image-20210723143942632&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;协方差的特征值：&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210723145627502.png&#34; alt=&#34;image-20210723145627502&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;评论区&#34;&gt;评论区&lt;/h2&gt;
+&lt;p&gt;这是挖掘数据线性分布规律的最重要算法。其实不仅仅用来降维，凡是涉及到分析数据分布特点的都可以用到。如：现在获得了某曲面大量的采样点云，要估计曲面在某采样点的法向量方向。则通过PCA分析该点及周围采样点的分布规律，找到数据点分布离散程度最大的两个正交方向，则这两个方向就近似构成曲面在该点的切平面，与此两方向正交的第三个方向就是曲面在该点的近似法矢&lt;/p&gt;
+&lt;p&gt;最初知道这个算法就是在研究点云处理、逆向工程时查文献了解的。后来开始转向机器学习又遇到这个。后面学了矩阵论加强了线代基础，把这个算法自己又推导了一遍，在看此视频之前已经从理论到直观透彻理解了&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>svd</title>
+      <link>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/svd/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/svd/</guid>
+      <description>&lt;h2 id=&#34;evd-特征值分解&#34;&gt;EVD-特征值分解&lt;/h2&gt;
+&lt;p&gt;在理解奇异值分解之前，需要先回顾一下特征值分解，如果矩阵$A$是一个$m\times m$的实对称矩阵（即$A = A^T$），那么它可以被分解成如下的形式&lt;/p&gt;
+$$
+A = Q\Sigma Q^T= Q\left[ \begin{matrix} \lambda_1 &amp; \cdots &amp; \cdots &amp; \cdots\\ \cdots &amp; \lambda_2 &amp; \cdots &amp; \cdots\\ \cdots &amp; \cdots &amp; \ddots &amp; \cdots\\ \cdots &amp; \cdots &amp; \cdots &amp; \lambda_m\\ \end{matrix} \right]Q^T
+$$
+&lt;p&gt;
+其中$Q$为标准正交阵，即有$QQ^T = I$，$\Sigma$为对角矩阵，且上面的矩阵的维度均为$m\times m$。$\lambda_i$称为特征值，$q_i$是$Q$（特征矩阵）中的列向量，称为特征向量。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意到要进行特征分解，矩阵A必须为方阵。那么如果A不是方阵，即行和列不相同时，我们需要使用SVD。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;svd-奇异值分解&#34;&gt;SVD-奇异值分解&lt;/h2&gt;
+&lt;h3 id=&#34;定义&#34;&gt;定义&lt;/h3&gt;
+&lt;p&gt;奇异值分解是一个能适用于任意的矩阵的一种分解的方法：
+&lt;/p&gt;
+$$
+M=U \Sigma V^{T}
+$$
+&lt;p&gt;
+假设M是一个M *N的矩阵，那么得到的U是一个M *M的方阵（里面的向量是正交的，U里面的向量称为左奇异向量），Σ是一个M * N的矩阵（除了对角线的元素都是0，对角线上的元素称为奇异值），V的转置是一个N * N的矩阵，里面的向量也是正交的，V里面的向量称为右奇异向量）。&lt;/p&gt;
+&lt;p&gt;那么我们如何求出 SVD 分解后的 $U, \Sigma, V$这三个矩阵呢？&lt;/p&gt;
+&lt;p&gt;如果我们将 A 的转置和 A 做矩阵乘法，那么会得到 $n \times n$的一个方阵 $A^TA$。既然 $A^TA$是方阵，那么我们就可以进行特征分解，得到的特征值和特征向量满足下式：
+&lt;/p&gt;
+$$
+(A^TA)v_i = \lambda_i v_i
+$$
+&lt;p&gt;
+这样我们就可以得到矩阵 $A^TA$的 n 个特征值和对应的 n 个特征向量 $v$了。将 $A^TA$的所有特征向量张成一个 $n \times n$的矩阵 V，就是我们 SVD 公式里面的 V 矩阵了。一般我们将 V 中的每个特征向量叫做 A 的右奇异向量。&lt;/p&gt;
+&lt;p&gt;如果我们将 A 和 A 的转置做矩阵乘法，那么会得到 $m \times m$的一个方阵 $AA^T$。既然 $AA^T$是方阵，那么我们就可以进行特征分解，得到的特征值和特征向量满足下式：
+&lt;/p&gt;
+$$
+(AA^T)u_i = \lambda_i u_i
+$$
+&lt;p&gt;
+这样我们就可以得到矩阵 $AA^T$的 m 个特征值和对应的 m 个特征向量 $u$了。将 $AA^T$的所有特征向量张成一个 $m \times m$的矩阵 U，就是我们 SVD 公式里面的 U 矩阵了。一般我们将 U 中的每个特征向量叫做 A 的左奇异向量。&lt;/p&gt;
+&lt;p&gt;U 和 V 我们都求出来了，现在就剩下奇异值矩阵$\Sigma$没有求出了。由于$\Sigma$除了对角线上是奇异值其他位置都是 0，那我们只需要求出每个奇异值$\sigma$就可以了。&lt;/p&gt;
+&lt;p&gt;我们注意到:&lt;/p&gt;
+$$
+A=U\Sigma V^T \Rightarrow AV=U\Sigma V^TV \Rightarrow AV=U\Sigma \Rightarrow  Av_i = \sigma_i u_i  \Rightarrow  \sigma_i =  Av_i / u_i
+$$
+&lt;p&gt;
+这样我们可以求出我们的每个奇异值，进而求出奇异值矩阵$\Sigma$。&lt;/p&gt;
+&lt;p&gt;上面还有一个问题没有讲，就是我们说 $A^TA$的特征向量组成的就是我们 SVD 中的 V 矩阵，而 $AA^T$的特征向量组成的就是我们 SVD 中的 U 矩阵，这有什么根据吗？这个其实很容易证明，我们以 V 矩阵的证明为例。&lt;/p&gt;
+$$A=U\Sigma V^T \Rightarrow A^T=V\Sigma^T U^T \Rightarrow A^TA = V\Sigma^T U^TU\Sigma V^T = V\Sigma^2V^T$$
+&lt;p&gt;上式证明使用了:$U^TU=I, \Sigma^T\Sigma=\Sigma^2。$可以看出 $A^TA$的特征向量组成的的确就是我们 SVD 中的 V 矩阵。类似的方法可以得到 $AA^T$的特征向量组成的就是我们 SVD 中的 U 矩阵。&lt;/p&gt;
+&lt;p&gt;进一步我们还可以看出我们的特征值矩阵等于奇异值矩阵的平方，也就是说特征值和奇异值满足如下关系：&lt;/p&gt;
+$$
+\sigma_i = \sqrt{\lambda_i}​
+$$
+&lt;p&gt;
+这样也就是说，我们可以不用 $\sigma_i =  Av_i / u_i$来计算奇异值，也可以通过求出 $A^TA$的特征值取平方根来求奇异值。&lt;/p&gt;
+&lt;h3 id=&#34;奇异值分解的几何意义&#34;&gt;奇异值分解的几何意义：&lt;/h3&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210728141820986.png&#34; alt=&#34;image-20210728141820986&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;几个参考链接：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/pinard/p/6251584.html&#34;&gt;奇异值分解(SVD)原理与在降维中的应用&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/endlesscoding/p/10033527.html&#34;&gt;SVD（奇异值分解）小结&lt;/a&gt;（包含python图片压缩）&lt;/p&gt;
+&lt;h2 id=&#34;svd用于pca&#34;&gt;SVD用于PCA&lt;/h2&gt;
+&lt;p&gt;要用 PCA 降维，需要找到样本协方差矩阵 $X^TX$的最大的 d 个特征向量，然后用这最大的 d 个特征向量张成的矩阵来做低维投影降维。可以看出，在这个过程中需要先求出协方差矩阵 $X^TX$，当样本数多样本特征数也多的时候，这个计算量是很大的。&lt;/p&gt;
+&lt;p&gt;注意到我们的 SVD 也可以得到协方差矩阵 $X^TX$最大的 d 个特征向量张成的矩阵，但是 SVD 有个好处，有一些 SVD 的实现算法可以不求先求出协方差矩阵 $X^TX$，也能求出我们的右奇异矩阵 $V$。也就是说，我们的 PCA 算法可以不用做特征分解，而是做 SVD 来完成。这个方法在样本量很大的时候很有效。实际上，scikit-learn 的 PCA 算法的背后真正的实现就是用的 SVD，而不是我们我们认为的暴力特征分解。&lt;/p&gt;
+&lt;p&gt;另一方面，注意到 PCA 仅仅使用了我们 SVD 的右奇异矩阵，没有使用左奇异矩阵，那么左奇异矩阵有什么用呢？&lt;/p&gt;
+&lt;p&gt;假设我们的样本是 $m \times n$的矩阵 X，如果我们通过 SVD 找到了矩阵 $XX^T$最大的 d 个特征向量张成的 $m \times d$维矩阵 U，则我们如果进行如下处理：&lt;/p&gt;
+$$X&#39;_{d \times n} = U_{d \times m}^TX_{m \times n}$$
+&lt;p&gt;可以得到一个 $d \times n$的矩阵 X‘, 这个矩阵和我们原来的 $m \times n$维样本矩阵 X 相比，行数从 m 减到了 d，可见对行数进行了压缩。也就是说，左奇异矩阵可以用于行数的压缩。相对的，右奇异矩阵可以用于列数即特征维度的压缩，也就是我们的 PCA 降维。&lt;/p&gt;
+&lt;h2 id=&#34;点对点配准使用svd&#34;&gt;点对点配准使用SVD&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/image-20210728204205980.png&#34; alt=&#34;image-20210728204205980&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/265530941&#34;&gt;点云配准之SVD解法的由来&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>DBSCAN聚类</title>
+      <link>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/dbscan%E8%81%9A%E7%B1%BB/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/dbscan%E8%81%9A%E7%B1%BB/</guid>
+      <description>&lt;h3 id=&#34;基于密度的噪声应用空间聚类-dbscan&#34;&gt;基于密度的噪声应用空间聚类 (DBSCAN)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;基于密度的噪声应用空间聚类 (DBSCAN)&lt;/strong&gt; 是一种无监督的 ML 聚类算法。无监督的意思是它不使用预先标记的目标来聚类数据点。聚类是指试图将相似的数据点分组到人工确定的组或簇中。它可以替代 KMeans 和层次聚类等流行的聚类算法。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;KMeans vs DBSCAN：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;KMeans 尤其容易受到异常值的影响。当算法遍历质心时，在达到稳定性和收敛性之前，离群值对质心的移动方式有显著的影响。此外，KMeans 在集群大小和密度不同的情况下还存在数据精确聚类的问题。K-Means 只能应用球形簇，如果数据不是球形的，它的准确性就会受到影响。最后，KMeans 要求我们首先选择希望找到的集群的数量。下面是 KMeans 和 DBSCAN 如何聚类同一个数据集的示例。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://pic1.zhimg.com/v2-989205be3915295ffd3385db3684f6dc_b.jpg&#34; style=&#34;zoom:67%;&#34; /&gt;&lt;img src=&#34;https://pic4.zhimg.com/v2-3a63d148ea74127a0de27ac0fca7b267_b.jpg&#34; style=&#34;zoom:67%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;另一方面，DBSCAN 不要求我们指定集群的数量，避免了异常值，并且在任意形状和大小的集群中工作得非常好。它没有质心，聚类簇是通过将相邻的点连接在一起的过程形成的。&lt;/p&gt;
+&lt;h3 id=&#34;dbscan-是如何实现的呢&#34;&gt;DBSCAN 是如何实现的呢?&lt;/h3&gt;
+&lt;p&gt;首先，让我们定义 Epsilon 和最小点、应用 DBSCAN 算法时需要的两个参数以及一些额外的参数。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;**Epsilon (ɛ)：**社区的最大半径。如果数据点的相互距离小于或等于指定的 epsilon，那么它们将是同一类的。换句话说，它是 DBSCAN 用来确定两个点是否相似和属于同一类的距离。更大的 epsilon 将产生更大的簇 (包含更多的数据点)，更小的 epsilon 将构建更小的簇。一般来说，我们喜欢较小的值是因为我们只需要很小一部分的数据点在彼此之间的距离内。但是如果太小，您会将集群分割的越来越小。&lt;/li&gt;
+&lt;li&gt;**最小点 (minPts)：**在一个邻域的半径内 minPts 数的邻域被认为是一个簇。请记住，初始点包含在 minPts 中。一个较低的 minPts 帮助算法建立更多的集群与更多的噪声或离群值。较高的 minPts 将确保更健壮的集群，但如果集群太大，较小的集群将被合并到较大的集群中。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果 “最小点”= 4，则在彼此距离内的任意 4 个或 4 个以上的点都被认为是一个簇。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;其他参数&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心点:&lt;/strong&gt; 核心数据点在其近邻距离内至少有的最小的数据点个数。&lt;/p&gt;
+&lt;p&gt;我一直认为 DBSCAN 需要一个名为 “core_min” 的第三个参数，它将确定一个邻域点簇被认为是聚类簇之前的最小核心点数量。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;边界点:&lt;/strong&gt; 边界数据点位于郊区，就像它们属于近邻点一样。(比如 w / 在 epsilon 距离内的核心点)，但需要小于 minPts。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;离群点:&lt;/strong&gt; 这些点不是近邻点，也不是边界点。这些点位于低密度地区。&lt;/p&gt;
+&lt;img src=&#34;https://pic3.zhimg.com/v2-e5e7d729822a0b6f6544abb2cc4073da_b.jpg&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;p&gt;首先，选择一个在其半径内至少有 minPts 的随机点。然后对核心点的邻域内的每个点进行评估，以确定它是否在 epsilon 距离内有 minPts (minPts 包括点本身)。如果该点满足 minPts 标准，它将成为另一个核心点，集群将扩展。如果一个点不满足 minPts 标准，它成为边界点。随着过程的继续，算法开始发展成为核心点 “a” 是“b”的邻居，而 “b” 又是 “c” 的邻居，以此类推。当集群被边界点包围时，这个聚类簇已经搜索完全，因为在距离内没有更多的点。选择一个新的随机点，并重复该过程以识别下一个簇。&lt;/p&gt;
+&lt;img src=&#34;https://pic3.zhimg.com/v2-e2fde401a584c047b8d66c6f99d0880e_r.jpg&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;h3 id=&#34;dbscan的优点&#34;&gt;DBSCAN的优点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;不需要像KMeans那样预先确定集群的数量&lt;/li&gt;
+&lt;li&gt;对异常值不敏感&lt;/li&gt;
+&lt;li&gt;能将高密度数据分离成小集群&lt;/li&gt;
+&lt;li&gt;可以聚类非线性关系(聚类为任意形状)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dbscan的缺点&#34;&gt;DBSCAN的缺点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;很难在不同密度的数据中识别集群&lt;/li&gt;
+&lt;li&gt;DBSCAN 算法的运行速度要比 KMeans 算法慢一些&lt;/li&gt;
+&lt;li&gt;DBSCAN 算法的两个参数也是要根据具体的数据情况进行多次尝试。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;o3d程序示例&#34;&gt;o3d程序示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;open3d&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;o3d&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;numpy&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;np&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;matplotlib&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pyplot&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;pcd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;o3d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read_point_cloud&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;test_data/fragment.ply&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 距离0.05，最小点数量10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;o3d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;utility&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;VerbosityContextManager&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;o3d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;utility&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;VerbosityLevel&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Debug&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;array&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;pcd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cluster_dbscan&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;eps&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.05&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;min_points&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;print_progress&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;max_label&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;max&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;point cloud has &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;max_label&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; clusters&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;colors&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_cmap&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;tab20&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;max_label&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;max_label&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;colors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;labels&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;pcd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;colors&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;o3d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;utility&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Vector3dVector&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;colors&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[:,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;o3d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;visualization&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;draw_geometries&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pcd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                  &lt;span class=&#34;n&#34;&gt;zoom&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.455&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                  &lt;span class=&#34;n&#34;&gt;front&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.4999&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.1659&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.8499&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                  &lt;span class=&#34;n&#34;&gt;lookat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;2.1813&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2.0619&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2.0999&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                                  &lt;span class=&#34;n&#34;&gt;up&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.1204&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.9852&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.1215&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>最小二乘</title>
+      <link>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/</guid>
+      <description>&lt;h3 id=&#34;最小二乘&#34;&gt;最小二乘&lt;/h3&gt;
+&lt;p&gt;通俗易懂的链接。（台译最小平方）&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.matongxue.com/&#34;&gt;知乎马同学图解数学&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.zhihu.com/question/37031188/answer/411760828&#34;&gt;https://www.zhihu.com/question/37031188/answer/411760828&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;最小二乘问题的四种非线性解法&#34;&gt;最小二乘问题的四种非线性解法&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98.assets/image-20221208132704450.png&#34; alt=&#34;image-20221208132704450&#34;&gt;&lt;/p&gt;
+&lt;p&gt;有些函数的导数可能形式复杂，使得导数为零不易求解，所以采用数值优化的方式迭代优化。&lt;/p&gt;
+&lt;p&gt;牛顿法，梯度下降法，高斯牛顿法和列文伯格-马夸特法的区别和联系。（https://zhuanlan.zhihu.com/p/113946848）&lt;/p&gt;
+&lt;p&gt;这个链接实际上参考的就是《视觉SLAM 14讲》，可以直接看书，讲得也很清晰。&lt;/p&gt;
+&lt;h3 id=&#34;超定方程最小二乘解线性的&#34;&gt;超定方程最小二乘解（线性的）&lt;/h3&gt;
+&lt;p&gt;简述原理：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/narjaja/p/9304472.html&#34;&gt;https://www.cnblogs.com/narjaja/p/9304472.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;先看两张图：&lt;/p&gt;
+&lt;img src=&#34;最小二乘.assets/image-20221208161415702.png&#34; alt=&#34;image-20221208161415702&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;img src=&#34;最小二乘.assets/image-20221208161429983.png&#34; alt=&#34;image-20221208161429983&#34; style=&#34;border:1px solid&#34; /&gt;
+&lt;p&gt;PPT证明：（公式）&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://wenku.baidu.com/view/41b5edbca55177232f60ddccda38376bae1fe025.html?_wkts_=1670487372369&#34;&gt;https://wenku.baidu.com/view/41b5edbca55177232f60ddccda38376bae1fe025.html?_wkts_=1670487372369&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>高斯混合模型（GMM）</title>
+      <link>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8Bgmm/</link>
+      <pubDate>Wed, 14 Apr 2021 02:23:00 +0800</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E9%AB%98%E6%96%AF%E6%B7%B7%E5%90%88%E6%A8%A1%E5%9E%8Bgmm/</guid>
+      <description>&lt;h2 id=&#34;混合模型mixture-model&#34;&gt;&lt;strong&gt;混合模型（Mixture Model）&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;混合模型是一个可以用来表示在总体分布（distribution）中含有 K 个子分布的概率模型，换句话说，混合模型表示了观测数据在总体中的概率分布，它是一个由 K 个子分布组成的混合分布。混合模型不要求观测数据提供关于子分布的信息，来计算观测数据在总体分布中的概率。&lt;/p&gt;
+&lt;h2 id=&#34;高斯模型&#34;&gt;&lt;strong&gt;高斯模型&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;单高斯模型&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当样本数据 X 是一维数据（Univariate）时，高斯分布遵从下方概率密度函数（Probability Density Function）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=P%28x%7C%5Ctheta%29+%3D+%5Cfrac%7B1%7D%7B%5Csqrt%7B2%5Cpi%5Csigma%5E%7B2%7D%7D%7D+exp%28-%5Cfrac%7B%28x-%5Cmu%29%5E2%7D%7B2%5Csigma%5E%7B2%7D%7D%29&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Cmu&#34; alt=&#34;&#34;&gt; 为数据均值（期望）， &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Csigma&#34; alt=&#34;&#34;&gt; 为数据标准差（Standard deviation）。&lt;/p&gt;
+&lt;p&gt;当样本数据 X 是多维数据（Multivariate）时，高斯分布遵从下方概率密度函数：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=P%28x%7C%5Ctheta%29+%3D+%5Cfrac%7B1%7D%7B%282%5Cpi%29%5E%7B%5Cfrac%7BD%7D%7B2%7D%7D%5Cleft%7C+%5CSigma+%5Cright%7C%5E%7B%5Cfrac%7B1%7D%7B2%7D%7D%7Dexp%28-%5Cfrac%7B%28x-%5Cmu%29%5E%7BT%7D%5CSigma%5E%7B-1%7D%28x-%5Cmu%29%7D%7B2%7D%29&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;其中， &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Cmu&#34; alt=&#34;&#34;&gt; 为数据均值（期望）， &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5CSigma&#34; alt=&#34;&#34;&gt; 为协方差（Covariance），D 为数据维度。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;高斯混合模型&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;高斯混合模型可以看作是由 K 个单高斯模型组合而成的模型，这 K 个子模型是混合模型的隐变量（Hidden variable）。一般来说，一个混合模型可以使用任何概率分布，这里&lt;strong&gt;使用高斯混合模型是因为高斯分布具备很好的数学性质以及良好的计算性能。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;举个不是特别稳妥的例子，比如我们现在有一组狗的样本数据，不同种类的狗，体型、颜色、长相各不相同，但都属于狗这个种类，此时单高斯模型可能不能很好的来描述这个分布，因为样本数据分布并不是一个单一的椭圆，所以用混合高斯分布可以更好的描述这个问题，如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://pic1.zhimg.com/v2-b1a0d985d1508814f45234bc98bf9120_r.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;首先定义如下信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=x_%7Bj%7D&#34; alt=&#34;&#34;&gt; 表示第 &lt;img src=&#34;https://www.zhihu.com/equation?tex=j&#34; alt=&#34;&#34;&gt; 个观测数据， &lt;img src=&#34;https://www.zhihu.com/equation?tex=j+%3D+1%2C2%2C...%2CN&#34; alt=&#34;&#34;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=K&#34; alt=&#34;&#34;&gt; 是混合模型中子高斯模型的数量， &lt;img src=&#34;https://www.zhihu.com/equation?tex=k+%3D+1%2C2%2C...%2CK&#34; alt=&#34;&#34;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Calpha_%7Bk%7D&#34; alt=&#34;&#34;&gt; 是观测数据属于第 &lt;img src=&#34;https://www.zhihu.com/equation?tex=k&#34; alt=&#34;&#34;&gt; 个子模型的概率， &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Calpha_%7Bk%7D+%5Cgeq+0&#34; alt=&#34;&#34;&gt; ， &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Csum_%7Bk%3D1%7D%5E%7BK%7D%7B%5Calpha_%7Bk%7D%7D+%3D+1&#34; alt=&#34;&#34;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Cphi%28x%7C%5Ctheta_%7Bk%7D%29&#34; alt=&#34;&#34;&gt; 是第 &lt;img src=&#34;https://www.zhihu.com/equation?tex=k&#34; alt=&#34;&#34;&gt; 个子模型的高斯分布密度函数， &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Ctheta_%7Bk%7D+%3D+%28%5Cmu_%7Bk%7D%2C+%5Csigma_%7Bk%7D%5E%7B2%7D%29&#34; alt=&#34;&#34;&gt; 。其展开形式与上面介绍的单高斯模型相同&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Cgamma_%7Bjk%7D&#34; alt=&#34;&#34;&gt; 表示第 &lt;img src=&#34;https://www.zhihu.com/equation?tex=j&#34; alt=&#34;&#34;&gt; 个观测数据属于第 &lt;img src=&#34;https://www.zhihu.com/equation?tex=k&#34; alt=&#34;&#34;&gt; 个子模型的概率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;高斯混合模型的概率分布为：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=P%28x%7C%5Ctheta%29+%3D+%5Csum_%7Bk%3D1%7D%5E%7BK%7D%7B%5Calpha_%7Bk%7D%5Cphi%28x%7C%5Ctheta_%7Bk%7D%29%7D&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;对于这个模型而言，参数 &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Ctheta+%3D+%28%5Ctilde%7B%5Cmu_%7Bk%7D%7D%2C+%5Ctilde%7B%5Csigma_%7Bk%7D%7D%2C+%5Ctilde%7B%5Calpha_%7Bk%7D%7D%29&#34; alt=&#34;&#34;&gt; ，也就是每个子模型的期望、方差（或协方差）、在混合模型中发生的概率。&lt;/p&gt;
+&lt;h2 id=&#34;模型参数学习&#34;&gt;&lt;strong&gt;模型参数学习&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;对于单高斯模型&lt;/strong&gt;，我们可以用最大似然法（Maximum likelihood）估算参数 &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Ctheta&#34; alt=&#34;&#34;&gt; 的值，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Ctheta+%3D+argmax_%7B%5Ctheta%7D+L%28%5Ctheta%29&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里我们假设了每个数据点都是独立的（Independent），似然函数由概率密度函数（PDF）给出。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=L%28%5Ctheta%29+%3D+%5Cprod_%7Bj%3D1%7D%5E%7BN%7DP%28x_%7Bj%7D%7C%5Ctheta%29&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;由于每个点发生的概率都很小，乘积会变得极其小，不利于计算和观察，因此通常我们用 Maximum Log-Likelihood 来计算（因为 Log 函数具备单调性，不会改变极值的位置，同时在 0-1 之间输入值很小的变化可以引起输出值相对较大的变动）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=logL%28%5Ctheta%29+%3D+%5Csum_%7Bj%3D1%7D%5E%7BN%7D%7BlogP%28x_%7Bj%7D%7C%5Ctheta%29%7D&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;对于高斯混合模型&lt;/strong&gt;，Log-Likelihood 函数是：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=logL%28%5Ctheta%29+%3D+%5Csum_%7Bj%3D1%7D%5E%7BN%7D%7BlogP%28x_%7Bj%7D%7C%5Ctheta%29%7D+%3D+%5Csum_%7Bj%3D1%7D%5E%7BN%7D%7Blog%28%5Csum_%7Bk%3D1%7D%5E%7BK%7D%7B%5Calpha_%7Bk%7D%5Cphi%28x%7C%5Ctheta_%7Bk%7D%29%7D%29%7D&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如何计算高斯混合模型的参数呢？这里我们无法像单高斯模型那样使用最大似然法来求导求得使 likelihood 最大的参数，因为对于每个观测数据点来说，事先并不知道它是属于哪个子分布的（hidden variable），因此 log 里面还有求和，对于每个子模型都有未知的 &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Calpha_%7Bk%7D%2C+%5Cmu_%7Bk%7D%2C+%5Csigma_%7Bk%7D&#34; alt=&#34;&#34;&gt; ，直接求导无法计算。&lt;strong&gt;需要通过迭代的方法求解&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;em-算法&#34;&gt;&lt;strong&gt;EM 算法&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;EM 算法是一种迭代算法，1977 年由 Dempster 等人总结提出，用于含有隐变量（Hidden variable）的概率模型参数的最大似然估计。&lt;/p&gt;
+&lt;p&gt;每次迭代包含两个步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;E-step：求期望 &lt;img src=&#34;https://www.zhihu.com/equation?tex=E%28%5Cgamma_%7Bjk%7D+%7C+X%2C+%5Ctheta%29&#34; alt=&#34;&#34;&gt; for all &lt;img src=&#34;https://www.zhihu.com/equation?tex=j+%3D+1%2C2%2C...%2CN&#34; alt=&#34;&#34;&gt;&lt;/li&gt;
+&lt;li&gt;M-step：求极大，计算新一轮迭代的模型参数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这里不具体介绍一般性的 EM 算法（通过 Jensen 不等式得出似然函数的下界 Lower bound，通过极大化下界做到极大化似然函数），只介绍怎么在高斯混合模型里应用从来推算出模型参数。&lt;/p&gt;
+&lt;p&gt;通过 EM 迭代更新高斯混合模型参数的方法（我们有样本数据 &lt;img src=&#34;https://www.zhihu.com/equation?tex=x_%7B1%7D%2C+x_%7B2%7D%2C+...%2Cx_%7BN%7D&#34; alt=&#34;&#34;&gt; 和一个有 &lt;img src=&#34;https://www.zhihu.com/equation?tex=K&#34; alt=&#34;&#34;&gt; 个子模型的高斯混合模型，想要推算出这个高斯混合模型的最佳参数）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先初始化参数&lt;/li&gt;
+&lt;li&gt;E-step：依据当前参数，计算每个数据 &lt;img src=&#34;https://www.zhihu.com/equation?tex=j&#34; alt=&#34;&#34;&gt; 来自子模型 &lt;img src=&#34;https://www.zhihu.com/equation?tex=k&#34; alt=&#34;&#34;&gt; 的可能性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Cgamma_%7Bjk%7D+%3D+%5Cfrac%7B%5Calpha_%7Bk%7D%5Cphi%28x_%7Bj%7D%7C%5Ctheta_%7Bk%7D%29%7D%7B%5Csum_%7Bk%3D1%7D%5E%7BK%7D%7B%5Calpha_%7Bk%7D%5Cphi%28x_%7Bj%7D%7C%5Ctheta_%7Bk%7D%29%7D%7D%2C+j+%3D+1%2C2%2C...%2CN%3B+k+%3D+1%2C2%2C...%2CK&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;M-step：计算新一轮迭代的模型参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Cmu_%7Bk%7D+%3D+%5Cfrac%7B%5Csum_%7Bj%7D%5E%7BN%7D%7B%28%5Cgamma_%7Bjk%7D%7Dx_%7Bj%7D%29%7D%7B%5Csum_%7Bj%7D%5E%7BN%7D%7B%5Cgamma_%7Bjk%7D%7D%7D%2C+k%3D1%2C2%2C...%2CK&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=%5CSigma_%7Bk%7D+%3D+%5Cfrac%7B%5Csum_%7Bj%7D%5E%7BN%7D%7B%5Cgamma_%7Bjk%7D%7D%28x_%7Bj%7D-%5Cmu_%7Bk%7D%29%28x_%7Bj%7D-%5Cmu_%7Bk%7D%29%5E%7BT%7D%7D%7B%5Csum_%7Bj%7D%5E%7BN%7D%7B%5Cgamma_%7Bjk%7D%7D%7D%2C+k+%3D+1%2C2%2C...%2CK&#34; alt=&#34;&#34;&gt; （用这一轮更新后的 &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Cmu_%7Bk%7D&#34; alt=&#34;&#34;&gt; ）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Calpha_%7Bk%7D+%3D+%5Cfrac%7B%5Csum_%7Bj%3D1%7D%5E%7BN%7D%7B%5Cgamma_%7Bjk%7D%7D%7D%7BN%7D%2C+k%3D1%2C2%2C...%2CK&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;重复计算 E-step 和 M-step 直至收敛 （ &lt;img src=&#34;https://www.zhihu.com/equation?tex=%7C%7C%5Ctheta_%7Bi%2B1%7D+-+%5Ctheta_%7Bi%7D%7C%7C+%3C+%5Cvarepsilon&#34; alt=&#34;&#34;&gt; , &lt;img src=&#34;https://www.zhihu.com/equation?tex=%5Cvarepsilon&#34; alt=&#34;&#34;&gt; 是一个很小的正数，表示经过一次迭代之后参数变化非常小）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;至此，我们就找到了高斯混合模型的参数。需要注意的是，EM 算法具备收敛性，但并不保证找到全局最大值，有可能找到局部最大值。解决方法是初始化几次不同的参数进行迭代，取结果最好的那次。&lt;/p&gt;
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;《统计学习方法》第九章 - EM 算法及其推广——李航&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://link.zhihu.com/?target=https%3A//en.wikipedia.org/wiki/Mixture_model%23Gaussian_mixture_model&#34;&gt;Mixture model - Wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://link.zhihu.com/?target=http%3A//blog.csdn.net/jojozhangju/article/details/19182013&#34;&gt;高斯混合模型（GMM）介绍以及学习笔记&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

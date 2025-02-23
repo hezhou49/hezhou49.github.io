@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fezzy&#39;s notebook | FEZZY</title>
+    <link>https://hezhou49.github.io/docs/</link>
+      <atom:link href="https://hezhou49.github.io/docs/index.xml" rel="self" type="application/rss+xml" />
+    <description>fezzy&#39;s notebook</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 07 May 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>fezzy&#39;s notebook</title>
+      <link>https://hezhou49.github.io/docs/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>https://hezhou49.github.io/docs/%E5%85%B6%E5%AE%83/c&#43;&#43;%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/docs/%E5%85%B6%E5%AE%83/c&#43;&#43;%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <description>&lt;h2 id=&#34;目前环境&#34;&gt;目前环境&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;版本&lt;/th&gt;
+&lt;th&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;PCL&lt;/td&gt;
+&lt;td&gt;1.11.1&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/PointCloudLibrary/pcl/releases&#34;&gt;https://github.com/PointCloudLibrary/pcl/releases&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;QT&lt;/td&gt;
+&lt;td&gt;5.14.0&lt;/td&gt;
+&lt;td&gt;之后版本应该问题也不大&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VTK&lt;/td&gt;
+&lt;td&gt;8.2.0&lt;/td&gt;
+&lt;td&gt;重要。编译后覆盖PCL自带的VTK&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VS 2019&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CMAKE&lt;/td&gt;
+&lt;td&gt;最新&lt;/td&gt;
+&lt;td&gt;无所谓，下载最新稳定版即可。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;此文章很大程度参考了https://blog.csdn.net/qq_21095573/article/details/107505585，主要区别在于使用CMake组织项目，不需要手动去配VS环境（建属性表）。&lt;/p&gt;
+&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;
+&lt;h3 id=&#34;关于cmake&#34;&gt;关于CMake&lt;/h3&gt;
+&lt;p&gt;CMake很重要，很好的跨平台工具，使用cmake组织项目，拒绝手动配置VS。&lt;/p&gt;
+&lt;p&gt;安装完成后，可以尝试编译下面两个开源项目，已测试可行。&lt;/p&gt;
+&lt;p&gt;简单一点：https://github.com/imuncle/TStoneCalibration&lt;/p&gt;
+&lt;p&gt;稍微复杂专业一点：https://github.com/alex-hjm/cloudtool&lt;/p&gt;
+&lt;h3 id=&#34;关于vtk版本&#34;&gt;关于VTK版本&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;非常重要&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;VTK 8.1.2和VTK8.2.0之后版本在QVTKWidget上有很大区别。如果项目中VTK编译报错或运行报错，首先考虑是否是版本不兼容以及由于版本不对应带来的程序编写差异。&lt;/p&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/a15005784320/article/details/99460999&#34;&gt;tudy-VTK：QVTKWidget、QVTKOpenGLWidget、QVTKOpenGLNativeWidget、QVTKWidget2 区别&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/libaineu2004/article/details/124379146&#34;&gt;VTK v9.0新版本找不到QVTKWidget.h头文件了？Qt设计师怎么办？&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;安装过程&#34;&gt;安装过程&lt;/h2&gt;
+&lt;h3 id=&#34;pcl安装说明&#34;&gt;PCL安装说明&lt;/h3&gt;
+&lt;p&gt;新机器直接下载两个文件后，一路NEXT。环境变量选择给所有用户使用。&lt;/p&gt;
+&lt;p&gt;然后把pdb文件（用于调试）解压放在PCL1.11.1安装目录的bin下面就可以了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100841966.png&#34; alt=&#34;image-20221109220354582&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果是自定义的安装路径的话，3rdparty内的OpenNI2应该会被默认安装到C盘。&lt;/p&gt;
+&lt;p&gt;点开OpenNI2文件夹，里面应该只有一个msi文件。点击msi文件先删除OpenNI2，然后再点击msi文件，将OpenNI2安装至当前文件夹。&lt;/p&gt;
+&lt;p&gt;安装好后环境变量应该是会自动配置好的 ，如下图几条，应该需要手动加入一下最下面那一条openni tools的，其它都是自动配置的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100841967.png&#34; alt=&#34;image-20221109220653846&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100841968.png&#34; alt=&#34;image-20221109220741354&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;qt安装说明&#34;&gt;QT安装说明&lt;/h3&gt;
+&lt;p&gt;QT安装可以参考https://blog.csdn.net/yao_hou/article/details/108015209&lt;/p&gt;
+&lt;p&gt;下面是简明步骤。&lt;/p&gt;
+&lt;h4 id=&#34;安装-qt-5140&#34;&gt;安装 QT 5.14.0&lt;/h4&gt;
+&lt;p&gt;进入链接下载：https://download.qt.io/archive/qt/5.14/5.14.0/&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100841969.png&#34; alt=&#34;image-20221109221441747&#34;&gt;&lt;/p&gt;
+&lt;p&gt;选择组件时只勾选一个“MSVC 2017 64-bit”就ok了，5.14没有MSVC 2019的选项，选个2017不影响。&lt;/p&gt;
+&lt;p&gt;建议把QT的bin路径加到Path中：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;D:\hezhou_work_space\c_ws\Qt5.14.0\5.14.0\msvc2017_64\bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100841970.png&#34; alt=&#34;image-20221109225327148&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;安装addin-插件&#34;&gt;安装addin 插件&lt;/h4&gt;
+&lt;p&gt;这个版本其实无所谓。https://download.qt.io/archive/vsaddin/2.5.1/&lt;/p&gt;
+&lt;p&gt;为 Visual Studio 安装 qt addin 插件，在前面的下载链接中下载插件文件，后缀名为 &lt;code&gt;.vsix&lt;/code&gt; ，双击完成安装。重新打开 Visual Studio，可以在菜单栏上看到 &lt;code&gt;QT VS Tools&lt;/code&gt; 菜单。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842885.png&#34; alt=&#34;img&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;p&gt;安装完成后，打开 Visual Studio 进行 Qt 配置。打开 &lt;code&gt;Qt VS Tools&lt;/code&gt; - &lt;code&gt;Qt Options&lt;/code&gt;，设置对应 Qt 版本及路径。&lt;/p&gt;
+&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100841264.png&#34; alt=&#34;img&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;h3 id=&#34;vs-2019安装&#34;&gt;VS 2019安装&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://learn.microsoft.com/zh-cn/visualstudio/releases/2019/release-notes&#34;&gt;https://learn.microsoft.com/zh-cn/visualstudio/releases/2019/release-notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;不细说了。&lt;/p&gt;
+&lt;h3 id=&#34;vtk-编译说明&#34;&gt;VTK 编译说明&lt;/h3&gt;
+&lt;p&gt;PCL 依赖 VTK，在其 &lt;code&gt;3rdParty&lt;/code&gt; 目录下可以看到 VTK。那为什么还要自己手动编译 VTK 呢？这是因为，PCL 安装目录下的 VTK 并不完整，其中就少了与 Qt 相关的模块，而这些模块是 CloudViewer 编译运行所需要的（如 &lt;code&gt;QVTKWidget&lt;/code&gt;）。所以我们需要手动编译 VTK，并替换 PCL &lt;code&gt;3rdParty&lt;/code&gt; 下的 VTK。&lt;/p&gt;
+&lt;p&gt;可以发现，PCL1.11.1 依赖 VTK8.2，所以我们编译这个版本的 VTK。可以在 VTK Github 下的 release 页面获取对应版本的 VTK 源码。&lt;/p&gt;
+&lt;p&gt;官网下载链接：https://www.vtk.org/files/release/8.2/VTK-8.2.0.zip&lt;/p&gt;
+&lt;p&gt;点击直接下载（我发现官网和GitHub的release大小还不一样，不管）&lt;/p&gt;
+&lt;p&gt;首先将 VTK 源码解压，打开 cmake-gui，设置源码目录（此处即为 VTK 源码目录）和生成目录（随便建一个）。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100841971.png&#34; alt=&#34;image-20221109224527248&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后点击Configure 选择 Visual studio 16 2019 和x64&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100841972.png&#34; alt=&#34;image-20221109224740901&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后开始配置VTK环境&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;勾选 BUILD_EXAMPLES&lt;/p&gt;
+&lt;p&gt;编译VTK自带的示例文件。（非必须，如果不需要的话可以不选。这样会大幅度减少后续使用vs编译时的时间）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842841.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;勾选 BUILD_SHARED_LIBS&lt;/p&gt;
+&lt;p&gt;VTK-8.2.0默认是勾选的。作用：生成动态共享库DLL。）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842999.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;配置 CMAKE_INSTALL_PREFIX&lt;/p&gt;
+&lt;p&gt;VTK库要安装的位置，VTK编译后生成的库文件所在位置，可以随便放在一个位置，到时把这个文件夹内的内容替换之PCL目录下的VTK内。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842237.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;勾选 VTK_Group_Qt （使用QT一定要勾选！！！）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842068.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;配置 CMAKE_DEBUG_POSTFIX&lt;/p&gt;
+&lt;p&gt;(添加_d这样进行Debug版本编译时会在库文件名后面多个_-gd)&lt;/p&gt;
+&lt;p&gt;填-gd，忽略下图。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842410.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;执行完以上步骤以后再次点击Configure。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;点击后会发现还有很多红色的提示，继续修改。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里报错了一个找不到Qt路径的错误提示  （如果将QT添加至环境变量了不会有该错误）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842169.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;br&gt;
+解决办法直接手动配置一下绝对路径。&lt;/p&gt;
+&lt;p&gt;确认VTK_QT_VERSION 版本为5，通常都是然后再次点击Config&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842481.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;**执行完以上步骤以后再次点击Configrue。**这一步非常重要！！！！！&lt;/p&gt;
+&lt;p&gt;并且VTK 8.1.2和8.2.0之后版本的主要区别也体现在这。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;勾选 QVTKOpenGLNativeWidget&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842045.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;执行完以上步骤以后再次点击Configrue。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;出现下面红色提示路径不对&lt;/p&gt;
+&lt;p&gt;手动指定路径&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842912.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;再次点击Configrue。&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;发现现在已经没有报红了，点击Generate生成工程。&lt;/p&gt;
+&lt;p&gt;(如果没有变成白色要检查红色条目到底对不对，直到出现Configuring done)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842442.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;下图出现Generate done&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hezhou-img.oss-cn-shanghai.aliyuncs.com/img/202211100842275.png&#34; alt=&#34;在这里插入图片描述&#34;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;生成完毕后&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;可以在生成目录下发现 Visual Studio 解决方案。&lt;/p&gt;
+&lt;p&gt;打开解决方案，其中包含了上百个项目，默认是 Debug x64 模式，右击 &lt;strong&gt;ALL_BUILD&lt;/strong&gt; 项目，选择生成，生成完成后，右击 &lt;strong&gt;INSTALL&lt;/strong&gt; 项目，选择生成，即开始安装，将生成 debug 库文件。&lt;/p&gt;
+&lt;p&gt;待构建完成后，切换为 Release x64 模式，按同样的操作（先ALL再INSTALL），生成 release 库文件（构建过程比较耗时，大概需要 1 个小时左右）。最终完成 VTK 的构建，可以在先前配置的安装目录下（CMAKE_INSTALL_PREFIX）找到构建好的文件。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;替换&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;最后，将构建好的整个目录拷贝至 PCL &lt;code&gt;3rdParty&lt;/code&gt; 目录下，替换掉原来的 VTK。&lt;/p&gt;
+&lt;p&gt;了能够在 Qt Designer 中使用 QVTKWidget 控件，将 &lt;code&gt;PCL_ROOT/3rdParty/VTK/plugins/designer/QVTKWidget.dll&lt;/code&gt; 拷贝至 &lt;code&gt;QTDIR/Qt5.14.0/5.14.0/msvc2017_64/plugins/designer&lt;/code&gt; 目录下.&lt;/p&gt;
+&lt;h2 id=&#34;测试&#34;&gt;测试&lt;/h2&gt;
+&lt;p&gt;现在一般大型C++项目都是CMake管理，可以上github上搜索关键词QT、OPENCV、PCL等找一些项目，看看别人的项目是怎么组织的，CMakeLists怎么写的。&lt;/p&gt;
+&lt;p&gt;目前随便找了两个，且均成功编译运行了：&lt;/p&gt;
+&lt;p&gt;简单一点：https://github.com/imuncle/TStoneCalibration。主要依赖opencv和QT&lt;/p&gt;
+&lt;p&gt;稍微复杂专业一点：https://github.com/alex-hjm/cloudtool。主要依赖PCL、QT、VTK。&lt;/p&gt;
+&lt;p&gt;记录几个小问题：&lt;/p&gt;
+&lt;p&gt;下载源码的时候使用git clone，不要用打包zip的方式，可能会出现换行符和编码错乱导致编译失败。&lt;/p&gt;
+&lt;p&gt;1.&lt;/p&gt;
+&lt;p&gt;程序报错“error C2065: “M_PI”: 未声明的标识符&amp;quot;：https://blog.csdn.net/liu_feng_zi_/article/details/84816763&lt;/p&gt;
+&lt;p&gt;2.&lt;/p&gt;
+&lt;p&gt;关于中文引起的乱码问题：https://learn.microsoft.com/zh-cn/cpp/build/reference/execution-charset-set-execution-character-set?view=msvc-170&lt;/p&gt;
+&lt;p&gt;在编译器选项内添加&lt;code&gt;/source-charset:utf-8 /execution-charset:utf-8&lt;/code&gt;，注意跟已有的用空格隔开。&lt;/p&gt;
+&lt;h2 id=&#34;规范&#34;&gt;规范&lt;/h2&gt;
+&lt;p&gt;关于项目构建：https://blog.csdn.net/u011942101/article/details/123758470&lt;/p&gt;
+&lt;p&gt;这篇博客的构建方式与https://github.com/alex-hjm/cloudtool一致，组件打包成库，最终生成一个可执行文件。&lt;/p&gt;
+&lt;h2 id=&#34;记录&#34;&gt;记录&lt;/h2&gt;
+&lt;h3 id=&#34;配置qt-creator&#34;&gt;配置QT creator&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/afgqwjgfjqwgfg/article/details/118981256&#34;&gt;https://blog.csdn.net/afgqwjgfjqwgfg/article/details/118981256&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;QT开发方式，基于QT creator，可以选择使用Cmake构建项目。会自动生成如下几个文件。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;c++%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/image-20221110194921607.png&#34; alt=&#34;image-20221110194921607&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击manage简单配置一下编译器属性等，（选一个debug就ok了），使用creator主要是为了生成几个文件方便，并不是调试的主战场。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;c++%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/image-20221110201504651.png&#34; alt=&#34;image-20221110201504651&#34;&gt;&lt;/p&gt;
+&lt;p&gt;配置一下CMake选项：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;c++%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/image-20221110201918827.png&#34; alt=&#34;image-20221110201918827&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在建构和运行栏中，可以调一下编译路径默认为当前目录的build下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;c++%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/image-20221110202042611.png&#34; alt=&#34;image-20221110202042611&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后再次调整一下build参数，点击左侧栏“项目”：把默认的all改为ALL_BUILD。不然会报找不到项目的错。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;c++%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/image-20221110202442519.png&#34; alt=&#34;image-20221110202442519&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后就可以开始构建并运行项目了。&lt;/p&gt;
+&lt;h3 id=&#34;修改ui&#34;&gt;修改UI&lt;/h3&gt;
+&lt;p&gt;此时双击UI文件进行随意修改。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;c++%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/image-20221110202700834.png&#34; alt=&#34;image-20221110202700834&#34;&gt;&lt;/p&gt;
+&lt;p&gt;比如，拖一个按钮进来并创建槽函数。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;c++%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/image-20221110202901183.png&#34; alt=&#34;image-20221110202901183&#34;&gt;&lt;/p&gt;
+&lt;p&gt;选择clicked后，会自动进行如下更改：&lt;/p&gt;
+&lt;p&gt;1.mainwindow.h多了槽函数定义：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;c++%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/image-20221110203034171.png&#34; alt=&#34;image-20221110203034171&#34;&gt;&lt;/p&gt;
+&lt;p&gt;2.mainwindow.cpp内多处了新的空白槽函数体，等待补全。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;c++%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.assets/image-20221110203056038.png&#34; alt=&#34;image-20221110203056038&#34;&gt;&lt;/p&gt;
+&lt;p&gt;理论上来说，是需要用connect绑定空间与函数的，但是&lt;code&gt;on_控件_clicked&lt;/code&gt;的写法相当于定义好了connect。参见&lt;a href=&#34;https://blog.csdn.net/HB_Programmer/article/details/90669577&#34;&gt;Qt信号和槽函数的四种实现方式&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

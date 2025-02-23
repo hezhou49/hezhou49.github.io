@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://hezhou49.github.io/sitemap.xml

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>研究生课题 | FEZZY</title>
+    <link>https://hezhou49.github.io/tags/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E9%A2%98/</link>
+      <atom:link href="https://hezhou49.github.io/tags/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    <description>研究生课题</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 31 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>研究生课题</title>
+      <link>https://hezhou49.github.io/tags/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E9%A2%98/</link>
+    </image>
+    
+    <item>
+      <title>双目、结构光视觉引导的机器人系统</title>
+      <link>https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Thu, 31 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/</guid>
+      <description>&lt;p&gt;研究生课题。基于深度相机与双目相机组成的视觉系统，将跟踪目标（手术针）与人体解剖结构统一至同一坐标系下，完全可视化穿刺过程，提高定位精度，减少重复入针带来的伤害。&lt;/p&gt;
+&lt;p&gt;可搭载机器人代替人手进行更高精度的穿刺动作。（已于多家医院展开落地合作）&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;image-20241229160526209&#34; srcset=&#34;
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229160526209_hu95656cab8399a6c86e2036cd334f6ed6_100257_b1d3e12ecb381b9c8f8b5adde42118ce.webp 400w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229160526209_hu95656cab8399a6c86e2036cd334f6ed6_100257_153f6cc27015a0c187f90efe38669371.webp 760w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229160526209_hu95656cab8399a6c86e2036cd334f6ed6_100257_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229160526209_hu95656cab8399a6c86e2036cd334f6ed6_100257_b1d3e12ecb381b9c8f8b5adde42118ce.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;203&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;cases&#34;&gt;Cases&lt;/h2&gt;
+&lt;img src=&#34;image-20241229162923115.png&#34; alt=&#34;image-20241229162923115&#34; style=&#34;zoom: 50%;&#34; /&gt;
+&lt;iframe src=&#34;robot_puncture.mp4&#34;  style=&#34;width: 600px; height: 400px;&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; framespacing=&#34;0&#34;  autoplay=&#34;true&#34; muted=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;h2 id=&#34;系统&#34;&gt;系统&lt;/h2&gt;
+&lt;h3 id=&#34;硬件组成&#34;&gt;硬件组成&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;image-20241229152129874&#34; srcset=&#34;
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229152129874_hub8462fc534ac87dc297452314dd677d3_390540_51728bb74ec0f142c1f492a9efc67cb9.webp 400w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229152129874_hub8462fc534ac87dc297452314dd677d3_390540_55408ddaca6c47bf411c744bde89f965.webp 760w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229152129874_hub8462fc534ac87dc297452314dd677d3_390540_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229152129874_hub8462fc534ac87dc297452314dd677d3_390540_51728bb74ec0f142c1f492a9efc67cb9.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;426&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;软件界面&#34;&gt;软件界面&lt;/h3&gt;
+&lt;img src=&#34;software.png&#34; alt=&#34;software&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
+&lt;h3 id=&#34;标定&#34;&gt;标定&lt;/h3&gt;
+&lt;p&gt;手眼标定、多视觉系统联合标定&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;刚体跟踪&#34;&gt;刚体跟踪&lt;/h3&gt;
+&lt;p&gt;主动近红外下的、基于多目视觉的刚体跟踪。（跟踪手术针）&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;matching&#34; srcset=&#34;
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/matching_hu4ad54dd2511d3752733df22b1acbd19f_95078_b2c498ddf109b5c28ff7556541c37a5c.webp 400w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/matching_hu4ad54dd2511d3752733df22b1acbd19f_95078_47a7f2bd5020a331228e51a3ec82f735.webp 760w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/matching_hu4ad54dd2511d3752733df22b1acbd19f_95078_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/matching_hu4ad54dd2511d3752733df22b1acbd19f_95078_b2c498ddf109b5c28ff7556541c37a5c.webp&#34;
+               width=&#34;591&#34;
+               height=&#34;666&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;点云配准&#34;&gt;点云配准&lt;/h3&gt;
+&lt;p&gt;基于特征匹配的点云配准算法，流程：&lt;/p&gt;
+&lt;img src=&#34;11.jpg&#34; alt=&#34;11&#34;  /&gt;
+&lt;p&gt;特征提取步，使用大量人体点云样本训练模型，提取出高区分度的特征。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;image-20241229151905201&#34; srcset=&#34;
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229151905201_hue4890eff1c18f9bbce6da8f5be09863c_215129_22b1568ffd5344f1d6eeeec0df75b5ec.webp 400w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229151905201_hue4890eff1c18f9bbce6da8f5be09863c_215129_b46840cc5e090c0fecdc9400bc459fff.webp 760w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229151905201_hue4890eff1c18f9bbce6da8f5be09863c_215129_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229151905201_hue4890eff1c18f9bbce6da8f5be09863c_215129_22b1568ffd5344f1d6eeeec0df75b5ec.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;283&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

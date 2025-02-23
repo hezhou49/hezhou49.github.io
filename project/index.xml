@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | FEZZY</title>
+    <link>https://hezhou49.github.io/project/</link>
+      <atom:link href="https://hezhou49.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 07 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
+      <title>Projects</title>
+      <link>https://hezhou49.github.io/project/</link>
+    </image>
+    
+    <item>
+      <title>仓储搬运机器人系统</title>
+      <link>https://hezhou49.github.io/project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sat, 07 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/</guid>
+      <description>&lt;p&gt;Work in progress&lt;/p&gt;
+&lt;h2 id=&#34;架构设计&#34;&gt;架构设计&lt;/h2&gt;
+&lt;p&gt;(图片已脱敏)&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;fezzy_here&#34; srcset=&#34;
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/fezzy_here_hu0de20209c90422504f6d9500cdc91e43_395179_0bda7954c69c7ab1bd4ae07ee475cb43.webp 400w,
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/fezzy_here_hu0de20209c90422504f6d9500cdc91e43_395179_20bcd8fa73df5dbbbab7522297f74461.webp 760w,
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/fezzy_here_hu0de20209c90422504f6d9500cdc91e43_395179_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/fezzy_here_hu0de20209c90422504f6d9500cdc91e43_395179_0bda7954c69c7ab1bd4ae07ee475cb43.webp&#34;
+               width=&#34;180&#34;
+               height=&#34;210&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;系统架构&#34;&gt;系统架构&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;architecture_downsample&#34; srcset=&#34;
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/architecture_downsample_hu2e04452ae9864d26b3b94612549bfd8b_526292_f70c467e8e0882aae87d79a4f465042f.webp 400w,
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/architecture_downsample_hu2e04452ae9864d26b3b94612549bfd8b_526292_837752290e2db0043c472257627d9ee9.webp 760w,
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/architecture_downsample_hu2e04452ae9864d26b3b94612549bfd8b_526292_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/architecture_downsample_hu2e04452ae9864d26b3b94612549bfd8b_526292_f70c467e8e0882aae87d79a4f465042f.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;611&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;规控模块时序&#34;&gt;规控模块时序&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;img&#34; srcset=&#34;
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_49a0e5d435b386f1d058efd3deb7ed72_hu09d62e8edf318c854ae3cab860e68624_322283_2d54dd4aae68b3841b1010eda11365fe.webp 400w,
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_49a0e5d435b386f1d058efd3deb7ed72_hu09d62e8edf318c854ae3cab860e68624_322283_3126f51f5759a991ea9f02bc43d716f4.webp 760w,
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_49a0e5d435b386f1d058efd3deb7ed72_hu09d62e8edf318c854ae3cab860e68624_322283_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_49a0e5d435b386f1d058efd3deb7ed72_hu09d62e8edf318c854ae3cab860e68624_322283_2d54dd4aae68b3841b1010eda11365fe.webp&#34;
+               width=&#34;583&#34;
+               height=&#34;760&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;传感器流向与定位时序&#34;&gt;传感器流向与定位时序&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;img&#34; srcset=&#34;
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_09a79457bf493cc3c3172561d40fe86b_hu3feb820f4b479196b7500617ca5dc42f_854464_618ff5e38141475bc1aac79fc05fa6d6.webp 400w,
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_09a79457bf493cc3c3172561d40fe86b_hu3feb820f4b479196b7500617ca5dc42f_854464_37378eb1a777c4b805c7a39f7b9f410d.webp 760w,
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_09a79457bf493cc3c3172561d40fe86b_hu3feb820f4b479196b7500617ca5dc42f_854464_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_09a79457bf493cc3c3172561d40fe86b_hu3feb820f4b479196b7500617ca5dc42f_854464_618ff5e38141475bc1aac79fc05fa6d6.webp&#34;
+               width=&#34;660&#34;
+               height=&#34;760&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;后端时序&#34;&gt;后端时序&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;img&#34; srcset=&#34;
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_1f7b15e91b3e824b1ce170eb50bb8342_hu2a0d96617a1b977d071d23476e265bd7_553025_8d6764117b9a96b8b33441688b4cb9aa.webp 400w,
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_1f7b15e91b3e824b1ce170eb50bb8342_hu2a0d96617a1b977d071d23476e265bd7_553025_134b8ebdf556f10afc10b939afa6a92f.webp 760w,
+               /project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_1f7b15e91b3e824b1ce170eb50bb8342_hu2a0d96617a1b977d071d23476e265bd7_553025_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E4%BB%93%E5%82%A8%E6%90%AC%E8%BF%90%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/userlmn_1f7b15e91b3e824b1ce170eb50bb8342_hu2a0d96617a1b977d071d23476e265bd7_553025_8d6764117b9a96b8b33441688b4cb9aa.webp&#34;
+               width=&#34;624&#34;
+               height=&#34;760&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
+&lt;h3 id=&#34;嵌入式&#34;&gt;嵌入式&lt;/h3&gt;
+&lt;h4 id=&#34;协程思路&#34;&gt;协程思路&lt;/h4&gt;
+&lt;p&gt;xxx&lt;/p&gt;
+&lt;h4 id=&#34;解耦模块化组件通信&#34;&gt;解耦、模块化、组件通信&lt;/h4&gt;
+&lt;p&gt;xxx&lt;/p&gt;
+&lt;h3 id=&#34;规控&#34;&gt;规控&lt;/h3&gt;
+&lt;h4 id=&#34;全局最短路径规划&#34;&gt;全局最短路径规划&lt;/h4&gt;
+&lt;p&gt;xxx&lt;/p&gt;
+&lt;h4 id=&#34;插件式运动控制&#34;&gt;插件式运动控制&lt;/h4&gt;
+&lt;p&gt;xxx&lt;/p&gt;
+&lt;h3 id=&#34;标定&#34;&gt;标定&lt;/h3&gt;
+&lt;h4 id=&#34;雷达轮速计imu标定&#34;&gt;雷达、轮速计、imu标定&lt;/h4&gt;
+&lt;p&gt;xxx&lt;/p&gt;
+&lt;h3 id=&#34;定位&#34;&gt;定位&lt;/h3&gt;
+&lt;h4 id=&#34;动态物体滤除&#34;&gt;动态物体滤除&lt;/h4&gt;
+&lt;p&gt;xxx&lt;/p&gt;
+&lt;h4 id=&#34;多观测的定位融合&#34;&gt;多观测的定位融合&lt;/h4&gt;
+&lt;p&gt;xxx&lt;/p&gt;
+&lt;h4 id=&#34;退化检测&#34;&gt;退化检测&lt;/h4&gt;
+&lt;p&gt;xxx&lt;/p&gt;
+&lt;h3 id=&#34;时间开销优化&#34;&gt;时间开销优化&lt;/h3&gt;
+&lt;p&gt;xxx&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>双目、结构光视觉引导的机器人系统</title>
+      <link>https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Thu, 31 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/</guid>
+      <description>&lt;p&gt;研究生课题。基于深度相机与双目相机组成的视觉系统，将跟踪目标（手术针）与人体解剖结构统一至同一坐标系下，完全可视化穿刺过程，提高定位精度，减少重复入针带来的伤害。&lt;/p&gt;
+&lt;p&gt;可搭载机器人代替人手进行更高精度的穿刺动作。（已于多家医院展开落地合作）&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;image-20241229160526209&#34; srcset=&#34;
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229160526209_hu95656cab8399a6c86e2036cd334f6ed6_100257_b1d3e12ecb381b9c8f8b5adde42118ce.webp 400w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229160526209_hu95656cab8399a6c86e2036cd334f6ed6_100257_153f6cc27015a0c187f90efe38669371.webp 760w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229160526209_hu95656cab8399a6c86e2036cd334f6ed6_100257_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229160526209_hu95656cab8399a6c86e2036cd334f6ed6_100257_b1d3e12ecb381b9c8f8b5adde42118ce.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;203&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;cases&#34;&gt;Cases&lt;/h2&gt;
+&lt;img src=&#34;image-20241229162923115.png&#34; alt=&#34;image-20241229162923115&#34; style=&#34;zoom: 50%;&#34; /&gt;
+&lt;iframe src=&#34;robot_puncture.mp4&#34;  style=&#34;width: 600px; height: 400px;&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; framespacing=&#34;0&#34;  autoplay=&#34;true&#34; muted=&#34;true&#34;&gt; &lt;/iframe&gt;
+&lt;h2 id=&#34;系统&#34;&gt;系统&lt;/h2&gt;
+&lt;h3 id=&#34;硬件组成&#34;&gt;硬件组成&lt;/h3&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;image-20241229152129874&#34; srcset=&#34;
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229152129874_hub8462fc534ac87dc297452314dd677d3_390540_51728bb74ec0f142c1f492a9efc67cb9.webp 400w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229152129874_hub8462fc534ac87dc297452314dd677d3_390540_55408ddaca6c47bf411c744bde89f965.webp 760w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229152129874_hub8462fc534ac87dc297452314dd677d3_390540_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229152129874_hub8462fc534ac87dc297452314dd677d3_390540_51728bb74ec0f142c1f492a9efc67cb9.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;426&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;软件界面&#34;&gt;软件界面&lt;/h3&gt;
+&lt;img src=&#34;software.png&#34; alt=&#34;software&#34; style=&#34;zoom:67%;&#34; /&gt;
+&lt;h2 id=&#34;实现&#34;&gt;实现&lt;/h2&gt;
+&lt;h3 id=&#34;标定&#34;&gt;标定&lt;/h3&gt;
+&lt;p&gt;手眼标定、多视觉系统联合标定&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;刚体跟踪&#34;&gt;刚体跟踪&lt;/h3&gt;
+&lt;p&gt;主动近红外下的、基于多目视觉的刚体跟踪。（跟踪手术针）&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;matching&#34; srcset=&#34;
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/matching_hu4ad54dd2511d3752733df22b1acbd19f_95078_b2c498ddf109b5c28ff7556541c37a5c.webp 400w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/matching_hu4ad54dd2511d3752733df22b1acbd19f_95078_47a7f2bd5020a331228e51a3ec82f735.webp 760w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/matching_hu4ad54dd2511d3752733df22b1acbd19f_95078_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/matching_hu4ad54dd2511d3752733df22b1acbd19f_95078_b2c498ddf109b5c28ff7556541c37a5c.webp&#34;
+               width=&#34;591&#34;
+               height=&#34;666&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;点云配准&#34;&gt;点云配准&lt;/h3&gt;
+&lt;p&gt;基于特征匹配的点云配准算法，流程：&lt;/p&gt;
+&lt;img src=&#34;11.jpg&#34; alt=&#34;11&#34;  /&gt;
+&lt;p&gt;特征提取步，使用大量人体点云样本训练模型，提取出高区分度的特征。&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;image-20241229151905201&#34; srcset=&#34;
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229151905201_hue4890eff1c18f9bbce6da8f5be09863c_215129_22b1568ffd5344f1d6eeeec0df75b5ec.webp 400w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229151905201_hue4890eff1c18f9bbce6da8f5be09863c_215129_b46840cc5e090c0fecdc9400bc459fff.webp 760w,
+               /project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229151905201_hue4890eff1c18f9bbce6da8f5be09863c_215129_1200x1200_fit_q80_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/project/%E5%8F%8C%E7%9B%AE%E7%BB%93%E6%9E%84%E5%85%89%E8%A7%86%E8%A7%89%E5%BC%95%E5%AF%BC%E7%9A%84%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F/image-20241229151905201_hue4890eff1c18f9bbce6da8f5be09863c_215129_22b1568ffd5344f1d6eeeec0df75b5ec.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;283&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>智慧工厂MES系统</title>
+      <link>https://hezhou49.github.io/project/%E6%99%BA%E6%85%A7%E5%B7%A5%E5%8E%82mes%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/project/%E6%99%BA%E6%85%A7%E5%B7%A5%E5%8E%82mes%E7%B3%BB%E7%BB%9F/</guid>
+      <description>&lt;h2 id=&#34;写在前面&#34;&gt;写在前面&lt;/h2&gt;
+&lt;p&gt;前后端分离的网页应用。（上图展示了其中一条产线，4倍速）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Spring Boot / Spring Security / Vue.js  / MQTT / OPC / MySQL / NginX&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;基于OPC协议从现场PLC内读取机器人、生产线的姿态、状态等数据；绘制产线的俯视图，根据实时信号在网页端可视化机器人的执行、报错等信息。&lt;/p&gt;
+&lt;p&gt;对数据库进行增删改查从而监控工厂的生产、制造状态。&lt;/p&gt;
+&lt;h2 id=&#34;一些照片&#34;&gt;一些照片&lt;/h2&gt;
+&lt;div class=&#34;&#34;&gt;
+&lt;img src=&#34;image-20241208154554990.png&#34;  style=&#34;width: 300px; display: inline-block; margin: 2px 0px;padding: 0px&#34; /&gt;
+&lt;img src=&#34;image-20241208155443887.png&#34; style=&#34;width: 300px;display: inline-block; margin: 2px 0px; padding: 0&#34; /&gt;
+&lt;img src=&#34;image-20241208154345691.png&#34;style=&#34;width: 300px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;image-20241208155328117.png&#34; style=&#34;width: 300px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>RoboCup机器人世界杯</title>
+      <link>https://hezhou49.github.io/project/robocup%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%96%E7%95%8C%E6%9D%AF/</link>
+      <pubDate>Mon, 31 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/project/robocup%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%96%E7%95%8C%E6%9D%AF/</guid>
+      <description>&lt;p&gt;在室内场景下，识别人类意图，并进行对应的服务。&lt;/p&gt;
+&lt;p&gt;比如：“你好Max，帮我去客厅的桌上拿一瓶可乐回来。”&lt;/p&gt;
+&lt;p&gt;由此，机器人需要完成：语音辨识、路径规划与导航（提前的建图与实时的定位）、目标识别与位姿估计、目标抓取等任务。&lt;/p&gt;
+&lt;h2 id=&#34;照片墙&#34;&gt;照片墙&lt;/h2&gt;
+&lt;div &gt;
+&lt;img src=&#34;./robo1.jpg&#34; alt=&#34;robo1&#34; style=&#34;width: 300px; height: 225px;display: inline-block; margin: 2px 0px;padding: 0px&#34; /&gt;
+&lt;img src=&#34;18机器人.jpg&#34; alt=&#34;18机器人&#34; style=&#34;width: 300px;height: 225px;display: inline-block; margin: 2px 0px; padding: 0&#34; /&gt;
+&lt;img src=&#34;18专项.jpg&#34; alt=&#34;18专项&#34; style=&#34;width: 300px;height: 225px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;19服务机器人.JPG&#34; alt=&#34;19服务机器人&#34; style=&#34;width: 300px;height: 225px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;19机器人.jpg&#34; alt=&#34;19机器人&#34; style=&#34;width: 300px;height: 225px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>智能物联医疗箱</title>
+      <link>https://hezhou49.github.io/project/%E6%99%BA%E8%83%BD%E7%89%A9%E8%81%94%E5%8C%BB%E7%96%97%E7%AE%B1/</link>
+      <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/project/%E6%99%BA%E8%83%BD%E7%89%A9%E8%81%94%E5%8C%BB%E7%96%97%E7%AE%B1/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;为了解决公共场所内突发的 需医疗介入的 紧急情况，用户可以使用微信小程序在地图内找到医疗箱位置并预约药物，到达后凭二维码自动获取药物。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;微信小程序 / 物联网 / Mosquito / ESP 32 / 机械设计 / 电机控制&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;一些图片&#34;&gt;一些图片&lt;/h2&gt;
+&lt;div class=&#34;&#34;&gt;
+&lt;img src=&#34;image-20241208162025362.png&#34;  style=&#34;width: 300px; display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;image-20241208162048124.png&#34; style=&#34;width: 300px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;image-20241208161830006.png&#34; style=&#34;width: 300px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;img src=&#34;image-20241208165942684.png&#34; style=&#34;width: 300px;display: inline-block; margin: 2px 0px;&#34; /&gt;
+&lt;/div&gt;
+&lt;iframe src=&#34;final.mp4&#34;  style=&#34;width: 600px; height: 400px;&#34; scrolling=&#34;no&#34; border=&#34;0&#34; frameborder=&#34;no&#34; framespacing=&#34;0&#34;  autoplay=&#34;true&#34; muted=&#34;true&#34;&gt; &lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>and more</title>
+      <link>https://hezhou49.github.io/project/and-more/</link>
+      <pubDate>Thu, 01 Jan 1970 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/project/and-more/</guid>
+      <description>&lt;p&gt;work in progress&lt;/p&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;work in progress&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
