@@ -5,12 +5,57 @@
     <link>https://hezhou49.github.io/post/</link>
       <atom:link href="https://hezhou49.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Blog</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 27 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jan 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hezhou49.github.io/media/icon_hu1c8e88b8ad59f9a914752996b889ae01_459483_512x512_fill_lanczos_center_3.png</url>
       <title>Blog</title>
       <link>https://hezhou49.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>🌟年度金牌个人</title>
+      <link>https://hezhou49.github.io/post/2024%E5%B9%B4%E7%BB%88/</link>
+      <pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/post/2024%E5%B9%B4%E7%BB%88/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>🎉校招新人宣讲</title>
+      <link>https://hezhou49.github.io/post/2024%E6%96%B0%E4%BA%BA%E5%AE%A3%E8%AE%B2/</link>
+      <pubDate>Wed, 10 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://hezhou49.github.io/post/2024%E6%96%B0%E4%BA%BA%E5%AE%A3%E8%AE%B2/</guid>
+      <description>&lt;p&gt;作为唯一的“上年度校招代表”为本年度入职的校招新人宣讲，尝试分享一些困惑、想法、方案.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;flex justify-center	&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;baa0b09ba6c221c43301b87144b82c12&#34; srcset=&#34;
+               /post/2024%E6%96%B0%E4%BA%BA%E5%AE%A3%E8%AE%B2/baa0b09ba6c221c43301b87144b82c12_hue32752bf8e0bd2a99460a502a8d36323_117144_80529c236df74015d86e3930ad7a4dc9.webp 400w,
+               /post/2024%E6%96%B0%E4%BA%BA%E5%AE%A3%E8%AE%B2/baa0b09ba6c221c43301b87144b82c12_hue32752bf8e0bd2a99460a502a8d36323_117144_36516dfd860458c07753dce985fd9279.webp 760w,
+               /post/2024%E6%96%B0%E4%BA%BA%E5%AE%A3%E8%AE%B2/baa0b09ba6c221c43301b87144b82c12_hue32752bf8e0bd2a99460a502a8d36323_117144_1200x1200_fit_q80_h2_lanczos.webp 1200w&#34;
+               src=&#34;https://hezhou49.github.io/post/2024%E6%96%B0%E4%BA%BA%E5%AE%A3%E8%AE%B2/baa0b09ba6c221c43301b87144b82c12_hue32752bf8e0bd2a99460a502a8d36323_117144_80529c236df74015d86e3930ad7a4dc9.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;570&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>🎉 Easily create your own simple yet highly customizable blog</title>
@@ -217,7 +262,7 @@
 
 
 
-&lt;div id=&#34;chart-468235719&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-498213657&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   async function fetchChartJSON() {
     console.debug(&#39;Hugo Blox fetching chart JSON...&#39;)
@@ -235,7 +280,7 @@
 
       fetchChartJSON().then(chart =&gt; {
         console.debug(&#39;Plotting chart...&#39;)
-        window.Plotly.newPlot(&#39;chart-468235719&#39;, chart.data, chart.layout, {responsive: true});
+        window.Plotly.newPlot(&#39;chart-498213657&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
